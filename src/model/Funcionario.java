@@ -12,16 +12,16 @@ package model;
 public class Funcionario extends Pessoa {
     
     private int idPessoa;
-    private int idTipoPessoa;
+    private int idTipoFuncionario;
     private double salario;
     private String senha;
     
     public Funcionario() {}
     
-    public Funcionario(int id, int idPessoa, String nome, String email, String dataNascimento, String cpf, String telefone, int idTipoPessoa, double salario, String senha) {
+    public Funcionario(int id, int idPessoa, String nome, String email, String dataNascimento, String cpf, String telefone, int idTipoFuncionario, double salario, String senha) {
         super(id, nome, email, dataNascimento, cpf, telefone);
         this.idPessoa = idPessoa;
-        this.idTipoPessoa = idTipoPessoa;
+        this.idTipoFuncionario = idTipoFuncionario;
         this.salario = salario;
         this.senha = senha;
     }
@@ -34,12 +34,12 @@ public class Funcionario extends Pessoa {
         this.idPessoa = idPessoa;
     }
 
-    public int getIdTipoPessoa() {
-        return idTipoPessoa;
+    public int getIdTipoFuncionario() {
+        return idTipoFuncionario;
     }
 
-    public void setIdTipoPessoa(int idTipoPessoa) {
-        this.idTipoPessoa = idTipoPessoa;
+    public void setIdTipoFuncionario(int idTipoFuncionario) {
+        this.idTipoFuncionario = idTipoFuncionario;
     }
 
     public double getSalario() {

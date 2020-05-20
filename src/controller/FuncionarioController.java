@@ -12,22 +12,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
-import model.Cliente;
+import model.Funcionario;
 import util.CriaStatement;
 
 /**
  *
  * @author fdz
  */
-public class ClienteController implements IController<Cliente> {
+public class FuncionarioController implements IController<Funcionario> {
     
     private Connection con;
     private ResultSet rs;
     private CriaStatement criaStatement;
     private PreparedStatement psPessoa;
-    private PreparedStatement psCliente;
+    private PreparedStatement psFuncionario;
     
-    public ClienteController(Connection con) {
+    public FuncionarioController(Connection con) {
         
         this.con = con;
         this.criaStatement = new CriaStatement(con);
@@ -37,12 +37,12 @@ public class ClienteController implements IController<Cliente> {
 
     //comenta!
     @Override
-    public boolean inserirItem(Cliente item) {
+    public boolean inserirItem(Funcionario item) {
         
         try {
             
             psPessoa = criaStatement.insertSql("pessoa", "nome,email,data_nascimento,cpf,telefone");
-            psCliente = criaStatement.insertSql("cliente", "id,idpessoa");
+            psFuncionario = criaStatement.insertSql("funcionario", "id,idtipofuncionario,idtipopessoa,salario,senha");
             PreparedStatement psPessoa2 = criaStatement.selectSql("pessoa", true, "cpf");
             
             psPessoa.setString(1, item.getNome());
@@ -63,14 +63,17 @@ public class ClienteController implements IController<Cliente> {
 
             } else {
 
-                throw new Exception("Erro na inserção do item Cliente(parte de pesquisa por cpf para pegar id)");
+                throw new Exception("Erro na inserção do item Funcionario(parte de pesquisa por cpf para pegar id)");
 
             }
 
-            psCliente.setInt(1, item.getId());
-            psCliente.setInt(2, item.getIdPessoa());
+            psFuncionario.setInt(1, item.getId());
+            psFuncionario.setInt(2, item.getIdTipoFuncionario());
+            psFuncionario.setInt(3, item.getIdPessoa());
+            psFuncionario.setDouble(4, item.getSalario());
+            psFuncionario.setString(5, item.getSenha());
 
-            psCliente.executeUpdate();
+            psFuncionario.executeUpdate();
 
         } catch (Exception error) {
             
@@ -84,11 +87,12 @@ public class ClienteController implements IController<Cliente> {
     }
 
     @Override
-    public boolean alterarItem(Cliente item) {
+    public boolean alterarItem(Funcionario item) {
         
         try {
 
             psPessoa = criaStatement.updateSql("pessoa", "nome,email,data_nascimento,cpf,telefone");
+            psFuncionario = criaStatement.updateSql("funcionario", "idtipofuncionario,salario,senha");
             
             psPessoa.setString(1, item.getNome());
             psPessoa.setString(2, item.getEmail());
@@ -98,6 +102,12 @@ public class ClienteController implements IController<Cliente> {
             psPessoa.setInt(6, item.getIdPessoa());
             
             psPessoa.executeUpdate();
+            
+            psFuncionario.setInt(1, item.getIdTipoFuncionario());
+            psFuncionario.setDouble(2, item.getSalario());
+            psFuncionario.setString(3, item.getSenha());
+            
+            psFuncionario.executeUpdate();
 
         } catch (Exception error) {
             
@@ -115,11 +125,11 @@ public class ClienteController implements IController<Cliente> {
         
         try {
 
-            psCliente = criaStatement.deleteSql("cliente");
+            psFuncionario = criaStatement.deleteSql("funcionario");
             
-            psCliente.setInt(1, id);
+            psFuncionario.setInt(1, id);
             
-            psCliente.executeUpdate();
+            psFuncionario.executeUpdate();
 
         } catch (Exception ex) {
 
@@ -133,22 +143,22 @@ public class ClienteController implements IController<Cliente> {
     }
 
     @Override
-    public Iterator<Cliente> getTodosItens() {
+    public Iterator<Funcionario> getTodosItens() {
         
-        List<Cliente> clientes = new ArrayList<Cliente>();
+        List<Funcionario> clientes = new ArrayList<Funcionario>();
          
         try {
 
-            psCliente = criaStatement.selectSql("cliente", false, null);
+            psFuncionario = criaStatement.selectSql("funcionario", false, null);
             
-            rs = psCliente.executeQuery();
+            rs = psFuncionario.executeQuery();
             
             ResultSet rsPessoa = null;
             
             while(rs.next()) {
                 
-                int idPessoa = rs.getInt("id_pessoa");
-                int idCliente = rs.getInt("id");
+                int idPessoa = rs.getInt("idtipopessoa");
+                int idFuncionario = rs.getInt("id");
                 
                 psPessoa = criaStatement.selectSql("pessoa", true, "id");
                 
@@ -157,9 +167,9 @@ public class ClienteController implements IController<Cliente> {
                 rsPessoa = psPessoa.executeQuery();
                 
                 if (rsPessoa.next())
-                    clientes.add(new Cliente(idCliente, idPessoa, rsPessoa.getString("nome"), rsPessoa.getString("email"), rsPessoa.getString("data_nascimento"), rsPessoa.getString("cpf"), rsPessoa.getString("telefone")));
+                    clientes.add(new Funcionario(idFuncionario, idPessoa, rsPessoa.getString("nome"), rsPessoa.getString("email"), rsPessoa.getString("data_nascimento"), rsPessoa.getString("cpf"), rsPessoa.getString("telefone"), rs.getInt("idtipofuncionario"), rs.getDouble("salario"), rs.getString("senha")));
                 else 
-                    throw new Exception("Erro na pesquisa de todos os itens Cliente(parte de pesquisa por id pessoa para pegar as informações)");
+                    throw new Exception("Erro na pesquisa de todos os itens Funcionario(parte de pesquisa por id pessoa para pegar as informações)");
                 
             }
 
@@ -174,21 +184,21 @@ public class ClienteController implements IController<Cliente> {
     }
 
     @Override
-    public Cliente getItem(int id) {
+    public Funcionario getItem(int id) {
         
-        Cliente cliente = new Cliente();
+        Funcionario cliente = new Funcionario();
         
         try {
 
-            psCliente = criaStatement.selectSql("cliente", true, "id");
+            psFuncionario = criaStatement.selectSql("funcionario", true, "id");
             
-            rs = psCliente.executeQuery();
+            rs = psFuncionario.executeQuery();
             
             ResultSet rsPessoa = null;
             
             if(rs.next()) {
                 
-                int idPessoa = rs.getInt("id_pessoa");
+                int idPessoa = rs.getInt("idtipopessoa");
                 
                 psPessoa = criaStatement.selectSql("pessoa", true, "id");
                 
@@ -197,13 +207,13 @@ public class ClienteController implements IController<Cliente> {
                 rsPessoa = psPessoa.executeQuery();
                 
                 if (rsPessoa.next())
-                    cliente = new Cliente(id, idPessoa, rsPessoa.getString("nome"), rsPessoa.getString("email"), rsPessoa.getString("data_nascimento"), rsPessoa.getString("cpf"), rsPessoa.getString("telefone"));
+                    cliente = new Funcionario(id, idPessoa, rsPessoa.getString("nome"), rsPessoa.getString("email"), rsPessoa.getString("data_nascimento"), rsPessoa.getString("cpf"), rsPessoa.getString("telefone"), rs.getInt("idtipofuncionario"), rs.getDouble("salario"), rs.getString("senha"));
                 else 
-                    throw new Exception("Erro na pesquisa de um item Cliente(parte de pesquisa por id pessoa para pegar as informações)");
+                    throw new Exception("Erro na pesquisa de um item Funcionario(parte de pesquisa por id pessoa para pegar as informações)");
                 
             }
             else
-                throw new Exception("Erro na pesquisa de um item Cliente(parte de pesquisa por id cliente para pegar o id pessoa)");
+                throw new Exception("Erro na pesquisa de um item Funcionario(parte de pesquisa por id funcionario para pegar o id pessoa)");
 
         } catch (Exception ex) {
 
