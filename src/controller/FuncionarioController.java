@@ -8,9 +8,6 @@ package controller;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import javax.swing.JOptionPane;
 import model.Funcionario;
 import util.CriaStatement;
@@ -19,25 +16,25 @@ import util.CriaStatement;
  *
  * @author fdz
  */
-public class FuncionarioController implements IController<Funcionario> {
+public class FuncionarioController extends Controller<Funcionario> {
     
-    private Connection con;
     private ResultSet rs;
     private CriaStatement criaStatement;
     private PreparedStatement psPessoa;
     private PreparedStatement psFuncionario;
+    private int idPessoa;
+    private int idFuncionario;
     
     public FuncionarioController(Connection con) {
         
-        this.con = con;
+        super(con);
         this.criaStatement = new CriaStatement(con);
         rs = null;
         
     }
 
-    //comenta!
     @Override
-    public boolean inserirItem(Funcionario item) {
+    public PreparedStatement statementInserir(Funcionario item) {
         
         try {
             
@@ -73,21 +70,17 @@ public class FuncionarioController implements IController<Funcionario> {
             psFuncionario.setDouble(4, item.getSalario());
             psFuncionario.setString(5, item.getSenha());
 
-            psFuncionario.executeUpdate();
-
         } catch (Exception error) {
             
             JOptionPane.showMessageDialog(null, error.getMessage());
-            return false;
             
         }
         
-        return true;
-        
+        return psFuncionario;
     }
 
     @Override
-    public boolean alterarItem(Funcionario item) {
+    public PreparedStatement statementAlterar(Funcionario item) {
         
         try {
 
@@ -106,46 +99,38 @@ public class FuncionarioController implements IController<Funcionario> {
             psFuncionario.setInt(1, item.getIdTipoFuncionario());
             psFuncionario.setDouble(2, item.getSalario());
             psFuncionario.setString(3, item.getSenha());
-            
-            psFuncionario.executeUpdate();
 
         } catch (Exception error) {
             
             JOptionPane.showMessageDialog(null, error.getMessage());
-            return false;
             
         }
         
-        return true;
+        return psFuncionario;
         
     }
 
     @Override
-    public boolean deletarItem(int id) {
+    public PreparedStatement statementDeletar(int id) {
         
         try {
 
             psFuncionario = criaStatement.deleteSql("funcionario");
             
             psFuncionario.setInt(1, id);
-            
-            psFuncionario.executeUpdate();
 
         } catch (Exception ex) {
 
             JOptionPane.showMessageDialog(null, ex.getMessage());
-            return false;
 
         }
         
-        return true;
+        return psFuncionario;
         
     }
 
     @Override
-    public Iterator<Funcionario> getTodosItens() {
-        
-        List<Funcionario> clientes = new ArrayList<Funcionario>();
+    public PreparedStatement statementGetTodos() {
          
         try {
 
@@ -153,23 +138,14 @@ public class FuncionarioController implements IController<Funcionario> {
             
             rs = psFuncionario.executeQuery();
             
-            ResultSet rsPessoa = null;
-            
             while(rs.next()) {
                 
-                int idPessoa = rs.getInt("idtipopessoa");
-                int idFuncionario = rs.getInt("id");
+                idPessoa = rs.getInt("idtipopessoa");
+                idFuncionario = rs.getInt("id");
                 
                 psPessoa = criaStatement.selectSql("pessoa", true, "id");
                 
                 psPessoa.setInt(1, idPessoa);
-            
-                rsPessoa = psPessoa.executeQuery();
-                
-                if (rsPessoa.next())
-                    clientes.add(new Funcionario(idFuncionario, idPessoa, rsPessoa.getString("nome"), rsPessoa.getString("email"), rsPessoa.getString("data_nascimento"), rsPessoa.getString("cpf"), rsPessoa.getString("telefone"), rs.getInt("idtipofuncionario"), rs.getDouble("salario"), rs.getString("senha")));
-                else 
-                    throw new Exception("Erro na pesquisa de todos os itens Funcionario(parte de pesquisa por id pessoa para pegar as informações)");
                 
             }
 
@@ -179,14 +155,12 @@ public class FuncionarioController implements IController<Funcionario> {
 
         }
         
-        return clientes.iterator();
+        return psPessoa;
         
     }
 
     @Override
-    public Funcionario getItem(int id) {
-        
-        Funcionario cliente = new Funcionario();
+    public PreparedStatement statementGetItem(int id) {
         
         try {
 
@@ -194,22 +168,13 @@ public class FuncionarioController implements IController<Funcionario> {
             
             rs = psFuncionario.executeQuery();
             
-            ResultSet rsPessoa = null;
-            
             if(rs.next()) {
                 
-                int idPessoa = rs.getInt("idtipopessoa");
+                idPessoa = rs.getInt("idtipopessoa");
                 
                 psPessoa = criaStatement.selectSql("pessoa", true, "id");
                 
                 psPessoa.setInt(1, idPessoa);
-            
-                rsPessoa = psPessoa.executeQuery();
-                
-                if (rsPessoa.next())
-                    cliente = new Funcionario(id, idPessoa, rsPessoa.getString("nome"), rsPessoa.getString("email"), rsPessoa.getString("data_nascimento"), rsPessoa.getString("cpf"), rsPessoa.getString("telefone"), rs.getInt("idtipofuncionario"), rs.getDouble("salario"), rs.getString("senha"));
-                else 
-                    throw new Exception("Erro na pesquisa de um item Funcionario(parte de pesquisa por id pessoa para pegar as informações)");
                 
             }
             else
@@ -221,7 +186,27 @@ public class FuncionarioController implements IController<Funcionario> {
 
         }
         
-        return cliente;
+        return psPessoa;
+        
+    }
+
+    @Override
+    public Funcionario criaItem(ResultSet rsPessoa) {
+        
+        try {
+            
+            if (rsPessoa.next())
+                    return new Funcionario(idFuncionario, idPessoa, rsPessoa.getString("nome"), rsPessoa.getString("email"), rsPessoa.getString("data_nascimento"), rsPessoa.getString("cpf"), rsPessoa.getString("telefone"), rs.getInt("idtipofuncionario"), rs.getDouble("salario"), rs.getString("senha"));
+                else 
+                    throw new Exception("Erro na pesquisa de um item Funcionario(parte de pesquisa por id pessoa para pegar as informações)");
+            
+        } catch (Exception e) {
+            
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            
+        }
+        
+        return null;
         
     }
     

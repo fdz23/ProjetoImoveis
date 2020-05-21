@@ -8,9 +8,6 @@ package controller;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import util.CriaStatement;
@@ -19,25 +16,25 @@ import util.CriaStatement;
  *
  * @author fdz
  */
-public class ClienteController implements IController<Cliente> {
+public class ClienteController extends Controller<Cliente> {
     
-    private Connection con;
     private ResultSet rs;
     private CriaStatement criaStatement;
     private PreparedStatement psPessoa;
     private PreparedStatement psCliente;
+    private int idPessoa;
+    private int idCliente;
     
     public ClienteController(Connection con) {
         
-        this.con = con;
+        super(con);
         this.criaStatement = new CriaStatement(con);
         rs = null;
         
     }
 
-    //comenta!
     @Override
-    public boolean inserirItem(Cliente item) {
+    public PreparedStatement statementInserir(Cliente item) {
         
         try {
             
@@ -69,22 +66,15 @@ public class ClienteController implements IController<Cliente> {
 
             psCliente.setInt(1, item.getId());
             psCliente.setInt(2, item.getIdPessoa());
-
-            psCliente.executeUpdate();
-
-        } catch (Exception error) {
-            
-            JOptionPane.showMessageDialog(null, error.getMessage());
-            return false;
-            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
         
-        return true;
-        
+        return psCliente;
     }
 
     @Override
-    public boolean alterarItem(Cliente item) {
+    public PreparedStatement statementAlterar(Cliente item) {
         
         try {
 
@@ -96,87 +86,64 @@ public class ClienteController implements IController<Cliente> {
             psPessoa.setString(4, item.getCpf());
             psPessoa.setString(5, item.getTelefone());
             psPessoa.setInt(6, item.getIdPessoa());
-            
-            psPessoa.executeUpdate();
 
         } catch (Exception error) {
             
             JOptionPane.showMessageDialog(null, error.getMessage());
-            return false;
             
         }
         
-        return true;
-        
+        return psPessoa;
     }
 
     @Override
-    public boolean deletarItem(int id) {
+    public PreparedStatement statementDeletar(int id) {
         
         try {
 
             psCliente = criaStatement.deleteSql("cliente");
             
             psCliente.setInt(1, id);
-            
-            psCliente.executeUpdate();
 
         } catch (Exception ex) {
 
             JOptionPane.showMessageDialog(null, ex.getMessage());
-            return false;
 
         }
         
-        return true;
-        
+        return psCliente;
     }
 
     @Override
-    public Iterator<Cliente> getTodosItens() {
+    public PreparedStatement statementGetTodos() {
         
-        List<Cliente> clientes = new ArrayList<Cliente>();
-         
         try {
 
             psCliente = criaStatement.selectSql("cliente", false, null);
             
             rs = psCliente.executeQuery();
             
-            ResultSet rsPessoa = null;
-            
             while(rs.next()) {
                 
-                int idPessoa = rs.getInt("id_pessoa");
-                int idCliente = rs.getInt("id");
+                idPessoa = rs.getInt("id_pessoa");
                 
                 psPessoa = criaStatement.selectSql("pessoa", true, "id");
                 
                 psPessoa.setInt(1, idPessoa);
-            
-                rsPessoa = psPessoa.executeQuery();
-                
-                if (rsPessoa.next())
-                    clientes.add(new Cliente(idCliente, idPessoa, rsPessoa.getString("nome"), rsPessoa.getString("email"), rsPessoa.getString("data_nascimento"), rsPessoa.getString("cpf"), rsPessoa.getString("telefone")));
-                else 
-                    throw new Exception("Erro na pesquisa de todos os itens Cliente(parte de pesquisa por id pessoa para pegar as informações)");
                 
             }
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
+            
+        } catch (Exception e) {
+            
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            
         }
         
-        return clientes.iterator();
-        
+        return psPessoa;
     }
 
     @Override
-    public Cliente getItem(int id) {
-        
-        Cliente cliente = new Cliente();
+    public PreparedStatement statementGetItem(int id) {
         
         try {
 
@@ -184,24 +151,17 @@ public class ClienteController implements IController<Cliente> {
             
             rs = psCliente.executeQuery();
             
-            ResultSet rsPessoa = null;
-            
             if(rs.next()) {
                 
-                int idPessoa = rs.getInt("id_pessoa");
+                idPessoa = rs.getInt("id_pessoa");
+                idCliente = rs.getInt("id");
                 
                 psPessoa = criaStatement.selectSql("pessoa", true, "id");
                 
                 psPessoa.setInt(1, idPessoa);
-            
-                rsPessoa = psPessoa.executeQuery();
-                
-                if (rsPessoa.next())
-                    cliente = new Cliente(id, idPessoa, rsPessoa.getString("nome"), rsPessoa.getString("email"), rsPessoa.getString("data_nascimento"), rsPessoa.getString("cpf"), rsPessoa.getString("telefone"));
-                else 
-                    throw new Exception("Erro na pesquisa de um item Cliente(parte de pesquisa por id pessoa para pegar as informações)");
                 
             }
+            
             else
                 throw new Exception("Erro na pesquisa de um item Cliente(parte de pesquisa por id cliente para pegar o id pessoa)");
 
@@ -211,7 +171,26 @@ public class ClienteController implements IController<Cliente> {
 
         }
         
-        return cliente;
+        return psPessoa;
+    }
+
+    @Override
+    public Cliente criaItem(ResultSet rs) {
+        
+        try {
+            
+            if (rs.next())
+                    return new Cliente(idCliente, idPessoa, rs.getString("nome"), rs.getString("email"), rs.getString("data_nascimento"), rs.getString("cpf"), rs.getString("telefone"));
+                else 
+                    throw new Exception("Erro na pesquisa de um item Cliente(parte de pesquisa por id pessoa para pegar as informações)");
+            
+        } catch (Exception e) {
+            
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            
+        }
+        
+        return null;
         
     }
     

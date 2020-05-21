@@ -14,7 +14,7 @@ import java.util.Date;
 public class Imovel {
     
     private int id;
-    private Date dataCadastro;
+    private String dataCadastro;
     private String nome;
     private double preco;
     private double altura;
@@ -27,15 +27,15 @@ public class Imovel {
     private String endereco;
     private double valorComissao;
     private int statusImovel;
-    private Date baixaImovel;
+    private String baixaImovel;
     private String baixaMotivo;
     private int idTipoImovel;
     
     public Imovel() {}
     
-    public Imovel(int id, Date dataCadastro, String nome, double preco, double altura, double comprimento, 
+    public Imovel(int id, String dataCadastro, String nome, double preco, double altura, double comprimento, 
             double largura, int quantidadeQuartos, int quantidadeSuites, boolean banheira, int quantidadeParcelas, 
-            String endereco, double valorComissao, int statusImovel, Date baixaImovel, String baixaMotivo, int idTipoImovel) {
+            String endereco, double valorComissao, int statusImovel, String baixaImovel, String baixaMotivo, int idTipoImovel) {
         
         this.id = id;
         this.dataCadastro = dataCadastro;
@@ -64,11 +64,11 @@ public class Imovel {
         this.id = id;
     }
 
-    public Date getDataCadastro() {
+    public String getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(Date dataCadastro) {
+    public void setDataCadastro(String dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
 
@@ -168,11 +168,11 @@ public class Imovel {
         this.statusImovel = statusImovel;
     }
 
-    public Date getBaixaImovel() {
+    public String getBaixaImovel() {
         return baixaImovel;
     }
 
-    public void setBaixaImovel(Date baixaImovel) {
+    public void setBaixaImovel(String baixaImovel) {
         this.baixaImovel = baixaImovel;
     }
 
