@@ -156,7 +156,7 @@ public class EnderecoController extends Controller<Endereco> {
                 );
 
             } else
-                throw new Exception("Contrato não encontrado");
+                throw new Exception("Endereco não encontrado");
             
         } catch (Exception e) {
             

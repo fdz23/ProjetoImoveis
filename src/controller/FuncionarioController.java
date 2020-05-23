@@ -24,8 +24,6 @@ public class FuncionarioController extends Controller<Funcionario> {
     private PessoaController pessoaController;
     private PreparedStatement psFuncionario;
     private PreparedStatement psPessoa;
-    private int idPessoa;
-    private int idFuncionario;
     
     public FuncionarioController(Connection con) {
         
@@ -140,8 +138,7 @@ public class FuncionarioController extends Controller<Funcionario> {
             
             while(rs.next()) {
                 
-                idPessoa = rs.getInt("id_pe_pessoas");
-                idFuncionario = rs.getInt("id");
+                int idPessoa = rs.getInt("id_pe_pessoas");
                 
                 psPessoa = criaStatement.selectSql("pessoas", true, "id");
                 
@@ -170,7 +167,7 @@ public class FuncionarioController extends Controller<Funcionario> {
             
             if(rs.next()) {
                 
-                idPessoa = rs.getInt("id_pe_pessoas");
+                int idPessoa = rs.getInt("id_pe_pessoas");
                 
                 psPessoa = criaStatement.selectSql("pessoas", true, "id");
                 

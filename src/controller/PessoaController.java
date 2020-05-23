@@ -181,7 +181,7 @@ public class PessoaController extends Controller<Pessoa> {
                 );
 
             } else
-                throw new Exception("Contrato não encontrado");
+                throw new Exception("Pessoa não encontrada");
             
         } catch (Exception e) {
             

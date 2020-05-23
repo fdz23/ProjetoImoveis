@@ -172,7 +172,7 @@ public class ImovelController extends Controller<Imovel> {
                 );
 
             } else
-                throw new Exception("Contrato não encontrado");
+                throw new Exception("Imovel não encontrado");
             
         } catch (Exception e) {
             
