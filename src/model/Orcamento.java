@@ -14,23 +14,27 @@ import java.util.Date;
 public class Orcamento {
     
     private int id;
-    private Date dataOrcamento;
-    private int idFuncionario;
-    private int idCliente;
-    private int idImovel;
+    private String dataOrcamento;
     private double valorOrcamento;
+    private String descricao;
     private int quantidadeParcelas;
+    private int idTipoPagamento;
+    private int idPessoa;
+    private int idFuncionario;
+    private int idImovel;
     
     public Orcamento() {}
     
-    public Orcamento(int id, Date dataOrcamento, int idFuncionario, int idCliente, int idImovel, double valorOrcamento, int quantidadeParcelas) {
+    public Orcamento(int id, String dataOrcamento, double valorOrcamento, String descricao, int quantidadeParcelas, int idTipoPagamento, int idPessoa, int idFuncionario, int idImovel) {
         this.id = id;
         this.dataOrcamento = dataOrcamento;
-        this.idCliente = idCliente;
         this.idFuncionario = idFuncionario;
         this.idImovel = idImovel;
         this.valorOrcamento = valorOrcamento;
         this.quantidadeParcelas = quantidadeParcelas;
+        this.descricao = descricao;
+        this.idTipoPagamento = idTipoPagamento;
+        this.idPessoa = idPessoa;
     }
 
     public int getId() {
@@ -41,11 +45,11 @@ public class Orcamento {
         this.id = id;
     }
 
-    public Date getDataOrcamento() {
+    public String getDataOrcamento() {
         return dataOrcamento;
     }
 
-    public void setDataOrcamento(Date dataOrcamento) {
+    public void setDataOrcamento(String dataOrcamento) {
         this.dataOrcamento = dataOrcamento;
     }
 
@@ -55,14 +59,6 @@ public class Orcamento {
 
     public void setIdFuncionario(int idFuncionario) {
         this.idFuncionario = idFuncionario;
-    }
-
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
     }
 
     public int getIdImovel() {
@@ -87,6 +83,30 @@ public class Orcamento {
 
     public void setQuantidadeParcelas(int quantidadeParcelas) {
         this.quantidadeParcelas = quantidadeParcelas;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public int getIdTipoPagamento() {
+        return idTipoPagamento;
+    }
+
+    public void setIdTipoPagamento(int idTipoPagamento) {
+        this.idTipoPagamento = idTipoPagamento;
+    }
+
+    public int getIdPessoa() {
+        return idPessoa;
+    }
+
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
     }
     
 }

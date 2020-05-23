@@ -11,19 +11,27 @@ package model;
  */
 public class Funcionario extends Pessoa {
     
-    private int idPessoa;
-    private int idTipoFuncionario;
     private double salario;
-    private String senha;
+    private String dataPrimeiroSalario;
+    private String dataUltimoSalario;
+    private String matricula;
+    private String dataContratacao;
+    private int idTipoFuncionario;
+    private int idPessoa;
     
     public Funcionario() {}
     
-    public Funcionario(int id, int idPessoa, String nome, String email, String dataNascimento, String cpf, String telefone, int idTipoFuncionario, double salario, String senha) {
+    public Funcionario( int id, double salario, String dataPrimeiroSalario, String dataUltimoSalario, String matricula, String dataContratacao, 
+                        int idTipoFuncionario, int idPessoa, String nome, String email, String dataNascimento, String cpf, String telefone) {
+        
         super(id, nome, email, dataNascimento, cpf, telefone);
         this.idPessoa = idPessoa;
         this.idTipoFuncionario = idTipoFuncionario;
         this.salario = salario;
-        this.senha = senha;
+        this.dataPrimeiroSalario = dataPrimeiroSalario;
+        this.dataUltimoSalario = dataUltimoSalario;
+        this.matricula = matricula;
+        this.dataContratacao = dataContratacao;
     }
 
     public int getIdPessoa() {
@@ -50,11 +58,35 @@ public class Funcionario extends Pessoa {
         this.salario = salario;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getDataPrimeiroSalario() {
+        return dataPrimeiroSalario;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setDataPrimeiroSalario(String dataPrimeiroSalario) {
+        this.dataPrimeiroSalario = dataPrimeiroSalario;
+    }
+
+    public String getDataUltimoSalario() {
+        return dataUltimoSalario;
+    }
+
+    public void setDataUltimoSalario(String dataUltimoSalario) {
+        this.dataUltimoSalario = dataUltimoSalario;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public String getDataContratacao() {
+        return dataContratacao;
+    }
+
+    public void setDataContratacao(String dataContratacao) {
+        this.dataContratacao = dataContratacao;
     }
 }

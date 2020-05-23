@@ -12,15 +12,19 @@ package model;
 public class Contrato {
     
     private int id;
+    private String dataOrcamento;
+    private String dataAlteracao;
+    private int idSituacao;
     private int idOrcamento;
-    private String status;
     
     public Contrato() {}
     
-    public Contrato(int id, int idOrcamento, String status) {
+    public Contrato(int id, String dataOrcamento, String dataAlteracao, int idSituacao, int idOrcamento) {
         this.id = id;
+        this.dataOrcamento = dataOrcamento;
+        this.dataAlteracao = dataAlteracao;
+        this.idSituacao = idSituacao;
         this.idOrcamento = idOrcamento;
-        this.status = status;
     }
 
     public int getId() {
@@ -31,20 +35,36 @@ public class Contrato {
         this.id = id;
     }
 
+    public String getDataOrcamento() {
+        return dataOrcamento;
+    }
+
+    public void setDataOrcamento(String dataOrcamento) {
+        this.dataOrcamento = dataOrcamento;
+    }
+
+    public String getDataAlteracao() {
+        return dataAlteracao;
+    }
+
+    public void setDataAlteracao(String dataAlteracao) {
+        this.dataAlteracao = dataAlteracao;
+    }
+
+    public int getIdSituacao() {
+        return idSituacao;
+    }
+
+    public void setIdSituacao(int idSituacao) {
+        this.idSituacao = idSituacao;
+    }
+
     public int getIdOrcamento() {
         return idOrcamento;
     }
 
     public void setIdOrcamento(int idOrcamento) {
         this.idOrcamento = idOrcamento;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
     
 }

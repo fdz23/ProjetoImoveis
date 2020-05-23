@@ -9,7 +9,7 @@ package model;
  *
  * @author fdz
  */
-public abstract class Pessoa {
+public class Pessoa {
     
     private int id;
     private String nome;

@@ -17,43 +17,34 @@ public class Imovel {
     private String dataCadastro;
     private String nome;
     private double preco;
-    private double altura;
-    private double comprimento;
-    private double largura;
-    private int quantidadeQuartos;
-    private int quantidadeSuites;
-    private boolean banheira;
+    private String itens;
+    private String descricao;
     private int quantidadeParcelas;
-    private String endereco;
     private double valorComissao;
     private int statusImovel;
     private String baixaImovel;
-    private String baixaMotivo;
     private int idTipoImovel;
+    private int idEndereco;
+    private int idStatus;
     
     public Imovel() {}
     
-    public Imovel(int id, String dataCadastro, String nome, double preco, double altura, double comprimento, 
-            double largura, int quantidadeQuartos, int quantidadeSuites, boolean banheira, int quantidadeParcelas, 
-            String endereco, double valorComissao, int statusImovel, String baixaImovel, String baixaMotivo, int idTipoImovel) {
+    public Imovel(int id, String dataCadastro, String nome, double preco, String itens, String descricao, int quantidadeParcelas, 
+            double valorComissao, int statusImovel, String baixaImovel, int idTipoImovel, int idEndereco, int idStatus) {
         
         this.id = id;
         this.dataCadastro = dataCadastro;
         this.nome = nome;
         this.preco = preco;
-        this.altura = altura;
-        this.comprimento = comprimento;
-        this.largura = largura;
-        this.quantidadeQuartos = quantidadeQuartos;
+        this.itens = itens;
         this.quantidadeParcelas = quantidadeParcelas;
-        this.quantidadeSuites = quantidadeSuites;
-        this.banheira = banheira;
-        this.endereco = endereco;
         this.valorComissao = valorComissao;
         this.statusImovel = statusImovel;
         this.baixaImovel = baixaImovel;
-        this.baixaMotivo = baixaMotivo;
         this.idTipoImovel = idTipoImovel;
+        this.idEndereco = idEndereco;
+        this.idStatus = idStatus;
+        this.descricao = descricao;
     }
 
     public int getId() {
@@ -88,68 +79,28 @@ public class Imovel {
         this.preco = preco;
     }
 
-    public double getAltura() {
-        return altura;
+    public String getItens() {
+        return itens;
     }
 
-    public void setAltura(double altura) {
-        this.altura = altura;
+    public void setItens(String itens) {
+        this.itens = itens;
     }
 
-    public double getComprimento() {
-        return comprimento;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setComprimento(double comprimento) {
-        this.comprimento = comprimento;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
-
-    public double getLargura() {
-        return largura;
-    }
-
-    public void setLargura(double largura) {
-        this.largura = largura;
-    }
-
-    public int getQuantidadeQuartos() {
-        return quantidadeQuartos;
-    }
-
-    public void setQuantidadeQuartos(int quantidadeQuartos) {
-        this.quantidadeQuartos = quantidadeQuartos;
-    }
-
-    public int getQuantidadeSuites() {
-        return quantidadeSuites;
-    }
-
-    public void setQuantidadeSuites(int quantidadeSuites) {
-        this.quantidadeSuites = quantidadeSuites;
-    }
-
-    public boolean isBanheira() {
-        return banheira;
-    }
-
-    public void setBanheira(boolean banheira) {
-        this.banheira = banheira;
-    }
-
+    
     public int getQuantidadeParcelas() {
         return quantidadeParcelas;
     }
 
     public void setQuantidadeParcelas(int quantidadeParcelas) {
         this.quantidadeParcelas = quantidadeParcelas;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
     }
 
     public double getValorComissao() {
@@ -176,19 +127,27 @@ public class Imovel {
         this.baixaImovel = baixaImovel;
     }
 
-    public String getBaixaMotivo() {
-        return baixaMotivo;
-    }
-
-    public void setBaixaMotivo(String baixaMotivo) {
-        this.baixaMotivo = baixaMotivo;
-    }
-
     public int getIdTipoImovel() {
         return idTipoImovel;
     }
 
     public void setIdTipoImovel(int idTipoImovel) {
         this.idTipoImovel = idTipoImovel;
+    }
+
+    public int getIdEndereco() {
+        return idEndereco;
+    }
+
+    public void setIdEndereco(int idEndereco) {
+        this.idEndereco = idEndereco;
+    }
+
+    public int getIdStatus() {
+        return idStatus;
+    }
+
+    public void setIdStatus(int idStatus) {
+        this.idStatus = idStatus;
     }
 }

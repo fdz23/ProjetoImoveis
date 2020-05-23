@@ -9,14 +9,14 @@ package model;
  *
  * @author fdz
  */
-public class TipoImovel {
+public class Situacao {
     
     private int id;
     private String descricao;
     
-    public TipoImovel() {}
+    public Situacao() {}
     
-    public TipoImovel(int id, String descricao) {
+    public Situacao(int id, String descricao) {
         this.id = id;
         this.descricao = descricao;
     }
@@ -36,4 +36,5 @@ public class TipoImovel {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+    
 }

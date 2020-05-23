@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import model.Funcionario;
+import model.Pessoa;
 import util.CriaStatement;
 
 /**
@@ -20,14 +21,16 @@ public class FuncionarioController extends Controller<Funcionario> {
     
     private ResultSet rs;
     private CriaStatement criaStatement;
-    private PreparedStatement psPessoa;
+    private PessoaController pessoaController;
     private PreparedStatement psFuncionario;
+    private PreparedStatement psPessoa;
     private int idPessoa;
     private int idFuncionario;
     
     public FuncionarioController(Connection con) {
         
         super(con);
+        pessoaController = new PessoaController(con);
         this.criaStatement = new CriaStatement(con);
         rs = null;
         
@@ -38,37 +41,28 @@ public class FuncionarioController extends Controller<Funcionario> {
         
         try {
             
-            psPessoa = criaStatement.insertSql("pessoa", "nome,email,data_nascimento,cpf,telefone");
-            psFuncionario = criaStatement.insertSql("funcionario", "id,idtipofuncionario,idtipopessoa,salario,senha");
-            PreparedStatement psPessoa2 = criaStatement.selectSql("pessoa", true, "cpf");
+            psFuncionario = criaStatement.insertSql("funcionario", "func_salario,func_data_primeiro_salario,func_data_ultimo_salario,func_matricula,func_data_contratacao,id_tif_tipofuncionario,id_pe_pessoa");
             
-            psPessoa.setString(1, item.getNome());
-            psPessoa.setString(2, item.getEmail());
-            psPessoa.setString(3, item.getDataNascimento());
-            psPessoa.setString(4, item.getCpf());
-            psPessoa.setString(5, item.getTelefone());
+            pessoaController.inserirItem(
+                    new Pessoa(
+                            0, 
+                            item.getNome(), 
+                            item.getEmail(), 
+                            item.getDataNascimento(), 
+                            item.getCpf(), 
+                            item.getTelefone()
+                    )
+            );
             
-            psPessoa.executeUpdate();
-            
-            psPessoa.setString(1, item.getCpf());
+            Pessoa pessoa = pessoaController.getPessoaPorCpf(item.getCpf());
 
-            rs = psPessoa2.executeQuery();
-
-            if (rs.next()) {
-
-                item.setIdPessoa(rs.getInt("id"));
-
-            } else {
-
-                throw new Exception("Erro na inserção do item Funcionario(parte de pesquisa por cpf para pegar id)");
-
-            }
-
-            psFuncionario.setInt(1, item.getId());
-            psFuncionario.setInt(2, item.getIdTipoFuncionario());
-            psFuncionario.setInt(3, item.getIdPessoa());
-            psFuncionario.setDouble(4, item.getSalario());
-            psFuncionario.setString(5, item.getSenha());
+            psFuncionario.setDouble(1, item.getSalario());
+            psFuncionario.setString(2, item.getDataPrimeiroSalario());
+            psFuncionario.setString(3, item.getDataUltimoSalario());
+            psFuncionario.setString(4, item.getMatricula());
+            psFuncionario.setString(5, item.getDataContratacao());
+            psFuncionario.setInt(6, item.getIdTipoFuncionario());
+            psFuncionario.setInt(7, pessoa.getId());
 
         } catch (Exception error) {
             
@@ -84,21 +78,27 @@ public class FuncionarioController extends Controller<Funcionario> {
         
         try {
 
-            psPessoa = criaStatement.updateSql("pessoa", "nome,email,data_nascimento,cpf,telefone");
-            psFuncionario = criaStatement.updateSql("funcionario", "idtipofuncionario,salario,senha");
+            psFuncionario = criaStatement.updateSql("funcionario", "func_salario,func_data_primeiro_salario,func_data_ultimo_salario,func_matricula,func_data_contratacao,id_tif_tipofuncionario,id_pe_pessoa");
             
-            psPessoa.setString(1, item.getNome());
-            psPessoa.setString(2, item.getEmail());
-            psPessoa.setString(3, item.getDataNascimento());
-            psPessoa.setString(4, item.getCpf());
-            psPessoa.setString(5, item.getTelefone());
-            psPessoa.setInt(6, item.getIdPessoa());
+            Pessoa pessoa = new Pessoa(
+                    item.getIdPessoa(), 
+                    item.getNome(), 
+                    item.getEmail(), 
+                    item.getDataNascimento(), 
+                    item.getCpf(), 
+                    item.getTelefone()
+            );
             
-            psPessoa.executeUpdate();
+            pessoaController.alterarItem(pessoa);
             
-            psFuncionario.setInt(1, item.getIdTipoFuncionario());
-            psFuncionario.setDouble(2, item.getSalario());
-            psFuncionario.setString(3, item.getSenha());
+            psFuncionario.setDouble(1, item.getSalario());
+            psFuncionario.setString(2, item.getDataPrimeiroSalario());
+            psFuncionario.setString(3, item.getDataUltimoSalario());
+            psFuncionario.setString(4, item.getMatricula());
+            psFuncionario.setString(5, item.getDataContratacao());
+            psFuncionario.setInt(6, item.getIdTipoFuncionario());
+            psFuncionario.setInt(7, item.getIdPessoa());
+            psFuncionario.setInt(8, item.getId());
 
         } catch (Exception error) {
             
@@ -115,7 +115,7 @@ public class FuncionarioController extends Controller<Funcionario> {
         
         try {
 
-            psFuncionario = criaStatement.deleteSql("funcionario");
+            psFuncionario = criaStatement.deleteSql("funcionarios");
             
             psFuncionario.setInt(1, id);
 
@@ -134,16 +134,16 @@ public class FuncionarioController extends Controller<Funcionario> {
          
         try {
 
-            psFuncionario = criaStatement.selectSql("funcionario", false, null);
+            psFuncionario = criaStatement.selectSql("funcionarios", false, null);
             
             rs = psFuncionario.executeQuery();
             
             while(rs.next()) {
                 
-                idPessoa = rs.getInt("idtipopessoa");
+                idPessoa = rs.getInt("id_pe_pessoas");
                 idFuncionario = rs.getInt("id");
                 
-                psPessoa = criaStatement.selectSql("pessoa", true, "id");
+                psPessoa = criaStatement.selectSql("pessoas", true, "id");
                 
                 psPessoa.setInt(1, idPessoa);
                 
@@ -164,15 +164,15 @@ public class FuncionarioController extends Controller<Funcionario> {
         
         try {
 
-            psFuncionario = criaStatement.selectSql("funcionario", true, "id");
+            psFuncionario = criaStatement.selectSql("funcionarios", true, "id");
             
             rs = psFuncionario.executeQuery();
             
             if(rs.next()) {
                 
-                idPessoa = rs.getInt("idtipopessoa");
+                idPessoa = rs.getInt("id_pe_pessoas");
                 
-                psPessoa = criaStatement.selectSql("pessoa", true, "id");
+                psPessoa = criaStatement.selectSql("pessoas", true, "id");
                 
                 psPessoa.setInt(1, idPessoa);
                 
@@ -195,10 +195,25 @@ public class FuncionarioController extends Controller<Funcionario> {
         
         try {
             
-            if (rsPessoa.next())
-                    return new Funcionario(idFuncionario, idPessoa, rsPessoa.getString("nome"), rsPessoa.getString("email"), rsPessoa.getString("data_nascimento"), rsPessoa.getString("cpf"), rsPessoa.getString("telefone"), rs.getInt("idtipofuncionario"), rs.getDouble("salario"), rs.getString("senha"));
-                else 
-                    throw new Exception("Erro na pesquisa de um item Funcionario(parte de pesquisa por id pessoa para pegar as informações)");
+            if (rsPessoa.next()) {
+                return new Funcionario( 
+                        rs.getInt("id"), 
+                        rs.getDouble("func_salario"), 
+                        rs.getString("func_data_primeiro_salario"), 
+                        rs.getString("func_data_ultimo_salario"), 
+                        rs.getString("func_matricula"), 
+                        rs.getString("func_data_contratacao"), 
+                        rs.getInt("id_tif_tipofuncionario"), 
+                        rs.getInt("id_pe_pessoa"), 
+                        rsPessoa.getString("pe_nome"), 
+                        rsPessoa.getString("pe_email"), 
+                        rsPessoa.getString("pe_data_nascimento"), 
+                        rsPessoa.getString("pe_cpf"), 
+                        rsPessoa.getString("pe_telefone")
+                );
+            }
+            else 
+                throw new Exception("Erro na pesquisa de um item Funcionario(parte de pesquisa por id pessoa para pegar as informações)");
             
         } catch (Exception e) {
             

@@ -22,10 +22,10 @@ import util.CriaStatement;
  */
 public abstract class Controller<T> implements IController<T> {
 
-    private Connection con;
-    private ResultSet rs;
-    private CriaStatement criaStatement;
-    private PreparedStatement preparedStatement;
+    protected Connection con;
+    protected ResultSet rs;
+    protected CriaStatement criaStatement;
+    protected PreparedStatement preparedStatement;
 
     public Controller(Connection con) {
 
