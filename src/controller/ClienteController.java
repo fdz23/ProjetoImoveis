@@ -66,6 +66,7 @@ public class ClienteController extends Controller<Cliente> {
 
             psCliente.setInt(1, item.getId());
             psCliente.setInt(2, item.getIdPessoa());
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
