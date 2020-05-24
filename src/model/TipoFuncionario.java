@@ -12,16 +12,14 @@ package model;
 public class TipoFuncionario {
     
     private int id;
-    private String cargo;
     private int idNivelAcesso;
     private Double salario;
     private String descricao;
     
     public TipoFuncionario() {}
     
-    public TipoFuncionario(int id, String cargo, int idNivelAcesso, Double salario, String descricao) {
+    public TipoFuncionario(int id, String descricao, int idNivelAcesso, Double salario) {
         this.id = id;
-        this.cargo = cargo;
         this.idNivelAcesso = idNivelAcesso;
         this.salario = salario;
         this.descricao = descricao;
@@ -33,14 +31,6 @@ public class TipoFuncionario {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
     }
 
     public int getIdNivelAcesso() {

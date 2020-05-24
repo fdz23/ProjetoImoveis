@@ -29,7 +29,9 @@ public class ImovelController extends Controller<Imovel> {
     public ImovelController(Connection con) {
 
         super(con);
-        this.criaStatement = new CriaStatement(con);
+        this.tabela = "imoveis";
+        this.id = "imo_iden";
+        this.criaStatement = new CriaStatement(con, tabela, id);
         rs = null;
 
     }
@@ -39,21 +41,21 @@ public class ImovelController extends Controller<Imovel> {
         
         try {
 
-            psImovel = criaStatement.insertSql("imoveis", "im_data_cadastro,im_nome,im_preco,im_itens,im_descricao,im_quantidade_parcelas,im_valor_comissao,"
-                                            + "im_status_imovel,im_baixa_imovel,id_tip_tipo_imovel,id_end_enderecos,id_sta_status");
+            psImovel = criaStatement.insertSql(tabela, "imo_data_inclusao,imo_preco,imo_tamanho,imo_observacao,imo_baixa_data,imo_baixa_motivo,"
+                                                     + "imo_quantidade_parcelas,imo_valor_comissao,imo_fun_iden,imo_pes_iden,imo_tim_iden,imo_end_iden");
 
-            psImovel.setString(1, item.getDataCadastro());
-            psImovel.setString(2, item.getNome());
-            psImovel.setDouble(3, item.getPreco());
-            psImovel.setString(4, item.getItens());
-            psImovel.setString(5, item.getDescricao());
-            psImovel.setInt(6, item.getQuantidadeParcelas());
-            psImovel.setDouble(7, item.getValorComissao());
-            psImovel.setInt(8, item.getStatusImovel());
-            psImovel.setString(9, item.getBaixaImovel());
-            psImovel.setInt(10, item.getIdTipoImovel());
-            psImovel.setInt(11, item.getIdEndereco());
-            psImovel.setInt(12, item.getIdStatus());
+            psImovel.setString(1, item.getDataInclusao());
+            psImovel.setDouble(2, item.getPreco());
+            psImovel.setDouble(3, item.getTamanho());
+            psImovel.setString(4, item.getObservacao());
+            psImovel.setString(5, item.getBaixaData());
+            psImovel.setString(6, item.getBaixaMotivo());
+            psImovel.setInt(7, item.getQuantidadeParcelas());
+            psImovel.setDouble(8, item.getValorComissao());
+            psImovel.setInt(9, item.getIdFuncionario());
+            psImovel.setInt(10, item.getIdPessoa());
+            psImovel.setInt(11, item.getIdTipoImovel());
+            psImovel.setInt(12, item.getIdEndereco());
 
         } catch (Exception error) {
 
@@ -70,22 +72,22 @@ public class ImovelController extends Controller<Imovel> {
         
         try {
 
-            psImovel = criaStatement.updateSql("imoveis", "im_data_cadastro,im_nome,im_preco,im_itens,im_descricao,im_quantidade_parcelas,im_valor_comissao,"
-                                            + "im_status_imovel,im_baixa_imovel,id_tip_tipo_imovel,id_end_enderecos,id_sta_status");
+            psImovel = criaStatement.updateSql("imo_data_inclusao,imo_preco,imo_tamanho,imo_observacao,imo_baixa_data,imo_baixa_motivo,"
+                                             + "imo_quantidade_parcelas,imo_valor_comissao,imo_fun_iden,imo_pes_iden,imo_tim_iden,imo_end_iden");
 
-            psImovel.setString(1, item.getDataCadastro());
-            psImovel.setString(2, item.getNome());
-            psImovel.setDouble(3, item.getPreco());
-            psImovel.setString(4, item.getItens());
-            psImovel.setString(5, item.getDescricao());
-            psImovel.setInt(6, item.getQuantidadeParcelas());
-            psImovel.setDouble(7, item.getValorComissao());
-            psImovel.setInt(8, item.getStatusImovel());
-            psImovel.setString(9, item.getBaixaImovel());
-            psImovel.setInt(10, item.getIdTipoImovel());
-            psImovel.setInt(11, item.getIdEndereco());
-            psImovel.setInt(12, item.getIdStatus());
-            psImovel.setInt(15, item.getId());
+            psImovel.setString(1, item.getDataInclusao());
+            psImovel.setDouble(2, item.getPreco());
+            psImovel.setDouble(3, item.getTamanho());
+            psImovel.setString(4, item.getObservacao());
+            psImovel.setString(5, item.getBaixaData());
+            psImovel.setString(6, item.getBaixaMotivo());
+            psImovel.setInt(7, item.getQuantidadeParcelas());
+            psImovel.setDouble(8, item.getValorComissao());
+            psImovel.setInt(9, item.getIdFuncionario());
+            psImovel.setInt(10, item.getIdPessoa());
+            psImovel.setInt(11, item.getIdTipoImovel());
+            psImovel.setInt(12, item.getIdEndereco());
+            psImovel.setInt(13, item.getId());
 
         } catch (Exception error) {
 
@@ -102,7 +104,7 @@ public class ImovelController extends Controller<Imovel> {
         
         try {
 
-            psImovel = criaStatement.deleteSql("imoveis");
+            psImovel = criaStatement.deleteSql();
 
             psImovel.setInt(1, id);
 
@@ -121,7 +123,7 @@ public class ImovelController extends Controller<Imovel> {
         
         try {
 
-            psImovel = criaStatement.selectSql("imoveis", false, null);
+            psImovel = criaStatement.selectSql(tabela, false, null);
 
         } catch (Exception ex) {
 
@@ -137,7 +139,7 @@ public class ImovelController extends Controller<Imovel> {
         
         try {
 
-            psImovel = criaStatement.selectSql("imoveis", true, "id");
+            psImovel = criaStatement.selectSql(tabela, true, this.id);
 
         } catch (Exception ex) {
 
@@ -156,21 +158,21 @@ public class ImovelController extends Controller<Imovel> {
             if (rs.next()) {
 
                 return new Imovel(
-                        rs.getInt("id"), 
-                        rs.getString("im_data_cadastro"), 
-                        rs.getString("im_nome"), 
-                        rs.getDouble("im_preco"), 
-                        rs.getString("im_itens"), 
-                        rs.getString("im_descricao"),
-                        rs.getInt("im_quantidade_parcelas"), 
-                        rs.getDouble("im_valor_comissao"), 
-                        rs.getInt("im_status_imovel"), 
-                        rs.getString("im_baixa_imovel"), 
-                        rs.getInt("id_tip_tipo_imovel"),
-                        rs.getInt("id_end_enderecos"), 
-                        rs.getInt("id_sta_status")
+                        rs.getInt("imo_iden"), 
+                        rs.getString("imo_data_inclusao"), 
+                        rs.getDouble("imo_preco"), 
+                        rs.getDouble("imo_tamanho"), 
+                        rs.getString("imo_observacao"), 
+                        rs.getString("imo_baixa_data"),
+                        rs.getString("imo_baixa_motivo"), 
+                        rs.getInt("imo_quantidade_parcelas"), 
+                        rs.getDouble("imo_valor_comissao"), 
+                        rs.getInt("imo_fun_iden"), 
+                        rs.getInt("imo_pes_iden"),
+                        rs.getInt("imo_tim_iden"), 
+                        rs.getInt("imo_end_iden")
                 );
-
+                
             } else
                 throw new Exception("Imovel não encontrado");
             

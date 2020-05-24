@@ -14,10 +14,8 @@ import java.util.Date;
 public class Orcamento {
     
     private int id;
-    private String dataOrcamento;
-    private double valorOrcamento;
+    private String data;
     private String descricao;
-    private int quantidadeParcelas;
     private int idTipoPagamento;
     private int idPessoa;
     private int idFuncionario;
@@ -25,13 +23,11 @@ public class Orcamento {
     
     public Orcamento() {}
     
-    public Orcamento(int id, String dataOrcamento, double valorOrcamento, String descricao, int quantidadeParcelas, int idTipoPagamento, int idPessoa, int idFuncionario, int idImovel) {
+    public Orcamento(int id, String data, String descricao, int idFuncionario, int idPessoa, int idImovel, int idTipoPagamento) {
         this.id = id;
-        this.dataOrcamento = dataOrcamento;
+        this.data = data;
         this.idFuncionario = idFuncionario;
         this.idImovel = idImovel;
-        this.valorOrcamento = valorOrcamento;
-        this.quantidadeParcelas = quantidadeParcelas;
         this.descricao = descricao;
         this.idTipoPagamento = idTipoPagamento;
         this.idPessoa = idPessoa;
@@ -45,12 +41,12 @@ public class Orcamento {
         this.id = id;
     }
 
-    public String getDataOrcamento() {
-        return dataOrcamento;
+    public String getData() {
+        return data;
     }
 
-    public void setDataOrcamento(String dataOrcamento) {
-        this.dataOrcamento = dataOrcamento;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public int getIdFuncionario() {
@@ -67,22 +63,6 @@ public class Orcamento {
 
     public void setIdImovel(int idImovel) {
         this.idImovel = idImovel;
-    }
-
-    public double getValorOrcamento() {
-        return valorOrcamento;
-    }
-
-    public void setValorOrcamento(double valorOrcamento) {
-        this.valorOrcamento = valorOrcamento;
-    }
-
-    public int getQuantidadeParcelas() {
-        return quantidadeParcelas;
-    }
-
-    public void setQuantidadeParcelas(int quantidadeParcelas) {
-        this.quantidadeParcelas = quantidadeParcelas;
     }
 
     public String getDescricao() {

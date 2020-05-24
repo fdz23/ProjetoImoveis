@@ -24,7 +24,9 @@ public class TipoImovelController extends Controller<TipoImovel> {
     public TipoImovelController(Connection con) {
 
         super(con);
-        this.criaStatement = new CriaStatement(con);
+        this.id = "tim_iden";
+        this.tabela = "tipo_imoveis";
+        this.criaStatement = new CriaStatement(con, tabela, id);
 
     }
 
@@ -33,7 +35,7 @@ public class TipoImovelController extends Controller<TipoImovel> {
         
         try {
 
-            psTipoImovel = criaStatement.insertSql("tipo_imoveis", "descricao");
+            psTipoImovel = criaStatement.insertSql(tabela, "tim_nome");
 
             psTipoImovel.setString(1, item.getDescricao());
 
@@ -52,7 +54,7 @@ public class TipoImovelController extends Controller<TipoImovel> {
         
         try {
 
-            psTipoImovel = criaStatement.updateSql("tipo_imoveis", "descricao");
+            psTipoImovel = criaStatement.updateSql("tim_nome");
 
             psTipoImovel.setString(1, item.getDescricao());
             psTipoImovel.setInt(2, item.getId());
@@ -72,7 +74,7 @@ public class TipoImovelController extends Controller<TipoImovel> {
         
         try {
 
-            psTipoImovel = criaStatement.deleteSql("tipo_imoveis");
+            psTipoImovel = criaStatement.deleteSql();
 
             psTipoImovel.setInt(1, id);
 
@@ -90,7 +92,7 @@ public class TipoImovelController extends Controller<TipoImovel> {
         
         try {
 
-            psTipoImovel = criaStatement.selectSql("tipo_imoveis", false, null);
+            psTipoImovel = criaStatement.selectSql(tabela, false, null);
 
         } catch (Exception ex) {
 
@@ -106,7 +108,7 @@ public class TipoImovelController extends Controller<TipoImovel> {
         
         try {
 
-            psTipoImovel = criaStatement.selectSql("tipo_imoveis", true, "id");
+            psTipoImovel = criaStatement.selectSql(tabela, true, this.id);
             
             psTipoImovel.setInt(1, id);
 
@@ -127,8 +129,8 @@ public class TipoImovelController extends Controller<TipoImovel> {
             if (rs.next()) {
 
                 return new TipoImovel(
-                        rs.getInt("id"), 
-                        rs.getString("descricao")
+                        rs.getInt(id), 
+                        rs.getString("tim_nome")
                 );
 
             } else

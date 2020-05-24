@@ -14,37 +14,37 @@ import java.util.Date;
 public class Imovel {
     
     private int id;
-    private String dataCadastro;
-    private String nome;
+    private String dataInclusao;
     private double preco;
-    private String itens;
-    private String descricao;
-    private int quantidadeParcelas;
+    private double tamanho;
+    private String observacao;
+    private String baixaData;
+    private String baixaMotivo;
     private double valorComissao;
-    private int statusImovel;
-    private String baixaImovel;
+    private int quantidadeParcelas;
     private int idTipoImovel;
     private int idEndereco;
-    private int idStatus;
+    private int idPessoa;
+    private int idFuncionario;
     
     public Imovel() {}
     
-    public Imovel(int id, String dataCadastro, String nome, double preco, String itens, String descricao, int quantidadeParcelas, 
-            double valorComissao, int statusImovel, String baixaImovel, int idTipoImovel, int idEndereco, int idStatus) {
+    public Imovel(int id, String dataInclusao, double preco, double tamanho, String observacao, String baixaData, String baixaMotivo, 
+            int quantidadeParcelas, double valorComissao, int idFuncionario, int idPessoa, int idTipoImovel, int idEndereco) {
         
         this.id = id;
-        this.dataCadastro = dataCadastro;
-        this.nome = nome;
+        this.dataInclusao = dataInclusao;
+        this.tamanho = tamanho;
         this.preco = preco;
-        this.itens = itens;
-        this.quantidadeParcelas = quantidadeParcelas;
+        this.observacao = observacao;
+        this.baixaMotivo = baixaMotivo;
         this.valorComissao = valorComissao;
-        this.statusImovel = statusImovel;
-        this.baixaImovel = baixaImovel;
+        this.quantidadeParcelas = quantidadeParcelas;
+        this.idFuncionario = idFuncionario;
         this.idTipoImovel = idTipoImovel;
         this.idEndereco = idEndereco;
-        this.idStatus = idStatus;
-        this.descricao = descricao;
+        this.baixaData = baixaData;
+        this.idPessoa = idPessoa;
     }
 
     public int getId() {
@@ -55,20 +55,12 @@ public class Imovel {
         this.id = id;
     }
 
-    public String getDataCadastro() {
-        return dataCadastro;
+    public String getDataInclusao() {
+        return dataInclusao;
     }
 
-    public void setDataCadastro(String dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setDataInclusao(String dataInclusao) {
+        this.dataInclusao = dataInclusao;
     }
 
     public double getPreco() {
@@ -79,28 +71,28 @@ public class Imovel {
         this.preco = preco;
     }
 
-    public String getItens() {
-        return itens;
+    public String getObservacao() {
+        return observacao;
     }
 
-    public void setItens(String itens) {
-        this.itens = itens;
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getBaixaData() {
+        return baixaData;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setBaixaData(String baixaData) {
+        this.baixaData = baixaData;
     }
     
-    public int getQuantidadeParcelas() {
-        return quantidadeParcelas;
+    public String getBaixaMotivo() {
+        return baixaMotivo;
     }
 
-    public void setQuantidadeParcelas(int quantidadeParcelas) {
-        this.quantidadeParcelas = quantidadeParcelas;
+    public void setBaixaMotivo(String baixaMotivo) {
+        this.baixaMotivo = baixaMotivo;
     }
 
     public double getValorComissao() {
@@ -111,20 +103,12 @@ public class Imovel {
         this.valorComissao = valorComissao;
     }
 
-    public int getStatusImovel() {
-        return statusImovel;
+    public int getQuantidadeParcelas() {
+        return quantidadeParcelas;
     }
 
-    public void setStatusImovel(int statusImovel) {
-        this.statusImovel = statusImovel;
-    }
-
-    public String getBaixaImovel() {
-        return baixaImovel;
-    }
-
-    public void setBaixaImovel(String baixaImovel) {
-        this.baixaImovel = baixaImovel;
+    public void setQuantidadeParcelas(int quantidadeParcelas) {
+        this.quantidadeParcelas = quantidadeParcelas;
     }
 
     public int getIdTipoImovel() {
@@ -143,11 +127,27 @@ public class Imovel {
         this.idEndereco = idEndereco;
     }
 
-    public int getIdStatus() {
-        return idStatus;
+    public int getIdPessoa() {
+        return idPessoa;
     }
 
-    public void setIdStatus(int idStatus) {
-        this.idStatus = idStatus;
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
+    }
+
+    public double getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(double tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    public int getIdFuncionario() {
+        return idFuncionario;
+    }
+
+    public void setIdFuncionario(int idFuncionario) {
+        this.idFuncionario = idFuncionario;
     }
 }

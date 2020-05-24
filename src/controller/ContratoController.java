@@ -24,7 +24,9 @@ public class ContratoController extends Controller<Contrato> {
     public ContratoController(Connection con) {
 
         super(con);
-        this.criaStatement = new CriaStatement(con);
+        this.id = "con_iden";
+        this.tabela = "contratos";
+        this.criaStatement = new CriaStatement(con, tabela, id);
 
     }
 
@@ -33,7 +35,7 @@ public class ContratoController extends Controller<Contrato> {
         
         try {
 
-            psContrato = criaStatement.insertSql("contratos", "con_data_orcamento,con_data_alteracao,id_sit_situacao,id_orc_orcamento");
+            psContrato = criaStatement.insertSql(tabela, "con_data,con_data_alteracao,id_sit_iden,id_orc_iden");
 
             psContrato.setString(1, item.getDataOrcamento());
             psContrato.setString(2, item.getDataAlteracao());
@@ -55,7 +57,7 @@ public class ContratoController extends Controller<Contrato> {
         
         try {
 
-            psContrato = criaStatement.updateSql("contratos", "con_data_orcamento,con_data_alteracao,id_sit_situacao,id_orc_orcamento");
+            psContrato = criaStatement.updateSql("con_data,con_data_alteracao,id_sit_iden,id_orc_iden");
 
             psContrato.setString(1, item.getDataOrcamento());
             psContrato.setString(2, item.getDataAlteracao());
@@ -78,7 +80,7 @@ public class ContratoController extends Controller<Contrato> {
         
         try {
 
-            psContrato = criaStatement.deleteSql("contratos");
+            psContrato = criaStatement.deleteSql();
 
             psContrato.setInt(1, id);
 
@@ -96,7 +98,7 @@ public class ContratoController extends Controller<Contrato> {
         
         try {
 
-            psContrato = criaStatement.selectSql("contratos", false, null);
+            psContrato = criaStatement.selectSql(tabela, false, null);
 
         } catch (Exception ex) {
 
@@ -112,7 +114,7 @@ public class ContratoController extends Controller<Contrato> {
         
         try {
 
-            psContrato = criaStatement.selectSql("contratos", true, "id");
+            psContrato = criaStatement.selectSql(tabela, true, this.id);
             
             psContrato.setInt(1, id);
 
@@ -133,11 +135,11 @@ public class ContratoController extends Controller<Contrato> {
             if (rs.next()) {
 
                 return new Contrato(
-                        rs.getInt("id"), 
-                        rs.getString("con_data_orcamento"), 
+                        rs.getInt(id), 
+                        rs.getString("con_data"), 
                         rs.getString("con_data_alteracao"), 
-                        rs.getInt("id_sit_situacao"), 
-                        rs.getInt("id_orc_orcamento")
+                        rs.getInt("id_sit_iden"), 
+                        rs.getInt("id_orc_iden")
                 );
 
             } else

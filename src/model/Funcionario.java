@@ -11,27 +11,23 @@ package model;
  */
 public class Funcionario extends Pessoa {
     
-    private double salario;
-    private String dataPrimeiroSalario;
-    private String dataUltimoSalario;
+    private int idStatus;
+    private String dataRescisao;
     private String matricula;
-    private String dataContratacao;
     private int idTipoFuncionario;
     private int idPessoa;
     
     public Funcionario() {}
     
-    public Funcionario( int id, double salario, String dataPrimeiroSalario, String dataUltimoSalario, String matricula, String dataContratacao, 
-                        int idTipoFuncionario, int idPessoa, String nome, String email, String dataNascimento, String cpf, String telefone) {
+    public Funcionario(String nome, String email, String dataNascimento, String cpf, String telefone, int idEndereco,
+                       int id, String matricula, int idPessoa, int idTipoFuncionario, int idStatus, String dataRescisao) {
         
-        super(id, nome, email, dataNascimento, cpf, telefone);
+        super(id, nome, email, dataNascimento, cpf, telefone, idEndereco);
         this.idPessoa = idPessoa;
         this.idTipoFuncionario = idTipoFuncionario;
-        this.salario = salario;
-        this.dataPrimeiroSalario = dataPrimeiroSalario;
-        this.dataUltimoSalario = dataUltimoSalario;
         this.matricula = matricula;
-        this.dataContratacao = dataContratacao;
+        this.idStatus = idStatus;
+        this.dataRescisao = dataRescisao;
     }
 
     public int getIdPessoa() {
@@ -49,31 +45,7 @@ public class Funcionario extends Pessoa {
     public void setIdTipoFuncionario(int idTipoFuncionario) {
         this.idTipoFuncionario = idTipoFuncionario;
     }
-
-    public double getSalario() {
-        return salario;
-    }
-
-    public void setSalario(double salario) {
-        this.salario = salario;
-    }
-
-    public String getDataPrimeiroSalario() {
-        return dataPrimeiroSalario;
-    }
-
-    public void setDataPrimeiroSalario(String dataPrimeiroSalario) {
-        this.dataPrimeiroSalario = dataPrimeiroSalario;
-    }
-
-    public String getDataUltimoSalario() {
-        return dataUltimoSalario;
-    }
-
-    public void setDataUltimoSalario(String dataUltimoSalario) {
-        this.dataUltimoSalario = dataUltimoSalario;
-    }
-
+    
     public String getMatricula() {
         return matricula;
     }
@@ -82,11 +54,20 @@ public class Funcionario extends Pessoa {
         this.matricula = matricula;
     }
 
-    public String getDataContratacao() {
-        return dataContratacao;
+    public int getIdStatus() {
+        return idStatus;
     }
 
-    public void setDataContratacao(String dataContratacao) {
-        this.dataContratacao = dataContratacao;
+    public void setIdStatus(int idStatus) {
+        this.idStatus = idStatus;
     }
+
+    public String getDataRescisao() {
+        return dataRescisao;
+    }
+
+    public void setDataRescisao(String dataRescisao) {
+        this.dataRescisao = dataRescisao;
+    }
+    
 }

@@ -24,7 +24,9 @@ public class SituacaoController extends Controller<Situacao> {
     public SituacaoController(Connection con) {
 
         super(con);
-        this.criaStatement = new CriaStatement(con);
+        this.id = "sit_iden";
+        this.tabela = "situacoes";
+        this.criaStatement = new CriaStatement(con, tabela, id);
 
     }
 
@@ -33,7 +35,7 @@ public class SituacaoController extends Controller<Situacao> {
         
         try {
 
-            psSituacao = criaStatement.insertSql("situacoes", "descricao");
+            psSituacao = criaStatement.insertSql(tabela, "sit_descricao");
 
             psSituacao.setString(1, item.getDescricao());
 
@@ -52,7 +54,7 @@ public class SituacaoController extends Controller<Situacao> {
         
         try {
 
-            psSituacao = criaStatement.updateSql("situacoes", "descricao");
+            psSituacao = criaStatement.updateSql("sit_descricao");
 
             psSituacao.setString(1, item.getDescricao());
             psSituacao.setInt(2, item.getId());
@@ -72,7 +74,7 @@ public class SituacaoController extends Controller<Situacao> {
         
         try {
 
-            psSituacao = criaStatement.deleteSql("situacoes");
+            psSituacao = criaStatement.deleteSql();
 
             psSituacao.setInt(1, id);
 
@@ -90,7 +92,7 @@ public class SituacaoController extends Controller<Situacao> {
         
         try {
 
-            psSituacao = criaStatement.selectSql("situacoes", false, null);
+            psSituacao = criaStatement.selectSql(tabela, false, null);
 
         } catch (Exception ex) {
 
@@ -106,7 +108,7 @@ public class SituacaoController extends Controller<Situacao> {
         
         try {
 
-            psSituacao = criaStatement.selectSql("situacoes", true, "id");
+            psSituacao = criaStatement.selectSql(tabela, true, this.id);
             
             psSituacao.setInt(1, id);
 
@@ -127,8 +129,8 @@ public class SituacaoController extends Controller<Situacao> {
             if (rs.next()) {
 
                 return new Situacao(
-                        rs.getInt("id"), 
-                        rs.getString("descricao")
+                        rs.getInt(id), 
+                        rs.getString("sit_descricao")
                 );
 
             } else

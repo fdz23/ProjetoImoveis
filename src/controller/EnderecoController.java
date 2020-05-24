@@ -24,7 +24,9 @@ public class EnderecoController extends Controller<Endereco> {
     public EnderecoController(Connection con) {
 
         super(con);
-        this.criaStatement = new CriaStatement(con);
+        this.id = "end_iden";
+        this.tabela = "enderecos";
+        this.criaStatement = new CriaStatement(con, id, tabela);
 
     }
 
@@ -33,17 +35,17 @@ public class EnderecoController extends Controller<Endereco> {
         
         try {
 
-            psEndereco = criaStatement.insertSql("enderecos", "end_codigo_ibge,end_cidade,end_bairro,end_estado,end_rua,end_numero,end_ponto_referencia,end_cep,id_pe_pessoas");
+            psEndereco = criaStatement.insertSql(tabela, "end_codigo_ibge,end_logradouro,end_bairro,end_cidade,end_estado,end_complemento,end_numero,end_ponto_referencia,end_cep");
 
             psEndereco.setString(1, item.getCodigoIBGE());
-            psEndereco.setString(2, item.getCidade());
+            psEndereco.setString(2, item.getLogradouro());
             psEndereco.setString(3, item.getBairro());
-            psEndereco.setString(4, item.getEstado());
-            psEndereco.setString(5, item.getRua());
-            psEndereco.setString(6, item.getNumero());
-            psEndereco.setString(7, item.getPontoReferencia());
-            psEndereco.setString(8, item.getCep());
-            psEndereco.setInt(9, item.getIdPessoa());
+            psEndereco.setString(4, item.getCidade());
+            psEndereco.setString(5, item.getEstado());
+            psEndereco.setString(6, item.getComplemento());
+            psEndereco.setString(7, item.getNumero());
+            psEndereco.setString(8, item.getPontoReferencia());
+            psEndereco.setString(9, item.getCep());
 
         } catch (Exception error) {
 
@@ -60,17 +62,17 @@ public class EnderecoController extends Controller<Endereco> {
         
         try {
 
-            psEndereco = criaStatement.updateSql("enderecos", "end_codigo_ibge,end_cidade,end_bairro,end_estado,end_rua,end_numero,end_ponto_referencia,end_cep,id_pe_pessoas");
+            psEndereco = criaStatement.updateSql("end_codigo_ibge,end_logradouro,end_bairro,end_cidade,end_estado,end_complemento,end_numero,end_ponto_referencia,end_cep");
 
             psEndereco.setString(1, item.getCodigoIBGE());
-            psEndereco.setString(2, item.getCidade());
+            psEndereco.setString(2, item.getLogradouro());
             psEndereco.setString(3, item.getBairro());
-            psEndereco.setString(4, item.getEstado());
-            psEndereco.setString(5, item.getRua());
-            psEndereco.setString(6, item.getNumero());
-            psEndereco.setString(7, item.getPontoReferencia());
-            psEndereco.setString(8, item.getCep());
-            psEndereco.setInt(9, item.getIdPessoa());
+            psEndereco.setString(4, item.getCidade());
+            psEndereco.setString(5, item.getEstado());
+            psEndereco.setString(6, item.getComplemento());
+            psEndereco.setString(7, item.getNumero());
+            psEndereco.setString(8, item.getPontoReferencia());
+            psEndereco.setString(9, item.getCep());
             psEndereco.setInt(10, item.getId());
 
         } catch (Exception error) {
@@ -88,7 +90,7 @@ public class EnderecoController extends Controller<Endereco> {
         
         try {
 
-            psEndereco = criaStatement.deleteSql("enderecos");
+            psEndereco = criaStatement.deleteSql();
 
             psEndereco.setInt(1, id);
 
@@ -106,7 +108,7 @@ public class EnderecoController extends Controller<Endereco> {
         
         try {
 
-            psEndereco = criaStatement.selectSql("enderecos", false, null);
+            psEndereco = criaStatement.selectSql(tabela, false, null);
 
         } catch (Exception ex) {
 
@@ -122,7 +124,7 @@ public class EnderecoController extends Controller<Endereco> {
         
         try {
 
-            psEndereco = criaStatement.selectSql("enderecos", true, "id");
+            psEndereco = criaStatement.selectSql(tabela, true, this.id);
             
             psEndereco.setInt(1, id);
 
@@ -143,16 +145,16 @@ public class EnderecoController extends Controller<Endereco> {
             if (rs.next()) {
 
                 return new Endereco(
-                        rs.getInt("id"), 
+                        rs.getInt(id), 
                         rs.getString("end_codigo_ibge"), 
-                        rs.getString("end_cidade"), 
+                        rs.getString("end_logradouro"), 
                         rs.getString("end_bairro"), 
-                        rs.getString("end_estado"), 
-                        rs.getString("end_rua"),
+                        rs.getString("end_cidade"), 
+                        rs.getString("end_estado"),
+                        rs.getString("end_complemento"),
                         rs.getString("end_numero"), 
                         rs.getString("end_ponto_referencia"), 
-                        rs.getString("end_cep"), 
-                        rs.getInt("id_pe_pessoas")
+                        rs.getString("end_cep")
                 );
 
             } else

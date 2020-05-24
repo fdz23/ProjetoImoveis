@@ -17,16 +17,18 @@ public class Pessoa {
     private String dataNascimento;
     private String cpf;
     private String telefone;
+    private int idEndereco;
     
     public Pessoa() {}
     
-    public Pessoa(int id, String nome, String email, String dataNascimento, String cpf, String telefone) {
+    public Pessoa(int id, String nome, String email, String dataNascimento, String cpf, String telefone, int idEndereco) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
         this.telefone = telefone;
+        this.idEndereco = idEndereco;
     }
 
     public int getId() {
@@ -75,6 +77,14 @@ public class Pessoa {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public int getIdEndereco() {
+        return idEndereco;
+    }
+
+    public void setIdEndereco(int idEndereco) {
+        this.idEndereco = idEndereco;
     }
     
 }

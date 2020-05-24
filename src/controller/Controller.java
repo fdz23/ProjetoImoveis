@@ -26,11 +26,12 @@ public abstract class Controller<T> implements IController<T> {
     protected ResultSet rs;
     protected CriaStatement criaStatement;
     protected PreparedStatement preparedStatement;
+    protected String id;
+    protected String tabela;
 
     public Controller(Connection con) {
 
         this.con = con;
-        this.criaStatement = new CriaStatement(con);
         rs = null;
 
     }
@@ -116,7 +117,7 @@ public abstract class Controller<T> implements IController<T> {
 
             while (rs.next()) {
 
-                itens.add(getItem(rs.getInt("id")));
+                itens.add(getItem(rs.getInt(id)));
 
             }
 

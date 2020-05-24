@@ -9,35 +9,37 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-import model.NivelAcesso;
+import model.ImovelItem;
 import util.CriaStatement;
 
 /**
  *
  * @author fdz
  */
-public class NivelAcessoController extends Controller<NivelAcesso> {
+public class ImovelItemController extends Controller<ImovelItem> {
     
     private CriaStatement criaStatement;
-    private PreparedStatement psNivelAcesso;
+    private PreparedStatement psContrato;
 
-    public NivelAcessoController(Connection con) {
+    public ImovelItemController(Connection con) {
 
         super(con);
-        this.tabela = "nivel_acessos";
-        this.id = "nac_iden";
+        this.id = "iit_iden";
+        this.tabela = "imoveis_itens";
         this.criaStatement = new CriaStatement(con, tabela, id);
 
     }
 
     @Override
-    public PreparedStatement statementInserir(NivelAcesso item) {
+    public PreparedStatement statementInserir(ImovelItem item) {
         
         try {
 
-            psNivelAcesso = criaStatement.insertSql(tabela, "nac_descricao");
+            psContrato = criaStatement.insertSql(tabela, "iit_valor,iit_iti_iden,iit_imo_iden");
 
-            psNivelAcesso.setString(1, item.getDescricao());
+            psContrato.setDouble(1, item.getValor());
+            psContrato.setInt(2, item.getIdItemMovel());
+            psContrato.setInt(3, item.getIdImovel());
 
         } catch (Exception error) {
 
@@ -45,19 +47,21 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
 
         }
 
-        return psNivelAcesso;
+        return psContrato;
         
     }
 
     @Override
-    public PreparedStatement statementAlterar(NivelAcesso item) {
+    public PreparedStatement statementAlterar(ImovelItem item) {
         
         try {
 
-            psNivelAcesso = criaStatement.updateSql("nac_descricao");
+            psContrato = criaStatement.updateSql("iit_valor,iit_iti_iden,iit_imo_iden");
 
-            psNivelAcesso.setString(1, item.getDescricao());
-            psNivelAcesso.setInt(2, item.getId());
+            psContrato.setDouble(1, item.getValor());
+            psContrato.setInt(2, item.getIdItemMovel());
+            psContrato.setInt(3, item.getIdImovel());
+            psContrato.setInt(5, item.getId());
 
         } catch (Exception error) {
 
@@ -65,7 +69,7 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
 
         }
 
-        return psNivelAcesso;
+        return psContrato;
         
     }
 
@@ -74,16 +78,16 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
         
         try {
 
-            psNivelAcesso = criaStatement.deleteSql();
+            psContrato = criaStatement.deleteSql();
 
-            psNivelAcesso.setInt(1, id);
+            psContrato.setInt(1, id);
 
         } catch (Exception ex) {
 
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
-        return psNivelAcesso;
+        return psContrato;
 
     }
 
@@ -92,7 +96,7 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
         
         try {
 
-            psNivelAcesso = criaStatement.selectSql(tabela, false, null);
+            psContrato = criaStatement.selectSql(tabela, false, null);
 
         } catch (Exception ex) {
 
@@ -100,7 +104,7 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
 
         }
         
-        return psNivelAcesso;
+        return psContrato;
     }
 
     @Override
@@ -108,9 +112,9 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
         
         try {
 
-            psNivelAcesso = criaStatement.selectSql(tabela, true, this.id);
+            psContrato = criaStatement.selectSql(tabela, true, this.id);
             
-            psNivelAcesso.setInt(1, id);
+            psContrato.setInt(1, id);
 
         } catch (Exception ex) {
 
@@ -118,23 +122,25 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
 
         }
 
-        return psNivelAcesso;
+        return psContrato;
     }
 
     @Override
-    public NivelAcesso criaItem(ResultSet rs) {
+    public ImovelItem criaItem(ResultSet rs) {
         
         try {
             
             if (rs.next()) {
 
-                return new NivelAcesso(
+                return new ImovelItem(
                         rs.getInt(id), 
-                        rs.getString("nac_descricao")
+                        rs.getDouble("iit_valor"), 
+                        rs.getInt("iit_iti_iden"), 
+                        rs.getInt("iit_imo_iden")
                 );
 
             } else
-                throw new Exception("NivelAcesso não encontrado");
+                throw new Exception("ImovelItem não encontrado");
             
         } catch (Exception e) {
             

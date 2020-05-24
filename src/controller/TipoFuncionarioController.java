@@ -24,7 +24,9 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
     public TipoFuncionarioController(Connection con) {
 
         super(con);
-        this.criaStatement = new CriaStatement(con);
+        this.tabela = "tipo_funcionarios";
+        this.id = "tfu_iden";
+        this.criaStatement = new CriaStatement(con, tabela, id);
 
     }
 
@@ -33,12 +35,11 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
         
         try {
 
-            psTipoFuncionario = criaStatement.insertSql("tipo_funcionarios", "tfu_cargo,id_nia_nivel_acessos,tfu_salario,tfu_descricao");
+            psTipoFuncionario = criaStatement.insertSql(tabela, "tfu_descricao,tfu_nac_iden,tfu_salario");
 
-            psTipoFuncionario.setString(1, item.getCargo());
+            psTipoFuncionario.setString(1, item.getDescricao());
             psTipoFuncionario.setInt(2, item.getIdNivelAcesso());
             psTipoFuncionario.setDouble(3, item.getSalario());
-            psTipoFuncionario.setString(4, item.getDescricao());
 
         } catch (Exception error) {
 
@@ -55,13 +56,12 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
         
         try {
 
-            psTipoFuncionario = criaStatement.updateSql("tipo_funcionarios", "tfu_cargo,id_nia_nivel_acessos,tfu_salario,tfu_descricao");
+            psTipoFuncionario = criaStatement.updateSql("tfu_descricao,tfu_nac_iden,tfu_salario");
 
-            psTipoFuncionario.setString(1, item.getCargo());
+            psTipoFuncionario.setString(1, item.getDescricao());
             psTipoFuncionario.setInt(2, item.getIdNivelAcesso());
             psTipoFuncionario.setDouble(3, item.getSalario());
-            psTipoFuncionario.setString(4, item.getDescricao());
-            psTipoFuncionario.setInt(5, item.getId());
+            psTipoFuncionario.setInt(4, item.getId());
 
         } catch (Exception error) {
 
@@ -78,7 +78,7 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
         
         try {
 
-            psTipoFuncionario = criaStatement.deleteSql("tipo_funcionarios");
+            psTipoFuncionario = criaStatement.deleteSql();
 
             psTipoFuncionario.setInt(1, id);
 
@@ -96,7 +96,7 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
         
         try {
 
-            psTipoFuncionario = criaStatement.selectSql("tipo_funcionarios", false, null);
+            psTipoFuncionario = criaStatement.selectSql(tabela, false, null);
 
         } catch (Exception ex) {
 
@@ -112,7 +112,7 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
         
         try {
 
-            psTipoFuncionario = criaStatement.selectSql("tipo_funcionarios", true, "id");
+            psTipoFuncionario = criaStatement.selectSql(tabela, true, this.id);
             
             psTipoFuncionario.setInt(1, id);
 
@@ -133,11 +133,10 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
             if (rs.next()) {
 
                 return new TipoFuncionario(
-                        rs.getInt("id"), 
-                        rs.getString("tfu_cargo"), 
-                        rs.getInt("id_nia_nivel_acessos"), 
-                        rs.getDouble("tfu_salario"), 
-                        rs.getString("tfu_descricao")
+                        rs.getInt(id),
+                        rs.getString("tfu_descricao"),
+                        rs.getInt("tfu_nac_iden"), 
+                        rs.getDouble("tfu_salario")
                 );
 
             } else

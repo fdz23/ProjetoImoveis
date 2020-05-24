@@ -24,7 +24,9 @@ public class PessoaController extends Controller<Pessoa> {
     public PessoaController(Connection con) {
 
         super(con);
-        this.criaStatement = new CriaStatement(con);
+        this.tabela = "pessoas";
+        this.id = "pes_iden";
+        this.criaStatement = new CriaStatement(con, tabela, id);
 
     }
     
@@ -52,7 +54,7 @@ public class PessoaController extends Controller<Pessoa> {
         
         try {
 
-            psPessoas = criaStatement.selectSql("pessoas", true, "cpf");
+            psPessoas = criaStatement.selectSql(tabela, true, "cpf");
             
             psPessoas.setString(1, cpf);
 
@@ -70,13 +72,14 @@ public class PessoaController extends Controller<Pessoa> {
         
         try {
 
-            psPessoas = criaStatement.insertSql("pessoas", "pe_nome,pe_email,pe_data_nascimento,pe_cpf,pe_telefone");
+            psPessoas = criaStatement.insertSql(tabela, "pes_nome,pes_email,pes_nascimento,pes_cpf,pes_telefone,pes_end_iden");
 
             psPessoas.setString(1, item.getNome());
             psPessoas.setString(2, item.getEmail());
             psPessoas.setString(3, item.getDataNascimento());
             psPessoas.setString(4, item.getCpf());
             psPessoas.setString(5, item.getTelefone());
+            psPessoas.setInt(6, item.getIdEndereco());
 
         } catch (Exception error) {
 
@@ -93,14 +96,15 @@ public class PessoaController extends Controller<Pessoa> {
         
         try {
 
-            psPessoas = criaStatement.updateSql("pessoas", "pe_nome,pe_email,pe_data_nascimento,pe_cpf,pe_telefone");
+            psPessoas = criaStatement.updateSql("pes_nome,pes_email,pes_nascimento,pes_cpf,pes_telefone,pes_end_iden");
 
             psPessoas.setString(1, item.getNome());
             psPessoas.setString(2, item.getEmail());
             psPessoas.setString(3, item.getDataNascimento());
             psPessoas.setString(4, item.getCpf());
             psPessoas.setString(5, item.getTelefone());
-            psPessoas.setInt(6, item.getId());
+            psPessoas.setInt(6, item.getIdEndereco());
+            psPessoas.setInt(7, item.getId());
 
         } catch (Exception error) {
 
@@ -117,7 +121,7 @@ public class PessoaController extends Controller<Pessoa> {
         
         try {
 
-            psPessoas = criaStatement.deleteSql("pessoas");
+            psPessoas = criaStatement.deleteSql();
 
             psPessoas.setInt(1, id);
 
@@ -135,7 +139,7 @@ public class PessoaController extends Controller<Pessoa> {
         
         try {
 
-            psPessoas = criaStatement.selectSql("pessoas", false, null);
+            psPessoas = criaStatement.selectSql(tabela, false, null);
 
         } catch (Exception ex) {
 
@@ -151,7 +155,7 @@ public class PessoaController extends Controller<Pessoa> {
         
         try {
 
-            psPessoas = criaStatement.selectSql("pessoas", true, "id");
+            psPessoas = criaStatement.selectSql(tabela, true, this.id);
             
             psPessoas.setInt(1, id);
 
@@ -172,14 +176,15 @@ public class PessoaController extends Controller<Pessoa> {
             if (rs.next()) {
 
                 return new Pessoa(
-                        rs.getInt("id"), 
-                        rs.getString("pe_nome"), 
-                        rs.getString("pe_email"), 
-                        rs.getString("pe_data_nascimento"), 
-                        rs.getString("pe_cpf"), 
-                        rs.getString("pe_telefone")
+                        rs.getInt(id), 
+                        rs.getString("pes_nome"), 
+                        rs.getString("pes_email"), 
+                        rs.getString("pes_nascimento"), 
+                        rs.getString("pes_cpf"), 
+                        rs.getString("pes_telefone"), 
+                        rs.getInt("pes_end_iden")
                 );
-
+                
             } else
                 throw new Exception("Pessoa não encontrada");
             

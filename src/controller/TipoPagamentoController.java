@@ -24,7 +24,9 @@ public class TipoPagamentoController extends Controller<TipoPagamento> {
     public TipoPagamentoController(Connection con) {
 
         super(con);
-        this.criaStatement = new CriaStatement(con);
+        this.id = "tpa_iden";
+        this.tabela = "tipo_pagamentos";
+        this.criaStatement = new CriaStatement(con, tabela, id);
 
     }
 
@@ -33,7 +35,7 @@ public class TipoPagamentoController extends Controller<TipoPagamento> {
         
         try {
 
-            psTipoPagamento = criaStatement.insertSql("tipo_pagamentos", "descricao");
+            psTipoPagamento = criaStatement.insertSql(tabela, "tpa_descricao");
 
             psTipoPagamento.setString(1, item.getDescricao());
 
@@ -52,7 +54,7 @@ public class TipoPagamentoController extends Controller<TipoPagamento> {
         
         try {
 
-            psTipoPagamento = criaStatement.updateSql("tipo_pagamentos", "descricao");
+            psTipoPagamento = criaStatement.updateSql("tpa_descricao");
 
             psTipoPagamento.setString(1, item.getDescricao());
             psTipoPagamento.setInt(2, item.getId());
@@ -72,7 +74,7 @@ public class TipoPagamentoController extends Controller<TipoPagamento> {
         
         try {
 
-            psTipoPagamento = criaStatement.deleteSql("tipo_pagamentos");
+            psTipoPagamento = criaStatement.deleteSql();
 
             psTipoPagamento.setInt(1, id);
 
@@ -90,7 +92,7 @@ public class TipoPagamentoController extends Controller<TipoPagamento> {
         
         try {
 
-            psTipoPagamento = criaStatement.selectSql("tipo_pagamentos", false, null);
+            psTipoPagamento = criaStatement.selectSql(tabela, false, null);
 
         } catch (Exception ex) {
 
@@ -106,7 +108,7 @@ public class TipoPagamentoController extends Controller<TipoPagamento> {
         
         try {
 
-            psTipoPagamento = criaStatement.selectSql("tipo_pagamentos", true, "id");
+            psTipoPagamento = criaStatement.selectSql(tabela, true, this.id);
             
             psTipoPagamento.setInt(1, id);
 
@@ -127,8 +129,8 @@ public class TipoPagamentoController extends Controller<TipoPagamento> {
             if (rs.next()) {
 
                 return new TipoPagamento(
-                        rs.getInt("id"), 
-                        rs.getString("descricao")
+                        rs.getInt(id), 
+                        rs.getString("tpa_descricao")
                 );
 
             } else

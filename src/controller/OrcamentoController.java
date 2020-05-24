@@ -24,7 +24,9 @@ public class OrcamentoController extends Controller<Orcamento> {
     public OrcamentoController(Connection con) {
 
         super(con);
-        this.criaStatement = new CriaStatement(con);
+        this.tabela = "orcamentos";
+        this.id = "orc_iden";
+        this.criaStatement = new CriaStatement(con, tabela, id);
 
     }
 
@@ -33,16 +35,14 @@ public class OrcamentoController extends Controller<Orcamento> {
         
         try {
 
-            psOrcamento = criaStatement.insertSql("orcamentos", "orc_data_orcamento,orc_valor_orcamento,orc_descricao,orc_quantidade_parcelas,id_tip_tipo_pagamentos,id_pe_pessoa,id_fun_funcionario,id_im_imoveis");
+            psOrcamento = criaStatement.insertSql(tabela, "orc_data,orc_descricao,orc_func_iden,orc_pes_iden,orc_imo_iden,orc_tpa_iden");
 
-            psOrcamento.setString(1, item.getDataOrcamento());
-            psOrcamento.setDouble(2, item.getValorOrcamento());
-            psOrcamento.setString(3, item.getDescricao());
-            psOrcamento.setInt(4, item.getQuantidadeParcelas());
-            psOrcamento.setInt(5, item.getIdTipoPagamento());
-            psOrcamento.setInt(6, item.getIdPessoa());
-            psOrcamento.setInt(7, item.getIdFuncionario());
-            psOrcamento.setInt(8, item.getIdImovel());
+            psOrcamento.setString(1, item.getData());
+            psOrcamento.setString(2, item.getDescricao());
+            psOrcamento.setInt(3, item.getIdFuncionario());
+            psOrcamento.setInt(4, item.getIdPessoa());
+            psOrcamento.setInt(5, item.getIdImovel());
+            psOrcamento.setInt(6, item.getIdTipoPagamento());
 
         } catch (Exception error) {
 
@@ -59,17 +59,15 @@ public class OrcamentoController extends Controller<Orcamento> {
         
         try {
 
-            psOrcamento = criaStatement.updateSql("orcamentos", "orc_data_orcamento,orc_valor_orcamento,orc_descricao,orc_quantidade_parcelas,id_tip_tipo_pagamentos,id_pe_pessoa,id_fun_funcionario,id_im_imoveis");
+            psOrcamento = criaStatement.updateSql("orc_data,orc_descricao,orc_func_iden,orc_pes_iden,orc_imo_iden,orc_tpa_iden");
 
-            psOrcamento.setString(1, item.getDataOrcamento());
-            psOrcamento.setDouble(2, item.getValorOrcamento());
-            psOrcamento.setString(3, item.getDescricao());
-            psOrcamento.setInt(4, item.getQuantidadeParcelas());
-            psOrcamento.setInt(5, item.getIdTipoPagamento());
-            psOrcamento.setInt(6, item.getIdPessoa());
-            psOrcamento.setInt(7, item.getIdFuncionario());
-            psOrcamento.setInt(8, item.getIdImovel());
-            psOrcamento.setInt(10, item.getId());
+            psOrcamento.setString(1, item.getData());
+            psOrcamento.setString(2, item.getDescricao());
+            psOrcamento.setInt(3, item.getIdFuncionario());
+            psOrcamento.setInt(4, item.getIdPessoa());
+            psOrcamento.setInt(5, item.getIdImovel());
+            psOrcamento.setInt(6, item.getIdTipoPagamento());
+            psOrcamento.setInt(7, item.getId());
 
         } catch (Exception error) {
 
@@ -86,7 +84,7 @@ public class OrcamentoController extends Controller<Orcamento> {
         
         try {
 
-            psOrcamento = criaStatement.deleteSql("orcamentos");
+            psOrcamento = criaStatement.deleteSql();
 
             psOrcamento.setInt(1, id);
 
@@ -104,7 +102,7 @@ public class OrcamentoController extends Controller<Orcamento> {
         
         try {
 
-            psOrcamento = criaStatement.selectSql("orcamentos", false, null);
+            psOrcamento = criaStatement.selectSql(tabela, false, null);
 
         } catch (Exception ex) {
 
@@ -120,7 +118,7 @@ public class OrcamentoController extends Controller<Orcamento> {
         
         try {
 
-            psOrcamento = criaStatement.selectSql("orcamentos", true, "id");
+            psOrcamento = criaStatement.selectSql(tabela, true, this.id);
             
             psOrcamento.setInt(1, id);
 
@@ -141,15 +139,13 @@ public class OrcamentoController extends Controller<Orcamento> {
             if (rs.next()) {
 
                 return new Orcamento(
-                        rs.getInt("id"), 
-                        rs.getString("orc_data_orcamento"), 
-                        rs.getDouble("orc_valor_orcamento"), 
+                        rs.getInt(id), 
+                        rs.getString("orc_data"), 
                         rs.getString("orc_descricao"), 
-                        rs.getInt("orc_quantidade_parcelas"),
-                        rs.getInt("id_tip_tipo_pagamentos"),
-                        rs.getInt("id_pe_pessoa"),
-                        rs.getInt("id_fun_funcionario"), 
-                        rs.getInt("id_im_imoveis")
+                        rs.getInt("orc_func_iden"),
+                        rs.getInt("orc_pes_iden"),
+                        rs.getInt("orc_imo_iden"),
+                        rs.getInt("orc_tpa_iden")
                 );
 
             } else

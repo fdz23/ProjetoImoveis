@@ -16,25 +16,25 @@ public class Endereco {
     private String cidade;
     private String bairro;
     private String estado;
-    private String rua;
     private String numero;
     private String pontoReferencia;
     private String cep;
-    private int idPessoa;
+    private String logradouro;
+    private String complemento;
     
     public Endereco() {}
     
-    public Endereco(int id, String codigoIBGE, String cidade, String bairro, String estado, String rua, String numero, String pontoReferencia, String cep, int idPessoa) {
+    public Endereco(int id, String codigoIBGE, String logradouro, String bairro, String cidade, String estado, String complemento, String numero, String pontoReferencia, String cep) {
         this.id = id;
         this.codigoIBGE = codigoIBGE;
         this.cidade = cidade;
         this.bairro = bairro;
         this.estado = estado;
-        this.rua = rua;
         this.numero = numero;
         this.pontoReferencia = pontoReferencia;
         this.cep = cep;
-        this.idPessoa = idPessoa;
+        this.logradouro = logradouro;
+        this.complemento = complemento;
     }
 
     public int getId() {
@@ -77,14 +77,6 @@ public class Endereco {
         this.estado = estado;
     }
 
-    public String getRua() {
-        return rua;
-    }
-
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
     public String getNumero() {
         return numero;
     }
@@ -109,12 +101,20 @@ public class Endereco {
         this.cep = cep;
     }
 
-    public int getIdPessoa() {
-        return idPessoa;
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    public void setIdPessoa(int idPessoa) {
-        this.idPessoa = idPessoa;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
     }
     
 }

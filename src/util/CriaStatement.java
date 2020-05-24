@@ -15,9 +15,13 @@ import java.sql.PreparedStatement;
 public class CriaStatement {
     
     private Connection con = null;
+    private String tabela;
+    private String id;
     
-    public CriaStatement(Connection con) {
+    public CriaStatement(Connection con, String tabela, String id) {
         this.con = con;
+        this.tabela = tabela;
+        this.id = id;
     }
     
     //Para mais de uma coluna/valores utilize "," entre cada um deles(sem espaço)
@@ -43,13 +47,13 @@ public class CriaStatement {
         return con.prepareStatement(sql);
     }
     
-    public PreparedStatement deleteSql(String tabela) throws Exception {
-        String sql = "DELETE FROM " + tabela + " WHERE id = ?";
+    public PreparedStatement deleteSql() throws Exception {
+        String sql = "DELETE FROM " + tabela + " WHERE " + id + " = ?";
         
         return con.prepareStatement(sql);
     }
     
-    public PreparedStatement updateSql(String tabela, String colunas) throws Exception {
+    public PreparedStatement updateSql(String colunas) throws Exception {
         String[] colunasSplit = colunas.split(",");
         
         String sql = "UPDATE " + tabela + " SET " + colunasSplit[0] + " = ?";
@@ -60,7 +64,7 @@ public class CriaStatement {
             }
         }
         
-        sql += " WHERE id = ?";
+        sql += " WHERE " + id + " = ?";
         
         return con.prepareStatement(sql);
     }

@@ -24,7 +24,9 @@ public class ItemMovelController extends Controller<ItemMovel> {
     public ItemMovelController(Connection con) {
 
         super(con);
-        this.criaStatement = new CriaStatement(con);
+        this.id = "iti_iden";
+        this.tabela = "item_moveis";
+        this.criaStatement = new CriaStatement(con, tabela, id);
 
     }
 
@@ -33,7 +35,7 @@ public class ItemMovelController extends Controller<ItemMovel> {
         
         try {
 
-            psItemMovel = criaStatement.insertSql("item_moveis", "iti_descricao");
+            psItemMovel = criaStatement.insertSql(tabela, "iti_nome");
 
             psItemMovel.setString(1, item.getDescricao());
 
@@ -52,7 +54,7 @@ public class ItemMovelController extends Controller<ItemMovel> {
         
         try {
 
-            psItemMovel = criaStatement.updateSql("item_moveis", "iti_descricao");
+            psItemMovel = criaStatement.updateSql("iti_nome");
 
             psItemMovel.setString(1, item.getDescricao());
             psItemMovel.setInt(2, item.getId());
@@ -72,7 +74,7 @@ public class ItemMovelController extends Controller<ItemMovel> {
         
         try {
 
-            psItemMovel = criaStatement.deleteSql("item_moveis");
+            psItemMovel = criaStatement.deleteSql();
 
             psItemMovel.setInt(1, id);
 
@@ -90,7 +92,7 @@ public class ItemMovelController extends Controller<ItemMovel> {
         
         try {
 
-            psItemMovel = criaStatement.selectSql("item_moveis", false, null);
+            psItemMovel = criaStatement.selectSql(tabela, false, null);
 
         } catch (Exception ex) {
 
@@ -106,7 +108,7 @@ public class ItemMovelController extends Controller<ItemMovel> {
         
         try {
 
-            psItemMovel = criaStatement.selectSql("item_moveis", true, "id");
+            psItemMovel = criaStatement.selectSql(tabela, true, this.id);
             
             psItemMovel.setInt(1, id);
 
@@ -127,8 +129,8 @@ public class ItemMovelController extends Controller<ItemMovel> {
             if (rs.next()) {
 
                 return new ItemMovel(
-                        rs.getInt("id"), 
-                        rs.getString("iti_descricao")
+                        rs.getInt(id), 
+                        rs.getString("iti_nome")
                 );
 
             } else

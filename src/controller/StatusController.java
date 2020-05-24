@@ -24,7 +24,9 @@ public class StatusController extends Controller<Status> {
     public StatusController(Connection con) {
 
         super(con);
-        this.criaStatement = new CriaStatement(con);
+        this.id = "sta_iden";
+        this.tabela = "status";
+        this.criaStatement = new CriaStatement(con, tabela, id);
 
     }
 
@@ -33,7 +35,7 @@ public class StatusController extends Controller<Status> {
         
         try {
 
-            psStatus = criaStatement.insertSql("status", "descricao");
+            psStatus = criaStatement.insertSql(tabela, "sta_descricao");
 
             psStatus.setString(1, item.getDescricao());
 
@@ -52,7 +54,7 @@ public class StatusController extends Controller<Status> {
         
         try {
 
-            psStatus = criaStatement.updateSql("status", "descricao");
+            psStatus = criaStatement.updateSql("sta_descricao");
 
             psStatus.setString(1, item.getDescricao());
             psStatus.setInt(2, item.getId());
@@ -72,7 +74,7 @@ public class StatusController extends Controller<Status> {
         
         try {
 
-            psStatus = criaStatement.deleteSql("status");
+            psStatus = criaStatement.deleteSql();
 
             psStatus.setInt(1, id);
 
@@ -90,7 +92,7 @@ public class StatusController extends Controller<Status> {
         
         try {
 
-            psStatus = criaStatement.selectSql("status", false, null);
+            psStatus = criaStatement.selectSql(tabela, false, null);
 
         } catch (Exception ex) {
 
@@ -106,7 +108,7 @@ public class StatusController extends Controller<Status> {
         
         try {
 
-            psStatus = criaStatement.selectSql("status", true, "id");
+            psStatus = criaStatement.selectSql(tabela, true, this.id);
             
             psStatus.setInt(1, id);
 
@@ -127,8 +129,8 @@ public class StatusController extends Controller<Status> {
             if (rs.next()) {
 
                 return new Status(
-                        rs.getInt("id"), 
-                        rs.getString("descricao")
+                        rs.getInt(id), 
+                        rs.getString("sta_descricao")
                 );
 
             } else
