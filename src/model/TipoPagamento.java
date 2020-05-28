@@ -5,14 +5,28 @@
  */
 package model;
 
+import interfaces.Tabela;
+
 /**
  *
  * @author fdz
  */
-public class TipoPagamento {
+public class TipoPagamento implements Tabela {
     
     private int id;
     private String descricao;
+    private String nomeId = "tpa_iden";
+    private String nomeTabela = "tipo_pagamentos";
+
+    @Override
+    public String getNomeId() {
+        return nomeId;
+    }
+
+    @Override
+    public String getNomeTabela() {
+        return nomeTabela;
+    }
     
     public TipoPagamento() {}
     

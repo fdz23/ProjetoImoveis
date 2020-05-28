@@ -5,6 +5,8 @@
  */
 package controller;
 
+import fabricas.AbstractFactory;
+import interfaces.Tabela;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,8 +26,11 @@ public class SituacaoController extends Controller<Situacao> {
     public SituacaoController(Connection con) {
 
         super(con);
-        this.id = "sit_iden";
-        this.tabela = "situacoes";
+        
+        Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("SITUACAO");
+        
+        this.id = obj.getNomeId();
+        this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
 
     }
@@ -68,59 +73,7 @@ public class SituacaoController extends Controller<Situacao> {
         return psSituacao;
         
     }
-
-    @Override
-    public PreparedStatement statementDeletar(int id) {
-        
-        try {
-
-            psSituacao = criaStatement.deleteSql();
-
-            psSituacao.setInt(1, id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-
-        return psSituacao;
-
-    }
-
-    @Override
-    public PreparedStatement statementGetTodos() {
-        
-        try {
-
-            psSituacao = criaStatement.selectSql(tabela, false, null);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-        
-        return psSituacao;
-    }
-
-    @Override
-    public PreparedStatement statementGetItem(int id) {
-        
-        try {
-
-            psSituacao = criaStatement.selectSql(tabela, true, this.id);
-            
-            psSituacao.setInt(1, id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-
-        return psSituacao;
-    }
-
+    
     @Override
     public Situacao criaItem(ResultSet rs) {
         

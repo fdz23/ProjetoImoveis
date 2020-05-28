@@ -5,13 +5,14 @@
  */
 package model;
 
+import interfaces.Tabela;
 import java.util.Date;
 
 /**
  *
  * @author fdz
  */
-public class Orcamento {
+public class Orcamento implements Tabela {
     
     private int id;
     private String data;
@@ -20,6 +21,18 @@ public class Orcamento {
     private int idPessoa;
     private int idFuncionario;
     private int idImovel;
+    private String nomeId = "orc_iden";
+    private String nomeTabela = "orcamentos";
+
+    @Override
+    public String getNomeId() {
+        return nomeId;
+    }
+
+    @Override
+    public String getNomeTabela() {
+        return nomeTabela;
+    }
     
     public Orcamento() {}
     

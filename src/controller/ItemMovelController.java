@@ -5,6 +5,8 @@
  */
 package controller;
 
+import fabricas.AbstractFactory;
+import interfaces.Tabela;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,8 +26,11 @@ public class ItemMovelController extends Controller<ItemMovel> {
     public ItemMovelController(Connection con) {
 
         super(con);
-        this.id = "iti_iden";
-        this.tabela = "item_moveis";
+        
+        Tabela obj = AbstractFactory.getInstance("MATERIAL").getTabela("ITEM_MOVEL");
+        
+        this.id = obj.getNomeId();
+        this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
 
     }
@@ -67,58 +72,6 @@ public class ItemMovelController extends Controller<ItemMovel> {
 
         return psItemMovel;
         
-    }
-
-    @Override
-    public PreparedStatement statementDeletar(int id) {
-        
-        try {
-
-            psItemMovel = criaStatement.deleteSql();
-
-            psItemMovel.setInt(1, id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-
-        return psItemMovel;
-
-    }
-
-    @Override
-    public PreparedStatement statementGetTodos() {
-        
-        try {
-
-            psItemMovel = criaStatement.selectSql(tabela, false, null);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-        
-        return psItemMovel;
-    }
-
-    @Override
-    public PreparedStatement statementGetItem(int id) {
-        
-        try {
-
-            psItemMovel = criaStatement.selectSql(tabela, true, this.id);
-            
-            psItemMovel.setInt(1, id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-
-        return psItemMovel;
     }
 
     @Override

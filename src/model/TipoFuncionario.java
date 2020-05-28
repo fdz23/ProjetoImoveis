@@ -5,16 +5,30 @@
  */
 package model;
 
+import interfaces.Tabela;
+
 /**
  *
  * @author fdz
  */
-public class TipoFuncionario {
+public class TipoFuncionario implements Tabela {
     
     private int id;
     private int idNivelAcesso;
     private Double salario;
     private String descricao;
+    private String nomeId = "tfu_iden";
+    private String nomeTabela = "tipo_funcionarios";
+
+    @Override
+    public String getNomeId() {
+        return nomeId;
+    }
+
+    @Override
+    public String getNomeTabela() {
+        return nomeTabela;
+    }
     
     public TipoFuncionario() {}
     

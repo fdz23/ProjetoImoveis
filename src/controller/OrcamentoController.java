@@ -5,6 +5,8 @@
  */
 package controller;
 
+import fabricas.AbstractFactory;
+import interfaces.Tabela;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,8 +26,11 @@ public class OrcamentoController extends Controller<Orcamento> {
     public OrcamentoController(Connection con) {
 
         super(con);
-        this.tabela = "orcamentos";
-        this.id = "orc_iden";
+        
+        Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("ORCAMENTO");
+        
+        this.id = obj.getNomeId();
+        this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
 
     }
@@ -78,59 +83,7 @@ public class OrcamentoController extends Controller<Orcamento> {
         return psOrcamento;
         
     }
-
-    @Override
-    public PreparedStatement statementDeletar(int id) {
-        
-        try {
-
-            psOrcamento = criaStatement.deleteSql();
-
-            psOrcamento.setInt(1, id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-
-        return psOrcamento;
-
-    }
-
-    @Override
-    public PreparedStatement statementGetTodos() {
-        
-        try {
-
-            psOrcamento = criaStatement.selectSql(tabela, false, null);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-        
-        return psOrcamento;
-    }
-
-    @Override
-    public PreparedStatement statementGetItem(int id) {
-        
-        try {
-
-            psOrcamento = criaStatement.selectSql(tabela, true, this.id);
-            
-            psOrcamento.setInt(1, id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-
-        return psOrcamento;
-    }
-
+    
     @Override
     public Orcamento criaItem(ResultSet rs) {
         

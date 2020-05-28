@@ -5,6 +5,8 @@
  */
 package controller;
 
+import fabricas.AbstractFactory;
+import interfaces.Tabela;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,9 +30,12 @@ public class FuncionarioController extends Controller<Funcionario> {
     public FuncionarioController(Connection con) {
         
         super(con);
+        
+        Tabela obj = AbstractFactory.getInstance("HUMANO").getTabela("FUNCIONARIO");
+        
+        this.id = obj.getNomeId();
+        this.tabela = obj.getNomeTabela();
         pessoaController = new PessoaController(con);
-        this.tabela = "funcionario";
-        this.id = "fun_iden";
         this.criaStatement = new CriaStatement(con, tabela, id);
         rs = null;
         
@@ -112,6 +117,21 @@ public class FuncionarioController extends Controller<Funcionario> {
     public PreparedStatement statementDeletar(int id) {
         
         try {
+            
+            psFuncionario = criaStatement.selectSql(tabela, true, this.id);
+            
+            rs = psFuncionario.executeQuery();
+            
+            if(rs.next()) {
+                
+                int idPessoa = rs.getInt("fun_pes_iden");
+                
+                pessoaController.deletarItem(idPessoa);
+                
+            }
+            else
+                throw new Exception("Erro na remoção de um item Funcionario(parte de remoção por id pessoa para remover a pessoa)");
+
 
             psFuncionario = criaStatement.deleteSql();
             

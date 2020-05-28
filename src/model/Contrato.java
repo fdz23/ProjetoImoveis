@@ -5,17 +5,21 @@
  */
 package model;
 
+import interfaces.Tabela;
+
 /**
  *
  * @author fdz
  */
-public class Contrato {
+public class Contrato implements Tabela {
     
     private int id;
     private String dataOrcamento;
     private String dataAlteracao;
     private int idSituacao;
     private int idOrcamento;
+    private String nomeId = "con_iden";
+    private String nomeTabela = "contratos";
     
     public Contrato() {}
     
@@ -65,6 +69,16 @@ public class Contrato {
 
     public void setIdOrcamento(int idOrcamento) {
         this.idOrcamento = idOrcamento;
+    }
+
+    @Override
+    public String getNomeId() {
+        return nomeId;
+    }
+
+    @Override
+    public String getNomeTabela() {
+        return nomeTabela;
     }
     
 }
