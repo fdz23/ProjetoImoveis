@@ -28,6 +28,7 @@ public class FuncionarioController extends Controller<Funcionario> {
     
     private PessoaController pessoaController;
     private PreparedStatement psPessoa;
+    private String[] vetorCamposPessoa;
     
     public FuncionarioController(Connection con) {
         
@@ -41,6 +42,7 @@ public class FuncionarioController extends Controller<Funcionario> {
         this.criaStatement = new CriaStatement(con, tabela, id);
         campos = "fun_matricula,fun_pes_iden,fun_tfu_iden,fun_sta_iden,fun_data_rescisao";
         vetorCampos = campos.split(",");
+        vetorCamposPessoa = pessoaController.getVetorCampos();
         
     }
 
@@ -188,12 +190,12 @@ public class FuncionarioController extends Controller<Funcionario> {
             
             if (rsPessoa.next()) {
                 return new Funcionario( 
-                        rsPessoa.getString("pes_nome"), 
-                        rsPessoa.getString("pes_email"), 
-                        rsPessoa.getString("pes_nascimento"), 
-                        rsPessoa.getString("pes_cpf"), 
-                        rsPessoa.getString("pes_telefone"),
-                        rsPessoa.getInt("pes_end_iden"),
+                        rsPessoa.getString(vetorCamposPessoa[0]), 
+                        rsPessoa.getString(vetorCamposPessoa[1]), 
+                        rsPessoa.getString(vetorCamposPessoa[2]), 
+                        rsPessoa.getString(vetorCamposPessoa[3]), 
+                        rsPessoa.getString(vetorCamposPessoa[4]),
+                        rsPessoa.getInt(vetorCamposPessoa[5]),
                         rs.getInt(id), 
                         rs.getString(vetorCampos[0]), 
                         rs.getInt(vetorCampos[1]), 

@@ -34,6 +34,10 @@ public class PessoaController extends Controller<Pessoa> {
 
     }
     
+    public String[] getVetorCampos() {
+        return vetorCampos;
+    }
+    
     public Pessoa getPessoaPorCpf(String cpf) {
 
         try {
