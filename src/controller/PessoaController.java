@@ -20,9 +20,6 @@ import util.CriaStatement;
  */
 public class PessoaController extends Controller<Pessoa> {
     
-    private CriaStatement criaStatement;
-    private PreparedStatement psPessoas;
-
     public PessoaController(Connection con) {
 
         super(con);
@@ -32,6 +29,8 @@ public class PessoaController extends Controller<Pessoa> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
+        campos = "pes_nome,pes_email,pes_nascimento,pes_cpf,pes_telefone,pes_end_iden";
+        vetorCampos = campos.split(",");
 
     }
     
@@ -39,9 +38,9 @@ public class PessoaController extends Controller<Pessoa> {
 
         try {
 
-            preparedStatement = statementGetPessoaPorCpf(cpf);
+            ps = statementGetPessoaPorCpf(cpf);
 
-            rs = preparedStatement.executeQuery();
+            rs = ps.executeQuery();
 
             return criaItem(rs);
 
@@ -59,9 +58,9 @@ public class PessoaController extends Controller<Pessoa> {
         
         try {
 
-            psPessoas = criaStatement.selectSql(tabela, true, "cpf");
+            ps = criaStatement.selectSql(tabela, true, "cpf");
             
-            psPessoas.setString(1, cpf);
+            ps.setString(1, cpf);
 
         } catch (Exception ex) {
 
@@ -69,7 +68,7 @@ public class PessoaController extends Controller<Pessoa> {
 
         }
 
-        return psPessoas;
+        return ps;
     }
 
     @Override
@@ -77,14 +76,14 @@ public class PessoaController extends Controller<Pessoa> {
         
         try {
 
-            psPessoas = criaStatement.insertSql(tabela, "pes_nome,pes_email,pes_nascimento,pes_cpf,pes_telefone,pes_end_iden");
+            ps = criaStatement.insertSql(tabela, campos);
 
-            psPessoas.setString(1, item.getNome());
-            psPessoas.setString(2, item.getEmail());
-            psPessoas.setString(3, item.getDataNascimento());
-            psPessoas.setString(4, item.getCpf());
-            psPessoas.setString(5, item.getTelefone());
-            psPessoas.setInt(6, item.getIdEndereco());
+            ps.setString(1, item.getNome());
+            ps.setString(2, item.getEmail());
+            ps.setString(3, item.getDataNascimento());
+            ps.setString(4, item.getCpf());
+            ps.setString(5, item.getTelefone());
+            ps.setInt(6, item.getIdEndereco());
 
         } catch (Exception error) {
 
@@ -92,7 +91,7 @@ public class PessoaController extends Controller<Pessoa> {
 
         }
 
-        return psPessoas;
+        return ps;
         
     }
 
@@ -101,15 +100,15 @@ public class PessoaController extends Controller<Pessoa> {
         
         try {
 
-            psPessoas = criaStatement.updateSql("pes_nome,pes_email,pes_nascimento,pes_cpf,pes_telefone,pes_end_iden");
+            ps = criaStatement.updateSql(campos);
 
-            psPessoas.setString(1, item.getNome());
-            psPessoas.setString(2, item.getEmail());
-            psPessoas.setString(3, item.getDataNascimento());
-            psPessoas.setString(4, item.getCpf());
-            psPessoas.setString(5, item.getTelefone());
-            psPessoas.setInt(6, item.getIdEndereco());
-            psPessoas.setInt(7, item.getId());
+            ps.setString(1, item.getNome());
+            ps.setString(2, item.getEmail());
+            ps.setString(3, item.getDataNascimento());
+            ps.setString(4, item.getCpf());
+            ps.setString(5, item.getTelefone());
+            ps.setInt(6, item.getIdEndereco());
+            ps.setInt(7, item.getId());
 
         } catch (Exception error) {
 
@@ -117,7 +116,7 @@ public class PessoaController extends Controller<Pessoa> {
 
         }
 
-        return psPessoas;
+        return ps;
         
     }
 
@@ -130,12 +129,12 @@ public class PessoaController extends Controller<Pessoa> {
 
                 return new Pessoa(
                         rs.getInt(id), 
-                        rs.getString("pes_nome"), 
-                        rs.getString("pes_email"), 
-                        rs.getString("pes_nascimento"), 
-                        rs.getString("pes_cpf"), 
-                        rs.getString("pes_telefone"), 
-                        rs.getInt("pes_end_iden")
+                        rs.getString(vetorCampos[0]), 
+                        rs.getString(vetorCampos[1]), 
+                        rs.getString(vetorCampos[2]), 
+                        rs.getString(vetorCampos[3]), 
+                        rs.getString(vetorCampos[4]), 
+                        rs.getInt(vetorCampos[5])
                 );
                 
             } else

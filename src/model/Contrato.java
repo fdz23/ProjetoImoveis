@@ -14,7 +14,7 @@ import interfaces.Tabela;
 public class Contrato implements Tabela {
     
     private int id;
-    private String dataOrcamento;
+    private String data;
     private String dataAlteracao;
     private int idSituacao;
     private int idOrcamento;
@@ -25,7 +25,7 @@ public class Contrato implements Tabela {
     
     public Contrato(int id, String dataOrcamento, String dataAlteracao, int idSituacao, int idOrcamento) {
         this.id = id;
-        this.dataOrcamento = dataOrcamento;
+        this.data = dataOrcamento;
         this.dataAlteracao = dataAlteracao;
         this.idSituacao = idSituacao;
         this.idOrcamento = idOrcamento;
@@ -39,12 +39,12 @@ public class Contrato implements Tabela {
         this.id = id;
     }
 
-    public String getDataOrcamento() {
-        return dataOrcamento;
+    public String getData() {
+        return data;
     }
 
-    public void setDataOrcamento(String dataOrcamento) {
-        this.dataOrcamento = dataOrcamento;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getDataAlteracao() {

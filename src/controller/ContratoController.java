@@ -10,6 +10,10 @@ import interfaces.Tabela;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
 import javax.swing.JOptionPane;
 import model.Contrato;
 import util.CriaStatement;
@@ -19,9 +23,6 @@ import util.CriaStatement;
  * @author fdz
  */
 public class ContratoController extends Controller<Contrato> {
-    
-    private CriaStatement criaStatement;
-    private PreparedStatement psContrato;
 
     public ContratoController(Connection con) {
 
@@ -29,23 +30,25 @@ public class ContratoController extends Controller<Contrato> {
         
         Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("CONTRATO");
         
-        this.id = obj.getNomeId();
-        this.tabela = obj.getNomeTabela();
-        this.criaStatement = new CriaStatement(con, tabela, id);
+        id = obj.getNomeId();
+        tabela = obj.getNomeTabela();
+        criaStatement = new CriaStatement(con, tabela, id);
+        campos = "con_data,con_data_alteracao,id_sit_iden,id_orc_iden";
+        vetorCampos = campos.split(",");
 
     }
-
+    
     @Override
     public PreparedStatement statementInserir(Contrato item) {
         
         try {
 
-            psContrato = criaStatement.insertSql(tabela, "con_data,con_data_alteracao,id_sit_iden,id_orc_iden");
+            ps = criaStatement.insertSql(tabela, campos);
 
-            psContrato.setString(1, item.getDataOrcamento());
-            psContrato.setString(2, item.getDataAlteracao());
-            psContrato.setInt(3, item.getIdSituacao());
-            psContrato.setInt(4, item.getIdOrcamento());
+            ps.setString(1, item.getData());
+            ps.setString(2, item.getDataAlteracao());
+            ps.setInt(3, item.getIdSituacao());
+            ps.setInt(4, item.getIdOrcamento());
 
         } catch (Exception error) {
 
@@ -53,7 +56,7 @@ public class ContratoController extends Controller<Contrato> {
 
         }
 
-        return psContrato;
+        return ps;
         
     }
 
@@ -62,13 +65,13 @@ public class ContratoController extends Controller<Contrato> {
         
         try {
 
-            psContrato = criaStatement.updateSql("con_data,con_data_alteracao,id_sit_iden,id_orc_iden");
+            ps = criaStatement.updateSql(campos);
 
-            psContrato.setString(1, item.getDataOrcamento());
-            psContrato.setString(2, item.getDataAlteracao());
-            psContrato.setInt(3, item.getIdSituacao());
-            psContrato.setInt(4, item.getIdOrcamento());
-            psContrato.setInt(5, item.getId());
+            ps.setString(1, item.getData());
+            ps.setString(2, item.getDataAlteracao());
+            ps.setInt(3, item.getIdSituacao());
+            ps.setInt(4, item.getIdOrcamento());
+            ps.setInt(5, item.getId());
 
         } catch (Exception error) {
 
@@ -76,7 +79,7 @@ public class ContratoController extends Controller<Contrato> {
 
         }
 
-        return psContrato;
+        return ps;
         
     }
 
@@ -89,10 +92,10 @@ public class ContratoController extends Controller<Contrato> {
 
                 return new Contrato(
                         rs.getInt(id), 
-                        rs.getString("con_data"), 
-                        rs.getString("con_data_alteracao"), 
-                        rs.getInt("id_sit_iden"), 
-                        rs.getInt("id_orc_iden")
+                        rs.getString(vetorCampos[0]), 
+                        rs.getString(vetorCampos[1]), 
+                        rs.getInt(vetorCampos[2]), 
+                        rs.getInt(vetorCampos[3])
                 );
 
             } else

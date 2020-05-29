@@ -20,9 +20,6 @@ import util.CriaStatement;
  */
 public class StatusController extends Controller<Status> {
     
-    private CriaStatement criaStatement;
-    private PreparedStatement psStatus;
-
     public StatusController(Connection con) {
 
         super(con);
@@ -32,6 +29,8 @@ public class StatusController extends Controller<Status> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
+        campos = "sta_descricao";
+        vetorCampos = campos.split(",");
 
     }
 
@@ -40,9 +39,9 @@ public class StatusController extends Controller<Status> {
         
         try {
 
-            psStatus = criaStatement.insertSql(tabela, "sta_descricao");
+            ps = criaStatement.insertSql(tabela, campos);
 
-            psStatus.setString(1, item.getDescricao());
+            ps.setString(1, item.getDescricao());
 
         } catch (Exception error) {
 
@@ -50,7 +49,7 @@ public class StatusController extends Controller<Status> {
 
         }
 
-        return psStatus;
+        return ps;
         
     }
 
@@ -59,10 +58,10 @@ public class StatusController extends Controller<Status> {
         
         try {
 
-            psStatus = criaStatement.updateSql("sta_descricao");
+            ps = criaStatement.updateSql(campos);
 
-            psStatus.setString(1, item.getDescricao());
-            psStatus.setInt(2, item.getId());
+            ps.setString(1, item.getDescricao());
+            ps.setInt(2, item.getId());
 
         } catch (Exception error) {
 
@@ -70,7 +69,7 @@ public class StatusController extends Controller<Status> {
 
         }
 
-        return psStatus;
+        return ps;
         
     }
 
@@ -83,7 +82,7 @@ public class StatusController extends Controller<Status> {
 
                 return new Status(
                         rs.getInt(id), 
-                        rs.getString("sta_descricao")
+                        rs.getString(vetorCampos[0])
                 );
 
             } else

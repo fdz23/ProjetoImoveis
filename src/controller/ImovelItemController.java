@@ -20,9 +20,6 @@ import util.CriaStatement;
  */
 public class ImovelItemController extends Controller<ImovelItem> {
     
-    private CriaStatement criaStatement;
-    private PreparedStatement psContrato;
-
     public ImovelItemController(Connection con) {
 
         super(con);
@@ -32,6 +29,8 @@ public class ImovelItemController extends Controller<ImovelItem> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
+        campos = "iit_valor,iit_iti_iden,iit_imo_iden";
+        vetorCampos = campos.split(",");
 
     }
 
@@ -40,11 +39,11 @@ public class ImovelItemController extends Controller<ImovelItem> {
         
         try {
 
-            psContrato = criaStatement.insertSql(tabela, "iit_valor,iit_iti_iden,iit_imo_iden");
+            ps = criaStatement.insertSql(tabela, campos);
 
-            psContrato.setDouble(1, item.getValor());
-            psContrato.setInt(2, item.getIdItemMovel());
-            psContrato.setInt(3, item.getIdImovel());
+            ps.setDouble(1, item.getValor());
+            ps.setInt(2, item.getIdItemMovel());
+            ps.setInt(3, item.getIdImovel());
 
         } catch (Exception error) {
 
@@ -52,7 +51,7 @@ public class ImovelItemController extends Controller<ImovelItem> {
 
         }
 
-        return psContrato;
+        return ps;
         
     }
 
@@ -61,12 +60,12 @@ public class ImovelItemController extends Controller<ImovelItem> {
         
         try {
 
-            psContrato = criaStatement.updateSql("iit_valor,iit_iti_iden,iit_imo_iden");
+            ps = criaStatement.updateSql(campos);
 
-            psContrato.setDouble(1, item.getValor());
-            psContrato.setInt(2, item.getIdItemMovel());
-            psContrato.setInt(3, item.getIdImovel());
-            psContrato.setInt(5, item.getId());
+            ps.setDouble(1, item.getValor());
+            ps.setInt(2, item.getIdItemMovel());
+            ps.setInt(3, item.getIdImovel());
+            ps.setInt(5, item.getId());
 
         } catch (Exception error) {
 
@@ -74,7 +73,7 @@ public class ImovelItemController extends Controller<ImovelItem> {
 
         }
 
-        return psContrato;
+        return ps;
         
     }
 
@@ -87,9 +86,9 @@ public class ImovelItemController extends Controller<ImovelItem> {
 
                 return new ImovelItem(
                         rs.getInt(id), 
-                        rs.getDouble("iit_valor"), 
-                        rs.getInt("iit_iti_iden"), 
-                        rs.getInt("iit_imo_iden")
+                        rs.getDouble(vetorCampos[0]), 
+                        rs.getInt(vetorCampos[1]), 
+                        rs.getInt(vetorCampos[2])
                 );
 
             } else

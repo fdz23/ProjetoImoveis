@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 import javax.swing.JOptionPane;
@@ -25,9 +26,11 @@ public abstract class Controller<T> implements IController<T> {
     protected Connection con;
     protected ResultSet rs;
     protected CriaStatement criaStatement;
-    protected PreparedStatement preparedStatement;
+    protected PreparedStatement ps;
     protected String id;
     protected String tabela;
+    protected String campos;
+    protected String[] vetorCampos;
 
     public Controller(Connection con) {
 
@@ -36,6 +39,39 @@ public abstract class Controller<T> implements IController<T> {
 
     }
     
+    //campo em maísculo exatamente igual às propriedades da classe || true para ordem ascendente e false para descendente
+    public Iterator<T> getTodosItensOrdenadosPor(int campo, boolean ascOuDesc) throws Exception {
+        
+        if (campo < 0 || campo > (vetorCampos.length - 1))
+            throw new Exception("Campo para ser ordenado inexistente.");
+        
+        String coluna = vetorCampos[campo];
+        
+        List<T> itens = new LinkedList<T>();
+
+        try {
+
+            ps = criaStatement.selectSqlOrder(tabela, coluna, ascOuDesc);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                itens.add(getItem(rs.getInt(id)));
+
+            }
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return itens.iterator();
+
+    }
+
+    
     public abstract PreparedStatement statementInserir(T item);
     public abstract PreparedStatement statementAlterar(T item);
     
@@ -43,7 +79,7 @@ public abstract class Controller<T> implements IController<T> {
          
         try {
 
-            PreparedStatement ps = criaStatement.deleteSql();
+            ps = criaStatement.deleteSql();
 
             ps.setInt(1, id);
             
@@ -62,7 +98,7 @@ public abstract class Controller<T> implements IController<T> {
         
         try {
 
-            PreparedStatement ps = criaStatement.selectSql(tabela, false, null);
+            ps = criaStatement.selectSql(tabela, false, null);
 
             return ps;
 
@@ -79,7 +115,7 @@ public abstract class Controller<T> implements IController<T> {
         
         try {
 
-            PreparedStatement ps = criaStatement.selectSql(tabela, true, this.id);
+            ps = criaStatement.selectSql(tabela, true, this.id);
             
             ps.setInt(1, id);
 
@@ -102,9 +138,9 @@ public abstract class Controller<T> implements IController<T> {
 
         try {
 
-            preparedStatement = statementInserir(item);
+            ps = statementInserir(item);
 
-            preparedStatement.executeUpdate();
+            ps.executeUpdate();
 
         } catch (Exception error) {
 
@@ -122,9 +158,9 @@ public abstract class Controller<T> implements IController<T> {
 
         try {
 
-            preparedStatement = statementAlterar(item);
+            ps = statementAlterar(item);
 
-            preparedStatement.executeUpdate();
+            ps.executeUpdate();
 
         } catch (Exception error) {
 
@@ -142,9 +178,9 @@ public abstract class Controller<T> implements IController<T> {
 
         try {
 
-            preparedStatement = statementDeletar(id);
+            ps = statementDeletar(id);
 
-            preparedStatement.executeUpdate();
+            ps.executeUpdate();
 
         } catch (Exception ex) {
 
@@ -164,9 +200,9 @@ public abstract class Controller<T> implements IController<T> {
 
         try {
 
-            preparedStatement = statementGetTodos();
+            ps = statementGetTodos();
 
-            rs = preparedStatement.executeQuery();
+            rs = ps.executeQuery();
 
             while (rs.next()) {
 
@@ -189,9 +225,9 @@ public abstract class Controller<T> implements IController<T> {
 
         try {
 
-            preparedStatement = statementGetItem(id);
+            ps = statementGetItem(id);
 
-            rs = preparedStatement.executeQuery();
+            rs = ps.executeQuery();
 
             return criaItem(rs);
 

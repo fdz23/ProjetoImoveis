@@ -20,9 +20,6 @@ import util.CriaStatement;
  */
 public class TipoImovelController extends Controller<TipoImovel> {
     
-    private CriaStatement criaStatement;
-    private PreparedStatement psTipoImovel;
-
     public TipoImovelController(Connection con) {
 
         super(con);
@@ -32,6 +29,8 @@ public class TipoImovelController extends Controller<TipoImovel> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
+        campos = "tim_nome";
+        vetorCampos = campos.split(",");
 
     }
 
@@ -40,9 +39,9 @@ public class TipoImovelController extends Controller<TipoImovel> {
         
         try {
 
-            psTipoImovel = criaStatement.insertSql(tabela, "tim_nome");
+            ps = criaStatement.insertSql(tabela, campos);
 
-            psTipoImovel.setString(1, item.getDescricao());
+            ps.setString(1, item.getDescricao());
 
         } catch (Exception error) {
 
@@ -50,7 +49,7 @@ public class TipoImovelController extends Controller<TipoImovel> {
 
         }
 
-        return psTipoImovel;
+        return ps;
         
     }
 
@@ -59,10 +58,10 @@ public class TipoImovelController extends Controller<TipoImovel> {
         
         try {
 
-            psTipoImovel = criaStatement.updateSql("tim_nome");
+            ps = criaStatement.updateSql(campos);
 
-            psTipoImovel.setString(1, item.getDescricao());
-            psTipoImovel.setInt(2, item.getId());
+            ps.setString(1, item.getDescricao());
+            ps.setInt(2, item.getId());
 
         } catch (Exception error) {
 
@@ -70,7 +69,7 @@ public class TipoImovelController extends Controller<TipoImovel> {
 
         }
 
-        return psTipoImovel;
+        return ps;
         
     }
 
@@ -83,7 +82,7 @@ public class TipoImovelController extends Controller<TipoImovel> {
 
                 return new TipoImovel(
                         rs.getInt(id), 
-                        rs.getString("tim_nome")
+                        rs.getString(vetorCampos[0])
                 );
 
             } else
