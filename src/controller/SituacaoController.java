@@ -20,9 +20,6 @@ import util.CriaStatement;
  */
 public class SituacaoController extends Controller<Situacao> {
     
-    private CriaStatement criaStatement;
-    private PreparedStatement psSituacao;
-
     public SituacaoController(Connection con) {
 
         super(con);
@@ -32,6 +29,8 @@ public class SituacaoController extends Controller<Situacao> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
+        campos = "sit_descricao";
+        vetorCampos = campos.split(",");
 
     }
 
@@ -40,9 +39,9 @@ public class SituacaoController extends Controller<Situacao> {
         
         try {
 
-            psSituacao = criaStatement.insertSql(tabela, "sit_descricao");
+            ps = criaStatement.insertSql(tabela, campos);
 
-            psSituacao.setString(1, item.getDescricao());
+            ps.setString(1, item.getDescricao());
 
         } catch (Exception error) {
 
@@ -50,7 +49,7 @@ public class SituacaoController extends Controller<Situacao> {
 
         }
 
-        return psSituacao;
+        return ps;
         
     }
 
@@ -59,10 +58,10 @@ public class SituacaoController extends Controller<Situacao> {
         
         try {
 
-            psSituacao = criaStatement.updateSql("sit_descricao");
+            ps = criaStatement.updateSql(campos);
 
-            psSituacao.setString(1, item.getDescricao());
-            psSituacao.setInt(2, item.getId());
+            ps.setString(1, item.getDescricao());
+            ps.setInt(2, item.getId());
 
         } catch (Exception error) {
 
@@ -70,7 +69,7 @@ public class SituacaoController extends Controller<Situacao> {
 
         }
 
-        return psSituacao;
+        return ps;
         
     }
     
@@ -83,7 +82,7 @@ public class SituacaoController extends Controller<Situacao> {
 
                 return new Situacao(
                         rs.getInt(id), 
-                        rs.getString("sit_descricao")
+                        rs.getString(vetorCampos[0])
                 );
 
             } else

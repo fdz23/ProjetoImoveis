@@ -20,9 +20,6 @@ import util.CriaStatement;
  */
 public class EnderecoController extends Controller<Endereco> {
     
-    private CriaStatement criaStatement;
-    private PreparedStatement psEndereco;
-
     public EnderecoController(Connection con) {
 
         super(con);
@@ -32,6 +29,8 @@ public class EnderecoController extends Controller<Endereco> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, id, tabela);
+        campos = "end_codigo_ibge,end_logradouro,end_bairro,end_cidade,end_estado,end_complemento,end_numero,end_ponto_referencia,end_cep";
+        vetorCampos = campos.split(",");
 
     }
 
@@ -40,17 +39,17 @@ public class EnderecoController extends Controller<Endereco> {
         
         try {
 
-            psEndereco = criaStatement.insertSql(tabela, "end_codigo_ibge,end_logradouro,end_bairro,end_cidade,end_estado,end_complemento,end_numero,end_ponto_referencia,end_cep");
+            ps = criaStatement.insertSql(tabela, campos);
 
-            psEndereco.setString(1, item.getCodigoIBGE());
-            psEndereco.setString(2, item.getLogradouro());
-            psEndereco.setString(3, item.getBairro());
-            psEndereco.setString(4, item.getCidade());
-            psEndereco.setString(5, item.getEstado());
-            psEndereco.setString(6, item.getComplemento());
-            psEndereco.setString(7, item.getNumero());
-            psEndereco.setString(8, item.getPontoReferencia());
-            psEndereco.setString(9, item.getCep());
+            ps.setString(1, item.getCodigoIBGE());
+            ps.setString(2, item.getLogradouro());
+            ps.setString(3, item.getBairro());
+            ps.setString(4, item.getCidade());
+            ps.setString(5, item.getEstado());
+            ps.setString(6, item.getComplemento());
+            ps.setString(7, item.getNumero());
+            ps.setString(8, item.getPontoReferencia());
+            ps.setString(9, item.getCep());
 
         } catch (Exception error) {
 
@@ -58,7 +57,7 @@ public class EnderecoController extends Controller<Endereco> {
 
         }
 
-        return psEndereco;
+        return ps;
         
     }
 
@@ -67,18 +66,18 @@ public class EnderecoController extends Controller<Endereco> {
         
         try {
 
-            psEndereco = criaStatement.updateSql("end_codigo_ibge,end_logradouro,end_bairro,end_cidade,end_estado,end_complemento,end_numero,end_ponto_referencia,end_cep");
+            ps = criaStatement.updateSql(campos);
 
-            psEndereco.setString(1, item.getCodigoIBGE());
-            psEndereco.setString(2, item.getLogradouro());
-            psEndereco.setString(3, item.getBairro());
-            psEndereco.setString(4, item.getCidade());
-            psEndereco.setString(5, item.getEstado());
-            psEndereco.setString(6, item.getComplemento());
-            psEndereco.setString(7, item.getNumero());
-            psEndereco.setString(8, item.getPontoReferencia());
-            psEndereco.setString(9, item.getCep());
-            psEndereco.setInt(10, item.getId());
+            ps.setString(1, item.getCodigoIBGE());
+            ps.setString(2, item.getLogradouro());
+            ps.setString(3, item.getBairro());
+            ps.setString(4, item.getCidade());
+            ps.setString(5, item.getEstado());
+            ps.setString(6, item.getComplemento());
+            ps.setString(7, item.getNumero());
+            ps.setString(8, item.getPontoReferencia());
+            ps.setString(9, item.getCep());
+            ps.setInt(10, item.getId());
 
         } catch (Exception error) {
 
@@ -86,7 +85,7 @@ public class EnderecoController extends Controller<Endereco> {
 
         }
 
-        return psEndereco;
+        return ps;
         
     }
 
@@ -99,15 +98,15 @@ public class EnderecoController extends Controller<Endereco> {
 
                 return new Endereco(
                         rs.getInt(id), 
-                        rs.getString("end_codigo_ibge"), 
-                        rs.getString("end_logradouro"), 
-                        rs.getString("end_bairro"), 
-                        rs.getString("end_cidade"), 
-                        rs.getString("end_estado"),
-                        rs.getString("end_complemento"),
-                        rs.getString("end_numero"), 
-                        rs.getString("end_ponto_referencia"), 
-                        rs.getString("end_cep")
+                        rs.getString(vetorCampos[0]), 
+                        rs.getString(vetorCampos[1]), 
+                        rs.getString(vetorCampos[2]), 
+                        rs.getString(vetorCampos[3]), 
+                        rs.getString(vetorCampos[4]),
+                        rs.getString(vetorCampos[5]),
+                        rs.getString(vetorCampos[6]), 
+                        rs.getString(vetorCampos[7]), 
+                        rs.getString(vetorCampos[8])
                 );
 
             } else

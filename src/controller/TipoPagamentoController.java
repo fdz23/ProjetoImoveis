@@ -20,9 +20,6 @@ import util.CriaStatement;
  */
 public class TipoPagamentoController extends Controller<TipoPagamento> {
     
-    private CriaStatement criaStatement;
-    private PreparedStatement psTipoPagamento;
-
     public TipoPagamentoController(Connection con) {
 
         super(con);
@@ -32,6 +29,8 @@ public class TipoPagamentoController extends Controller<TipoPagamento> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
+        campos = "tpa_descricao";
+        vetorCampos = campos.split(",");
 
     }
 
@@ -40,9 +39,9 @@ public class TipoPagamentoController extends Controller<TipoPagamento> {
         
         try {
 
-            psTipoPagamento = criaStatement.insertSql(tabela, "tpa_descricao");
+            ps = criaStatement.insertSql(tabela, campos);
 
-            psTipoPagamento.setString(1, item.getDescricao());
+            ps.setString(1, item.getDescricao());
 
         } catch (Exception error) {
 
@@ -50,7 +49,7 @@ public class TipoPagamentoController extends Controller<TipoPagamento> {
 
         }
 
-        return psTipoPagamento;
+        return ps;
         
     }
 
@@ -59,10 +58,10 @@ public class TipoPagamentoController extends Controller<TipoPagamento> {
         
         try {
 
-            psTipoPagamento = criaStatement.updateSql("tpa_descricao");
+            ps = criaStatement.updateSql(campos);
 
-            psTipoPagamento.setString(1, item.getDescricao());
-            psTipoPagamento.setInt(2, item.getId());
+            ps.setString(1, item.getDescricao());
+            ps.setInt(2, item.getId());
 
         } catch (Exception error) {
 
@@ -70,7 +69,7 @@ public class TipoPagamentoController extends Controller<TipoPagamento> {
 
         }
 
-        return psTipoPagamento;
+        return ps;
         
     }
 

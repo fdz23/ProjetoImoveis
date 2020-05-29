@@ -20,9 +20,6 @@ import util.CriaStatement;
  */
 public class NivelAcessoController extends Controller<NivelAcesso> {
     
-    private CriaStatement criaStatement;
-    private PreparedStatement psNivelAcesso;
-
     public NivelAcessoController(Connection con) {
 
         super(con);
@@ -32,6 +29,8 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
+        campos = "nac_descricao";
+        vetorCampos = campos.split(",");
 
     }
 
@@ -40,9 +39,9 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
         
         try {
 
-            psNivelAcesso = criaStatement.insertSql(tabela, "nac_descricao");
+            ps = criaStatement.insertSql(tabela, campos);
 
-            psNivelAcesso.setString(1, item.getDescricao());
+            ps.setString(1, item.getDescricao());
 
         } catch (Exception error) {
 
@@ -50,7 +49,7 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
 
         }
 
-        return psNivelAcesso;
+        return ps;
         
     }
 
@@ -59,10 +58,10 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
         
         try {
 
-            psNivelAcesso = criaStatement.updateSql("nac_descricao");
+            ps = criaStatement.updateSql(campos);
 
-            psNivelAcesso.setString(1, item.getDescricao());
-            psNivelAcesso.setInt(2, item.getId());
+            ps.setString(1, item.getDescricao());
+            ps.setInt(2, item.getId());
 
         } catch (Exception error) {
 
@@ -70,7 +69,7 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
 
         }
 
-        return psNivelAcesso;
+        return ps;
         
     }
 
@@ -83,7 +82,7 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
 
                 return new NivelAcesso(
                         rs.getInt(id), 
-                        rs.getString("nac_descricao")
+                        rs.getString(vetorCampos[0])
                 );
 
             } else

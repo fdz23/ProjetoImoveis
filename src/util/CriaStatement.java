@@ -68,4 +68,16 @@ public class CriaStatement {
         
         return con.prepareStatement(sql);
     }
+    
+    public PreparedStatement selectSqlOrder(String tabela, String coluna, boolean asc) throws Exception {
+        
+        String ascOuDesc = "DESC";
+        
+        if(asc)
+            ascOuDesc = "ASC";
+        
+        String sql = "SELECT * FROM " + tabela + " ORDER BY " + coluna + " " + ascOuDesc;
+        
+        return con.prepareStatement(sql);
+    }
 }

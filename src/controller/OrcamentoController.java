@@ -20,9 +20,6 @@ import util.CriaStatement;
  */
 public class OrcamentoController extends Controller<Orcamento> {
     
-    private CriaStatement criaStatement;
-    private PreparedStatement psOrcamento;
-
     public OrcamentoController(Connection con) {
 
         super(con);
@@ -32,6 +29,8 @@ public class OrcamentoController extends Controller<Orcamento> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
+        campos = "orc_data,orc_descricao,orc_func_iden,orc_pes_iden,orc_imo_iden,orc_tpa_iden";
+        vetorCampos = campos.split(",");
 
     }
 
@@ -40,14 +39,14 @@ public class OrcamentoController extends Controller<Orcamento> {
         
         try {
 
-            psOrcamento = criaStatement.insertSql(tabela, "orc_data,orc_descricao,orc_func_iden,orc_pes_iden,orc_imo_iden,orc_tpa_iden");
+            ps = criaStatement.insertSql(tabela, campos);
 
-            psOrcamento.setString(1, item.getData());
-            psOrcamento.setString(2, item.getDescricao());
-            psOrcamento.setInt(3, item.getIdFuncionario());
-            psOrcamento.setInt(4, item.getIdPessoa());
-            psOrcamento.setInt(5, item.getIdImovel());
-            psOrcamento.setInt(6, item.getIdTipoPagamento());
+            ps.setString(1, item.getData());
+            ps.setString(2, item.getDescricao());
+            ps.setInt(3, item.getIdFuncionario());
+            ps.setInt(4, item.getIdPessoa());
+            ps.setInt(5, item.getIdImovel());
+            ps.setInt(6, item.getIdTipoPagamento());
 
         } catch (Exception error) {
 
@@ -55,7 +54,7 @@ public class OrcamentoController extends Controller<Orcamento> {
 
         }
 
-        return psOrcamento;
+        return ps;
         
     }
 
@@ -64,15 +63,15 @@ public class OrcamentoController extends Controller<Orcamento> {
         
         try {
 
-            psOrcamento = criaStatement.updateSql("orc_data,orc_descricao,orc_func_iden,orc_pes_iden,orc_imo_iden,orc_tpa_iden");
+            ps = criaStatement.updateSql(campos);
 
-            psOrcamento.setString(1, item.getData());
-            psOrcamento.setString(2, item.getDescricao());
-            psOrcamento.setInt(3, item.getIdFuncionario());
-            psOrcamento.setInt(4, item.getIdPessoa());
-            psOrcamento.setInt(5, item.getIdImovel());
-            psOrcamento.setInt(6, item.getIdTipoPagamento());
-            psOrcamento.setInt(7, item.getId());
+            ps.setString(1, item.getData());
+            ps.setString(2, item.getDescricao());
+            ps.setInt(3, item.getIdFuncionario());
+            ps.setInt(4, item.getIdPessoa());
+            ps.setInt(5, item.getIdImovel());
+            ps.setInt(6, item.getIdTipoPagamento());
+            ps.setInt(7, item.getId());
 
         } catch (Exception error) {
 
@@ -80,7 +79,7 @@ public class OrcamentoController extends Controller<Orcamento> {
 
         }
 
-        return psOrcamento;
+        return ps;
         
     }
     
@@ -93,12 +92,12 @@ public class OrcamentoController extends Controller<Orcamento> {
 
                 return new Orcamento(
                         rs.getInt(id), 
-                        rs.getString("orc_data"), 
-                        rs.getString("orc_descricao"), 
-                        rs.getInt("orc_func_iden"),
-                        rs.getInt("orc_pes_iden"),
-                        rs.getInt("orc_imo_iden"),
-                        rs.getInt("orc_tpa_iden")
+                        rs.getString(vetorCampos[0]), 
+                        rs.getString(vetorCampos[1]), 
+                        rs.getInt(vetorCampos[2]),
+                        rs.getInt(vetorCampos[3]),
+                        rs.getInt(vetorCampos[4]),
+                        rs.getInt(vetorCampos[5])
                 );
 
             } else
