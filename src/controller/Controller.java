@@ -50,7 +50,7 @@ public abstract class Controller<T> implements IController<T> {
         String coluna1 = vetorCampos[campo1];
         String coluna2 = vetorCampos[campo2];
         
-        List<T> itens = new LinkedList<T>();
+        List<T> itens = new ArrayList<T>();
 
         try {
 
