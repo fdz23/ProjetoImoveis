@@ -76,7 +76,25 @@ public class CriaStatement {
         if(asc)
             ascOuDesc = "ASC";
         
-        String sql = "SELECT * FROM " + tabela + " ORDER BY " + coluna + " " + ascOuDesc;
+        String sql = "SELECT * FROM " + tabela 
+                  + " ORDER BY " + coluna + " " + ascOuDesc;
+        
+        return con.prepareStatement(sql);
+    }
+    
+    public PreparedStatement selectSqlOrderDupla(String tabela, String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {
+        
+        String ascOuDesc1 = "DESC";
+        String ascOuDesc2 = "DESC";
+        
+        if(asc1)
+            ascOuDesc1 = "ASC";
+        if(asc2)
+            ascOuDesc2 = "ASC";
+        
+        String sql = "SELECT * FROM " + tabela 
+                  + " ORDER BY " + coluna1 + " " + ascOuDesc1 + ", " 
+                  + coluna2 + " " + ascOuDesc2;
         
         return con.prepareStatement(sql);
     }

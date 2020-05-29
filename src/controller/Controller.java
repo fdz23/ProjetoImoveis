@@ -40,6 +40,41 @@ public abstract class Controller<T> implements IController<T> {
     }
     
     //campo em maísculo exatamente igual às propriedades da classe || true para ordem ascendente e false para descendente
+    public Iterator<T> getTodosItensOrdenadosDuplamentePor(int campo1, int campo2, boolean ascOuDesc1, boolean ascOuDesc2) throws Exception {
+        
+        if (campo1 < 0 || campo1 > (vetorCampos.length - 1))
+            throw new Exception("Campo1 para ser ordenado inexistente.");
+        if (campo2 < 0 || campo2 > (vetorCampos.length - 1))
+            throw new Exception("Campo2 para ser ordenado inexistente.");
+        
+        String coluna1 = vetorCampos[campo1];
+        String coluna2 = vetorCampos[campo2];
+        
+        List<T> itens = new LinkedList<T>();
+
+        try {
+
+            ps = criaStatement.selectSqlOrderDupla(tabela, coluna1, coluna2, ascOuDesc1, ascOuDesc2);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                itens.add(getItem(rs.getInt(id)));
+
+            }
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return itens.iterator();
+
+    }
+    
+    //campo em maísculo exatamente igual às propriedades da classe || true para ordem ascendente e false para descendente
     public Iterator<T> getTodosItensOrdenadosPor(int campo, boolean ascOuDesc) throws Exception {
         
         if (campo < 0 || campo > (vetorCampos.length - 1))
