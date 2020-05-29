@@ -5,11 +5,13 @@
  */
 package model;
 
+import interfaces.Tabela;
+
 /**
  *
  * @author fdz
  */
-public class Endereco {
+public class Endereco implements Tabela {
     
     private int id;
     private String codigoIBGE;
@@ -21,6 +23,18 @@ public class Endereco {
     private String cep;
     private String logradouro;
     private String complemento;
+    private String nomeId = "end_iden";
+    private String nomeTabela = "enderecos";
+
+    @Override
+    public String getNomeId() {
+        return nomeId;
+    }
+
+    @Override
+    public String getNomeTabela() {
+        return nomeTabela;
+    }
     
     public Endereco() {}
     

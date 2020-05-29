@@ -5,11 +5,13 @@
  */
 package model;
 
+import interfaces.Tabela;
+
 /**
  *
  * @author fdz
  */
-public class Pessoa {
+public class Pessoa implements Tabela {
     
     private int id;
     private String nome;
@@ -18,6 +20,18 @@ public class Pessoa {
     private String cpf;
     private String telefone;
     private int idEndereco;
+    private String nomeId = "pes_iden";
+    private String nomeTabela = "pessoas";
+
+    @Override
+    public String getNomeId() {
+        return nomeId;
+    }
+
+    @Override
+    public String getNomeTabela() {
+        return nomeTabela;
+    }
     
     public Pessoa() {}
     

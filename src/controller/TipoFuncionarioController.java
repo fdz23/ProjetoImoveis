@@ -5,6 +5,8 @@
  */
 package controller;
 
+import fabricas.AbstractFactory;
+import interfaces.Tabela;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,8 +26,11 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
     public TipoFuncionarioController(Connection con) {
 
         super(con);
-        this.tabela = "tipo_funcionarios";
-        this.id = "tfu_iden";
+        
+        Tabela obj = AbstractFactory.getInstance("HUMANO").getTabela("TIPO_FUNCIONARIO");
+        
+        this.id = obj.getNomeId();
+        this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
 
     }
@@ -71,58 +76,6 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
 
         return psTipoFuncionario;
         
-    }
-
-    @Override
-    public PreparedStatement statementDeletar(int id) {
-        
-        try {
-
-            psTipoFuncionario = criaStatement.deleteSql();
-
-            psTipoFuncionario.setInt(1, id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-
-        return psTipoFuncionario;
-
-    }
-
-    @Override
-    public PreparedStatement statementGetTodos() {
-        
-        try {
-
-            psTipoFuncionario = criaStatement.selectSql(tabela, false, null);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-        
-        return psTipoFuncionario;
-    }
-
-    @Override
-    public PreparedStatement statementGetItem(int id) {
-        
-        try {
-
-            psTipoFuncionario = criaStatement.selectSql(tabela, true, this.id);
-            
-            psTipoFuncionario.setInt(1, id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-
-        return psTipoFuncionario;
     }
 
     @Override

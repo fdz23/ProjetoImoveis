@@ -5,17 +5,31 @@
  */
 package model;
 
+import interfaces.Tabela;
+
 /**
  *
  * @author fdz
  */
-public class Funcionario extends Pessoa {
+public class Funcionario extends Pessoa implements Tabela {
     
     private int idStatus;
     private String dataRescisao;
     private String matricula;
     private int idTipoFuncionario;
     private int idPessoa;
+    private String nomeId = "fun_iden";
+    private String nomeTabela = "funcionarios";
+
+    @Override
+    public String getNomeId() {
+        return nomeId;
+    }
+
+    @Override
+    public String getNomeTabela() {
+        return nomeTabela;
+    }
     
     public Funcionario() {}
     

@@ -38,9 +38,62 @@ public abstract class Controller<T> implements IController<T> {
     
     public abstract PreparedStatement statementInserir(T item);
     public abstract PreparedStatement statementAlterar(T item);
-    public abstract PreparedStatement statementDeletar(int id);
-    public abstract PreparedStatement statementGetTodos();
-    public abstract PreparedStatement statementGetItem(int id);
+    
+    public PreparedStatement statementDeletar(int id) {
+         
+        try {
+
+            PreparedStatement ps = criaStatement.deleteSql();
+
+            ps.setInt(1, id);
+            
+            return ps;
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+
+        return null;
+            
+    }
+    
+    public PreparedStatement statementGetTodos() {
+        
+        try {
+
+            PreparedStatement ps = criaStatement.selectSql(tabela, false, null);
+
+            return ps;
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+        
+        return null;
+    }
+    
+    public PreparedStatement statementGetItem(int id) {
+        
+        try {
+
+            PreparedStatement ps = criaStatement.selectSql(tabela, true, this.id);
+            
+            ps.setInt(1, id);
+
+            return ps;
+        
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+        
+        return null;
+
+    }
     public abstract T criaItem(ResultSet rs);
 
     //comenta!

@@ -5,13 +5,14 @@
  */
 package model;
 
+import interfaces.Tabela;
 import java.util.Date;
 
 /**
  *
  * @author fdz
  */
-public class Imovel {
+public class Imovel implements Tabela {
     
     private int id;
     private String dataInclusao;
@@ -26,6 +27,18 @@ public class Imovel {
     private int idEndereco;
     private int idPessoa;
     private int idFuncionario;
+    private String nomeId = "imo_iden";
+    private String nomeTabela = "imoveis";
+
+    @Override
+    public String getNomeId() {
+        return nomeId;
+    }
+
+    @Override
+    public String getNomeTabela() {
+        return nomeTabela;
+    }
     
     public Imovel() {}
     

@@ -5,14 +5,28 @@
  */
 package model;
 
+import interfaces.Tabela;
+
 /**
  *
  * @author fdz
  */
-public class ItemMovel {
+public class ItemMovel implements Tabela {
     
     private int id;
     private String descricao;
+    private String nomeId = "iti_iden";
+    private String nomeTabela = "item_moveis";
+
+    @Override
+    public String getNomeId() {
+        return nomeId;
+    }
+
+    @Override
+    public String getNomeTabela() {
+        return nomeTabela;
+    }
     
     public ItemMovel() {}
     

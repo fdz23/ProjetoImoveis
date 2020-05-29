@@ -5,6 +5,8 @@
  */
 package controller;
 
+import fabricas.AbstractFactory;
+import interfaces.Tabela;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,8 +26,11 @@ public class TipoPagamentoController extends Controller<TipoPagamento> {
     public TipoPagamentoController(Connection con) {
 
         super(con);
-        this.id = "tpa_iden";
-        this.tabela = "tipo_pagamentos";
+        
+        Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("TIPO_PAGAMENTO");
+        
+        this.id = obj.getNomeId();
+        this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
 
     }
@@ -67,58 +72,6 @@ public class TipoPagamentoController extends Controller<TipoPagamento> {
 
         return psTipoPagamento;
         
-    }
-
-    @Override
-    public PreparedStatement statementDeletar(int id) {
-        
-        try {
-
-            psTipoPagamento = criaStatement.deleteSql();
-
-            psTipoPagamento.setInt(1, id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-
-        return psTipoPagamento;
-
-    }
-
-    @Override
-    public PreparedStatement statementGetTodos() {
-        
-        try {
-
-            psTipoPagamento = criaStatement.selectSql(tabela, false, null);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-        
-        return psTipoPagamento;
-    }
-
-    @Override
-    public PreparedStatement statementGetItem(int id) {
-        
-        try {
-
-            psTipoPagamento = criaStatement.selectSql(tabela, true, this.id);
-            
-            psTipoPagamento.setInt(1, id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-
-        return psTipoPagamento;
     }
 
     @Override

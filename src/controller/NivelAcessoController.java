@@ -5,6 +5,8 @@
  */
 package controller;
 
+import fabricas.AbstractFactory;
+import interfaces.Tabela;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,8 +26,11 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
     public NivelAcessoController(Connection con) {
 
         super(con);
-        this.tabela = "nivel_acessos";
-        this.id = "nac_iden";
+        
+        Tabela obj = AbstractFactory.getInstance("HUMANO").getTabela("NIVEL_ACESSO");
+        
+        this.id = obj.getNomeId();
+        this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
 
     }
@@ -67,58 +72,6 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
 
         return psNivelAcesso;
         
-    }
-
-    @Override
-    public PreparedStatement statementDeletar(int id) {
-        
-        try {
-
-            psNivelAcesso = criaStatement.deleteSql();
-
-            psNivelAcesso.setInt(1, id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-
-        return psNivelAcesso;
-
-    }
-
-    @Override
-    public PreparedStatement statementGetTodos() {
-        
-        try {
-
-            psNivelAcesso = criaStatement.selectSql(tabela, false, null);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-        
-        return psNivelAcesso;
-    }
-
-    @Override
-    public PreparedStatement statementGetItem(int id) {
-        
-        try {
-
-            psNivelAcesso = criaStatement.selectSql(tabela, true, this.id);
-            
-            psNivelAcesso.setInt(1, id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-
-        return psNivelAcesso;
     }
 
     @Override

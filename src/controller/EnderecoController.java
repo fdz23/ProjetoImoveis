@@ -5,6 +5,8 @@
  */
 package controller;
 
+import fabricas.AbstractFactory;
+import interfaces.Tabela;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,8 +26,11 @@ public class EnderecoController extends Controller<Endereco> {
     public EnderecoController(Connection con) {
 
         super(con);
-        this.id = "end_iden";
-        this.tabela = "enderecos";
+        
+        Tabela obj = AbstractFactory.getInstance("MATERIAL").getTabela("ENDERECO");
+        
+        this.id = obj.getNomeId();
+        this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, id, tabela);
 
     }
@@ -83,58 +88,6 @@ public class EnderecoController extends Controller<Endereco> {
 
         return psEndereco;
         
-    }
-
-    @Override
-    public PreparedStatement statementDeletar(int id) {
-        
-        try {
-
-            psEndereco = criaStatement.deleteSql();
-
-            psEndereco.setInt(1, id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-
-        return psEndereco;
-
-    }
-
-    @Override
-    public PreparedStatement statementGetTodos() {
-        
-        try {
-
-            psEndereco = criaStatement.selectSql(tabela, false, null);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-        
-        return psEndereco;
-    }
-
-    @Override
-    public PreparedStatement statementGetItem(int id) {
-        
-        try {
-
-            psEndereco = criaStatement.selectSql(tabela, true, this.id);
-            
-            psEndereco.setInt(1, id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-
-        return psEndereco;
     }
 
     @Override

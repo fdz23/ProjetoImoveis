@@ -5,14 +5,28 @@
  */
 package model;
 
+import interfaces.Tabela;
+
 /**
  *
  * @author fdz
  */
-public class Status {
+public class Status implements Tabela {
     
     private int id;
     private String descricao;
+    private String nomeId = "sta_iden";
+    private String nomeTabela = "status";
+
+    @Override
+    public String getNomeId() {
+        return nomeId;
+    }
+
+    @Override
+    public String getNomeTabela() {
+        return nomeTabela;
+    }
     
     public Status() {}
     

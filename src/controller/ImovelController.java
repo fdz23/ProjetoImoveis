@@ -5,6 +5,8 @@
  */
 package controller;
 
+import fabricas.AbstractFactory;
+import interfaces.Tabela;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,8 +31,11 @@ public class ImovelController extends Controller<Imovel> {
     public ImovelController(Connection con) {
 
         super(con);
-        this.tabela = "imoveis";
-        this.id = "imo_iden";
+        
+        Tabela obj = AbstractFactory.getInstance("MATERIAL").getTabela("IMOVEL");
+        
+        this.id = obj.getNomeId();
+        this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
         rs = null;
 
@@ -98,58 +103,7 @@ public class ImovelController extends Controller<Imovel> {
         return psImovel;
 
     }
-
-    @Override
-    public PreparedStatement statementDeletar(int id) {
-        
-        try {
-
-            psImovel = criaStatement.deleteSql();
-
-            psImovel.setInt(1, id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-
-        return psImovel;
-
-    }
-
-    @Override
-    public PreparedStatement statementGetTodos() {
-        
-        try {
-
-            psImovel = criaStatement.selectSql(tabela, false, null);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-        
-        return psImovel;
-    }
-
-    @Override
-    public PreparedStatement statementGetItem(int id) {
-        
-        try {
-
-            psImovel = criaStatement.selectSql(tabela, true, this.id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-
-        return psImovel;
-    }
-
+    
     @Override
     public Imovel criaItem(ResultSet rs) {
         

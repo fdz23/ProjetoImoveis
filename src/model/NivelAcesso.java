@@ -5,14 +5,28 @@
  */
 package model;
 
+import interfaces.Tabela;
+
 /**
  *
  * @author fdz
  */
-public class NivelAcesso {
+public class NivelAcesso implements Tabela {
     
     private int id;
     private String descricao;
+    private String nomeId = "nac_iden";
+    private String nomeTabela = "nivel_acessos";
+
+    @Override
+    public String getNomeId() {
+        return nomeId;
+    }
+
+    @Override
+    public String getNomeTabela() {
+        return nomeTabela;
+    }
     
     public NivelAcesso() {}
     
