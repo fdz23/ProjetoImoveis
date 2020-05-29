@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Stack;
 import javax.swing.JOptionPane;
 import model.Contrato;
@@ -50,7 +52,7 @@ public abstract class Controller<T> implements IController<T> {
         String coluna1 = vetorCampos[campo1];
         String coluna2 = vetorCampos[campo2];
         
-        List<T> itens = new ArrayList<T>();
+        Queue<T> itens = new PriorityQueue<T>();
 
         try {
 
