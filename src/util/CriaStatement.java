@@ -24,6 +24,9 @@ public class CriaStatement {
         this.id = id;
     }
     
+    //cria um PreparedStatement de inserção genericamente
+    //recebe o nome da tabela(conforme ao banco)
+    //recebe o nome da coluna(conforme ao banco)
     //Para mais de uma coluna/valores utilize "," entre cada um deles(sem espaço)
     public PreparedStatement insertSql(String tabela, String colunas) throws Exception {
         String sql = "INSERT INTO " + tabela + "(" + colunas + ")" + " values(?";
@@ -37,7 +40,11 @@ public class CriaStatement {
         return con.prepareStatement(sql);
     }
     
+    //cria um PreparedStatement de seleção genericamente
+    //recebe o nome da tabela(conforme ao banco)
     //especificacao true para pesquisar uma coluna especifica e false para a tabela inteira
+    //recebe o nome da coluna(conforme ao banco)
+    //Para mais de uma coluna/valores utilize "," entre cada um deles(sem espaço)
     public PreparedStatement selectSql(String tabela, boolean especificacao, String coluna) throws Exception {
         String sql = "SELECT * FROM " + tabela;
         
@@ -47,12 +54,16 @@ public class CriaStatement {
         return con.prepareStatement(sql);
     }
     
+    //cria um PreparedStatement de remoção genericamente o nome da tabela e o id foram definidos previamente
     public PreparedStatement deleteSql() throws Exception {
         String sql = "DELETE FROM " + tabela + " WHERE " + id + " = ?";
         
         return con.prepareStatement(sql);
     }
     
+    //cria um PreparedStatement de atualização genericamente
+    //recebe o nome da coluna(conforme ao banco)
+    //Para mais de uma coluna/valores utilize "," entre cada um deles(sem espaço)
     public PreparedStatement updateSql(String colunas) throws Exception {
         String[] colunasSplit = colunas.split(",");
         
@@ -69,6 +80,10 @@ public class CriaStatement {
         return con.prepareStatement(sql);
     }
     
+    //cria um PreparedStatement de seleção genérica de ordenação
+    //recebe o nome da tabela(conforme ao banco)
+    //recebe o nome da coluna(conforme ao banco)
+    //asc true para ordenação ascendente e false para descendente
     public PreparedStatement selectSqlOrder(String tabela, String coluna, boolean asc) throws Exception {
         
         String ascOuDesc = "DESC";
@@ -82,6 +97,12 @@ public class CriaStatement {
         return con.prepareStatement(sql);
     }
     
+    //cria um PreparedStatement de seleção genérica de ordenação
+    //recebe o nome da tabela(conforme ao banco)
+    //recebe o nome da coluna a ser ordenada em primeiro(conforme ao banco)
+    //recebe o nome da coluna a ser ordenada por segundo(conforme ao banco)
+    //asc1 true para ordenação ascendente e false para descendente da primeira coluna
+    //asc2 true para ordenação ascendente e false para descendente da segunda coluna
     public PreparedStatement selectSqlOrderDupla(String tabela, String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {
         
         String ascOuDesc1 = "DESC";

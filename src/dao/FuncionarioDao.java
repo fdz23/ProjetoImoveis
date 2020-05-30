@@ -48,6 +48,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
             
             ps = criaStatement.insertSql(tabela, campos);
             
+            //insere uma pessoa com os valores recebidos
             pessoaDao.inserir(
                     new Pessoa(
                             0, 
@@ -60,6 +61,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
                     )
             );
             
+            //pesquisa essa pessoa que foi inserida por cpf e cria um objeto pessoa e passa seu id para o statement a ser usado
             Pessoa pessoa = pessoaDao.getByCpf(item.getCpf());
 
             ps.setString(1, item.getMatricula());
@@ -82,8 +84,10 @@ public class FuncionarioDao extends Dao<Funcionario> {
         
         try {
 
+            //cria statement para alterar os dados dos campos da tabela funcionario
             ps = criaStatement.updateSql(campos);
             
+            //cria um objeto pessoa com os dados pertencentes a tabela pessoa
             Pessoa pessoa = new Pessoa(
                     item.getIdPessoa(), 
                     item.getNome(), 
@@ -94,6 +98,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
                     item.getIdEndereco()
             );
             
+            //altera a tabela pessoa também com os dados
             pessoaDao.alterar(pessoa);
             
             ps.setString(1, item.getMatricula());
@@ -118,14 +123,17 @@ public class FuncionarioDao extends Dao<Funcionario> {
         
         try {
             
+            //cria um statement que pesquisa o funcionario com esse id
             ps = criaStatement.selectSql(tabela, true, this.id);
             
             rs = ps.executeQuery();
             
             if(rs.next()) {
                 
+                //pega o id referente à tabela pessoa
                 int idPessoa = rs.getInt("fun_pes_iden");
                 
+                //e deleta o mesmo na tabela pessoa
                 pessoaDao.deletar(idPessoa);
                 
             }
@@ -133,6 +141,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
                 throw new Exception("Erro na remoção de um item Funcionario(parte de remoção por id pessoa para remover a pessoa)");
 
 
+            //cria o statemente para deletar o funcionario
             ps = criaStatement.deleteSql();
             
             ps.setInt(1, id);
@@ -152,14 +161,17 @@ public class FuncionarioDao extends Dao<Funcionario> {
         
         try {
 
+            //cria o statement que pesquisa por id na tabela funcionario
             ps = criaStatement.selectSql(tabela, true, this.id);
             
             rs = ps.executeQuery();
             
             if(rs.next()) {
                 
+                //pega o id referente à tabela pessoa na tabela funcionario
                 int idPessoa = rs.getInt("fun_pes_iden");
                 
+                //cria um statement que pesquisa por id na tabela pessoa e retorna o mesmo
                 psPessoa = criaStatement.selectSql("pessoas", true, "pes_iden");
                 
                 psPessoa.setInt(1, idPessoa);
@@ -183,6 +195,8 @@ public class FuncionarioDao extends Dao<Funcionario> {
         
         try {
             
+            //recebe um resultset com as informações da tabela pessoa referente ao id usado 
+            //e cria um objeto Funcionario com essas informações e as do resultset normal de funcionario
             if (rsPessoa.next()) {
                 return new Funcionario( 
                         rsPessoa.getString(vetorCamposPessoa[0]), 

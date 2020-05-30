@@ -10,7 +10,10 @@ public class ConectaDb {
 
         try {
 
+            //nome do .jar utilizado para conectar no banco postgresql
             Class.forName("org.postgresql.Driver");
+            
+            //conecta na db no localhost, db chamada projeto_imoveis, usuario postgres e senha root
             Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/projeto_imoveis", "postgres", "root");
 
             return con;

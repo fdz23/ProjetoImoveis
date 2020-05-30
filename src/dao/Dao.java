@@ -43,27 +43,34 @@ public abstract class Dao<T> implements IDao<T> {
     protected abstract PreparedStatement statementAlterar(T item);
     protected abstract T criaItem(ResultSet rs);
     
-    //campo em maísculo exatamente igual às propriedades da classe || true para ordem ascendente e false para descendente
+    //campo é o número correspondente à propriedade conforme a ordem na tabela do banco de dados!(começa do 0)
+    //ascOuDesc true para ordem ascendente e false para descendente
     public Iterator<T> getTodosItensOrdenadosDuplamentePor(int campo1, int campo2, boolean ascOuDesc1, boolean ascOuDesc2) throws Exception {
         
+        //verifica se o número recebido é menor que 0 ou maior que o número máximo de campos
         if (campo1 < 0 || campo1 > (vetorCampos.length - 1))
             throw new Exception("Campo1 para ser ordenado inexistente.");
         if (campo2 < 0 || campo2 > (vetorCampos.length - 1))
             throw new Exception("Campo2 para ser ordenado inexistente.");
         
+        //vetorCampos é um vetor que contém o nome de todos os campos da tabela no banco de dados na ordem
         String coluna1 = vetorCampos[campo1];
         String coluna2 = vetorCampos[campo2];
         
+        //estrutura de dados 1 : Fila de prioridade
         Queue<T> itens = new PriorityQueue<T>();
 
         try {
 
+            //cria um sql que recebe todos os itens ordenados conforme duas colunas
             ps = criaStatement.selectSqlOrderDupla(tabela, coluna1, coluna2, ascOuDesc1, ascOuDesc2);
 
+            //faz o pedido de busca conforme o PreparedStatement criado
             rs = ps.executeQuery();
 
             while (rs.next()) {
 
+                //adiciona na fila de prioridade todos os itens
                 itens.add(getByID(rs.getInt(id)));
 
             }
@@ -78,24 +85,31 @@ public abstract class Dao<T> implements IDao<T> {
 
     }
     
-    //campo em maísculo exatamente igual às propriedades da classe || true para ordem ascendente e false para descendente
+    //campo é o número correspondente à propriedade conforme a ordem na tabela do banco de dados!(começa do 0)
+    //ascOuDesc true para ordem ascendente e false para descendente
     public Iterator<T> getTodosItensOrdenadosPor(int campo, boolean ascOuDesc) throws Exception {
         
+        //verifica se o número recebido é menor que 0 ou maior que o número máximo de campos
         if (campo < 0 || campo > (vetorCampos.length - 1))
             throw new Exception("Campo para ser ordenado inexistente.");
         
+        //vetorCampos é um vetor que contém o nome de todos os campos da tabela no banco de dados na ordem
         String coluna = vetorCampos[campo];
         
+        //estrutura de dados 2 : Lista encadeada
         List<T> itens = new LinkedList<T>();
 
         try {
 
+            //cria um sql que recebe todos os itens ordenados a coluna
             ps = criaStatement.selectSqlOrder(tabela, coluna, ascOuDesc);
 
+            //faz o pedido de busca conforme o PreparedStatement criado
             rs = ps.executeQuery();
 
             while (rs.next()) {
 
+                //adiciona na fila de prioridade todos os itens
                 itens.add(getByID(rs.getInt(id)));
 
             }
@@ -114,6 +128,7 @@ public abstract class Dao<T> implements IDao<T> {
          
         try {
 
+            //cria um sql para deletar um item conforme seu id
             ps = criaStatement.deleteSql();
 
             ps.setInt(1, id);
@@ -133,6 +148,7 @@ public abstract class Dao<T> implements IDao<T> {
         
         try {
 
+            //cria um sql para selecionar todos os itens
             ps = criaStatement.selectSql(tabela, false, null);
 
             return ps;
@@ -150,6 +166,7 @@ public abstract class Dao<T> implements IDao<T> {
         
         try {
 
+            //cria um sql para seleciona o item que possue esse id
             ps = criaStatement.selectSql(tabela, true, this.id);
             
             ps.setInt(1, id);
@@ -172,6 +189,7 @@ public abstract class Dao<T> implements IDao<T> {
 
         try {
 
+            //cria um sql para inserir o item
             ps = statementInserir(item);
 
             ps.executeUpdate();
@@ -192,6 +210,7 @@ public abstract class Dao<T> implements IDao<T> {
 
         try {
 
+            //cria um sql para alterar o item
             ps = statementAlterar(item);
 
             ps.executeUpdate();
@@ -212,6 +231,7 @@ public abstract class Dao<T> implements IDao<T> {
 
         try {
 
+            //cria um sql para deletar o item
             ps = statementDeletar(id);
 
             ps.executeUpdate();
@@ -230,6 +250,7 @@ public abstract class Dao<T> implements IDao<T> {
     @Override
     public Iterator<T> getAll() {
 
+        //estrutura de dados 3 : pilha
         List<T> itens = new Stack<T>();
 
         try {

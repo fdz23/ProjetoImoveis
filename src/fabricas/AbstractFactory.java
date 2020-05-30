@@ -17,7 +17,11 @@ public abstract class AbstractFactory {
     protected String tipo;
     
     public String getTipo(){ return tipo; }
+    
+    //retorna a instancia do objeto selecionado dentro do objeto selecionado
     public abstract Tabela getTabela(String tabela);
+    
+    //retorna a instancia do objeto selecionado
     public static AbstractFactory getInstance( String tipo ) { 
         if( tipo == null ) {
             return null; 
