@@ -8,6 +8,7 @@ package controller;
 import fabricas.AbstractFactory;
 import interfaces.Tabela;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Iterator;
@@ -46,11 +47,11 @@ public class ImovelController extends Controller<Imovel> {
 
             ps = criaStatement.insertSql(tabela, campos);
 
-            ps.setString(1, item.getDataInclusao());
+            ps.setDate(1, item.getDataInclusao());
             ps.setDouble(2, item.getPreco());
             ps.setDouble(3, item.getTamanho());
             ps.setString(4, item.getObservacao());
-            ps.setString(5, item.getBaixaData());
+            ps.setDate(5, item.getBaixaData());
             ps.setString(6, item.getBaixaMotivo());
             ps.setInt(7, item.getQuantidadeParcelas());
             ps.setDouble(8, item.getValorComissao());
@@ -76,11 +77,11 @@ public class ImovelController extends Controller<Imovel> {
 
             ps = criaStatement.updateSql(campos);
 
-            ps.setString(1, item.getDataInclusao());
+            ps.setDate(1, item.getDataInclusao());
             ps.setDouble(2, item.getPreco());
             ps.setDouble(3, item.getTamanho());
             ps.setString(4, item.getObservacao());
-            ps.setString(5, item.getBaixaData());
+            ps.setDate(5, item.getBaixaData());
             ps.setString(6, item.getBaixaMotivo());
             ps.setInt(7, item.getQuantidadeParcelas());
             ps.setDouble(8, item.getValorComissao());
@@ -109,11 +110,11 @@ public class ImovelController extends Controller<Imovel> {
 
                 return new Imovel(
                         rs.getInt(vetorCampos[0]), 
-                        rs.getString(vetorCampos[1]), 
+                        rs.getDate(vetorCampos[1]), 
                         rs.getDouble(vetorCampos[2]), 
                         rs.getDouble(vetorCampos[3]), 
                         rs.getString(vetorCampos[4]), 
-                        rs.getString(vetorCampos[5]),
+                        rs.getDate(vetorCampos[5]),
                         rs.getString(vetorCampos[6]), 
                         rs.getInt(vetorCampos[7]), 
                         rs.getDouble(vetorCampos[8]), 

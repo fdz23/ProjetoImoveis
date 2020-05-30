@@ -6,7 +6,7 @@
 package model;
 
 import interfaces.Tabela;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -15,7 +15,7 @@ import java.util.Date;
 public class Orcamento implements Tabela {
     
     private int id;
-    private String data;
+    private Date data;
     private String descricao;
     private int idTipoPagamento;
     private int idPessoa;
@@ -36,7 +36,7 @@ public class Orcamento implements Tabela {
     
     public Orcamento() {}
     
-    public Orcamento(int id, String data, String descricao, int idFuncionario, int idPessoa, int idImovel, int idTipoPagamento) {
+    public Orcamento(int id, Date data, String descricao, int idFuncionario, int idPessoa, int idImovel, int idTipoPagamento) {
         this.id = id;
         this.data = data;
         this.idFuncionario = idFuncionario;
@@ -54,11 +54,11 @@ public class Orcamento implements Tabela {
         this.id = id;
     }
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 

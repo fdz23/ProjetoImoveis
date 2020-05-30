@@ -6,7 +6,7 @@
 package model;
 
 import interfaces.Tabela;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -15,11 +15,11 @@ import java.util.Date;
 public class Imovel implements Tabela {
     
     private int id;
-    private String dataInclusao;
+    private Date dataInclusao;
     private double preco;
     private double tamanho;
     private String observacao;
-    private String baixaData;
+    private Date baixaData;
     private String baixaMotivo;
     private double valorComissao;
     private int quantidadeParcelas;
@@ -42,7 +42,7 @@ public class Imovel implements Tabela {
     
     public Imovel() {}
     
-    public Imovel(int id, String dataInclusao, double preco, double tamanho, String observacao, String baixaData, String baixaMotivo, 
+    public Imovel(int id, Date dataInclusao, double preco, double tamanho, String observacao, Date baixaData, String baixaMotivo, 
             int quantidadeParcelas, double valorComissao, int idFuncionario, int idPessoa, int idTipoImovel, int idEndereco) {
         
         this.id = id;
@@ -68,11 +68,11 @@ public class Imovel implements Tabela {
         this.id = id;
     }
 
-    public String getDataInclusao() {
+    public Date getDataInclusao() {
         return dataInclusao;
     }
 
-    public void setDataInclusao(String dataInclusao) {
+    public void setDataInclusao(Date dataInclusao) {
         this.dataInclusao = dataInclusao;
     }
 
@@ -92,11 +92,11 @@ public class Imovel implements Tabela {
         this.observacao = observacao;
     }
 
-    public String getBaixaData() {
+    public Date getBaixaData() {
         return baixaData;
     }
 
-    public void setBaixaData(String baixaData) {
+    public void setBaixaData(Date baixaData) {
         this.baixaData = baixaData;
     }
     

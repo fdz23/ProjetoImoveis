@@ -45,8 +45,8 @@ public class ContratoController extends Controller<Contrato> {
 
             ps = criaStatement.insertSql(tabela, campos);
 
-            ps.setString(1, item.getData());
-            ps.setString(2, item.getDataAlteracao());
+            ps.setDate(1, item.getData());
+            ps.setDate(2, item.getDataAlteracao());
             ps.setInt(3, item.getIdSituacao());
             ps.setInt(4, item.getIdOrcamento());
 
@@ -67,8 +67,8 @@ public class ContratoController extends Controller<Contrato> {
 
             ps = criaStatement.updateSql(campos);
 
-            ps.setString(1, item.getData());
-            ps.setString(2, item.getDataAlteracao());
+            ps.setDate(1, item.getData());
+            ps.setDate(2, item.getDataAlteracao());
             ps.setInt(3, item.getIdSituacao());
             ps.setInt(4, item.getIdOrcamento());
             ps.setInt(5, item.getId());
@@ -92,8 +92,8 @@ public class ContratoController extends Controller<Contrato> {
 
                 return new Contrato(
                         rs.getInt(id), 
-                        rs.getString(vetorCampos[0]), 
-                        rs.getString(vetorCampos[1]), 
+                        rs.getDate(vetorCampos[0]), 
+                        rs.getDate(vetorCampos[1]), 
                         rs.getInt(vetorCampos[2]), 
                         rs.getInt(vetorCampos[3])
                 );

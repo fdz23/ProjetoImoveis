@@ -8,6 +8,7 @@ package controller;
 import fabricas.AbstractFactory;
 import interfaces.Tabela;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ public class FuncionarioController extends Controller<Funcionario> {
             ps.setInt(2, pessoa.getId());
             ps.setInt(3, item.getIdTipoFuncionario());
             ps.setInt(4, item.getIdStatus());
-            ps.setString(5, item.getDataRescisao());
+            ps.setDate(5, item.getDataRescisao());
 
         } catch (Exception error) {
             
@@ -105,7 +106,7 @@ public class FuncionarioController extends Controller<Funcionario> {
             ps.setInt(2, item.getIdPessoa());
             ps.setInt(3, item.getIdTipoFuncionario());
             ps.setInt(4, item.getIdStatus());
-            ps.setString(5, item.getDataRescisao());
+            ps.setDate(5, item.getDataRescisao());
             ps.setInt(6, item.getId());
 
         } catch (Exception error) {
@@ -192,7 +193,7 @@ public class FuncionarioController extends Controller<Funcionario> {
                 return new Funcionario( 
                         rsPessoa.getString(vetorCamposPessoa[0]), 
                         rsPessoa.getString(vetorCamposPessoa[1]), 
-                        rsPessoa.getString(vetorCamposPessoa[2]), 
+                        rsPessoa.getDate(vetorCamposPessoa[2]), 
                         rsPessoa.getString(vetorCamposPessoa[3]), 
                         rsPessoa.getString(vetorCamposPessoa[4]),
                         rsPessoa.getInt(vetorCamposPessoa[5]),
@@ -201,7 +202,7 @@ public class FuncionarioController extends Controller<Funcionario> {
                         rs.getInt(vetorCampos[1]), 
                         rs.getInt(vetorCampos[2]), 
                         rs.getInt(vetorCampos[3]), 
-                        rs.getString(vetorCampos[4])
+                        rs.getDate(vetorCampos[4])
                 );
             }
             else 

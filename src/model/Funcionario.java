@@ -6,6 +6,7 @@
 package model;
 
 import interfaces.Tabela;
+import java.sql.Date;
 
 /**
  *
@@ -14,7 +15,7 @@ import interfaces.Tabela;
 public class Funcionario extends Pessoa implements Tabela {
     
     private int idStatus;
-    private String dataRescisao;
+    private Date dataRescisao;
     private String matricula;
     private int idTipoFuncionario;
     private int idPessoa;
@@ -33,8 +34,8 @@ public class Funcionario extends Pessoa implements Tabela {
     
     public Funcionario() {}
     
-    public Funcionario(String nome, String email, String dataNascimento, String cpf, String telefone, int idEndereco,
-                       int id, String matricula, int idPessoa, int idTipoFuncionario, int idStatus, String dataRescisao) {
+    public Funcionario(String nome, String email, Date dataNascimento, String cpf, String telefone, int idEndereco,
+                       int id, String matricula, int idPessoa, int idTipoFuncionario, int idStatus, Date dataRescisao) {
         
         super(id, nome, email, dataNascimento, cpf, telefone, idEndereco);
         this.idPessoa = idPessoa;
@@ -76,11 +77,11 @@ public class Funcionario extends Pessoa implements Tabela {
         this.idStatus = idStatus;
     }
 
-    public String getDataRescisao() {
+    public Date getDataRescisao() {
         return dataRescisao;
     }
 
-    public void setDataRescisao(String dataRescisao) {
+    public void setDataRescisao(Date dataRescisao) {
         this.dataRescisao = dataRescisao;
     }
     

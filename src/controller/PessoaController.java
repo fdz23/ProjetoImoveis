@@ -8,6 +8,7 @@ package controller;
 import fabricas.AbstractFactory;
 import interfaces.Tabela;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -84,7 +85,7 @@ public class PessoaController extends Controller<Pessoa> {
 
             ps.setString(1, item.getNome());
             ps.setString(2, item.getEmail());
-            ps.setString(3, item.getDataNascimento());
+            ps.setDate(3, item.getDataNascimento());
             ps.setString(4, item.getCpf());
             ps.setString(5, item.getTelefone());
             ps.setInt(6, item.getIdEndereco());
@@ -108,7 +109,7 @@ public class PessoaController extends Controller<Pessoa> {
 
             ps.setString(1, item.getNome());
             ps.setString(2, item.getEmail());
-            ps.setString(3, item.getDataNascimento());
+            ps.setDate(3, item.getDataNascimento());
             ps.setString(4, item.getCpf());
             ps.setString(5, item.getTelefone());
             ps.setInt(6, item.getIdEndereco());
@@ -135,7 +136,7 @@ public class PessoaController extends Controller<Pessoa> {
                         rs.getInt(id), 
                         rs.getString(vetorCampos[0]), 
                         rs.getString(vetorCampos[1]), 
-                        rs.getString(vetorCampos[2]), 
+                        rs.getDate(vetorCampos[2]), 
                         rs.getString(vetorCampos[3]), 
                         rs.getString(vetorCampos[4]), 
                         rs.getInt(vetorCampos[5])
