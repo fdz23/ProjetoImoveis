@@ -6,7 +6,6 @@
 package controller;
 
 import dao.ImovelItemDao;
-import java.sql.Connection;
 import model.ImovelItem;
 
 /**

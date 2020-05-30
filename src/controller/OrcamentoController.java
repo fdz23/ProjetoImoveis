@@ -6,7 +6,8 @@
 package controller;
 
 import dao.OrcamentoDao;
-import java.sql.Connection;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
 import model.Orcamento;
 
 /**
@@ -20,4 +21,28 @@ public class OrcamentoController extends Controller<Orcamento> {
         dao = new OrcamentoDao();
 
     }
+    
+    public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
+
+        Iterator<Orcamento> lista = dao.getAll();
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+            
+            Orcamento item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getData(),
+                        item.getDescricao()
+                    });
+
+        }
+
+        return model;
+
+    }
+    
 }

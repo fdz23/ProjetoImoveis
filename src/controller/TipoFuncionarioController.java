@@ -6,7 +6,8 @@
 package controller;
 
 import dao.TipoFuncionarioDao;
-import java.sql.Connection;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
 import model.TipoFuncionario;
 
 /**
@@ -20,4 +21,28 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
         dao = new TipoFuncionarioDao();
 
     }
+    
+    public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
+
+        Iterator<TipoFuncionario> lista = dao.getAll();
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+            
+            TipoFuncionario item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getDescricao(),
+                        item.getSalario()
+                    });
+
+        }
+
+        return model;
+
+    }
+    
 }

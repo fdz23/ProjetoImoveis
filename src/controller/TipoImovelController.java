@@ -6,7 +6,8 @@
 package controller;
 
 import dao.TipoImovelDao;
-import java.sql.Connection;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
 import model.TipoImovel;
 
 /**
@@ -20,4 +21,27 @@ public class TipoImovelController extends Controller<TipoImovel> {
         dao = new TipoImovelDao();
 
     }
+    
+    public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
+
+        Iterator<TipoImovel> lista = dao.getAll();
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+            
+            TipoImovel item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getDescricao()
+                    });
+
+        }
+
+        return model;
+
+    }
+    
 }

@@ -6,7 +6,8 @@
 package controller;
 
 import dao.PessoaDao;
-import java.sql.Connection;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
 import model.Pessoa;
 
 /**
@@ -25,4 +26,31 @@ public class PessoaController extends Controller<Pessoa> {
 
         return new PessoaDao().getByCpf(cpf);
     }
+    
+    public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
+
+        Iterator<Pessoa> lista = dao.getAll();
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+            
+            Pessoa item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getNome(),
+                        item.getEmail(),
+                        item.getDataNascimento(),
+                        item.getCpf(),
+                        item.getTelefone()
+                    });
+
+        }
+
+        return model;
+
+    }
+    
 }

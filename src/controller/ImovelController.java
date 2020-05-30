@@ -6,7 +6,8 @@
 package controller;
 
 import dao.ImovelDao;
-import java.sql.Connection;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
 import model.Imovel;
 
 /**
@@ -18,6 +19,35 @@ public class ImovelController extends Controller<Imovel> {
     public ImovelController() throws ClassNotFoundException {
 
         dao = new ImovelDao();
+
+    }
+    
+    public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
+
+        Iterator<Imovel> lista = dao.getAll();
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+            
+            Imovel item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getDataInclusao(),
+                        item.getPreco(),
+                        item.getTamanho(),
+                        item.getObservacao(),
+                        item.getBaixaData(),
+                        item.getBaixaMotivo(),
+                        item.getQuantidadeParcelas(),
+                        item.getValorComissao()
+                    });
+
+        }
+
+        return model;
 
     }
 }

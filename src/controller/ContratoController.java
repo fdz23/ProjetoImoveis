@@ -6,7 +6,8 @@
 package controller;
 
 import dao.ContratoDao;
-import java.sql.Connection;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
 import model.Contrato;
 
 /**
@@ -18,8 +19,32 @@ public class ContratoController extends Controller<Contrato> {
     
     public ContratoController() throws ClassNotFoundException {
         
-         
         dao = new ContratoDao( );
         
+    }
+    
+    public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
+
+        Iterator<Contrato> lista = dao.getAll();
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+            
+            Contrato item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getData(),
+                        item.getDataAlteracao(),
+                        item.getIdSituacao(),
+                        item.getIdOrcamento()
+                    });
+
+        }
+
+        return model;
+
     }
 }
