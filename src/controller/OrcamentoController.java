@@ -8,6 +8,7 @@ package controller;
 import fabricas.AbstractFactory;
 import interfaces.Tabela;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -41,7 +42,7 @@ public class OrcamentoController extends Controller<Orcamento> {
 
             ps = criaStatement.insertSql(tabela, campos);
 
-            ps.setString(1, item.getData());
+            ps.setDate(1, item.getData());
             ps.setString(2, item.getDescricao());
             ps.setInt(3, item.getIdFuncionario());
             ps.setInt(4, item.getIdPessoa());
@@ -65,7 +66,7 @@ public class OrcamentoController extends Controller<Orcamento> {
 
             ps = criaStatement.updateSql(campos);
 
-            ps.setString(1, item.getData());
+            ps.setDate(1, item.getData());
             ps.setString(2, item.getDescricao());
             ps.setInt(3, item.getIdFuncionario());
             ps.setInt(4, item.getIdPessoa());
@@ -92,7 +93,7 @@ public class OrcamentoController extends Controller<Orcamento> {
 
                 return new Orcamento(
                         rs.getInt(id), 
-                        rs.getString(vetorCampos[0]), 
+                        rs.getDate(vetorCampos[0]), 
                         rs.getString(vetorCampos[1]), 
                         rs.getInt(vetorCampos[2]),
                         rs.getInt(vetorCampos[3]),

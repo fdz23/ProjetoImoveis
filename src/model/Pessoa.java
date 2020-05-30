@@ -6,6 +6,7 @@
 package model;
 
 import interfaces.Tabela;
+import java.sql.Date;
 
 /**
  *
@@ -16,7 +17,7 @@ public class Pessoa implements Tabela {
     private int id;
     private String nome;
     private String email;
-    private String dataNascimento;
+    private Date dataNascimento;
     private String cpf;
     private String telefone;
     private int idEndereco;
@@ -35,7 +36,7 @@ public class Pessoa implements Tabela {
     
     public Pessoa() {}
     
-    public Pessoa(int id, String nome, String email, String dataNascimento, String cpf, String telefone, int idEndereco) {
+    public Pessoa(int id, String nome, String email, Date dataNascimento, String cpf, String telefone, int idEndereco) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -69,11 +70,11 @@ public class Pessoa implements Tabela {
         this.email = email;
     }
 
-    public String getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

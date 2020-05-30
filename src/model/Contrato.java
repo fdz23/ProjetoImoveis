@@ -6,6 +6,7 @@
 package model;
 
 import interfaces.Tabela;
+import java.sql.Date;
 
 /**
  *
@@ -14,8 +15,8 @@ import interfaces.Tabela;
 public class Contrato implements Tabela {
     
     private int id;
-    private String data;
-    private String dataAlteracao;
+    private Date data;
+    private Date dataAlteracao;
     private int idSituacao;
     private int idOrcamento;
     private String nomeId = "con_iden";
@@ -23,7 +24,7 @@ public class Contrato implements Tabela {
     
     public Contrato() {}
     
-    public Contrato(int id, String dataOrcamento, String dataAlteracao, int idSituacao, int idOrcamento) {
+    public Contrato(int id, Date dataOrcamento, Date dataAlteracao, int idSituacao, int idOrcamento) {
         this.id = id;
         this.data = dataOrcamento;
         this.dataAlteracao = dataAlteracao;
@@ -39,19 +40,19 @@ public class Contrato implements Tabela {
         this.id = id;
     }
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
-    public String getDataAlteracao() {
+    public Date getDataAlteracao() {
         return dataAlteracao;
     }
 
-    public void setDataAlteracao(String dataAlteracao) {
+    public void setDataAlteracao(Date dataAlteracao) {
         this.dataAlteracao = dataAlteracao;
     }
 
