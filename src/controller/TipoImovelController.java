@@ -5,97 +5,20 @@
  */
 package controller;
 
-import fabricas.AbstractFactory;
-import interfaces.Tabela;
+import dao.TipoImovelDao;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.swing.JOptionPane;
 import model.TipoImovel;
-import util.CriaStatement;
 
 /**
  *
  * @author fdz
  */
 public class TipoImovelController extends Controller<TipoImovel> {
-    
+
     public TipoImovelController(Connection con) {
-
+        
         super(con);
-        
-        Tabela obj = AbstractFactory.getInstance("MATERIAL").getTabela("TIPO_IMOVEL");
-        
-        this.id = obj.getNomeId();
-        this.tabela = obj.getNomeTabela();
-        this.criaStatement = new CriaStatement(con, tabela, id);
-        campos = "tim_nome";
-        vetorCampos = campos.split(",");
-
-    }
-
-    @Override
-    public PreparedStatement statementInserir(TipoImovel item) {
-        
-        try {
-
-            ps = criaStatement.insertSql(tabela, campos);
-
-            ps.setString(1, item.getDescricao());
-
-        } catch (Exception error) {
-
-            JOptionPane.showMessageDialog(null, error.getMessage());
-
-        }
-
-        return ps;
+        dao = new TipoImovelDao(con);
         
     }
-
-    @Override
-    public PreparedStatement statementAlterar(TipoImovel item) {
-        
-        try {
-
-            ps = criaStatement.updateSql(campos);
-
-            ps.setString(1, item.getDescricao());
-            ps.setInt(2, item.getId());
-
-        } catch (Exception error) {
-
-            JOptionPane.showMessageDialog(null, error.getMessage());
-
-        }
-
-        return ps;
-        
-    }
-
-    @Override
-    public TipoImovel criaItem(ResultSet rs) {
-        
-        try {
-            
-            if (rs.next()) {
-
-                return new TipoImovel(
-                        rs.getInt(id), 
-                        rs.getString(vetorCampos[0])
-                );
-
-            } else
-                throw new Exception("TipoImovel não encontrado");
-            
-        } catch (Exception e) {
-            
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            
-        }
-        
-        return null;
-        
-    }
-
 }
