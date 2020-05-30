@@ -5,97 +5,20 @@
  */
 package controller;
 
-import fabricas.AbstractFactory;
-import interfaces.Tabela;
+import dao.TipoPagamentoDao;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.swing.JOptionPane;
 import model.TipoPagamento;
-import util.CriaStatement;
 
 /**
  *
  * @author fdz
  */
 public class TipoPagamentoController extends Controller<TipoPagamento> {
-    
+
     public TipoPagamentoController(Connection con) {
-
+        
         super(con);
-        
-        Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("TIPO_PAGAMENTO");
-        
-        this.id = obj.getNomeId();
-        this.tabela = obj.getNomeTabela();
-        this.criaStatement = new CriaStatement(con, tabela, id);
-        campos = "tpa_descricao";
-        vetorCampos = campos.split(",");
-
-    }
-
-    @Override
-    public PreparedStatement statementInserir(TipoPagamento item) {
-        
-        try {
-
-            ps = criaStatement.insertSql(tabela, campos);
-
-            ps.setString(1, item.getDescricao());
-
-        } catch (Exception error) {
-
-            JOptionPane.showMessageDialog(null, error.getMessage());
-
-        }
-
-        return ps;
+        dao = new TipoPagamentoDao(con);
         
     }
-
-    @Override
-    public PreparedStatement statementAlterar(TipoPagamento item) {
-        
-        try {
-
-            ps = criaStatement.updateSql(campos);
-
-            ps.setString(1, item.getDescricao());
-            ps.setInt(2, item.getId());
-
-        } catch (Exception error) {
-
-            JOptionPane.showMessageDialog(null, error.getMessage());
-
-        }
-
-        return ps;
-        
-    }
-
-    @Override
-    public TipoPagamento criaItem(ResultSet rs) {
-        
-        try {
-            
-            if (rs.next()) {
-
-                return new TipoPagamento(
-                        rs.getInt(id), 
-                        rs.getString("tpa_descricao")
-                );
-
-            } else
-                throw new Exception("TipoPagamento não encontrado");
-            
-        } catch (Exception e) {
-            
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            
-        }
-        
-        return null;
-        
-    }
-
 }
