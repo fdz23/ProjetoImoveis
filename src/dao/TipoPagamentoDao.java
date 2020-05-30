@@ -20,11 +20,9 @@ import util.CriaStatement;
  */
 public class TipoPagamentoDao extends Dao<TipoPagamento> {
     
-    public TipoPagamentoDao(Connection con) {
+    public TipoPagamentoDao() throws ClassNotFoundException {
 
-        super(con);
-        
-        Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("TIPO_PAGAMENTO");
+          Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("TIPO_PAGAMENTO");
         
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();

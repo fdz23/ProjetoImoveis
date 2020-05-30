@@ -15,10 +15,9 @@ import model.Situacao;
  */
 public class SituacaoController extends Controller<Situacao> {
 
-    public SituacaoController(Connection con) {
-        
-        super(con);
-        dao = new SituacaoDao(con);
-        
+    public SituacaoController() throws ClassNotFoundException {
+
+        dao = new SituacaoDao();
+
     }
 }

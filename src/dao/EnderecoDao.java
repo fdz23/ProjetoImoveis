@@ -19,13 +19,11 @@ import util.CriaStatement;
  * @author fdz
  */
 public class EnderecoDao extends Dao<Endereco> {
-    
-    public EnderecoDao(Connection con) {
 
-        super(con);
-        
+    public EnderecoDao() throws ClassNotFoundException {
+
         Tabela obj = AbstractFactory.getInstance("MATERIAL").getTabela("ENDERECO");
-        
+
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, id, tabela);
@@ -36,7 +34,7 @@ public class EnderecoDao extends Dao<Endereco> {
 
     @Override
     protected PreparedStatement statementInserir(Endereco item) {
-        
+
         try {
 
             ps = criaStatement.insertSql(tabela, campos);
@@ -58,12 +56,12 @@ public class EnderecoDao extends Dao<Endereco> {
         }
 
         return ps;
-        
+
     }
 
     @Override
     protected PreparedStatement statementAlterar(Endereco item) {
-        
+
         try {
 
             ps = criaStatement.updateSql(campos);
@@ -86,40 +84,41 @@ public class EnderecoDao extends Dao<Endereco> {
         }
 
         return ps;
-        
+
     }
 
     @Override
     protected Endereco criaItem(ResultSet rs) {
-        
+
         try {
-            
+
             if (rs.next()) {
 
                 return new Endereco(
-                        rs.getInt(id), 
-                        rs.getString(vetorCampos[0]), 
-                        rs.getString(vetorCampos[1]), 
-                        rs.getString(vetorCampos[2]), 
-                        rs.getString(vetorCampos[3]), 
+                        rs.getInt(id),
+                        rs.getString(vetorCampos[0]),
+                        rs.getString(vetorCampos[1]),
+                        rs.getString(vetorCampos[2]),
+                        rs.getString(vetorCampos[3]),
                         rs.getString(vetorCampos[4]),
                         rs.getString(vetorCampos[5]),
-                        rs.getString(vetorCampos[6]), 
-                        rs.getString(vetorCampos[7]), 
+                        rs.getString(vetorCampos[6]),
+                        rs.getString(vetorCampos[7]),
                         rs.getString(vetorCampos[8])
                 );
 
-            } else
+            } else {
                 throw new Exception("Endereco não encontrado");
-            
+            }
+
         } catch (Exception e) {
-            
+
             JOptionPane.showMessageDialog(null, e.getMessage());
-            
+
         }
-        
+
         return null;
-        
+
     }
 
 }

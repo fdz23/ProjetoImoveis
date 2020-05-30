@@ -15,10 +15,9 @@ import model.TipoImovel;
  */
 public class TipoImovelController extends Controller<TipoImovel> {
 
-    public TipoImovelController(Connection con) {
-        
-        super(con);
-        dao = new TipoImovelDao(con);
-        
+    public TipoImovelController() throws ClassNotFoundException {
+
+        dao = new TipoImovelDao();
+
     }
 }

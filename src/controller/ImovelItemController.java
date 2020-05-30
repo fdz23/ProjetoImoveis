@@ -15,10 +15,9 @@ import model.ImovelItem;
  */
 public class ImovelItemController extends Controller<ImovelItem> {
 
-    public ImovelItemController(Connection con) {
-        
-        super(con);
-        dao = new ImovelItemDao(con);
-        
+    public ImovelItemController() throws ClassNotFoundException {
+
+        dao = new ImovelItemDao();
+
     }
 }

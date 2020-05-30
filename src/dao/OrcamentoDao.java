@@ -20,13 +20,11 @@ import util.CriaStatement;
  * @author fdz
  */
 public class OrcamentoDao extends Dao<Orcamento> {
-    
-    public OrcamentoDao(Connection con) {
 
-        super(con);
-        
+    public OrcamentoDao() throws ClassNotFoundException {
+
         Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("ORCAMENTO");
-        
+
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
@@ -37,7 +35,7 @@ public class OrcamentoDao extends Dao<Orcamento> {
 
     @Override
     protected PreparedStatement statementInserir(Orcamento item) {
-        
+
         try {
 
             ps = criaStatement.insertSql(tabela, campos);
@@ -56,12 +54,12 @@ public class OrcamentoDao extends Dao<Orcamento> {
         }
 
         return ps;
-        
+
     }
 
     @Override
     protected PreparedStatement statementAlterar(Orcamento item) {
-        
+
         try {
 
             ps = criaStatement.updateSql(campos);
@@ -81,37 +79,38 @@ public class OrcamentoDao extends Dao<Orcamento> {
         }
 
         return ps;
-        
+
     }
-    
+
     @Override
     protected Orcamento criaItem(ResultSet rs) {
-        
+
         try {
-            
+
             if (rs.next()) {
 
                 return new Orcamento(
-                        rs.getInt(id), 
-                        rs.getDate(vetorCampos[0]), 
-                        rs.getString(vetorCampos[1]), 
+                        rs.getInt(id),
+                        rs.getDate(vetorCampos[0]),
+                        rs.getString(vetorCampos[1]),
                         rs.getInt(vetorCampos[2]),
                         rs.getInt(vetorCampos[3]),
                         rs.getInt(vetorCampos[4]),
                         rs.getInt(vetorCampos[5])
                 );
 
-            } else
+            } else {
                 throw new Exception("Orcamento não encontrado");
-            
+            }
+
         } catch (Exception e) {
-            
+
             JOptionPane.showMessageDialog(null, e.getMessage());
-            
+
         }
-        
+
         return null;
-        
+
     }
 
 }

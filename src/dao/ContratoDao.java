@@ -20,9 +20,9 @@ import util.CriaStatement;
  */
 public class ContratoDao extends Dao<Contrato> {
 
-    public ContratoDao(Connection con) {
+    public ContratoDao() throws ClassNotFoundException {
 
-        super(con);
+       
         
         Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("CONTRATO");
         

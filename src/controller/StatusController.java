@@ -15,10 +15,9 @@ import model.Status;
  */
 public class StatusController extends Controller<Status> {
 
-    public StatusController(Connection con) {
-        
-        super(con);
-        dao = new StatusDao(con);
-        
+    public StatusController() throws ClassNotFoundException {
+
+        dao = new StatusDao();
+
     }
 }

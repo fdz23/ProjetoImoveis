@@ -19,13 +19,11 @@ import util.CriaStatement;
  * @author fdz
  */
 public class ItemMovelDao extends Dao<ItemMovel> {
-    
-    public ItemMovelDao(Connection con) {
 
-        super(con);
-        
+    public ItemMovelDao() throws ClassNotFoundException {
+
         Tabela obj = AbstractFactory.getInstance("MATERIAL").getTabela("ITEM_MOVEL");
-        
+
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
@@ -36,7 +34,7 @@ public class ItemMovelDao extends Dao<ItemMovel> {
 
     @Override
     protected PreparedStatement statementInserir(ItemMovel item) {
-        
+
         try {
 
             ps = criaStatement.insertSql(tabela, campos);
@@ -50,12 +48,12 @@ public class ItemMovelDao extends Dao<ItemMovel> {
         }
 
         return ps;
-        
+
     }
 
     @Override
     protected PreparedStatement statementAlterar(ItemMovel item) {
-        
+
         try {
 
             ps = criaStatement.updateSql(campos);
@@ -70,32 +68,33 @@ public class ItemMovelDao extends Dao<ItemMovel> {
         }
 
         return ps;
-        
+
     }
 
     @Override
     protected ItemMovel criaItem(ResultSet rs) {
-        
+
         try {
-            
+
             if (rs.next()) {
 
                 return new ItemMovel(
-                        rs.getInt(id), 
+                        rs.getInt(id),
                         rs.getString(vetorCampos[0])
                 );
 
-            } else
+            } else {
                 throw new Exception("ItemMovel não encontrado");
-            
+            }
+
         } catch (Exception e) {
-            
+
             JOptionPane.showMessageDialog(null, e.getMessage());
-            
+
         }
-        
+
         return null;
-        
+
     }
 
 }

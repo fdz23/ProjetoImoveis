@@ -15,15 +15,14 @@ import model.Pessoa;
  */
 public class PessoaController extends Controller<Pessoa> {
 
-    public PessoaController(Connection con) {
-        
-        super(con);
-        dao = new PessoaDao(con);
-        
+    public PessoaController() throws ClassNotFoundException {
+
+        dao = new PessoaDao();
+
     }
-    
-    public Pessoa getPessoaPorCpf(String cpf) {
-        
-        return new PessoaDao(con).getByCpf(cpf);
+
+    public Pessoa getPessoaPorCpf(String cpf) throws ClassNotFoundException {
+
+        return new PessoaDao().getByCpf(cpf);
     }
 }

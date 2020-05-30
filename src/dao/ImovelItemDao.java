@@ -20,11 +20,9 @@ import util.CriaStatement;
  */
 public class ImovelItemDao extends Dao<ImovelItem> {
     
-    public ImovelItemDao(Connection con) {
+    public ImovelItemDao() throws ClassNotFoundException {
 
-        super(con);
-        
-        Tabela obj = AbstractFactory.getInstance("MATERIAL").getTabela("IMOVEL_ITEM");
+         Tabela obj = AbstractFactory.getInstance("MATERIAL").getTabela("IMOVEL_ITEM");
         
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();

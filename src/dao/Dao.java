@@ -16,6 +16,7 @@ import java.util.Queue;
 import java.util.Stack;
 import javax.swing.JOptionPane;
 import util.CriaStatement;
+import util.ConectaDb;
 
 /**
  *
@@ -32,9 +33,9 @@ public abstract class Dao<T> implements IDao<T> {
     protected String campos;
     protected String[] vetorCampos;
 
-    public Dao(Connection con) {
+    public Dao() throws ClassNotFoundException {
 
-        this.con = con;
+        this.con = ConectaDb.conectadb();
         rs = null;
 
     }

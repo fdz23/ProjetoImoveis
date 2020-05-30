@@ -15,10 +15,11 @@ import model.Contrato;
  */
 public class ContratoController extends Controller<Contrato> {
 
-    public ContratoController(Connection con) {
+    
+    public ContratoController() throws ClassNotFoundException {
         
-        super(con);
-        dao = new ContratoDao(con);
+         
+        dao = new ContratoDao( );
         
     }
 }

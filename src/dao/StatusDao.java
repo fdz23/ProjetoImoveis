@@ -19,13 +19,11 @@ import util.CriaStatement;
  * @author fdz
  */
 public class StatusDao extends Dao<Status> {
-    
-    public StatusDao(Connection con) {
 
-        super(con);
-        
+    public StatusDao() throws ClassNotFoundException {
+
         Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("STATUS");
-        
+
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
@@ -36,7 +34,7 @@ public class StatusDao extends Dao<Status> {
 
     @Override
     protected PreparedStatement statementInserir(Status item) {
-        
+
         try {
 
             ps = criaStatement.insertSql(tabela, campos);
@@ -50,12 +48,12 @@ public class StatusDao extends Dao<Status> {
         }
 
         return ps;
-        
+
     }
 
     @Override
     protected PreparedStatement statementAlterar(Status item) {
-        
+
         try {
 
             ps = criaStatement.updateSql(campos);
@@ -70,32 +68,33 @@ public class StatusDao extends Dao<Status> {
         }
 
         return ps;
-        
+
     }
 
     @Override
     protected Status criaItem(ResultSet rs) {
-        
+
         try {
-            
+
             if (rs.next()) {
 
                 return new Status(
-                        rs.getInt(id), 
+                        rs.getInt(id),
                         rs.getString(vetorCampos[0])
                 );
 
-            } else
+            } else {
                 throw new Exception("Status não encontrado");
-            
+            }
+
         } catch (Exception e) {
-            
+
             JOptionPane.showMessageDialog(null, e.getMessage());
-            
+
         }
-        
+
         return null;
-        
+
     }
 
 }

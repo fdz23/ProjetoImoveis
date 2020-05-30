@@ -15,10 +15,9 @@ import model.Funcionario;
  */
 public class FuncionarioController extends Controller<Funcionario> {
 
-    public FuncionarioController(Connection con) {
-        
-        super(con);
-        dao = new FuncionarioDao(con);
-        
+    public FuncionarioController() throws ClassNotFoundException {
+
+        dao = new FuncionarioDao();
+
     }
 }

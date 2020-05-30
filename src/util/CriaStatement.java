@@ -29,6 +29,9 @@ public class CriaStatement {
     //recebe o nome da coluna(conforme ao banco)
     //Para mais de uma coluna/valores utilize "," entre cada um deles(sem espaço)
     public PreparedStatement insertSql(String tabela, String colunas) throws Exception {
+        
+        
+        
         String sql = "INSERT INTO " + tabela + "(" + colunas + ")" + " values(?";
         
         for (int i = 1; i < colunas.split(",").length; i++) {

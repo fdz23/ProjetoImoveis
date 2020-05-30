@@ -19,13 +19,11 @@ import util.CriaStatement;
  * @author fdz
  */
 public class PessoaDao extends Dao<Pessoa> {
-    
-    public PessoaDao(Connection con) {
 
-        super(con);
-        
+    public PessoaDao() throws ClassNotFoundException {
+
         Tabela obj = AbstractFactory.getInstance("HUMANO").getTabela("PESSOA");
-        
+
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
@@ -33,11 +31,11 @@ public class PessoaDao extends Dao<Pessoa> {
         vetorCampos = campos.split(",");
 
     }
-    
+
     protected String[] getVetorCampos() {
         return vetorCampos;
     }
-    
+
     public Pessoa getByCpf(String cpf) {
 
         try {
@@ -57,13 +55,13 @@ public class PessoaDao extends Dao<Pessoa> {
         return null;
 
     }
-    
+
     protected PreparedStatement statementGetPessoaPorCpf(String cpf) {
-        
+
         try {
 
             ps = criaStatement.selectSql(tabela, true, "cpf");
-            
+
             ps.setString(1, cpf);
 
         } catch (Exception ex) {
@@ -77,7 +75,7 @@ public class PessoaDao extends Dao<Pessoa> {
 
     @Override
     protected PreparedStatement statementInserir(Pessoa item) {
-        
+
         try {
 
             ps = criaStatement.insertSql(tabela, campos);
@@ -96,12 +94,12 @@ public class PessoaDao extends Dao<Pessoa> {
         }
 
         return ps;
-        
+
     }
 
     @Override
     protected PreparedStatement statementAlterar(Pessoa item) {
-        
+
         try {
 
             ps = criaStatement.updateSql(campos);
@@ -121,37 +119,38 @@ public class PessoaDao extends Dao<Pessoa> {
         }
 
         return ps;
-        
+
     }
 
     @Override
     protected Pessoa criaItem(ResultSet rs) {
-        
+
         try {
-            
+
             if (rs.next()) {
 
                 return new Pessoa(
-                        rs.getInt(id), 
-                        rs.getString(vetorCampos[0]), 
-                        rs.getString(vetorCampos[1]), 
-                        rs.getDate(vetorCampos[2]), 
-                        rs.getString(vetorCampos[3]), 
-                        rs.getString(vetorCampos[4]), 
+                        rs.getInt(id),
+                        rs.getString(vetorCampos[0]),
+                        rs.getString(vetorCampos[1]),
+                        rs.getDate(vetorCampos[2]),
+                        rs.getString(vetorCampos[3]),
+                        rs.getString(vetorCampos[4]),
                         rs.getInt(vetorCampos[5])
                 );
-                
-            } else
+
+            } else {
                 throw new Exception("Pessoa não encontrada");
-            
+            }
+
         } catch (Exception e) {
-            
+
             JOptionPane.showMessageDialog(null, e.getMessage());
-            
+
         }
-        
+
         return null;
-        
+
     }
 
 }

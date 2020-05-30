@@ -15,10 +15,9 @@ import model.ItemMovel;
  */
 public class ItemMovelController extends Controller<ItemMovel> {
 
-    public ItemMovelController(Connection con) {
-        
-        super(con);
-        dao = new ItemMovelDao(con);
-        
+    public ItemMovelController(Connection con) throws ClassNotFoundException {
+
+        dao = new ItemMovelDao();
+
     }
 }

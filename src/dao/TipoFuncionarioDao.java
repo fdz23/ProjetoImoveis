@@ -19,13 +19,11 @@ import util.CriaStatement;
  * @author fdz
  */
 public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
-    
-    public TipoFuncionarioDao(Connection con) {
 
-        super(con);
-        
+    public TipoFuncionarioDao() throws ClassNotFoundException {
+
         Tabela obj = AbstractFactory.getInstance("HUMANO").getTabela("TIPO_FUNCIONARIO");
-        
+
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
@@ -36,7 +34,7 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
 
     @Override
     protected PreparedStatement statementInserir(TipoFuncionario item) {
-        
+
         try {
 
             ps = criaStatement.insertSql(tabela, campos);
@@ -52,12 +50,12 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
         }
 
         return ps;
-        
+
     }
 
     @Override
     protected PreparedStatement statementAlterar(TipoFuncionario item) {
-        
+
         try {
 
             ps = criaStatement.updateSql(campos);
@@ -74,34 +72,35 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
         }
 
         return ps;
-        
+
     }
 
     @Override
     protected TipoFuncionario criaItem(ResultSet rs) {
-        
+
         try {
-            
+
             if (rs.next()) {
 
                 return new TipoFuncionario(
                         rs.getInt(id),
                         rs.getString(vetorCampos[0]),
-                        rs.getInt(vetorCampos[1]), 
+                        rs.getInt(vetorCampos[1]),
                         rs.getDouble(vetorCampos[2])
                 );
 
-            } else
+            } else {
                 throw new Exception("TipoFuncionario não encontrado");
-            
+            }
+
         } catch (Exception e) {
-            
+
             JOptionPane.showMessageDialog(null, e.getMessage());
-            
+
         }
-        
+
         return null;
-        
+
     }
 
 }

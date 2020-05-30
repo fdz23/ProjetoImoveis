@@ -13,22 +13,21 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import model.NivelAcesso;
 import util.CriaStatement;
+import util.ConectaDb;
 
 /**
  *
  * @author fdz
  */
 public class NivelAcessoDao extends Dao<NivelAcesso> {
-    
-    public NivelAcessoDao(Connection con) {
 
-        super(con);
-        
+    public NivelAcessoDao() throws ClassNotFoundException {
+
         Tabela obj = AbstractFactory.getInstance("HUMANO").getTabela("NIVEL_ACESSO");
-        
+
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
-        this.criaStatement = new CriaStatement(con, tabela, id);
+        this.criaStatement = new CriaStatement(ConectaDb.conectadb(), tabela, id);
         campos = "nac_descricao";
         vetorCampos = campos.split(",");
 
@@ -36,7 +35,7 @@ public class NivelAcessoDao extends Dao<NivelAcesso> {
 
     @Override
     protected PreparedStatement statementInserir(NivelAcesso item) {
-        
+
         try {
 
             ps = criaStatement.insertSql(tabela, campos);
@@ -50,12 +49,12 @@ public class NivelAcessoDao extends Dao<NivelAcesso> {
         }
 
         return ps;
-        
+
     }
 
     @Override
     protected PreparedStatement statementAlterar(NivelAcesso item) {
-        
+
         try {
 
             ps = criaStatement.updateSql(campos);
@@ -70,32 +69,33 @@ public class NivelAcessoDao extends Dao<NivelAcesso> {
         }
 
         return ps;
-        
+
     }
 
     @Override
     protected NivelAcesso criaItem(ResultSet rs) {
-        
+
         try {
-            
+
             if (rs.next()) {
 
                 return new NivelAcesso(
-                        rs.getInt(id), 
+                        rs.getInt(id),
                         rs.getString(vetorCampos[0])
                 );
 
-            } else
+            } else {
                 throw new Exception("NivelAcesso não encontrado");
-            
+            }
+
         } catch (Exception e) {
-            
+
             JOptionPane.showMessageDialog(null, e.getMessage());
-            
+
         }
-        
+
         return null;
-        
+
     }
 
 }

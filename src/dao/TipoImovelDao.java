@@ -19,13 +19,11 @@ import util.CriaStatement;
  * @author fdz
  */
 public class TipoImovelDao extends Dao<TipoImovel> {
-    
-    public TipoImovelDao(Connection con) {
 
-        super(con);
-        
+    public TipoImovelDao() throws ClassNotFoundException {
+
         Tabela obj = AbstractFactory.getInstance("MATERIAL").getTabela("TIPO_IMOVEL");
-        
+
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
@@ -36,7 +34,7 @@ public class TipoImovelDao extends Dao<TipoImovel> {
 
     @Override
     protected PreparedStatement statementInserir(TipoImovel item) {
-        
+
         try {
 
             ps = criaStatement.insertSql(tabela, campos);
@@ -50,12 +48,12 @@ public class TipoImovelDao extends Dao<TipoImovel> {
         }
 
         return ps;
-        
+
     }
 
     @Override
     protected PreparedStatement statementAlterar(TipoImovel item) {
-        
+
         try {
 
             ps = criaStatement.updateSql(campos);
@@ -70,32 +68,33 @@ public class TipoImovelDao extends Dao<TipoImovel> {
         }
 
         return ps;
-        
+
     }
 
     @Override
     protected TipoImovel criaItem(ResultSet rs) {
-        
+
         try {
-            
+
             if (rs.next()) {
 
                 return new TipoImovel(
-                        rs.getInt(id), 
+                        rs.getInt(id),
                         rs.getString(vetorCampos[0])
                 );
 
-            } else
+            } else {
                 throw new Exception("TipoImovel não encontrado");
-            
+            }
+
         } catch (Exception e) {
-            
+
             JOptionPane.showMessageDialog(null, e.getMessage());
-            
+
         }
-        
+
         return null;
-        
+
     }
 
 }

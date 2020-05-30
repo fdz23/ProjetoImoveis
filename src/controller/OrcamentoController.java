@@ -15,10 +15,9 @@ import model.Orcamento;
  */
 public class OrcamentoController extends Controller<Orcamento> {
 
-    public OrcamentoController(Connection con) {
-        
-        super(con);
-        dao = new OrcamentoDao(con);
-        
+    public OrcamentoController() throws ClassNotFoundException {
+
+        dao = new OrcamentoDao();
+
     }
 }

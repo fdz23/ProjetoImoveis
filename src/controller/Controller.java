@@ -8,7 +8,7 @@ package controller;
 import dao.IDao;
 import java.sql.Connection;
 import java.util.Iterator;
-
+import util.ConectaDb;
 /**
  *
  * @author fdz
@@ -18,9 +18,9 @@ public abstract class Controller<T> implements IController<T> {
     protected Connection con;
     protected IDao<T> dao;
 
-    protected Controller(Connection con) {
+    protected Controller() throws ClassNotFoundException {
         
-        this.con = con;
+        this.con = ConectaDb.conectadb();
         
     }
 

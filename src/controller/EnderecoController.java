@@ -15,10 +15,9 @@ import model.Endereco;
  */
 public class EnderecoController extends Controller<Endereco> {
 
-    public EnderecoController(Connection con) {
-        
-        super(con);
-        dao = new EnderecoDao(con);
-        
+    public EnderecoController() throws ClassNotFoundException {
+
+        dao = new EnderecoDao();
+
     }
 }

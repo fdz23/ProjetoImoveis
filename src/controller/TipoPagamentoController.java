@@ -15,10 +15,9 @@ import model.TipoPagamento;
  */
 public class TipoPagamentoController extends Controller<TipoPagamento> {
 
-    public TipoPagamentoController(Connection con) {
+    public TipoPagamentoController() throws ClassNotFoundException {
         
-        super(con);
-        dao = new TipoPagamentoDao(con);
+       dao = new TipoPagamentoDao();
         
     }
 }

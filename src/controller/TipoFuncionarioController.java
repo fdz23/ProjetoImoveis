@@ -15,10 +15,9 @@ import model.TipoFuncionario;
  */
 public class TipoFuncionarioController extends Controller<TipoFuncionario> {
 
-    public TipoFuncionarioController(Connection con) {
-        
-        super(con);
-        dao = new TipoFuncionarioDao(con);
-        
+    public TipoFuncionarioController() throws ClassNotFoundException {
+
+        dao = new TipoFuncionarioDao();
+
     }
 }
