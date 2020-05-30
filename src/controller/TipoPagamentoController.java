@@ -6,7 +6,8 @@
 package controller;
 
 import dao.TipoPagamentoDao;
-import java.sql.Connection;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
 import model.TipoPagamento;
 
 /**
@@ -20,4 +21,27 @@ public class TipoPagamentoController extends Controller<TipoPagamento> {
        dao = new TipoPagamentoDao();
         
     }
+    
+    public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
+
+        Iterator<TipoPagamento> lista = dao.getAll();
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+            
+            TipoPagamento item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getDescricao()
+                    });
+
+        }
+
+        return model;
+
+    }
+    
 }

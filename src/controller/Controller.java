@@ -8,6 +8,7 @@ package controller;
 import dao.IDao;
 import java.sql.Connection;
 import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
 import util.ConectaDb;
 /**
  *
