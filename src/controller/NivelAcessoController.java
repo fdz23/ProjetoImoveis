@@ -17,7 +17,7 @@ import model.NivelAcesso;
  */
 public class NivelAcessoController extends Controller<NivelAcesso> {
 
-    public NivelAcessoController(Connection con) throws ClassNotFoundException {
+    public NivelAcessoController() throws ClassNotFoundException {
 
         dao = new NivelAcessoDao();
 
