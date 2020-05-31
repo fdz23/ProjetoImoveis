@@ -6,7 +6,8 @@
 package controller;
 
 import dao.ItemMovelDao;
-import java.sql.Connection;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
 import model.ItemMovel;
 
 /**
@@ -15,9 +16,32 @@ import model.ItemMovel;
  */
 public class ItemMovelController extends Controller<ItemMovel> {
 
-    public ItemMovelController(Connection con) throws ClassNotFoundException {
+    public ItemMovelController() throws ClassNotFoundException {
 
         dao = new ItemMovelDao();
 
     }
+    
+    public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
+
+        Iterator<ItemMovel> lista = dao.getAll();
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+            
+            ItemMovel item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getDescricao()
+                    });
+
+        }
+
+        return model;
+
+    }
+    
 }

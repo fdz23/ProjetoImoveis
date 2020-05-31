@@ -6,7 +6,6 @@
 package controller;
 
 import dao.SituacaoDao;
-import java.sql.Connection;
 import model.Situacao;
 
 /**

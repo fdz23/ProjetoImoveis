@@ -283,7 +283,7 @@ public abstract class Dao<T> implements IDao<T> {
 
             ps = statementGetItem(id);
 
-            rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
             return criaItem(rs);
 

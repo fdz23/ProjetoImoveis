@@ -6,7 +6,6 @@
 package controller;
 
 import dao.StatusDao;
-import java.sql.Connection;
 import model.Status;
 
 /**
