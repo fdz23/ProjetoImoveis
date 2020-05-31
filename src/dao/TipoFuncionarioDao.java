@@ -27,7 +27,7 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
-        campos = "tfu_descricao,tfu_nac_iden,tfu_salario";
+        campos = "tfu_descricao,tfu_nac_iden,tfu_salario,tfu_login";
         vetorCampos = campos.split(",");
 
     }
@@ -42,6 +42,7 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
             ps.setString(1, item.getDescricao());
             ps.setInt(2, item.getIdNivelAcesso());
             ps.setDouble(3, item.getSalario());
+            ps.setInt(4, item.getLogin());
 
         } catch (Exception error) {
 
@@ -64,6 +65,7 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
             ps.setInt(2, item.getIdNivelAcesso());
             ps.setDouble(3, item.getSalario());
             ps.setInt(4, item.getId());
+            ps.setInt(5, item.getLogin());
 
         } catch (Exception error) {
 
@@ -86,7 +88,8 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
                         rs.getInt(id),
                         rs.getString(vetorCampos[0]),
                         rs.getInt(vetorCampos[1]),
-                        rs.getDouble(vetorCampos[2])
+                        rs.getDouble(vetorCampos[2]),
+                        rs.getInt(vetorCampos[3])
                 );
 
             } else {

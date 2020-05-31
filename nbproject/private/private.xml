@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/Imovel.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/fabricasconcretas/Humano.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/util/api/ViaCEP.java</file>
@@ -53,6 +54,17 @@
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/NivelAcesso.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/ImovelItem.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/IController.java</file>
+=======
+            <file>file:/C:/Users/rapha/Desktop/Projeto%20Novo/ProjetoImoveis/src/controller/ImovelController.java</file>
+            <file>file:/C:/Users/rapha/Desktop/Projeto%20Novo/ProjetoImoveis/src/controller/SituacaoController.java</file>
+            <file>file:/C:/Users/rapha/Desktop/Projeto%20Novo/ProjetoImoveis/src/dao/TipoImovelDao.java</file>
+            <file>file:/C:/Users/rapha/Desktop/Projeto%20Novo/ProjetoImoveis/src/controller/OrcamentoController.java</file>
+            <file>file:/C:/Users/rapha/Desktop/Projeto%20Novo/ProjetoImoveis/src/dao/Dao.java</file>
+            <file>file:/C:/Users/rapha/Desktop/Projeto%20Novo/ProjetoImoveis/src/controller/TipoFuncionarioController.java</file>
+            <file>file:/C:/Users/rapha/Desktop/Projeto%20Novo/ProjetoImoveis/src/controller/ItemMovelController.java</file>
+            <file>file:/C:/Users/rapha/Desktop/Projeto%20Novo/ProjetoImoveis/src/dao/FuncionarioDao.java</file>
+            <file>file:/C:/Users/rapha/Desktop/Projeto%20Novo/ProjetoImoveis/src/view/TelaNivelAcesso.java</file>
+>>>>>>> 40a64a9d9194d72c0078a3448d63241b59cd08bb
         </group>
     </open-files>
 </project-private>

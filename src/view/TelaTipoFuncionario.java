@@ -17,6 +17,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     DefaultComboBoxModel modelo1 = new DefaultComboBoxModel();
     DefaultTableModel modelo = new DefaultTableModel();
     int linhaSelecionada = 0;
+    int login = 1;
 
     public TelaTipoFuncionario() throws ClassNotFoundException, Exception {
 
@@ -83,6 +84,8 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         jComboBox1.setEnabled(false);
         jTextFieldPesquisa.setEnabled(false);
         
+        JtextFielDescricaoSalario.setText("0.0");
+        
        
 
     
@@ -114,6 +117,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jButton2 = new javax.swing.JButton();
+        jCheckBoxLogin = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -133,10 +137,10 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
         jLabel2.setText("Escolha sua ação :");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 140, -1));
-        jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 140, -1));
+        jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 140, -1));
 
         jLabel4.setText("ID");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
 
         jButton1.setText("Ação ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +148,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 560, 110, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 590, 110, -1));
 
         jTableTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -206,6 +210,14 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 90, 130, -1));
+
+        jCheckBoxLogin.setText("Login");
+        jCheckBoxLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxLoginActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jCheckBoxLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 140, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -305,7 +317,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
                 case 1:
 
-                    TipoFuncionario tip = new TipoFuncionario(0, descricao, idNivel, salario);
+                    TipoFuncionario tip = new TipoFuncionario(0, descricao, idNivel, salario,login);
                     tfc.inserirItem(tip);
                     JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
 
@@ -317,7 +329,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
                     int alterarIntem = Integer.parseInt(jTextFieldId.getText());
 
-                    tip = new TipoFuncionario(alterarIntem, descricao, idNivel, salario);
+                    tip = new TipoFuncionario(alterarIntem, descricao, idNivel, salario,login);
                     tfc.alterarItem(tip);
                     popularJtable();
 
@@ -371,9 +383,21 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jCheckBoxLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxLoginActionPerformed
+      
+        if(jCheckBoxLogin.isSelected()){
+            
+           login = 1; 
+            
+        }else{
+            
+            login = 0;
+            
+        }
+        
+    }//GEN-LAST:event_jCheckBoxLoginActionPerformed
+
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -416,6 +440,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField JtextFielDescricaoSalario;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox jCheckBoxLogin;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
