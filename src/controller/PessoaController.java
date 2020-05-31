@@ -29,7 +29,8 @@ public class PessoaController extends Controller<Pessoa> {
     
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
-        Iterator<Pessoa> lista = dao.getAll();
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<Pessoa> lista = dao.getTodosItensOrdenadosPor(0, true);
 
         model.setNumRows(0);
 

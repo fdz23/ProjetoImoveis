@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dao.IDao;
+import dao.Dao;
 import java.sql.Connection;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +17,7 @@ import util.ConectaDb;
 public abstract class Controller<T> implements IController<T> {
     
     protected Connection con;
-    protected IDao<T> dao;
+    protected Dao<T> dao;
 
     protected Controller() throws ClassNotFoundException {
         

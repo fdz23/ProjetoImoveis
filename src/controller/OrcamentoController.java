@@ -24,7 +24,8 @@ public class OrcamentoController extends Controller<Orcamento> {
     
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
-        Iterator<Orcamento> lista = dao.getAll();
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<Orcamento> lista = dao.getTodosItensOrdenadosPor(0, true);
 
         model.setNumRows(0);
 

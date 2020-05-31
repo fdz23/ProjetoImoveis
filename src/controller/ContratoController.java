@@ -25,7 +25,8 @@ public class ContratoController extends Controller<Contrato> {
     
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
-        Iterator<Contrato> lista = dao.getAll();
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<Contrato> lista = dao.getTodosItensOrdenadosPor(0, true);
 
         model.setNumRows(0);
 

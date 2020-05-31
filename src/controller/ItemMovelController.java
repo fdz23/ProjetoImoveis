@@ -24,7 +24,8 @@ public class ItemMovelController extends Controller<ItemMovel> {
     
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
-        Iterator<ItemMovel> lista = dao.getAll();
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<ItemMovel> lista = dao.getTodosItensOrdenadosPor(0, true);
 
         model.setNumRows(0);
 

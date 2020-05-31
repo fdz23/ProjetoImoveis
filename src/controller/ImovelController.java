@@ -24,7 +24,8 @@ public class ImovelController extends Controller<Imovel> {
     
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
-        Iterator<Imovel> lista = dao.getAll();
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<Imovel> lista = dao.getTodosItensOrdenadosPor(0, true);
 
         model.setNumRows(0);
 
