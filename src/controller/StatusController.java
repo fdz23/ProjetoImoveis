@@ -6,6 +6,8 @@
 package controller;
 
 import dao.StatusDao;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
 import model.Status;
 
 /**
@@ -17,6 +19,26 @@ public class StatusController extends Controller<Status> {
     public StatusController() throws ClassNotFoundException {
 
         dao = new StatusDao();
+
+    }
+
+    public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
+
+        Iterator<Status> lista = dao.getAll();
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+
+            Status item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getDescricao(),});
+
+        }
+        return model;
 
     }
 }
