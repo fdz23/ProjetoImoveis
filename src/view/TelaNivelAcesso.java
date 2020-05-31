@@ -4,6 +4,7 @@ import controller.NivelAcessoController;
 import dao.NivelAcessoDao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +14,9 @@ public class TelaNivelAcesso extends javax.swing.JFrame {
 
     NivelAcessoController nac = null;
     DefaultTableModel modelo = new DefaultTableModel();
+    TelaTipoFuncionario tela;
+    DefaultComboBoxModel modelo1;
+
     int linhaSelecionada = 0;
 
     public TelaNivelAcesso() throws ClassNotFoundException, Exception {
@@ -21,6 +25,18 @@ public class TelaNivelAcesso extends javax.swing.JFrame {
         initComponents();
         iniciar();
         popularJtable();
+
+    }
+
+    public TelaNivelAcesso(TelaTipoFuncionario tela, DefaultComboBoxModel modelo1) throws ClassNotFoundException, Exception {
+
+        CriarJTable();
+        initComponents();
+        iniciar();
+        popularJtable();
+
+        this.tela = tela;
+        this.modelo1 = modelo1;
 
     }
 
@@ -72,7 +88,7 @@ public class TelaNivelAcesso extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextFieldId = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -148,7 +164,9 @@ public class TelaNivelAcesso extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 634, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -181,6 +199,8 @@ public class TelaNivelAcesso extends javax.swing.JFrame {
 
                     popularJtable();
 
+                    tela.nac.popularCombox(modelo1);
+
                     break;
 
                 case 2:
@@ -194,6 +214,7 @@ public class TelaNivelAcesso extends javax.swing.JFrame {
                     popularJtable();
 
                     JOptionPane.showMessageDialog(null, "Nível alterado com sucesso!");
+                    tela.nac.popularCombox(modelo1);
 
                     break;
 
@@ -206,6 +227,7 @@ public class TelaNivelAcesso extends javax.swing.JFrame {
                     popularJtable();
 
                     JOptionPane.showMessageDialog(null, "Nível excluído com sucesso!");
+                    tela.nac.popularCombox(modelo1);
 
             }
 

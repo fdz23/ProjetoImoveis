@@ -5,15 +5,14 @@
  */
 package controller;
 
+import dao.NivelAcessoDao;
 import dao.TipoFuncionarioDao;
 import java.util.Iterator;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import model.NivelAcesso;
 import model.TipoFuncionario;
 
-/**
- *
- * @author fdz
- */
 public class TipoFuncionarioController extends Controller<TipoFuncionario> {
 
     public TipoFuncionarioController() throws ClassNotFoundException {
@@ -21,7 +20,7 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
         dao = new TipoFuncionarioDao();
 
     }
-    
+
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
@@ -30,13 +29,14 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
         model.setNumRows(0);
 
         while (lista.hasNext()) {
-            
+
             TipoFuncionario item = lista.next();
 
             model.addRow(
                     new Object[]{
                         item.getId(),
                         item.getDescricao(),
+                        item.getIdNivelAcesso(),
                         item.getSalario()
                     });
 
@@ -45,5 +45,5 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
         return model;
 
     }
-    
+
 }

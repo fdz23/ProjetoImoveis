@@ -8,6 +8,7 @@ package controller;
 import dao.NivelAcessoDao;
 import java.sql.Connection;
 import java.util.Iterator;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import model.NivelAcesso;
 
@@ -22,7 +23,7 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
         dao = new NivelAcessoDao();
 
     }
-    
+
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
@@ -31,7 +32,7 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
         model.setNumRows(0);
 
         while (lista.hasNext()) {
-            
+
             NivelAcesso item = lista.next();
 
             model.addRow(
@@ -45,5 +46,23 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
         return model;
 
     }
-    
+
+    public DefaultComboBoxModel popularCombox(DefaultComboBoxModel model) throws Exception {
+
+        Iterator<NivelAcesso> lista = dao.getAll();
+
+        model.removeAllElements();
+
+        while (lista.hasNext()) {
+
+            NivelAcesso item = lista.next();
+
+            model.addElement(item.getId() + "-" + item.getDescricao());
+
+        }
+
+        return model;
+
+    }
+
 }
