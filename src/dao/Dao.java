@@ -91,11 +91,16 @@ public abstract class Dao<T> implements IDao<T> {
     public Iterator<T> getTodosItensOrdenadosPor(int campo, boolean ascOuDesc) throws Exception {
         
         //verifica se o número recebido é menor que 0 ou maior que o número máximo de campos
-        if (campo < 0 || campo > (vetorCampos.length - 1))
+        if (campo < 0 || campo > vetorCampos.length)
             throw new Exception("Campo para ser ordenado inexistente.");
         
+        String coluna = "";
+        
         //vetorCampos é um vetor que contém o nome de todos os campos da tabela no banco de dados na ordem
-        String coluna = vetorCampos[campo];
+        if (campo == 0)
+             coluna = id;
+        else
+            coluna = vetorCampos[campo - 1];
         
         //estrutura de dados 2 : Lista encadeada
         List<T> itens = new LinkedList<T>();
