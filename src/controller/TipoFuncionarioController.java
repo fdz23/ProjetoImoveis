@@ -45,5 +45,23 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
         return model;
 
     }
+    
+        public DefaultComboBoxModel popularCombox(DefaultComboBoxModel model) throws Exception {
+
+        Iterator<TipoFuncionario> lista = dao.getAll();
+
+        model.removeAllElements();
+
+        while (lista.hasNext()) {
+
+            TipoFuncionario item = lista.next();
+
+            model.addElement(item.getId() + "-" + item.getDescricao());
+
+        }  
+
+        return model;
+
+    }
 
 }
