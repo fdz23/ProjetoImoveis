@@ -7,7 +7,6 @@ package dao;
 
 import fabricas.AbstractFactory;
 import interfaces.Tabela;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -19,6 +18,11 @@ import util.CriaStatement;
  * @author fdz
  */
 public class ImovelDao extends Dao<Imovel> {
+    
+    private FuncionarioDao funcionarioDao = new FuncionarioDao();
+    private PessoaDao pessoaDao = new PessoaDao();
+    private TipoImovelDao tipoImovelDao = new TipoImovelDao();
+    private EnderecoDao enderecoDao = new EnderecoDao();
 
     public ImovelDao() throws ClassNotFoundException {
 
@@ -48,10 +52,10 @@ public class ImovelDao extends Dao<Imovel> {
             ps.setString(6, item.getBaixaMotivo());
             ps.setInt(7, item.getQuantidadeParcelas());
             ps.setDouble(8, item.getValorComissao());
-            ps.setInt(9, item.getFuncionario());
-            ps.setInt(10, item.getPessoa());
-            ps.setInt(11, item.getIdTipoImovel());
-            ps.setInt(12, item.getIdEndereco());
+            ps.setInt(9, item.getFuncionario().getId());
+            ps.setInt(10, item.getPessoa().getId());
+            ps.setInt(11, item.getIdTipoImovel().getId());
+            ps.setInt(12, item.getEndereco().getId());
 
         } catch (Exception error) {
 
@@ -78,10 +82,10 @@ public class ImovelDao extends Dao<Imovel> {
             ps.setString(6, item.getBaixaMotivo());
             ps.setInt(7, item.getQuantidadeParcelas());
             ps.setDouble(8, item.getValorComissao());
-            ps.setInt(9, item.getFuncionario());
-            ps.setInt(10, item.getPessoa());
-            ps.setInt(11, item.getIdTipoImovel());
-            ps.setInt(12, item.getIdEndereco());
+            ps.setInt(9, item.getFuncionario().getId());
+            ps.setInt(10, item.getPessoa().getId());
+            ps.setInt(11, item.getIdTipoImovel().getId());
+            ps.setInt(12, item.getEndereco().getId());
             ps.setInt(13, item.getId());
 
         } catch (Exception error) {
@@ -111,10 +115,10 @@ public class ImovelDao extends Dao<Imovel> {
                         rs.getString(vetorCampos[6]),
                         rs.getInt(vetorCampos[7]),
                         rs.getDouble(vetorCampos[8]),
-                        rs.getInt(vetorCampos[9]),
-                        rs.getInt(vetorCampos[10]),
-                        rs.getInt(vetorCampos[11]),
-                        rs.getInt(vetorCampos[12])
+                        funcionarioDao.getByID(rs.getInt(vetorCampos[9])),
+                        pessoaDao.getByID(rs.getInt(vetorCampos[10])),
+                        tipoImovelDao.getByID(rs.getInt(vetorCampos[11])),
+                        enderecoDao.getByID(rs.getInt(vetorCampos[12]))
                 );
 
             } else {

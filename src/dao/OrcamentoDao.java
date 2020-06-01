@@ -7,8 +7,6 @@ package dao;
 
 import fabricas.AbstractFactory;
 import interfaces.Tabela;
-import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -20,6 +18,11 @@ import util.CriaStatement;
  * @author fdz
  */
 public class OrcamentoDao extends Dao<Orcamento> {
+    
+    private FuncionarioDao funcionarioDao = new FuncionarioDao();
+    private PessoaDao pessoaDao = new PessoaDao();
+    private ImovelDao imovelDao = new ImovelDao();
+    private TipoPagamentoDao tipoPagamentoDao = new TipoPagamentoDao();
 
     public OrcamentoDao() throws ClassNotFoundException {
 
@@ -42,10 +45,10 @@ public class OrcamentoDao extends Dao<Orcamento> {
 
             ps.setDate(1, item.getData());
             ps.setString(2, item.getDescricao());
-            ps.setInt(3, item.getFuncionario());
-            ps.setInt(4, item.getPessoa());
-            ps.setInt(5, item.getImovel());
-            ps.setInt(6, item.getIdTipoPagamento());
+            ps.setInt(3, item.getFuncionario().getId());
+            ps.setInt(4, item.getPessoa().getId());
+            ps.setInt(5, item.getImovel().getId());
+            ps.setInt(6, item.getTipoPagamento().getId());
 
         } catch (Exception error) {
 
@@ -66,10 +69,10 @@ public class OrcamentoDao extends Dao<Orcamento> {
 
             ps.setDate(1, item.getData());
             ps.setString(2, item.getDescricao());
-            ps.setInt(3, item.getFuncionario());
-            ps.setInt(4, item.getPessoa());
-            ps.setInt(5, item.getImovel());
-            ps.setInt(6, item.getIdTipoPagamento());
+            ps.setInt(3, item.getFuncionario().getId());
+            ps.setInt(4, item.getPessoa().getId());
+            ps.setInt(5, item.getImovel().getId());
+            ps.setInt(6, item.getTipoPagamento().getId());
             ps.setInt(7, item.getId());
 
         } catch (Exception error) {
@@ -93,10 +96,10 @@ public class OrcamentoDao extends Dao<Orcamento> {
                         rs.getInt(id),
                         rs.getDate(vetorCampos[0]),
                         rs.getString(vetorCampos[1]),
-                        rs.getInt(vetorCampos[2]),
-                        rs.getInt(vetorCampos[3]),
-                        rs.getInt(vetorCampos[4]),
-                        rs.getInt(vetorCampos[5])
+                        funcionarioDao.getByID(rs.getInt(vetorCampos[2])),
+                        pessoaDao.getByID(rs.getInt(vetorCampos[3])),
+                        imovelDao.getByID(rs.getInt(vetorCampos[4])),
+                        tipoPagamentoDao.getByID(rs.getInt(vetorCampos[5]))
                 );
 
             } else {

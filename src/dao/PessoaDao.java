@@ -7,7 +7,6 @@ package dao;
 
 import fabricas.AbstractFactory;
 import interfaces.Tabela;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -19,6 +18,8 @@ import util.CriaStatement;
  * @author fdz
  */
 public class PessoaDao extends Dao<Pessoa> {
+    
+    private EnderecoDao enderecoDao = new EnderecoDao();
 
     public PessoaDao() throws ClassNotFoundException {
 
@@ -85,7 +86,7 @@ public class PessoaDao extends Dao<Pessoa> {
             ps.setDate(3, item.getDataNascimento());
             ps.setString(4, item.getCpf());
             ps.setString(5, item.getTelefone());
-            ps.setInt(6, item.getEndereco());
+            ps.setInt(6, item.getEndereco().getId());
 
         } catch (Exception error) {
 
@@ -109,7 +110,7 @@ public class PessoaDao extends Dao<Pessoa> {
             ps.setDate(3, item.getDataNascimento());
             ps.setString(4, item.getCpf());
             ps.setString(5, item.getTelefone());
-            ps.setInt(6, item.getEndereco());
+            ps.setInt(6, item.getEndereco().getId());
             ps.setInt(7, item.getId());
 
         } catch (Exception error) {
@@ -136,7 +137,7 @@ public class PessoaDao extends Dao<Pessoa> {
                         rs.getDate(vetorCampos[2]),
                         rs.getString(vetorCampos[3]),
                         rs.getString(vetorCampos[4]),
-                        rs.getInt(vetorCampos[5])
+                        enderecoDao.getByID(rs.getInt(vetorCampos[5]))
                 );
 
             } else {

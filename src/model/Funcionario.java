@@ -14,7 +14,7 @@ import java.sql.Date;
  */
 public class Funcionario extends Pessoa implements Tabela {
     
-    private int idStatus;
+    private Status status;
     private Date dataRescisao;
     private String matricula;
     private TipoFuncionario tipoFuncionario;
@@ -34,13 +34,13 @@ public class Funcionario extends Pessoa implements Tabela {
     
     public Funcionario() {}
     
-    public Funcionario(int id, String matricula, Pessoa pessoa, TipoFuncionario tipoFuncionario, int idStatus, Date dataRescisao) {
+    public Funcionario(int id, String matricula, Pessoa pessoa, TipoFuncionario tipoFuncionario, Status status, Date dataRescisao) {
         
         super(pessoa.getId(), pessoa.getNome(), pessoa.getEmail(), pessoa.getDataNascimento(), pessoa.getCpf(), pessoa.getTelefone(), pessoa.getEndereco());
         this.pessoa = pessoa;
         this.tipoFuncionario = tipoFuncionario;
         this.matricula = matricula;
-        this.idStatus = idStatus;
+        this.status = status;
         this.dataRescisao = dataRescisao;
     }
 
@@ -68,12 +68,12 @@ public class Funcionario extends Pessoa implements Tabela {
         this.matricula = matricula;
     }
 
-    public int getIdStatus() {
-        return idStatus;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setIdStatus(int idStatus) {
-        this.idStatus = idStatus;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Date getDataRescisao() {

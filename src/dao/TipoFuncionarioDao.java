@@ -19,6 +19,8 @@ import util.CriaStatement;
  * @author fdz
  */
 public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
+    
+    private NivelAcessoDao nivelAcessoDao = new NivelAcessoDao();
 
     public TipoFuncionarioDao() throws ClassNotFoundException {
 
@@ -40,7 +42,7 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
             ps = criaStatement.insertSql(tabela, campos);
 
             ps.setString(1, item.getDescricao());
-            ps.setInt(2, item.getIdNivelAcesso());
+            ps.setInt(2, item.getNivelAcesso().getId());
             ps.setDouble(3, item.getSalario());
             ps.setInt(4, item.getLogin());
 
@@ -62,7 +64,7 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
             ps = criaStatement.updateSql(campos);
 
             ps.setString(1, item.getDescricao());
-            ps.setInt(2, item.getIdNivelAcesso());
+            ps.setInt(2, item.getNivelAcesso().getId());
             ps.setDouble(3, item.getSalario());
             ps.setInt(4, item.getId());
             ps.setInt(5, item.getLogin());
@@ -87,7 +89,7 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
                 return new TipoFuncionario(
                         rs.getInt(id),
                         rs.getString(vetorCampos[0]),
-                        rs.getInt(vetorCampos[1]),
+                        nivelAcessoDao.getByID(rs.getInt(vetorCampos[1])),
                         rs.getDouble(vetorCampos[2]),
                         rs.getInt(vetorCampos[3])
                 );
