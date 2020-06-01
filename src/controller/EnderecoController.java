@@ -6,6 +6,8 @@
 package controller;
 
 import dao.EnderecoDao;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
 import model.Endereco;
 
 /**
@@ -17,6 +19,37 @@ public class EnderecoController extends Controller<Endereco> {
     public EnderecoController() throws ClassNotFoundException {
 
         dao = new EnderecoDao();
+
+    }
+    
+    public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
+
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<Endereco> lista = dao.getTodosItensOrdenadosPor(0, true);
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+            
+            Endereco item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getCodigoIBGE(),
+                        item.getLogradouro(),
+                        item.getBairro(),
+                        item.getCidade(),
+                        item.getEstado(),
+                        item.getComplemento(),
+                        item.getNumero(),
+                        item.getPontoReferencia(),
+                        item.getCep()
+                    });
+
+        }
+
+        return model;
 
     }
 }
