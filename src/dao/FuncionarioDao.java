@@ -55,7 +55,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
                             item.getDataNascimento(),
                             item.getCpf(),
                             item.getTelefone(),
-                            item.getIdEndereco()
+                            item.getEndereco()
                     )
             );
 
@@ -64,7 +64,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
             ps.setString(1, item.getMatricula());
             ps.setInt(2, pessoa.getId());
-            ps.setInt(3, item.getIdTipoFuncionario());
+            ps.setInt(3, item.getTipoFuncionario().getId());
             ps.setInt(4, item.getIdStatus());
             ps.setDate(5, item.getDataRescisao());
 
@@ -87,21 +87,21 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
             //cria um objeto pessoa com os dados pertencentes a tabela pessoa
             Pessoa pessoa = new Pessoa(
-                    item.getIdPessoa(),
+                    item.getPessoa(),
                     item.getNome(),
                     item.getEmail(),
                     item.getDataNascimento(),
                     item.getCpf(),
                     item.getTelefone(),
-                    item.getIdEndereco()
+                    item.getEndereco()
             );
 
             //altera a tabela pessoa também com os dados
             pessoaDao.alterar(pessoa);
 
             ps.setString(1, item.getMatricula());
-            ps.setInt(2, item.getIdPessoa());
-            ps.setInt(3, item.getIdTipoFuncionario());
+            ps.setInt(2, item.getPessoa());
+            ps.setInt(3, item.getTipoFuncionario());
             ps.setInt(4, item.getIdStatus());
             ps.setDate(5, item.getDataRescisao());
             ps.setInt(6, item.getId());

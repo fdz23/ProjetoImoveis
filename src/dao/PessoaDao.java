@@ -85,7 +85,7 @@ public class PessoaDao extends Dao<Pessoa> {
             ps.setDate(3, item.getDataNascimento());
             ps.setString(4, item.getCpf());
             ps.setString(5, item.getTelefone());
-            ps.setInt(6, item.getIdEndereco());
+            ps.setInt(6, item.getEndereco());
 
         } catch (Exception error) {
 
@@ -109,7 +109,7 @@ public class PessoaDao extends Dao<Pessoa> {
             ps.setDate(3, item.getDataNascimento());
             ps.setString(4, item.getCpf());
             ps.setString(5, item.getTelefone());
-            ps.setInt(6, item.getIdEndereco());
+            ps.setInt(6, item.getEndereco());
             ps.setInt(7, item.getId());
 
         } catch (Exception error) {

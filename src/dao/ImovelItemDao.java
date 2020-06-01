@@ -40,8 +40,8 @@ public class ImovelItemDao extends Dao<ImovelItem> {
             ps = criaStatement.insertSql(tabela, campos);
 
             ps.setDouble(1, item.getValor());
-            ps.setInt(2, item.getIdItemMovel());
-            ps.setInt(3, item.getIdImovel());
+            ps.setInt(2, item.getItemMovel());
+            ps.setInt(3, item.getImovel());
 
         } catch (Exception error) {
 
@@ -61,8 +61,8 @@ public class ImovelItemDao extends Dao<ImovelItem> {
             ps = criaStatement.updateSql(campos);
 
             ps.setDouble(1, item.getValor());
-            ps.setInt(2, item.getIdItemMovel());
-            ps.setInt(3, item.getIdImovel());
+            ps.setInt(2, item.getItemMovel());
+            ps.setInt(3, item.getImovel());
             ps.setInt(5, item.getId());
 
         } catch (Exception error) {

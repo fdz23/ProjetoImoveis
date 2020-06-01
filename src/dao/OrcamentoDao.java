@@ -42,9 +42,9 @@ public class OrcamentoDao extends Dao<Orcamento> {
 
             ps.setDate(1, item.getData());
             ps.setString(2, item.getDescricao());
-            ps.setInt(3, item.getIdFuncionario());
-            ps.setInt(4, item.getIdPessoa());
-            ps.setInt(5, item.getIdImovel());
+            ps.setInt(3, item.getFuncionario());
+            ps.setInt(4, item.getPessoa());
+            ps.setInt(5, item.getImovel());
             ps.setInt(6, item.getIdTipoPagamento());
 
         } catch (Exception error) {
@@ -66,9 +66,9 @@ public class OrcamentoDao extends Dao<Orcamento> {
 
             ps.setDate(1, item.getData());
             ps.setString(2, item.getDescricao());
-            ps.setInt(3, item.getIdFuncionario());
-            ps.setInt(4, item.getIdPessoa());
-            ps.setInt(5, item.getIdImovel());
+            ps.setInt(3, item.getFuncionario());
+            ps.setInt(4, item.getPessoa());
+            ps.setInt(5, item.getImovel());
             ps.setInt(6, item.getIdTipoPagamento());
             ps.setInt(7, item.getId());
 

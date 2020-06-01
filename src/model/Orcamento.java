@@ -17,10 +17,10 @@ public class Orcamento implements Tabela {
     private int id;
     private Date data;
     private String descricao;
-    private int idTipoPagamento;
-    private int idPessoa;
-    private int idFuncionario;
-    private int idImovel;
+    private TipoPagamento tipoPagamento;
+    private Pessoa pessoa;
+    private Funcionario funcionario;
+    private Imovel imovel;
     private String nomeId = "orc_iden";
     private String nomeTabela = "orcamentos";
 
@@ -36,14 +36,14 @@ public class Orcamento implements Tabela {
     
     public Orcamento() {}
     
-    public Orcamento(int id, Date data, String descricao, int idFuncionario, int idPessoa, int idImovel, int idTipoPagamento) {
+    public Orcamento(int id, Date data, String descricao, Funcionario funcionario, Pessoa pessoa, Imovel imovel, TipoPagamento tipoPagamento) {
         this.id = id;
         this.data = data;
-        this.idFuncionario = idFuncionario;
-        this.idImovel = idImovel;
+        this.funcionario = funcionario;
+        this.imovel = imovel;
         this.descricao = descricao;
-        this.idTipoPagamento = idTipoPagamento;
-        this.idPessoa = idPessoa;
+        this.tipoPagamento = tipoPagamento;
+        this.pessoa = pessoa;
     }
 
     public int getId() {
@@ -62,20 +62,20 @@ public class Orcamento implements Tabela {
         this.data = data;
     }
 
-    public int getIdFuncionario() {
-        return idFuncionario;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public void setIdFuncionario(int idFuncionario) {
-        this.idFuncionario = idFuncionario;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
-    public int getIdImovel() {
-        return idImovel;
+    public Imovel getImovel() {
+        return imovel;
     }
 
-    public void setIdImovel(int idImovel) {
-        this.idImovel = idImovel;
+    public void setImovel(Imovel imovel) {
+        this.imovel = imovel;
     }
 
     public String getDescricao() {
@@ -86,20 +86,20 @@ public class Orcamento implements Tabela {
         this.descricao = descricao;
     }
 
-    public int getIdTipoPagamento() {
-        return idTipoPagamento;
+    public TipoPagamento getTipoPagamento() {
+        return tipoPagamento;
     }
 
-    public void setIdTipoPagamento(int idTipoPagamento) {
-        this.idTipoPagamento = idTipoPagamento;
+    public void setTipoPagamento(TipoPagamento tipoPagamento) {
+        this.tipoPagamento = tipoPagamento;
     }
 
-    public int getIdPessoa() {
-        return idPessoa;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setIdPessoa(int idPessoa) {
-        this.idPessoa = idPessoa;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
     
 }
