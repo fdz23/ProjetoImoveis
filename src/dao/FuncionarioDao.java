@@ -40,6 +40,21 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
     }
     
+    public String geraMatricula() throws Exception {
+        
+        return "FUN" + String.format("%04d", getUltimoId());
+        
+    }
+    
+    private int getUltimoId() throws Exception {
+        
+        if (!getAll().hasNext())
+            return 1;
+        else
+            return getTodosItensOrdenadosPor(0, false).next().getId();
+            
+    }
+    
     @Override
     protected void verificaExistente(Funcionario item) throws Exception {}
 
