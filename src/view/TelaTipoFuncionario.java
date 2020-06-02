@@ -317,7 +317,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
                 case 1:
 
-                    TipoFuncionario tip = new TipoFuncionario(0, descricao, idNivel, salario,login);
+                    TipoFuncionario tip = new TipoFuncionario(0, descricao, idNivel, salario,1);
                     tfc.inserirItem(tip);
                     JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
 
