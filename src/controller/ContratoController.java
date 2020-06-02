@@ -39,8 +39,8 @@ public class ContratoController extends Controller<Contrato> {
                         item.getId(),
                         item.getData(),
                         item.getDataAlteracao(),
-                        item.getIdSituacao(),
-                        item.getIdOrcamento()
+                        item.getSituacao().getId(),
+                        item.getOrcamento().getId()
                     });
 
         }
