@@ -317,8 +317,8 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
                 case 1:
 
-                    TipoFuncionario tip = new TipoFuncionario(0, descricao, idNivel, salario,1);
-                    tfc.inserirItem(tip);
+               //     TipoFuncionario tip = new TipoFuncionario(0, descricao, 1, salario,1);
+                  //  tfc.inserirItem(tip);
                     JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
 
                     popularJtable();
@@ -329,8 +329,8 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
                     int alterarIntem = Integer.parseInt(jTextFieldId.getText());
 
-                    tip = new TipoFuncionario(alterarIntem, descricao, idNivel, salario,login);
-                    tfc.alterarItem(tip);
+                  //  tip = new TipoFuncionario(alterarIntem, descricao, 0, salario,login);
+                 //   tfc.alterarItem(tip);
                     popularJtable();
 
                     JOptionPane.showMessageDialog(null, "Tipo Funcionario alterado com sucesso!");
