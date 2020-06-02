@@ -66,7 +66,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
         else
             coluna1 = vetorCamposPessoa[campo1 - 1];
         
-        if (campo1 == vetorCamposPessoa.length)
+        if (campo1 == vetorCamposPessoa.length + 1)
             coluna1 = id;
         else
             coluna1 = vetorCampos[campo1 - vetorCamposPessoa.length - 1];
@@ -76,7 +76,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
         else
             coluna2 = vetorCamposPessoa[campo2 - 1];
         
-        if (campo2 == vetorCamposPessoa.length)
+        if (campo2 == vetorCamposPessoa.length + 1)
             coluna2 = id;
         else
             coluna2 = vetorCampos[campo2 - vetorCamposPessoa.length - 1];
@@ -129,7 +129,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
         else
             coluna = vetorCamposPessoa[campo - 1];
         
-        if (campo == vetorCamposPessoa.length)
+        if (campo == vetorCamposPessoa.length + 1)
             coluna = id;
         else
             coluna = vetorCampos[campo - vetorCamposPessoa.length - 1];
