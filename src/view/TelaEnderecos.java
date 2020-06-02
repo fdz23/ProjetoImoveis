@@ -15,6 +15,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
     ViaCEP cep = null;
     Endereco end = null;
     EnderecoController ec = null;
+    TelaFuncionarios tf = null;
     DefaultTableModel modelo = new DefaultTableModel();
     int linhaSelecionada = 0;
 
@@ -23,6 +24,18 @@ public class TelaEnderecos extends javax.swing.JFrame {
         initComponents();
         iniciar();
         popularJtable();
+    }
+    
+    public TelaEnderecos(TelaFuncionarios tf) throws Exception{
+        
+        
+        CriarJTable();
+        initComponents();
+        iniciar();
+        popularJtable();
+        this.tf = tf;
+        
+        
     }
 
     @SuppressWarnings("unchecked")
