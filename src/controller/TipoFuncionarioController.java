@@ -36,7 +36,7 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
                     new Object[]{
                         item.getId(),
                         item.getDescricao(),
-                        item.getIdNivelAcesso(),
+                        item.getNivelAcesso().getId(),
                         item.getSalario()
                     });
 

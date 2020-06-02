@@ -31,6 +31,51 @@ public class StatusDao extends Dao<Status> {
         vetorCampos = campos.split(",");
 
     }
+    
+    public Status getByDescricao(String descricao) {
+
+        try {
+
+            ps = statementByDescricao(descricao);
+
+            rs = ps.executeQuery();
+
+            return criaItem(rs);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return null;
+
+    }
+
+    protected PreparedStatement statementByDescricao(String descricao) {
+
+        try {
+
+            ps = criaStatement.selectSql(tabela, true, "sta_descricao");
+
+            ps.setString(1, descricao);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return ps;
+    }
+    
+    @Override
+    protected void verificaExistente(Status item) throws Exception {
+    
+        if (getByDescricao(item.getDescricao()) != null)
+            throw new Exception("Já existe um NivelAcesso com essa descrição.");
+    
+    }
 
     @Override
     protected PreparedStatement statementInserir(Status item) {

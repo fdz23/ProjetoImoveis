@@ -7,7 +7,6 @@ package dao;
 
 import fabricas.AbstractFactory;
 import interfaces.Tabela;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -31,6 +30,9 @@ public class EnderecoDao extends Dao<Endereco> {
         vetorCampos = campos.split(",");
 
     }
+    
+    @Override 
+    protected void verificaExistente(Endereco item) {}
 
     @Override
     protected PreparedStatement statementInserir(Endereco item) {

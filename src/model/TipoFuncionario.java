@@ -14,7 +14,7 @@ import interfaces.Tabela;
 public class TipoFuncionario implements Tabela {
     
     private int id;
-    private int idNivelAcesso;
+    private NivelAcesso nivelAcesso;
     private Double salario;
     private String descricao;
     private int login;
@@ -33,9 +33,9 @@ public class TipoFuncionario implements Tabela {
     
     public TipoFuncionario() {}
     
-    public TipoFuncionario(int id, String descricao, int idNivelAcesso, Double salario,int login) {
+    public TipoFuncionario(int id, String descricao, NivelAcesso nivelAcesso, Double salario, int login) {
         this.id = id;
-        this.idNivelAcesso = idNivelAcesso;
+        this.nivelAcesso = nivelAcesso;
         this.salario = salario;
         this.descricao = descricao;
         this.login = login;
@@ -49,12 +49,12 @@ public class TipoFuncionario implements Tabela {
         this.id = id;
     }
 
-    public int getIdNivelAcesso() {
-        return idNivelAcesso;
+    public NivelAcesso getNivelAcesso() {
+        return nivelAcesso;
     }
 
-    public void setIdNivelAcesso(int idNivelAcesso) {
-        this.idNivelAcesso = idNivelAcesso;
+    public void setNivelAcesso(NivelAcesso nivelAcesso) {
+        this.nivelAcesso = nivelAcesso;
     }
 
     public Double getSalario() {

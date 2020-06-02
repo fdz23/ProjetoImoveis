@@ -19,6 +19,8 @@ import util.CriaStatement;
  * @author fdz
  */
 public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
+    
+    private NivelAcessoDao nivelAcessoDao = new NivelAcessoDao();
 
     public TipoFuncionarioDao() throws ClassNotFoundException {
 
@@ -31,6 +33,90 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
         vetorCampos = campos.split(",");
 
     }
+    
+    public TipoFuncionario getByDescricao(String descricao) {
+
+        try {
+
+            ps = statementByDescricao(descricao);
+
+            rs = ps.executeQuery();
+
+            return criaItem(rs);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return null;
+
+    }
+
+    protected PreparedStatement statementByDescricao(String descricao) {
+
+        try {
+
+            ps = criaStatement.selectSql(tabela, true, "sta_descricao");
+
+            ps.setString(1, descricao);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return ps;
+    }
+    
+    public TipoFuncionario getByLogin(int login) {
+
+        try {
+
+            ps = statementByLogin(login);
+
+            rs = ps.executeQuery();
+
+            return criaItem(rs);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return null;
+
+    }
+
+    protected PreparedStatement statementByLogin(int login) {
+
+        try {
+
+            ps = criaStatement.selectSql(tabela, true, "tfu_login");
+
+            ps.setInt(1, login);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return ps;
+    }
+    
+    @Override
+    protected void verificaExistente(TipoFuncionario item) throws Exception {
+    
+        if (getByDescricao(item.getDescricao()) != null)
+            throw new Exception("Já existe um TipoFuncionario com essa descrição.");
+        else if (getByLogin(item.getLogin()) != null)
+            throw new Exception("Já existe um TipoFuncionario com esse login.");
+    
+    }
 
     @Override
     protected PreparedStatement statementInserir(TipoFuncionario item) {
@@ -40,7 +126,7 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
             ps = criaStatement.insertSql(tabela, campos);
 
             ps.setString(1, item.getDescricao());
-            ps.setInt(2, item.getIdNivelAcesso());
+            ps.setInt(2, item.getNivelAcesso().getId());
             ps.setDouble(3, item.getSalario());
             ps.setInt(4, item.getLogin());
 
@@ -62,7 +148,7 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
             ps = criaStatement.updateSql(campos);
 
             ps.setString(1, item.getDescricao());
-            ps.setInt(2, item.getIdNivelAcesso());
+            ps.setInt(2, item.getNivelAcesso().getId());
             ps.setDouble(3, item.getSalario());
             ps.setInt(4, item.getId());
             ps.setInt(5, item.getLogin());
@@ -87,7 +173,7 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
                 return new TipoFuncionario(
                         rs.getInt(id),
                         rs.getString(vetorCampos[0]),
-                        rs.getInt(vetorCampos[1]),
+                        nivelAcessoDao.getByID(rs.getInt(vetorCampos[1])),
                         rs.getDouble(vetorCampos[2]),
                         rs.getInt(vetorCampos[3])
                 );

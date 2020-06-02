@@ -17,19 +17,19 @@ public class Contrato implements Tabela {
     private int id;
     private Date data;
     private Date dataAlteracao;
-    private int idSituacao;
-    private int idOrcamento;
+    private Situacao situacao;
+    private Orcamento orcamento;
     private String nomeId = "con_iden";
     private String nomeTabela = "contratos";
     
     public Contrato() {}
     
-    public Contrato(int id, Date dataOrcamento, Date dataAlteracao, int idSituacao, int idOrcamento) {
+    public Contrato(int id, Date dataOrcamento, Date dataAlteracao, Situacao situacao, Orcamento orcamento) {
         this.id = id;
         this.data = dataOrcamento;
         this.dataAlteracao = dataAlteracao;
-        this.idSituacao = idSituacao;
-        this.idOrcamento = idOrcamento;
+        this.situacao = situacao;
+        this.orcamento = orcamento;
     }
 
     public int getId() {
@@ -56,20 +56,20 @@ public class Contrato implements Tabela {
         this.dataAlteracao = dataAlteracao;
     }
 
-    public int getIdSituacao() {
-        return idSituacao;
+    public Situacao getSituacao() {
+        return situacao;
     }
 
-    public void setIdSituacao(int idSituacao) {
-        this.idSituacao = idSituacao;
+    public void setSituacao(Situacao situacao) {
+        this.situacao = situacao;
     }
 
-    public int getIdOrcamento() {
-        return idOrcamento;
+    public Orcamento getOrcamento() {
+        return orcamento;
     }
 
-    public void setIdOrcamento(int idOrcamento) {
-        this.idOrcamento = idOrcamento;
+    public void setIdOrcamento(Orcamento orcamento) {
+        this.orcamento = orcamento;
     }
 
     @Override

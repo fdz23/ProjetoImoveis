@@ -7,7 +7,6 @@ package dao;
 
 import fabricas.AbstractFactory;
 import interfaces.Tabela;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -19,6 +18,8 @@ import util.CriaStatement;
  * @author fdz
  */
 public class PessoaDao extends Dao<Pessoa> {
+    
+    private EnderecoDao enderecoDao = new EnderecoDao();
 
     public PessoaDao() throws ClassNotFoundException {
 
@@ -34,6 +35,14 @@ public class PessoaDao extends Dao<Pessoa> {
 
     protected String[] getVetorCampos() {
         return vetorCampos;
+    }
+    
+    public void verificaExistente(Pessoa item) throws Exception {
+        
+        if (getByCpf(item.getCpf()) != null) throw new Exception("Cpf já cadastrado.");
+        else
+            if (getByEmail(item.getEmail()) != null) throw new Exception("Email já cadastrado.");
+        
     }
 
     public Pessoa getByCpf(String cpf) {
@@ -55,14 +64,51 @@ public class PessoaDao extends Dao<Pessoa> {
         return null;
 
     }
+    
+    public Pessoa getByEmail(String email) {
+
+        try {
+
+            ps = statementGetPessoaPorEmail(email);
+
+            rs = ps.executeQuery();
+
+            return criaItem(rs);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return null;
+
+    }
 
     protected PreparedStatement statementGetPessoaPorCpf(String cpf) {
 
         try {
 
-            ps = criaStatement.selectSql(tabela, true, "cpf");
+            ps = criaStatement.selectSql(tabela, true, "pes_cpf");
 
             ps.setString(1, cpf);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return ps;
+    }
+
+    protected PreparedStatement statementGetPessoaPorEmail(String email) {
+
+        try {
+
+            ps = criaStatement.selectSql(tabela, true, "pes_email");
+
+            ps.setString(1, email);
 
         } catch (Exception ex) {
 
@@ -77,6 +123,8 @@ public class PessoaDao extends Dao<Pessoa> {
     protected PreparedStatement statementInserir(Pessoa item) {
 
         try {
+            
+            verificaExistente(item);
 
             ps = criaStatement.insertSql(tabela, campos);
 
@@ -85,7 +133,7 @@ public class PessoaDao extends Dao<Pessoa> {
             ps.setDate(3, item.getDataNascimento());
             ps.setString(4, item.getCpf());
             ps.setString(5, item.getTelefone());
-            ps.setInt(6, item.getIdEndereco());
+            ps.setInt(6, item.getEndereco().getId());
 
         } catch (Exception error) {
 
@@ -109,7 +157,7 @@ public class PessoaDao extends Dao<Pessoa> {
             ps.setDate(3, item.getDataNascimento());
             ps.setString(4, item.getCpf());
             ps.setString(5, item.getTelefone());
-            ps.setInt(6, item.getIdEndereco());
+            ps.setInt(6, item.getEndereco().getId());
             ps.setInt(7, item.getId());
 
         } catch (Exception error) {
@@ -136,7 +184,7 @@ public class PessoaDao extends Dao<Pessoa> {
                         rs.getDate(vetorCampos[2]),
                         rs.getString(vetorCampos[3]),
                         rs.getString(vetorCampos[4]),
-                        rs.getInt(vetorCampos[5])
+                        enderecoDao.getByID(rs.getInt(vetorCampos[5]))
                 );
 
             } else {

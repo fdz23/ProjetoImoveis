@@ -14,11 +14,11 @@ import java.sql.Date;
  */
 public class Funcionario extends Pessoa implements Tabela {
     
-    private int idStatus;
+    private Status status;
     private Date dataRescisao;
     private String matricula;
-    private int idTipoFuncionario;
-    private int idPessoa;
+    private TipoFuncionario tipoFuncionario;
+    private Pessoa pessoa;
     private String nomeId = "fun_iden";
     private String nomeTabela = "funcionarios";
 
@@ -34,31 +34,30 @@ public class Funcionario extends Pessoa implements Tabela {
     
     public Funcionario() {}
     
-    public Funcionario(String nome, String email, Date dataNascimento, String cpf, String telefone, int idEndereco,
-                       int id, String matricula, int idPessoa, int idTipoFuncionario, int idStatus, Date dataRescisao) {
+    public Funcionario(int id, String matricula, Pessoa pessoa, TipoFuncionario tipoFuncionario, Status status, Date dataRescisao) {
         
-        super(id, nome, email, dataNascimento, cpf, telefone, idEndereco);
-        this.idPessoa = idPessoa;
-        this.idTipoFuncionario = idTipoFuncionario;
+        super(pessoa.getId(), pessoa.getNome(), pessoa.getEmail(), pessoa.getDataNascimento(), pessoa.getCpf(), pessoa.getTelefone(), pessoa.getEndereco());
+        this.pessoa = pessoa;
+        this.tipoFuncionario = tipoFuncionario;
         this.matricula = matricula;
-        this.idStatus = idStatus;
+        this.status = status;
         this.dataRescisao = dataRescisao;
     }
 
-    public int getIdPessoa() {
-        return idPessoa;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setIdPessoa(int idPessoa) {
-        this.idPessoa = idPessoa;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
-    public int getIdTipoFuncionario() {
-        return idTipoFuncionario;
+    public TipoFuncionario getTipoFuncionario() {
+        return tipoFuncionario;
     }
 
-    public void setIdTipoFuncionario(int idTipoFuncionario) {
-        this.idTipoFuncionario = idTipoFuncionario;
+    public void setTipoFuncionario(TipoFuncionario tipoFuncionario) {
+        this.tipoFuncionario = tipoFuncionario;
     }
     
     public String getMatricula() {
@@ -69,12 +68,12 @@ public class Funcionario extends Pessoa implements Tabela {
         this.matricula = matricula;
     }
 
-    public int getIdStatus() {
-        return idStatus;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setIdStatus(int idStatus) {
-        this.idStatus = idStatus;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Date getDataRescisao() {

@@ -7,7 +7,6 @@ package dao;
 
 import fabricas.AbstractFactory;
 import interfaces.Tabela;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -19,6 +18,11 @@ import util.CriaStatement;
  * @author fdz
  */
 public class ImovelDao extends Dao<Imovel> {
+    
+    private FuncionarioDao funcionarioDao = new FuncionarioDao();
+    private PessoaDao pessoaDao = new PessoaDao();
+    private TipoImovelDao tipoImovelDao = new TipoImovelDao();
+    private EnderecoDao enderecoDao = new EnderecoDao();
 
     public ImovelDao() throws ClassNotFoundException {
 
@@ -32,6 +36,52 @@ public class ImovelDao extends Dao<Imovel> {
         vetorCampos = campos.split(",");
 
     }
+    
+    public Imovel getByIdEndereco(int idEndereco) {
+
+        try {
+
+            ps = statementByIdEndereco(idEndereco);
+
+            rs = ps.executeQuery();
+
+            return criaItem(rs);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return null;
+
+    }
+
+    protected PreparedStatement statementByIdEndereco(int idEndereco) {
+
+        try {
+
+            ps = criaStatement.selectSql(tabela, true, "imo_end_iden");
+
+            ps.setInt(1, idEndereco);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return ps;
+    }
+    
+    @Override
+    protected void verificaExistente(Imovel item) throws Exception {
+    
+        if (getByIdEndereco(item.getEndereco().getId()) != null)
+            throw new Exception("Endereço já cadastrado.");
+    
+    }
+
 
     @Override
     protected PreparedStatement statementInserir(Imovel item) {
@@ -48,10 +98,10 @@ public class ImovelDao extends Dao<Imovel> {
             ps.setString(6, item.getBaixaMotivo());
             ps.setInt(7, item.getQuantidadeParcelas());
             ps.setDouble(8, item.getValorComissao());
-            ps.setInt(9, item.getIdFuncionario());
-            ps.setInt(10, item.getIdPessoa());
-            ps.setInt(11, item.getIdTipoImovel());
-            ps.setInt(12, item.getIdEndereco());
+            ps.setInt(9, item.getFuncionario().getId());
+            ps.setInt(10, item.getPessoa().getId());
+            ps.setInt(11, item.getIdTipoImovel().getId());
+            ps.setInt(12, item.getEndereco().getId());
 
         } catch (Exception error) {
 
@@ -78,10 +128,10 @@ public class ImovelDao extends Dao<Imovel> {
             ps.setString(6, item.getBaixaMotivo());
             ps.setInt(7, item.getQuantidadeParcelas());
             ps.setDouble(8, item.getValorComissao());
-            ps.setInt(9, item.getIdFuncionario());
-            ps.setInt(10, item.getIdPessoa());
-            ps.setInt(11, item.getIdTipoImovel());
-            ps.setInt(12, item.getIdEndereco());
+            ps.setInt(9, item.getFuncionario().getId());
+            ps.setInt(10, item.getPessoa().getId());
+            ps.setInt(11, item.getIdTipoImovel().getId());
+            ps.setInt(12, item.getEndereco().getId());
             ps.setInt(13, item.getId());
 
         } catch (Exception error) {
@@ -111,10 +161,10 @@ public class ImovelDao extends Dao<Imovel> {
                         rs.getString(vetorCampos[6]),
                         rs.getInt(vetorCampos[7]),
                         rs.getDouble(vetorCampos[8]),
-                        rs.getInt(vetorCampos[9]),
-                        rs.getInt(vetorCampos[10]),
-                        rs.getInt(vetorCampos[11]),
-                        rs.getInt(vetorCampos[12])
+                        funcionarioDao.getByID(rs.getInt(vetorCampos[9])),
+                        pessoaDao.getByID(rs.getInt(vetorCampos[10])),
+                        tipoImovelDao.getByID(rs.getInt(vetorCampos[11])),
+                        enderecoDao.getByID(rs.getInt(vetorCampos[12]))
                 );
 
             } else {
