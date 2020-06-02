@@ -36,6 +36,14 @@ public class PessoaDao extends Dao<Pessoa> {
     protected String[] getVetorCampos() {
         return vetorCampos;
     }
+    
+    public void verificaExistente(Pessoa item) throws Exception {
+        
+        if (getByCpf(item.getCpf()) != null) throw new Exception("Cpf já cadastrado.");
+        else
+            if (getByEmail(item.getEmail()) != null) throw new Exception("Email já cadastrado.");
+        
+    }
 
     public Pessoa getByCpf(String cpf) {
 
@@ -56,14 +64,51 @@ public class PessoaDao extends Dao<Pessoa> {
         return null;
 
     }
+    
+    public Pessoa getByEmail(String email) {
+
+        try {
+
+            ps = statementGetPessoaPorEmail(email);
+
+            rs = ps.executeQuery();
+
+            return criaItem(rs);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return null;
+
+    }
 
     protected PreparedStatement statementGetPessoaPorCpf(String cpf) {
 
         try {
 
-            ps = criaStatement.selectSql(tabela, true, "cpf");
+            ps = criaStatement.selectSql(tabela, true, "pes_cpf");
 
             ps.setString(1, cpf);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return ps;
+    }
+
+    protected PreparedStatement statementGetPessoaPorEmail(String email) {
+
+        try {
+
+            ps = criaStatement.selectSql(tabela, true, "pes_email");
+
+            ps.setString(1, email);
 
         } catch (Exception ex) {
 
@@ -78,6 +123,8 @@ public class PessoaDao extends Dao<Pessoa> {
     protected PreparedStatement statementInserir(Pessoa item) {
 
         try {
+            
+            verificaExistente(item);
 
             ps = criaStatement.insertSql(tabela, campos);
 

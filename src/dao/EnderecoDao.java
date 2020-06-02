@@ -30,6 +30,9 @@ public class EnderecoDao extends Dao<Endereco> {
         vetorCampos = campos.split(",");
 
     }
+    
+    @Override 
+    protected void verificaExistente(Endereco item) {}
 
     @Override
     protected PreparedStatement statementInserir(Endereco item) {

@@ -35,6 +35,51 @@ public class OrcamentoDao extends Dao<Orcamento> {
         vetorCampos = campos.split(",");
 
     }
+    
+    public Orcamento getByIdImovel(int idImovel) {
+
+        try {
+
+            ps = statementByIdImovel(idImovel);
+
+            rs = ps.executeQuery();
+
+            return criaItem(rs);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return null;
+
+    }
+
+    protected PreparedStatement statementByIdImovel(int idImovel) {
+
+        try {
+
+            ps = criaStatement.selectSql(tabela, true, "nac_descricao");
+
+            ps.setInt(1, idImovel);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return ps;
+    }
+    
+    @Override
+    protected void verificaExistente(Orcamento item) throws Exception {
+    
+        if (getByIdImovel(item.getImovel().getId()) != null)
+            throw new Exception("Já existe um Orçamento sobre este imóvel.");
+    
+    }
 
     @Override
     protected PreparedStatement statementInserir(Orcamento item) {

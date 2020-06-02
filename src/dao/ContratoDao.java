@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import model.Contrato;
+import model.Orcamento;
 import util.CriaStatement;
 
 /**
@@ -21,20 +22,64 @@ public class ContratoDao extends Dao<Contrato> {
 
     public ContratoDao() throws ClassNotFoundException {
 
-       
         
         Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("CONTRATO");
         
         id = obj.getNomeId();
         tabela = obj.getNomeTabela();
         criaStatement = new CriaStatement(con, tabela, id);
-        campos = "con_data,con_data_alteracao,id_sit_iden,id_orc_iden";
+        campos = "con_data,con_data_alteracao,con_sit_iden,con_orc_iden";
         vetorCampos = campos.split(",");
 
     }
     
     private SituacaoDao situacaoDao = new SituacaoDao();
     private OrcamentoDao orcamentoDao = new OrcamentoDao();
+    
+    @Override
+    protected void verificaExistente(Contrato item) throws Exception {
+        
+        if (getByIdOrcamento(item.getOrcamento().getId()) != null)
+            throw new Exception("Já existe um contrato para este orçamento.");
+        
+    }
+    
+    public Contrato getByIdOrcamento(int idOrcamento) {
+
+        try {
+
+            ps = statementByIdOrcamento(idOrcamento);
+
+            rs = ps.executeQuery();
+
+            return criaItem(rs);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return null;
+
+    }
+
+    protected PreparedStatement statementByIdOrcamento(int idOrcamento) {
+
+        try {
+
+            ps = criaStatement.selectSql(tabela, true, "con_orc_iden");
+
+            ps.setInt(1, idOrcamento);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return ps;
+    }
     
     @Override
     protected PreparedStatement statementInserir(Contrato item) {
