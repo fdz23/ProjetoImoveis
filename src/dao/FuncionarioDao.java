@@ -39,6 +39,9 @@ public class FuncionarioDao extends Dao<Funcionario> {
         vetorCamposPessoa = pessoaDao.getVetorCampos();
 
     }
+    
+    @Override
+    protected void verificaExistente(Funcionario item) throws Exception {}
 
     @Override
     protected PreparedStatement statementInserir(Funcionario item) {

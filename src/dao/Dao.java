@@ -43,6 +43,7 @@ public abstract class Dao<T> implements IDao<T> {
     protected abstract PreparedStatement statementInserir(T item);
     protected abstract PreparedStatement statementAlterar(T item);
     protected abstract T criaItem(ResultSet rs);
+    protected abstract void verificaExistente(T item) throws Exception;
     
     //campo é o número correspondente à propriedade conforme a ordem na tabela do banco de dados!(começa do 0)
     //ascOuDesc true para ordem ascendente e false para descendente
@@ -194,6 +195,8 @@ public abstract class Dao<T> implements IDao<T> {
     public boolean inserir(T item) {
 
         try {
+            
+            verificaExistente(item);
 
             //cria um sql para inserir o item
             ps = statementInserir(item);

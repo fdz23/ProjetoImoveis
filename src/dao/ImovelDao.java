@@ -36,6 +36,52 @@ public class ImovelDao extends Dao<Imovel> {
         vetorCampos = campos.split(",");
 
     }
+    
+    public Imovel getByIdEndereco(int idEndereco) {
+
+        try {
+
+            ps = statementByIdEndereco(idEndereco);
+
+            rs = ps.executeQuery();
+
+            return criaItem(rs);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return null;
+
+    }
+
+    protected PreparedStatement statementByIdEndereco(int idEndereco) {
+
+        try {
+
+            ps = criaStatement.selectSql(tabela, true, "imo_end_iden");
+
+            ps.setInt(1, idEndereco);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+        return ps;
+    }
+    
+    @Override
+    protected void verificaExistente(Imovel item) throws Exception {
+    
+        if (getByIdEndereco(item.getEndereco().getId()) != null)
+            throw new Exception("Endereço já cadastrado.");
+    
+    }
+
 
     @Override
     protected PreparedStatement statementInserir(Imovel item) {
