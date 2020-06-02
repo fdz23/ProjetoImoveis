@@ -7,7 +7,6 @@ package dao;
 
 import fabricas.AbstractFactory;
 import interfaces.Tabela;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -19,6 +18,9 @@ import util.CriaStatement;
  * @author fdz
  */
 public class ImovelItemDao extends Dao<ImovelItem> {
+    
+    private ItemMovelDao itemMovelDao = new ItemMovelDao();
+    private ImovelDao imovelDao = new ImovelDao();
     
     public ImovelItemDao() throws ClassNotFoundException {
 
@@ -40,8 +42,8 @@ public class ImovelItemDao extends Dao<ImovelItem> {
             ps = criaStatement.insertSql(tabela, campos);
 
             ps.setDouble(1, item.getValor());
-            ps.setInt(2, item.getIdItemMovel());
-            ps.setInt(3, item.getIdImovel());
+            ps.setInt(2, item.getItemMovel().getId());
+            ps.setInt(3, item.getImovel().getId());
 
         } catch (Exception error) {
 
@@ -61,8 +63,8 @@ public class ImovelItemDao extends Dao<ImovelItem> {
             ps = criaStatement.updateSql(campos);
 
             ps.setDouble(1, item.getValor());
-            ps.setInt(2, item.getIdItemMovel());
-            ps.setInt(3, item.getIdImovel());
+            ps.setInt(2, item.getItemMovel().getId());
+            ps.setInt(3, item.getImovel().getId());
             ps.setInt(5, item.getId());
 
         } catch (Exception error) {
@@ -85,8 +87,8 @@ public class ImovelItemDao extends Dao<ImovelItem> {
                 return new ImovelItem(
                         rs.getInt(id), 
                         rs.getDouble(vetorCampos[0]), 
-                        rs.getInt(vetorCampos[1]), 
-                        rs.getInt(vetorCampos[2])
+                        itemMovelDao.getByID(rs.getInt(vetorCampos[1])), 
+                        imovelDao.getByID(rs.getInt(vetorCampos[2]))
                 );
 
             } else

@@ -23,10 +23,10 @@ public class Imovel implements Tabela {
     private String baixaMotivo;
     private double valorComissao;
     private int quantidadeParcelas;
-    private int idTipoImovel;
-    private int idEndereco;
-    private int idPessoa;
-    private int idFuncionario;
+    private TipoImovel tipoImovel;
+    private Endereco endereco;
+    private Pessoa pessoa;
+    private Funcionario funcionario;
     private String nomeId = "imo_iden";
     private String nomeTabela = "imoveis";
 
@@ -43,7 +43,7 @@ public class Imovel implements Tabela {
     public Imovel() {}
     
     public Imovel(int id, Date dataInclusao, double preco, double tamanho, String observacao, Date baixaData, String baixaMotivo, 
-            int quantidadeParcelas, double valorComissao, int idFuncionario, int idPessoa, int idTipoImovel, int idEndereco) {
+            int quantidadeParcelas, double valorComissao, Funcionario funcionario, Pessoa pessoa, TipoImovel tipoImovel, Endereco endereco) {
         
         this.id = id;
         this.dataInclusao = dataInclusao;
@@ -53,11 +53,11 @@ public class Imovel implements Tabela {
         this.baixaMotivo = baixaMotivo;
         this.valorComissao = valorComissao;
         this.quantidadeParcelas = quantidadeParcelas;
-        this.idFuncionario = idFuncionario;
-        this.idTipoImovel = idTipoImovel;
-        this.idEndereco = idEndereco;
+        this.funcionario = funcionario;
+        this.tipoImovel = tipoImovel;
+        this.endereco = endereco;
         this.baixaData = baixaData;
-        this.idPessoa = idPessoa;
+        this.pessoa = pessoa;
     }
 
     public int getId() {
@@ -124,28 +124,28 @@ public class Imovel implements Tabela {
         this.quantidadeParcelas = quantidadeParcelas;
     }
 
-    public int getIdTipoImovel() {
-        return idTipoImovel;
+    public TipoImovel getIdTipoImovel() {
+        return tipoImovel;
     }
 
-    public void setIdTipoImovel(int idTipoImovel) {
-        this.idTipoImovel = idTipoImovel;
+    public void setIdTipoImovel(TipoImovel idTipoImovel) {
+        this.tipoImovel = idTipoImovel;
     }
 
-    public int getIdEndereco() {
-        return idEndereco;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setIdEndereco(int idEndereco) {
-        this.idEndereco = idEndereco;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
-    public int getIdPessoa() {
-        return idPessoa;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setIdPessoa(int idPessoa) {
-        this.idPessoa = idPessoa;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     public double getTamanho() {
@@ -156,11 +156,11 @@ public class Imovel implements Tabela {
         this.tamanho = tamanho;
     }
 
-    public int getIdFuncionario() {
-        return idFuncionario;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public void setIdFuncionario(int idFuncionario) {
-        this.idFuncionario = idFuncionario;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 }

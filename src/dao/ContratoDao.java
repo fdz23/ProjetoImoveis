@@ -7,7 +7,6 @@ package dao;
 
 import fabricas.AbstractFactory;
 import interfaces.Tabela;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -34,6 +33,9 @@ public class ContratoDao extends Dao<Contrato> {
 
     }
     
+    private SituacaoDao situacaoDao = new SituacaoDao();
+    private OrcamentoDao orcamentoDao = new OrcamentoDao();
+    
     @Override
     protected PreparedStatement statementInserir(Contrato item) {
         
@@ -43,8 +45,8 @@ public class ContratoDao extends Dao<Contrato> {
 
             ps.setDate(1, item.getData());
             ps.setDate(2, item.getDataAlteracao());
-            ps.setInt(3, item.getIdSituacao());
-            ps.setInt(4, item.getIdOrcamento());
+            ps.setInt(3, item.getSituacao().getId());
+            ps.setInt(4, item.getOrcamento().getId());
 
         } catch (Exception error) {
 
@@ -65,8 +67,8 @@ public class ContratoDao extends Dao<Contrato> {
 
             ps.setDate(1, item.getData());
             ps.setDate(2, item.getDataAlteracao());
-            ps.setInt(3, item.getIdSituacao());
-            ps.setInt(4, item.getIdOrcamento());
+            ps.setInt(3, item.getSituacao().getId());
+            ps.setInt(4, item.getOrcamento().getId());
             ps.setInt(5, item.getId());
 
         } catch (Exception error) {
@@ -90,8 +92,8 @@ public class ContratoDao extends Dao<Contrato> {
                         rs.getInt(id), 
                         rs.getDate(vetorCampos[0]), 
                         rs.getDate(vetorCampos[1]), 
-                        rs.getInt(vetorCampos[2]), 
-                        rs.getInt(vetorCampos[3])
+                        situacaoDao.getByID(rs.getInt(vetorCampos[2])), 
+                        orcamentoDao.getByID(rs.getInt(vetorCampos[3]))
                 );
 
             } else

@@ -15,8 +15,8 @@ public class ImovelItem implements Tabela {
     
     private int id;
     private double valor;
-    private int idItemMovel;
-    private int idImovel;
+    private ItemMovel itemMovel;
+    private Imovel imovel;
     private String nomeId = "iit_iden";
     private String nomeTabela = "imoveis_itens";
 
@@ -32,11 +32,11 @@ public class ImovelItem implements Tabela {
     
     public ImovelItem() {}
     
-    public ImovelItem(int id, double valor, int idItemMovel, int idImovel) {
+    public ImovelItem(int id, double valor, ItemMovel itemMovel, Imovel imovel) {
         this.id = id;
         this.valor = valor;
-        this.idImovel = idImovel;
-        this.idItemMovel = idItemMovel;
+        this.imovel = imovel;
+        this.itemMovel = itemMovel;
     }
 
     public int getId() {
@@ -55,19 +55,19 @@ public class ImovelItem implements Tabela {
         this.valor = valor;
     }
 
-    public int getIdItemMovel() {
-        return idItemMovel;
+    public ItemMovel getItemMovel() {
+        return itemMovel;
     }
 
-    public void setIdItemMovel(int idItemMovel) {
-        this.idItemMovel = idItemMovel;
+    public void setItemMovel(ItemMovel itemMovel) {
+        this.itemMovel = itemMovel;
     }
 
-    public int getIdImovel() {
-        return idImovel;
+    public Imovel getImovel() {
+        return imovel;
     }
 
-    public void setIdImovel(int idImovel) {
-        this.idImovel = idImovel;
+    public void setImovel(Imovel imovel) {
+        this.imovel = imovel;
     }
 }

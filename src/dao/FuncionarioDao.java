@@ -7,7 +7,6 @@ package dao;
 
 import fabricas.AbstractFactory;
 import interfaces.Tabela;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -24,6 +23,8 @@ public class FuncionarioDao extends Dao<Funcionario> {
     private PessoaDao pessoaDao;
     private PreparedStatement psPessoa;
     private String[] vetorCamposPessoa;
+    private TipoFuncionarioDao tipoFuncionarioDao = new TipoFuncionarioDao();
+    private StatusDao statusDao = new StatusDao();
 
     public FuncionarioDao() throws ClassNotFoundException {
 
@@ -55,7 +56,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
                             item.getDataNascimento(),
                             item.getCpf(),
                             item.getTelefone(),
-                            item.getIdEndereco()
+                            item.getEndereco()
                     )
             );
 
@@ -64,8 +65,8 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
             ps.setString(1, item.getMatricula());
             ps.setInt(2, pessoa.getId());
-            ps.setInt(3, item.getIdTipoFuncionario());
-            ps.setInt(4, item.getIdStatus());
+            ps.setInt(3, item.getTipoFuncionario().getId());
+            ps.setInt(4, item.getStatus().getId());
             ps.setDate(5, item.getDataRescisao());
 
         } catch (Exception error) {
@@ -87,22 +88,22 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
             //cria um objeto pessoa com os dados pertencentes a tabela pessoa
             Pessoa pessoa = new Pessoa(
-                    item.getIdPessoa(),
+                    item.getPessoa().getId(),
                     item.getNome(),
                     item.getEmail(),
                     item.getDataNascimento(),
                     item.getCpf(),
                     item.getTelefone(),
-                    item.getIdEndereco()
+                    item.getEndereco()
             );
 
             //altera a tabela pessoa também com os dados
             pessoaDao.alterar(pessoa);
 
             ps.setString(1, item.getMatricula());
-            ps.setInt(2, item.getIdPessoa());
-            ps.setInt(3, item.getIdTipoFuncionario());
-            ps.setInt(4, item.getIdStatus());
+            ps.setInt(2, item.getPessoa().getId());
+            ps.setInt(3, item.getTipoFuncionario().getId());
+            ps.setInt(4, item.getStatus().getId());
             ps.setDate(5, item.getDataRescisao());
             ps.setInt(6, item.getId());
 
@@ -196,17 +197,11 @@ public class FuncionarioDao extends Dao<Funcionario> {
             //e cria um objeto Funcionario com essas informações e as do resultset normal de funcionario
             if (rsPessoa.next()) {
                 return new Funcionario(
-                        rsPessoa.getString(vetorCamposPessoa[0]),
-                        rsPessoa.getString(vetorCamposPessoa[1]),
-                        rsPessoa.getDate(vetorCamposPessoa[2]),
-                        rsPessoa.getString(vetorCamposPessoa[3]),
-                        rsPessoa.getString(vetorCamposPessoa[4]),
-                        rsPessoa.getInt(vetorCamposPessoa[5]),
                         rs.getInt(id),
                         rs.getString(vetorCampos[0]),
-                        rs.getInt(vetorCampos[1]),
-                        rs.getInt(vetorCampos[2]),
-                        rs.getInt(vetorCampos[3]),
+                        pessoaDao.getByID(rs.getInt(vetorCampos[1])),
+                        tipoFuncionarioDao.getByID(rs.getInt(vetorCampos[2])),
+                        statusDao.getByID(rs.getInt(vetorCampos[3])),
                         rs.getDate(vetorCampos[4])
                 );
             } else {
