@@ -7,6 +7,7 @@ package controller;
 
 import dao.StatusDao;
 import java.util.Iterator;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import model.Status;
 
@@ -38,6 +39,24 @@ public class StatusController extends Controller<Status> {
                         item.getDescricao(),});
 
         }
+        return model;
+
+    }
+
+    public DefaultComboBoxModel popularCombox(DefaultComboBoxModel model) throws Exception {
+
+        Iterator<Status> lista = dao.getAll();
+
+        model.removeAllElements();
+
+        while (lista.hasNext()) {
+
+            Status item = lista.next();
+
+            model.addElement(item.getId() + "-" + item.getDescricao());
+
+        }
+
         return model;
 
     }
