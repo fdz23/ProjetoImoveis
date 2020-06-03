@@ -58,7 +58,7 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
 
         try {
 
-            ps = criaStatement.selectSql(tabela, true, "sta_descricao");
+            ps = criaStatement.selectSql(tabela, true, "tfu_descricao");
 
             ps.setString(1, descricao);
 

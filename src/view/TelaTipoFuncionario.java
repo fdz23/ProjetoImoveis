@@ -8,12 +8,14 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import model.NivelAcesso;
 import model.TipoFuncionario;
 
 public class TelaTipoFuncionario extends javax.swing.JFrame {
 
     TipoFuncionarioController tfc = null;
     NivelAcessoController nac = null;
+    NivelAcesso na = null;
     DefaultComboBoxModel modelo1 = new DefaultComboBoxModel();
     DefaultTableModel modelo = new DefaultTableModel();
     int linhaSelecionada = 0;
@@ -26,7 +28,6 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         iniciar();
         popularJtable();
         popularCombox();
-     
 
     }
 
@@ -55,16 +56,15 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
         String idAux = jComboBox1.getSelectedItem().toString();
 
-        String idNum = idAux.substring(0, 1);
+        String idAux1[] = new String[1];
+        idAux1 = idAux.split("-");
 
-        int id = Integer.parseInt(idNum);
+        int id = Integer.parseInt(idAux1[0]);
 
         return id;
     }
 
     public void iniciar() throws ClassNotFoundException, Exception {
-        
-       
 
         tfc = new TipoFuncionarioController();
         nac = new NivelAcessoController();
@@ -83,13 +83,9 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         JtextFielDescricaoNivelAcesso.setEnabled(false);
         jComboBox1.setEnabled(false);
         jTextFieldPesquisa.setEnabled(false);
-        
-        JtextFielDescricaoSalario.setText("0.0");
-        
-       
 
-    
-        
+        JtextFielDescricaoSalario.setText("0.0");
+
         JtextFielDescricaoNivelAcesso.setText(jComboBox1.getSelectedItem().toString());
 
     }
@@ -305,7 +301,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
             String descricao = JtextFielDescricao.getText();
             Double salario = Double.parseDouble(JtextFielDescricaoSalario.getText());
 
-            int idNivel = (int) pegarIDNivelAcesso();
+            na = nac.getItem(pegarIDNivelAcesso());
 
             switch (action) {
 
@@ -317,8 +313,8 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
                 case 1:
 
-               //     TipoFuncionario tip = new TipoFuncionario(0, descricao, 1, salario,1);
-                  //  tfc.inserirItem(tip);
+                    TipoFuncionario tip = new TipoFuncionario(0, descricao, na, salario, 1);
+                    tfc.inserirItem(tip);
                     JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
 
                     popularJtable();
@@ -329,8 +325,8 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
                     int alterarIntem = Integer.parseInt(jTextFieldId.getText());
 
-                  //  tip = new TipoFuncionario(alterarIntem, descricao, 0, salario,login);
-                 //   tfc.alterarItem(tip);
+                    tip = new TipoFuncionario(alterarIntem, descricao, na, salario, login);
+                    tfc.alterarItem(tip);
                     popularJtable();
 
                     JOptionPane.showMessageDialog(null, "Tipo Funcionario alterado com sucesso!");
@@ -373,9 +369,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         try {
-            new TelaNivelAcesso(this,modelo1).setVisible(true);
-
-          
+            new TelaNivelAcesso(this, modelo1).setVisible(true);
 
         } catch (Exception ex) {
             Logger.getLogger(TelaTipoFuncionario.class.getName()).log(Level.SEVERE, null, ex);
@@ -384,20 +378,19 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jCheckBoxLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxLoginActionPerformed
-      
-        if(jCheckBoxLogin.isSelected()){
-            
-           login = 1; 
-            
-        }else{
-            
+
+        if (jCheckBoxLogin.isSelected()) {
+
+            login = 1;
+
+        } else {
+
             login = 0;
-            
+
         }
-        
+
     }//GEN-LAST:event_jCheckBoxLoginActionPerformed
 
-   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
