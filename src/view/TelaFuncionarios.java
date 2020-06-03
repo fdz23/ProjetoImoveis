@@ -470,6 +470,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
             datanasc = new java.sql.Date(format.parse(jFormattedTextField1.getText()).getTime());
             String cpf = jTextFieldCPF.getText();
             String telefone = jFormattedTextFieldTelefone.getText();
+            String matricula = jTextFieldMatricula.getText();
 
             switch (action) {
 
@@ -486,7 +487,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                     end = endc.getItem(pegarIDNivelEndereco());
                     pe = new Pessoa(0, nome, email, datanasc, cpf, telefone, end);
 
-                    fun = new Funcionario(0, email, pe, tf, status, dataResci);
+                    fun = new Funcionario(0, matricula, pe, tf, status, dataResci);
                     fc.inserirItem(fun);
 
                     JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
