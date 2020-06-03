@@ -44,43 +44,50 @@ public class FuncionarioDao extends Dao<Funcionario> {
         vetorCamposPessoa = pessoaDao.getVetorCampos();
 
     }
+
     //campo é o número correspondente à propriedade conforme a ordem na tabela do banco de dados!(começa do 0)
     //ascOuDesc true para ordem ascendente e false para descendente
     @Override
     public Iterator<Funcionario> getTodosItensOrdenadosDuplamentePor(int campo1, int campo2, boolean ascOuDesc1, boolean ascOuDesc2) throws Exception {
-        
+
         String[] vetorCamposPessoa = pessoaDao.getVetorCampos();
-        
+
         //verifica se o número recebido é menor que 0 ou maior que o número máximo de campos
-        if (campo1 < 0 || campo1 > vetorCampos.length + vetorCamposPessoa.length)
+        if (campo1 < 0 || campo1 > vetorCampos.length + vetorCamposPessoa.length) {
             throw new Exception("Campo1 para ser ordenado inexistente.");
-        if (campo2 < 0 || campo2 > vetorCampos.length + vetorCamposPessoa.length)
+        }
+        if (campo2 < 0 || campo2 > vetorCampos.length + vetorCamposPessoa.length) {
             throw new Exception("Campo2 para ser ordenado inexistente.");
-        
+        }
+
         String coluna1 = "";
         String coluna2 = "";
-        
+
         //vetorCampos é um vetor que contém o nome de todos os campos da tabela no banco de dados na ordem
-        if (campo1 == 0)
+        if (campo1 == 0) {
             coluna1 = "pes_iden";
-        else
+        } else {
             coluna1 = vetorCamposPessoa[campo1 - 1];
-        
-        if (campo1 == vetorCamposPessoa.length + 1)
+        }
+
+        if (campo1 == vetorCamposPessoa.length + 1) {
             coluna1 = id;
-        else
+        } else {
             coluna1 = vetorCampos[campo1 - vetorCamposPessoa.length - 1];
-        
-        if (campo2 == 0)
+        }
+
+        if (campo2 == 0) {
             coluna2 = "pes_iden";
-        else
+        } else {
             coluna2 = vetorCamposPessoa[campo2 - 1];
-        
-        if (campo2 == vetorCamposPessoa.length + 1)
+        }
+
+        if (campo2 == vetorCamposPessoa.length + 1) {
             coluna2 = id;
-        else
+        } else {
             coluna2 = vetorCampos[campo2 - vetorCamposPessoa.length - 1];
-        
+        }
+
         //estrutura de dados 1 : Fila de prioridade
         Queue<Funcionario> itens = new PriorityQueue<Funcionario>();
 
@@ -95,8 +102,9 @@ public class FuncionarioDao extends Dao<Funcionario> {
             while (rs.next()) {
 
                 //adiciona na fila de prioridade todos os itens
-                if (checarPessoaFuncionario(rs.getInt("pes_iden")))
+                if (checarPessoaFuncionario(rs.getInt("pes_iden"))) {
                     itens.add(getByID(rs.getInt(id)));
+                }
 
             }
 
@@ -109,31 +117,36 @@ public class FuncionarioDao extends Dao<Funcionario> {
         return itens.iterator();
 
     }
-    
+
     //campo é o número correspondente à propriedade conforme a ordem na tabela do banco de dados!(começa do 0)
     //ascOuDesc true para ordem ascendente e false para descendente
     @Override
     public Iterator<Funcionario> getTodosItensOrdenadosPor(int campo, boolean ascOuDesc) throws Exception {
-        
+
         String[] vetorCamposPessoa = pessoaDao.getVetorCampos();
-        
+
         //verifica se o número recebido é menor que 0 ou maior que o número máximo de campos
-        if (campo < 0 || campo > vetorCampos.length + vetorCamposPessoa.length)
+        if (campo < 0 || campo > vetorCampos.length + vetorCamposPessoa.length) {
             throw new Exception("Campo para ser ordenado inexistente.");
-        
+        }
+
         String coluna = "";
-        
+
         //vetorCampos é um vetor que contém o nome de todos os campos da tabela no banco de dados na ordem
-        if (campo == 0)
-            coluna = "pes_iden";
-        else
-            coluna = vetorCamposPessoa[campo - 1];
-        
-        if (campo == vetorCamposPessoa.length + 1)
-            coluna = id;
-        else
-            coluna = vetorCampos[campo - vetorCamposPessoa.length - 1];
-        
+        if (campo < 7) {
+            if (campo == 0) {
+                coluna = "pes_iden";
+            } else {
+                coluna = vetorCamposPessoa[campo - 1];
+            }
+        } else {
+            if (campo == vetorCamposPessoa.length + 1) {
+                coluna = id;
+            } else {
+                coluna = vetorCampos[campo - vetorCamposPessoa.length - 1];
+            }
+        }
+
         //estrutura de dados 2 : Lista encadeada
         List<Funcionario> itens = new LinkedList<Funcionario>();
 
@@ -148,8 +161,9 @@ public class FuncionarioDao extends Dao<Funcionario> {
             while (rs.next()) {
 
                 //adiciona na fila de prioridade todos os itens
-                if (checarPessoaFuncionario(rs.getInt("pes_iden")))
+                if (checarPessoaFuncionario(rs.getInt("pes_iden"))) {
                     itens.add(getByID(rs.getInt(id)));
+                }
 
             }
 
@@ -162,38 +176,41 @@ public class FuncionarioDao extends Dao<Funcionario> {
         return itens.iterator();
 
     }
-    
+
     private boolean checarPessoaFuncionario(int idPessoa) {
-        
+
         Iterator<Funcionario> itens = getAll();
         boolean result = false;
-        
-        while(itens.hasNext()) {
-            if(itens.next().getPessoa().getId() == idPessoa)
+
+        while (itens.hasNext()) {
+            if (itens.next().getPessoa().getId() == idPessoa) {
                 result = true;
+            }
         }
-        
+
         return result;
-        
+
     }
-    
+
     public String geraMatricula() throws Exception {
-        
+
         return "FUN" + String.format("%04d", getUltimoId());
-        
+
     }
-    
+
     private int getUltimoId() throws Exception {
-        
-        if (!getAll().hasNext())
+
+        if (!getAll().hasNext()) {
             return 1;
-        else
+        } else {
             return getTodosItensOrdenadosPor(0, false).next().getId();
-            
+        }
+
     }
-    
+
     @Override
-    protected void verificaExistente(Funcionario item) throws Exception {}
+    protected void verificaExistente(Funcionario item) throws Exception {
+    }
 
     @Override
     protected PreparedStatement statementInserir(Funcionario item) {
