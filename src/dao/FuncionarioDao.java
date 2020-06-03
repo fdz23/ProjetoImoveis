@@ -132,44 +132,67 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
         String coluna = "";
 
+        //estrutura de dados 2 : Lista encadeada
+        List<Funcionario> itens = new LinkedList<Funcionario>();
+
         //vetorCampos é um vetor que contém o nome de todos os campos da tabela no banco de dados na ordem
-        if (campo < 7) {
+        if (campo < vetorCamposPessoa.length + 1) {
             if (campo == 0) {
                 coluna = "pes_iden";
             } else {
                 coluna = vetorCamposPessoa[campo - 1];
             }
+
+            try {
+
+                //cria um sql que recebe todos os itens ordenados a coluna
+                ps = criaStatement.selectSqlOrder("pessoas", coluna, ascOuDesc);
+
+                //faz o pedido de busca conforme o PreparedStatement criado
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+
+                    //adiciona na fila de prioridade todos os itens
+                    if (checarPessoaFuncionario(rs.getInt("pes_iden"))) {
+                        itens.add(getByID(rs.getInt(id)));
+                    }
+
+                }
+
+            } catch (Exception ex) {
+
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+
+            }
+
         } else {
             if (campo == vetorCamposPessoa.length + 1) {
                 coluna = id;
             } else {
                 coluna = vetorCampos[campo - vetorCamposPessoa.length - 1];
             }
-        }
 
-        //estrutura de dados 2 : Lista encadeada
-        List<Funcionario> itens = new LinkedList<Funcionario>();
+            try {
 
-        try {
+                //cria um sql que recebe todos os itens ordenados a coluna
+                ps = criaStatement.selectSqlOrder(tabela, coluna, ascOuDesc);
 
-            //cria um sql que recebe todos os itens ordenados a coluna
-            ps = criaStatement.selectSqlOrder("pessoas", coluna, ascOuDesc);
+                //faz o pedido de busca conforme o PreparedStatement criado
+                rs = ps.executeQuery();
 
-            //faz o pedido de busca conforme o PreparedStatement criado
-            rs = ps.executeQuery();
+                while (rs.next()) {
 
-            while (rs.next()) {
-
-                //adiciona na fila de prioridade todos os itens
-                if (checarPessoaFuncionario(rs.getInt("pes_iden"))) {
+                    //adiciona na fila de prioridade todos os itens
                     itens.add(getByID(rs.getInt(id)));
+
                 }
 
+            } catch (Exception ex) {
+
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+
             }
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
 
         }
 
@@ -333,8 +356,10 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
             //cria o statement que pesquisa por id na tabela funcionario
             ps = criaStatement.selectSql(tabela, true, this.id);
+            
+            ps.setInt(1, id);
 
-            rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
 
@@ -376,8 +401,6 @@ public class FuncionarioDao extends Dao<Funcionario> {
                         statusDao.getByID(rs.getInt(vetorCampos[3])),
                         rs.getDate(vetorCampos[4])
                 );
-            } else {
-                throw new Exception("Erro na pesquisa de um item Funcionario(parte de pesquisa por id pessoa para pegar as informações)");
             }
 
         } catch (Exception e) {

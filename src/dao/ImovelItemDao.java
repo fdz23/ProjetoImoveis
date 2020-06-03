@@ -136,8 +136,7 @@ public class ImovelItemDao extends Dao<ImovelItem> {
                         imovelDao.getByID(rs.getInt(vetorCampos[2]))
                 );
 
-            } else
-                throw new Exception("ImovelItem não encontrado");
+            }
             
         } catch (Exception e) {
             

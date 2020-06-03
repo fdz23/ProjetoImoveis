@@ -109,8 +109,6 @@ public class EnderecoDao extends Dao<Endereco> {
                         rs.getString(vetorCampos[8])
                 );
 
-            } else {
-                throw new Exception("Endereco não encontrado");
             }
 
         } catch (Exception e) {

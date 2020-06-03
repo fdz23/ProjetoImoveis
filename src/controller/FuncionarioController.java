@@ -25,7 +25,7 @@ public class FuncionarioController extends Controller<Funcionario> {
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
-        Iterator<Funcionario> lista = dao.getTodosItensOrdenadosPor(0, true);
+        Iterator<Funcionario> lista = dao.getTodosItensOrdenadosPor(7, true);
 
         model.setNumRows(0);
 
@@ -36,12 +36,9 @@ public class FuncionarioController extends Controller<Funcionario> {
             model.addRow(
                     new Object[]{
                         item.getId(),
-                        item.getNome(),
-                        item.getEmail(),
-                        item.getDataNascimento(),
-                        item.getCpf(),
-                        item.getTelefone(),
                         item.getMatricula(),
+                        item.getTipoFuncionario().getDescricao(),
+                        item.getStatus().getDescricao(),
                         item.getDataRescisao()
                     });
 

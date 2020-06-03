@@ -128,8 +128,6 @@ public class StatusDao extends Dao<Status> {
                         rs.getString(vetorCampos[0])
                 );
 
-            } else {
-                throw new Exception("Status não encontrado");
             }
 
         } catch (Exception e) {

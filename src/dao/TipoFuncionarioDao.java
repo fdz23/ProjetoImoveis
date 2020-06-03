@@ -113,8 +113,6 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
     
         if (getByDescricao(item.getDescricao()) != null)
             throw new Exception("Já existe um TipoFuncionario com essa descrição.");
-        else if (getByLogin(item.getLogin()) != null)
-            throw new Exception("Já existe um TipoFuncionario com esse login.");
     
     }
 
@@ -178,8 +176,6 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
                         rs.getInt(vetorCampos[3])
                 );
 
-            } else {
-                throw new Exception("TipoFuncionario não encontrado");
             }
 
         } catch (Exception e) {

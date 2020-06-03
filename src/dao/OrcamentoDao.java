@@ -147,8 +147,6 @@ public class OrcamentoDao extends Dao<Orcamento> {
                         tipoPagamentoDao.getByID(rs.getInt(vetorCampos[5]))
                 );
 
-            } else {
-                throw new Exception("Orcamento não encontrado");
             }
 
         } catch (Exception e) {

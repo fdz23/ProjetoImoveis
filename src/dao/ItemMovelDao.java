@@ -127,8 +127,6 @@ public class ItemMovelDao extends Dao<ItemMovel> {
                         rs.getString(vetorCampos[0])
                 );
 
-            } else {
-                throw new Exception("ItemMovel não encontrado");
             }
 
         } catch (Exception e) {

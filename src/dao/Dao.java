@@ -292,8 +292,14 @@ public abstract class Dao<T> implements IDao<T> {
             ps = statementGetItem(id);
 
             ResultSet rs = ps.executeQuery();
+            
+            T item = criaItem(rs);
 
-            return criaItem(rs);
+            if (item == null)
+                throw new Exception("Erro ao encontrar um item " + item.getClass().getName());
+            
+            return item;
+                
 
         } catch (Exception ex) {
 

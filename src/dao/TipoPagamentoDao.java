@@ -128,8 +128,7 @@ public class TipoPagamentoDao extends Dao<TipoPagamento> {
                         rs.getString("tpa_descricao")
                 );
 
-            } else
-                throw new Exception("TipoPagamento não encontrado");
+            }
             
         } catch (Exception e) {
             

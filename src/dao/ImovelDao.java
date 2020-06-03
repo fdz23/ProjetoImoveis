@@ -167,8 +167,6 @@ public class ImovelDao extends Dao<Imovel> {
                         enderecoDao.getByID(rs.getInt(vetorCampos[12]))
                 );
 
-            } else {
-                throw new Exception("Imovel não encontrado");
             }
 
         } catch (Exception e) {
