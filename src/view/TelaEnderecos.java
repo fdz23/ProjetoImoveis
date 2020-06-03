@@ -240,6 +240,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         modelo.addColumn("Logradouro");
         modelo.addColumn("Bairro");
         modelo.addColumn("Cidade");
+        modelo.addColumn("Estado");
         modelo.addColumn("Complemento");
         modelo.addColumn("Numero");
         modelo.addColumn("Referencia");
@@ -249,7 +250,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
     private void popularJtable() throws ClassNotFoundException, Exception {
 
-        //jTableTabela.setModel(ec.populaJTable(modelo));
+        jTableTabela.setModel(ec.populaJTable(modelo));
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
