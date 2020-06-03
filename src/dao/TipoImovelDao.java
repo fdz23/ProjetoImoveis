@@ -128,8 +128,6 @@ public class TipoImovelDao extends Dao<TipoImovel> {
                         rs.getString(vetorCampos[0])
                 );
 
-            } else {
-                throw new Exception("TipoImovel não encontrado");
             }
 
         } catch (Exception e) {

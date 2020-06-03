@@ -187,8 +187,6 @@ public class PessoaDao extends Dao<Pessoa> {
                         enderecoDao.getByID(rs.getInt(vetorCampos[5]))
                 );
 
-            } else {
-                throw new Exception("Pessoa não encontrada");
             }
 
         } catch (Exception e) {

@@ -141,8 +141,7 @@ public class ContratoDao extends Dao<Contrato> {
                         orcamentoDao.getByID(rs.getInt(vetorCampos[3]))
                 );
 
-            } else
-                throw new Exception("Contrato não encontrado");
+            }
             
         } catch (Exception e) {
             

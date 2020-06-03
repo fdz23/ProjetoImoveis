@@ -128,8 +128,6 @@ public class NivelAcessoDao extends Dao<NivelAcesso> {
                         rs.getString(vetorCampos[0])
                 );
 
-            } else {
-                throw new Exception("NivelAcesso não encontrado");
             }
 
         } catch (Exception e) {
