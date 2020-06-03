@@ -194,7 +194,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
     public String geraMatricula() throws Exception {
 
-        return "FUN" + String.format("%04d", getUltimoId());
+        return "FUN" + String.format("%04d", (getUltimoId() + 1));
 
     }
 
