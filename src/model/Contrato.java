@@ -10,7 +10,7 @@ import java.sql.Date;
 
 /**
  *
- * @author fdz
+ * @author rapha
  */
 public class Contrato implements Tabela {
     
