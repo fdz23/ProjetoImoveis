@@ -218,6 +218,8 @@ public abstract class Dao<T> implements IDao<T> {
     public boolean alterar(T item) {
 
         try {
+            
+            verificaExistente(item);
 
             //cria um sql para alterar o item
             ps = statementAlterar(item);
