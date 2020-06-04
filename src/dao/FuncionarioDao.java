@@ -226,7 +226,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
         if (!getAll().hasNext()) {
             return 1;
         } else {
-            return getTodosItensOrdenadosPor(0, false).next().getId();
+            return getTodosItensOrdenadosPor(7, false).next().getId();
         }
 
     }
