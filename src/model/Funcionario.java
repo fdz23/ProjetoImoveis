@@ -47,7 +47,7 @@ public class Funcionario extends Pessoa implements Tabela {
     
     public Funcionario(int id, String matricula, Pessoa pessoa, TipoFuncionario tipoFuncionario, Status status, Date dataRescisao) {
         
-        super(pessoa.getId(), pessoa.getNome(), pessoa.getEmail(), pessoa.getDataNascimento(), pessoa.getCpf(), pessoa.getTelefone(), pessoa.getEndereco());
+        super(pessoa.getId(), pessoa.getNome(), pessoa.getEmail(), pessoa.getDataNascimento(), pessoa.getCpf(), pessoa.getTelefone(), pessoa.getEndereco(), pessoa.getCliente());
         this.pessoa = pessoa;
         this.tipoFuncionario = tipoFuncionario;
         this.matricula = matricula;

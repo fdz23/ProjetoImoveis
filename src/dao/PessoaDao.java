@@ -9,6 +9,9 @@ import fabricas.AbstractFactory;
 import interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Stack;
 import model.Pessoa;
 import util.CriaStatement;
 
@@ -27,7 +30,7 @@ public class PessoaDao extends Dao<Pessoa> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
-        campos = "pes_nome,pes_email,pes_nascimento,pes_cpf,pes_telefone,pes_end_iden";
+        campos = "pes_nome,pes_email,pes_nascimento,pes_cpf,pes_telefone,pes_end_iden,pes_cliente";
         vetorCampos = campos.split(",");
 
     }
@@ -140,13 +143,54 @@ public class PessoaDao extends Dao<Pessoa> {
                     rs.getDate(vetorCampos[2]),
                     rs.getString(vetorCampos[3]),
                     rs.getString(vetorCampos[4]),
-                    enderecoDao.getByID(rs.getInt(vetorCampos[5]))
+                    enderecoDao.getByID(rs.getInt(vetorCampos[5])),
+                    rs.getInt(vetorCampos[6])
             );
 
         }
 
         return null;
 
+    }
+
+    public Iterator<Pessoa> getAllClientes() throws Exception {
+
+        //estrutura de dados 3 : pilha
+        List<Pessoa> itens = new Stack<Pessoa>();
+
+        ps = statementGetTodosClientes();
+        
+        ps.setInt(1, 1);
+
+        rs = ps.executeQuery();
+
+        while (rs.next()) {
+
+            itens.add(getByID(rs.getInt(id)));
+
+        }
+
+        return itens.iterator();
+
+    }
+
+    protected PreparedStatement statementGetTodosClientes() throws Exception {
+
+        //cria um sql para selecionar todos os itens clientes
+        ps = criaStatement.selectSql("pessoas WHERE pes_cliente = 1", true, "pes_cliente");
+
+        return ps;
+
+    }
+    
+    public boolean removeCliente(int id) throws Exception {
+        
+        Pessoa pessoa = getByID(id);
+        
+        pessoa.setCliente(0);
+
+        return alterar(pessoa);
+        
     }
 
 }

@@ -30,7 +30,7 @@ public class PessoaController extends Controller<Pessoa> {
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
-        Iterator<Pessoa> lista = dao.getTodosItensOrdenadosPor(0, true);
+        Iterator<Pessoa> lista = getTodosClientes();
 
         model.setNumRows(0);
 
@@ -52,6 +52,18 @@ public class PessoaController extends Controller<Pessoa> {
 
         return model;
 
+    }
+    
+    public Iterator<Pessoa> getTodosClientes() throws Exception {
+        
+        return new PessoaDao().getAllClientes();
+        
+    }
+    
+    public boolean removerCliente(int id) throws Exception {
+        
+        return new PessoaDao().removeCliente(id);
+        
     }
     
 }
