@@ -614,8 +614,13 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
         int idAux = Integer.parseInt(idacao.getText());
 
-        fc.getItem(idAux).getPessoa();
-        popularPessoaClick(pe);
+        try {
+            pe = fc.getItem(idAux).getPessoa();
+            popularPessoaClick(pe);
+        } catch (Exception ex) {
+            Logger.getLogger(TelaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
 
     }//GEN-LAST:event_jTableTabelaMouseClicked
 
