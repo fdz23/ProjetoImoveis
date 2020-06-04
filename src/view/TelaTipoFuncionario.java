@@ -18,6 +18,8 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     NivelAcesso na = null;
     DefaultComboBoxModel modelo1 = new DefaultComboBoxModel();
     DefaultTableModel modelo = new DefaultTableModel();
+    TelaNivelAcesso tela = null;
+    TelaFuncionarios tela1 = null;
     int linhaSelecionada = 0;
     int login = 1;
 
@@ -29,6 +31,17 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         popularJtable();
         popularCombox();
 
+    }
+    public TelaTipoFuncionario(TelaFuncionarios tela) throws Exception{
+        
+         CriarJTable();
+        initComponents();
+        iniciar();
+        popularJtable();
+        popularCombox();
+        this.tela1 = tela;
+        
+        
     }
 
     private void CriarJTable() {
@@ -46,7 +59,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
     }
 
-    private void popularCombox() throws ClassNotFoundException, Exception {
+    public void popularCombox() throws ClassNotFoundException, Exception {
 
         jComboBox1.setModel(nac.popularCombox(modelo1));
 
@@ -205,7 +218,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 90, 130, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 100, 130, -1));
 
         jCheckBoxLogin.setText("Login");
         jCheckBoxLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -315,6 +328,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
                     TipoFuncionario tip = new TipoFuncionario(0, descricao, na, salario, 1);
                     tfc.inserirItem(tip);
+                    tela1.popularComboboxCargo();
                     JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
 
                     popularJtable();
@@ -327,6 +341,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
                     tip = new TipoFuncionario(alterarIntem, descricao, na, salario, login);
                     tfc.alterarItem(tip);
+                    tela1.popularComboboxCargo();
                     popularJtable();
 
                     JOptionPane.showMessageDialog(null, "Tipo Funcionario alterado com sucesso!");
@@ -338,6 +353,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
                     int deleteItem = Integer.parseInt(jTextFieldId.getText());
 
                     tfc.deletarItem(deleteItem);
+                    tela1.popularComboboxCargo();
                     popularJtable();
 
                     JOptionPane.showMessageDialog(null, "Tipo funcionario excluído com sucesso!");
@@ -369,7 +385,8 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         try {
-            new TelaNivelAcesso(this, modelo1).setVisible(true);
+           tela = new TelaNivelAcesso(this);
+           tela.setVisible(true);
 
         } catch (Exception ex) {
             Logger.getLogger(TelaTipoFuncionario.class.getName()).log(Level.SEVERE, null, ex);
