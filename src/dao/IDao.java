@@ -13,10 +13,10 @@ import java.util.Iterator;
  */
 public interface IDao<T> {
 
-    public boolean inserir(T item);
-    public boolean alterar(T item);
-    public boolean deletar(int id);
-    public Iterator<T> getAll();
-    public T getByID(int id);
+    public boolean inserir(T item) throws Exception;
+    public boolean alterar(T item) throws Exception;
+    public boolean deletar(int id) throws Exception;
+    public Iterator<T> getAll() throws Exception;
+    public T getByID(int id) throws Exception;
     
 }
