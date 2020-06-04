@@ -56,9 +56,18 @@ public class ImovelDao extends Dao<Imovel> {
     }
 
     @Override
-    protected void verificaExistente(Imovel item) throws Exception {
+    protected void verificaExistenteInserir(Imovel item) throws Exception {
 
         if (getByIdEndereco(item.getEndereco().getId()) != null) {
+            throw new Exception("Endereço já cadastrado.");
+        }
+
+    }
+
+    @Override
+    protected void verificaExistenteAlterar(Imovel item) throws Exception {
+
+        if (getByIdEndereco(item.getEndereco().getId()) != null && getByIdEndereco(item.getEndereco().getId()).getId() != getByID(item.getId()).getEndereco().getId()) {
             throw new Exception("Endereço já cadastrado.");
         }
 

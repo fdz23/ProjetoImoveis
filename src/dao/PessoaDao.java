@@ -36,11 +36,23 @@ public class PessoaDao extends Dao<Pessoa> {
         return vetorCampos;
     }
 
-    public void verificaExistente(Pessoa item) throws Exception {
+    @Override
+    public void verificaExistenteInserir(Pessoa item) throws Exception {
 
         if (getByCpf(item.getCpf()) != null) {
             throw new Exception("Cpf já cadastrado.");
         } else if (getByEmail(item.getEmail()) != null) {
+            throw new Exception("Email já cadastrado.");
+        }
+
+    }
+
+    @Override
+    public void verificaExistenteAlterar(Pessoa item) throws Exception {
+
+        if (getByCpf(item.getCpf()) != null && getByCpf(item.getCpf()).getId() != getByID(item.getId()).getId()) {
+            throw new Exception("Cpf já cadastrado.");
+        } else if (getByEmail(item.getEmail()) != null  && getByEmail(item.getEmail()).getId() != getByID(item.getId()).getId()) {
             throw new Exception("Email já cadastrado.");
         }
 
@@ -86,8 +98,6 @@ public class PessoaDao extends Dao<Pessoa> {
 
     @Override
     protected PreparedStatement statementInserir(Pessoa item) throws Exception {
-
-        verificaExistente(item);
 
         ps = criaStatement.insertSql(tabela, campos);
 

@@ -50,9 +50,18 @@ public class TipoPagamentoDao extends Dao<TipoPagamento> {
     }
 
     @Override
-    protected void verificaExistente(TipoPagamento item) throws Exception {
+    protected void verificaExistenteInserir(TipoPagamento item) throws Exception {
 
         if (getByDescricao(item.getDescricao()) != null) {
+            throw new Exception("Já existe um TipoPagamento com essa descrição.");
+        }
+
+    }
+
+    @Override
+    protected void verificaExistenteAlterar(TipoPagamento item) throws Exception {
+
+        if (getByDescricao(item.getDescricao()) != null && getByDescricao(item.getDescricao()).getId() != getByID(item.getId()).getId()) {
             throw new Exception("Já existe um TipoPagamento com essa descrição.");
         }
 

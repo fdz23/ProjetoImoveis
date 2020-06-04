@@ -22,7 +22,7 @@ public class PessoaController extends Controller<Pessoa> {
 
     }
 
-    public Pessoa getPessoaPorCpf(String cpf) throws ClassNotFoundException {
+    public Pessoa getPessoaPorCpf(String cpf) throws Exception {
 
         return new PessoaDao().getByCpf(cpf);
     }

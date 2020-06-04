@@ -50,9 +50,18 @@ public class SituacaoDao extends Dao<Situacao> {
     }
 
     @Override
-    protected void verificaExistente(Situacao item) throws Exception {
+    protected void verificaExistenteInserir(Situacao item) throws Exception {
 
         if (getByDescricao(item.getDescricao()) != null) {
+            throw new Exception("Já existe um NivelAcesso com essa descrição.");
+        }
+
+    }
+
+    @Override
+    protected void verificaExistenteAlterar(Situacao item) throws Exception {
+
+        if (getByDescricao(item.getDescricao()) != null && getByDescricao(item.getDescricao()).getId() != getByID(item.getId()).getId()) {
             throw new Exception("Já existe um NivelAcesso com essa descrição.");
         }
 

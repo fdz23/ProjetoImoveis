@@ -207,7 +207,11 @@ public class FuncionarioDao extends Dao<Funcionario> {
     }
 
     @Override
-    protected void verificaExistente(Funcionario item) throws Exception {
+    protected void verificaExistenteInserir(Funcionario item) throws Exception {
+    }
+
+    @Override
+    protected void verificaExistenteAlterar(Funcionario item) throws Exception {
     }
 
     @Override

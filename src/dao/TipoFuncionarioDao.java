@@ -71,9 +71,18 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
     }
 
     @Override
-    protected void verificaExistente(TipoFuncionario item) throws Exception {
+    protected void verificaExistenteInserir(TipoFuncionario item) throws Exception {
 
         if (getByDescricao(item.getDescricao()) != null) {
+            throw new Exception("Já existe um TipoFuncionario com essa descrição.");
+        }
+
+    }
+
+    @Override
+    protected void verificaExistenteAlterar(TipoFuncionario item) throws Exception {
+
+        if (getByDescricao(item.getDescricao()) != null && getByDescricao(item.getDescricao()).getId() != getByID(item.getId()).getId()) {
             throw new Exception("Já existe um TipoFuncionario com essa descrição.");
         }
 

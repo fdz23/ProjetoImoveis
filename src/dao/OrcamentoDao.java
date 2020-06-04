@@ -55,9 +55,18 @@ public class OrcamentoDao extends Dao<Orcamento> {
     }
 
     @Override
-    protected void verificaExistente(Orcamento item) throws Exception {
+    protected void verificaExistenteInserir(Orcamento item) throws Exception {
 
         if (getByIdImovel(item.getImovel().getId()) != null) {
+            throw new Exception("Já existe um Orçamento sobre este imóvel.");
+        }
+
+    }
+
+    @Override
+    protected void verificaExistenteAlterar(Orcamento item) throws Exception {
+
+        if (getByIdImovel(item.getImovel().getId()) != null && getByIdImovel(item.getImovel().getId()).getId() != getByID(item.getId()).getImovel().getId()) {
             throw new Exception("Já existe um Orçamento sobre este imóvel.");
         }
 

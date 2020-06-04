@@ -50,9 +50,18 @@ public class StatusDao extends Dao<Status> {
     }
 
     @Override
-    protected void verificaExistente(Status item) throws Exception {
+    protected void verificaExistenteInserir(Status item) throws Exception {
 
         if (getByDescricao(item.getDescricao()) != null) {
+            throw new Exception("Já existe um NivelAcesso com essa descrição.");
+        }
+
+    }
+
+    @Override
+    protected void verificaExistenteAlterar(Status item) throws Exception {
+
+        if (getByDescricao(item.getDescricao()) != null && getByDescricao(item.getDescricao()).getId() != getByID(item.getId()).getId()) {
             throw new Exception("Já existe um NivelAcesso com essa descrição.");
         }
 
