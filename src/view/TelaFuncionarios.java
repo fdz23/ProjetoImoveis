@@ -590,7 +590,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
         } catch (Exception ex) {
 
-            System.out.println(ex.getMessage());
+           ex.printStackTrace();
 
         }
 
