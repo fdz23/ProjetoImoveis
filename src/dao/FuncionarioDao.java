@@ -14,7 +14,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import javax.swing.JOptionPane;
 import model.Funcionario;
 import model.Pessoa;
 import util.CriaStatement;
@@ -91,26 +90,18 @@ public class FuncionarioDao extends Dao<Funcionario> {
         //estrutura de dados 1 : Fila de prioridade
         Queue<Funcionario> itens = new PriorityQueue<Funcionario>();
 
-        try {
+        //cria um sql que recebe todos os itens ordenados conforme duas colunas
+        ps = criaStatement.selectSqlOrderDupla("pessoas", coluna1, coluna2, ascOuDesc1, ascOuDesc2);
 
-            //cria um sql que recebe todos os itens ordenados conforme duas colunas
-            ps = criaStatement.selectSqlOrderDupla("pessoas", coluna1, coluna2, ascOuDesc1, ascOuDesc2);
+        //faz o pedido de busca conforme o PreparedStatement criado
+        rs = ps.executeQuery();
 
-            //faz o pedido de busca conforme o PreparedStatement criado
-            rs = ps.executeQuery();
+        while (rs.next()) {
 
-            while (rs.next()) {
-
-                //adiciona na fila de prioridade todos os itens
-                if (checarPessoaFuncionario(rs.getInt("pes_iden"))) {
-                    itens.add(getByID(rs.getInt(id)));
-                }
-
+            //adiciona na fila de prioridade todos os itens
+            if (checarPessoaFuncionario(rs.getInt("pes_iden"))) {
+                itens.add(getByID(rs.getInt(id)));
             }
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
 
         }
 
@@ -143,26 +134,18 @@ public class FuncionarioDao extends Dao<Funcionario> {
                 coluna = vetorCamposPessoa[campo - 1];
             }
 
-            try {
+            //cria um sql que recebe todos os itens ordenados a coluna
+            ps = criaStatement.selectSqlOrder("pessoas", coluna, ascOuDesc);
 
-                //cria um sql que recebe todos os itens ordenados a coluna
-                ps = criaStatement.selectSqlOrder("pessoas", coluna, ascOuDesc);
+            //faz o pedido de busca conforme o PreparedStatement criado
+            rs = ps.executeQuery();
 
-                //faz o pedido de busca conforme o PreparedStatement criado
-                rs = ps.executeQuery();
+            while (rs.next()) {
 
-                while (rs.next()) {
-
-                    //adiciona na fila de prioridade todos os itens
-                    if (checarPessoaFuncionario(rs.getInt("pes_iden"))) {
-                        itens.add(getByID(rs.getInt(id)));
-                    }
-
+                //adiciona na fila de prioridade todos os itens
+                if (checarPessoaFuncionario(rs.getInt("pes_iden"))) {
+                    itens.add(getByID(rs.getInt(id)));
                 }
-
-            } catch (Exception ex) {
-
-                JOptionPane.showMessageDialog(null, ex.getMessage());
 
             }
 
@@ -173,24 +156,16 @@ public class FuncionarioDao extends Dao<Funcionario> {
                 coluna = vetorCampos[campo - vetorCamposPessoa.length - 1];
             }
 
-            try {
+            //cria um sql que recebe todos os itens ordenados a coluna
+            ps = criaStatement.selectSqlOrder(tabela, coluna, ascOuDesc);
 
-                //cria um sql que recebe todos os itens ordenados a coluna
-                ps = criaStatement.selectSqlOrder(tabela, coluna, ascOuDesc);
+            //faz o pedido de busca conforme o PreparedStatement criado
+            rs = ps.executeQuery();
 
-                //faz o pedido de busca conforme o PreparedStatement criado
-                rs = ps.executeQuery();
+            while (rs.next()) {
 
-                while (rs.next()) {
-
-                    //adiciona na fila de prioridade todos os itens
-                    itens.add(getByID(rs.getInt(id)));
-
-                }
-
-            } catch (Exception ex) {
-
-                JOptionPane.showMessageDialog(null, ex.getMessage());
+                //adiciona na fila de prioridade todos os itens
+                itens.add(getByID(rs.getInt(id)));
 
             }
 
@@ -200,7 +175,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
     }
 
-    private boolean checarPessoaFuncionario(int idPessoa) {
+    private boolean checarPessoaFuncionario(int idPessoa) throws Exception {
 
         Iterator<Funcionario> itens = getAll();
         boolean result = false;
@@ -236,149 +211,117 @@ public class FuncionarioDao extends Dao<Funcionario> {
     }
 
     @Override
-    protected PreparedStatement statementInserir(Funcionario item) {
+    protected PreparedStatement statementInserir(Funcionario item) throws Exception {
 
-        try {
+        ps = criaStatement.insertSql(tabela, campos);
 
-            ps = criaStatement.insertSql(tabela, campos);
+        //insere uma pessoa com os valores recebidos
+        pessoaDao.inserir(
+                new Pessoa(
+                        0,
+                        item.getNome(),
+                        item.getEmail(),
+                        item.getDataNascimento(),
+                        item.getCpf(),
+                        item.getTelefone(),
+                        item.getEndereco()
+                )
+        );
 
-            //insere uma pessoa com os valores recebidos
-            pessoaDao.inserir(
-                    new Pessoa(
-                            0,
-                            item.getNome(),
-                            item.getEmail(),
-                            item.getDataNascimento(),
-                            item.getCpf(),
-                            item.getTelefone(),
-                            item.getEndereco()
-                    )
-            );
+        //pesquisa essa pessoa que foi inserida por cpf e cria um objeto pessoa e passa seu id para o statement a ser usado
+        Pessoa pessoa = pessoaDao.getByCpf(item.getCpf());
 
-            //pesquisa essa pessoa que foi inserida por cpf e cria um objeto pessoa e passa seu id para o statement a ser usado
-            Pessoa pessoa = pessoaDao.getByCpf(item.getCpf());
-
-            ps.setString(1, item.getMatricula());
-            ps.setInt(2, pessoa.getId());
-            ps.setInt(3, item.getTipoFuncionario().getId());
-            ps.setInt(4, item.getStatus().getId());
-            ps.setDate(5, item.getDataRescisao());
-
-        } catch (Exception error) {
-
-            JOptionPane.showMessageDialog(null, error.getMessage());
-
-        }
+        ps.setString(1, item.getMatricula());
+        ps.setInt(2, pessoa.getId());
+        ps.setInt(3, item.getTipoFuncionario().getId());
+        ps.setInt(4, item.getStatus().getId());
+        ps.setDate(5, item.getDataRescisao());
 
         return ps;
     }
 
     @Override
-    protected PreparedStatement statementAlterar(Funcionario item) {
+    protected PreparedStatement statementAlterar(Funcionario item) throws Exception {
 
-        try {
+        //cria statement para alterar os dados dos campos da tabela funcionario
+        ps = criaStatement.updateSql(campos);
 
-            //cria statement para alterar os dados dos campos da tabela funcionario
-            ps = criaStatement.updateSql(campos);
+        //cria um objeto pessoa com os dados pertencentes a tabela pessoa
+        Pessoa pessoa = new Pessoa(
+                item.getPessoa().getId(),
+                item.getNome(),
+                item.getEmail(),
+                item.getDataNascimento(),
+                item.getCpf(),
+                item.getTelefone(),
+                item.getEndereco()
+        );
 
-            //cria um objeto pessoa com os dados pertencentes a tabela pessoa
-            Pessoa pessoa = new Pessoa(
-                    item.getPessoa().getId(),
-                    item.getNome(),
-                    item.getEmail(),
-                    item.getDataNascimento(),
-                    item.getCpf(),
-                    item.getTelefone(),
-                    item.getEndereco()
-            );
+        //altera a tabela pessoa também com os dados
+        pessoaDao.alterar(pessoa);
 
-            //altera a tabela pessoa também com os dados
-            pessoaDao.alterar(pessoa);
-
-            ps.setString(1, item.getMatricula());
-            ps.setInt(2, item.getPessoa().getId());
-            ps.setInt(3, item.getTipoFuncionario().getId());
-            ps.setInt(4, item.getStatus().getId());
-            ps.setDate(5, item.getDataRescisao());
-            ps.setInt(6, item.getId());
-
-        } catch (Exception error) {
-
-            JOptionPane.showMessageDialog(null, error.getMessage());
-
-        }
+        ps.setString(1, item.getMatricula());
+        ps.setInt(2, item.getPessoa().getId());
+        ps.setInt(3, item.getTipoFuncionario().getId());
+        ps.setInt(4, item.getStatus().getId());
+        ps.setDate(5, item.getDataRescisao());
+        ps.setInt(6, item.getId());
 
         return ps;
 
     }
 
     @Override
-    protected PreparedStatement statementDeletar(int id) {
+    protected PreparedStatement statementDeletar(int id) throws Exception {
 
-        try {
+        //cria um statement que pesquisa o funcionario com esse id
+        ps = criaStatement.selectSql(tabela, true, this.id);
 
-            //cria um statement que pesquisa o funcionario com esse id
-            ps = criaStatement.selectSql(tabela, true, this.id);
+        rs = ps.executeQuery();
 
-            rs = ps.executeQuery();
+        if (rs.next()) {
 
-            if (rs.next()) {
+            //pega o id referente à tabela pessoa
+            int idPessoa = rs.getInt("fun_pes_iden");
 
-                //pega o id referente à tabela pessoa
-                int idPessoa = rs.getInt("fun_pes_iden");
+            //e deleta o mesmo na tabela pessoa
+            pessoaDao.deletar(idPessoa);
 
-                //e deleta o mesmo na tabela pessoa
-                pessoaDao.deletar(idPessoa);
-
-            } else {
-                throw new Exception("Erro na remoção de um item Funcionario(parte de remoção por id pessoa para remover a pessoa)");
-            }
-
-            //cria o statemente para deletar o funcionario
-            ps = criaStatement.deleteSql();
-
-            ps.setInt(1, id);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
+        } else {
+            throw new Exception("Erro na remoção de um item Funcionario(parte de remoção por id pessoa para remover a pessoa)");
         }
+
+        //cria o statemente para deletar o funcionario
+        ps = criaStatement.deleteSql();
+
+        ps.setInt(1, id);
 
         return ps;
 
     }
 
     @Override
-    protected PreparedStatement statementGetItem(int id) {
+    protected PreparedStatement statementGetItem(int id) throws Exception {
 
-        try {
+        //cria o statement que pesquisa por id na tabela funcionario
+        ps = criaStatement.selectSql(tabela, true, this.id);
 
-            //cria o statement que pesquisa por id na tabela funcionario
-            ps = criaStatement.selectSql(tabela, true, this.id);
-            
-            ps.setInt(1, id);
+        ps.setInt(1, id);
 
-            ResultSet rs = ps.executeQuery();
+        ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
+        if (rs.next()) {
 
-                //pega o id referente à tabela pessoa na tabela funcionario
-                int idPessoa = rs.getInt("fun_pes_iden");
+            //pega o id referente à tabela pessoa na tabela funcionario
+            int idPessoa = rs.getInt("fun_pes_iden");
 
-                //cria um statement que pesquisa por id na tabela pessoa e retorna o mesmo
-                psPessoa = criaStatement.selectSql("pessoas", true, "pes_iden");
+            //cria um statement que pesquisa por id na tabela pessoa e retorna o mesmo
+            psPessoa = criaStatement.selectSql("pessoas", true, "pes_iden");
 
-                psPessoa.setInt(1, idPessoa);
+            psPessoa.setInt(1, idPessoa);
 
-            } else {
-                throw new Exception("Erro na pesquisa de um item Funcionario(parte de pesquisa por id funcionario para pegar o id pessoa)");
-            }
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
+        } else {
+            throw new Exception("Erro na pesquisa de um item Funcionario(parte de pesquisa por id funcionario para pegar o id pessoa)");
         }
 
         return psPessoa;
@@ -386,27 +329,19 @@ public class FuncionarioDao extends Dao<Funcionario> {
     }
 
     @Override
-    protected Funcionario criaItem(ResultSet rsPessoa) {
-
-        try {
+    protected Funcionario criaItem(ResultSet rsPessoa) throws Exception {
 
             //recebe um resultset com as informações da tabela pessoa referente ao id usado 
-            //e cria um objeto Funcionario com essas informações e as do resultset normal de funcionario
-            if (rsPessoa.next()) {
-                return new Funcionario(
-                        rs.getInt(id),
-                        rs.getString(vetorCampos[0]),
-                        pessoaDao.getByID(rs.getInt(vetorCampos[1])),
-                        tipoFuncionarioDao.getByID(rs.getInt(vetorCampos[2])),
-                        statusDao.getByID(rs.getInt(vetorCampos[3])),
-                        rs.getDate(vetorCampos[4])
-                );
-            }
-
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(null, e.getMessage());
-
+        //e cria um objeto Funcionario com essas informações e as do resultset normal de funcionario
+        if (rsPessoa.next()) {
+            return new Funcionario(
+                    rs.getInt(id),
+                    rs.getString(vetorCampos[0]),
+                    pessoaDao.getByID(rs.getInt(vetorCampos[1])),
+                    tipoFuncionarioDao.getByID(rs.getInt(vetorCampos[2])),
+                    statusDao.getByID(rs.getInt(vetorCampos[3])),
+                    rs.getDate(vetorCampos[4])
+            );
         }
 
         return null;

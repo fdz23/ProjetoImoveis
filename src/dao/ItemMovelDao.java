@@ -9,7 +9,6 @@ import fabricas.AbstractFactory;
 import interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.swing.JOptionPane;
 import model.ItemMovel;
 import util.CriaStatement;
 
@@ -30,108 +29,67 @@ public class ItemMovelDao extends Dao<ItemMovel> {
         vetorCampos = campos.split(",");
 
     }
-    
-    public ItemMovel getByDescricao(String descricao) {
 
-        try {
+    public ItemMovel getByDescricao(String descricao) throws Exception {
 
-            ps = statementByDescricao(descricao);
+        ps = statementByDescricao(descricao);
 
-            rs = ps.executeQuery();
+        rs = ps.executeQuery();
 
-            return criaItem(rs);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-
-        return null;
+        return criaItem(rs);
 
     }
 
-    protected PreparedStatement statementByDescricao(String descricao) {
+    protected PreparedStatement statementByDescricao(String descricao) throws Exception {
 
-        try {
+        ps = criaStatement.selectSql(tabela, true, "iti_nome");
 
-            ps = criaStatement.selectSql(tabela, true, "iti_nome");
-
-            ps.setString(1, descricao);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
+        ps.setString(1, descricao);
 
         return ps;
     }
-    
+
     @Override
     protected void verificaExistente(ItemMovel item) throws Exception {
-    
-        if (getByDescricao(item.getDescricao()) != null)
+
+        if (getByDescricao(item.getDescricao()) != null) {
             throw new Exception("Já existe um ItemMovel com esse nome.");
-    
+        }
+
     }
 
     @Override
-    protected PreparedStatement statementInserir(ItemMovel item) {
+    protected PreparedStatement statementInserir(ItemMovel item) throws Exception {
 
-        try {
+        ps = criaStatement.insertSql(tabela, campos);
 
-            ps = criaStatement.insertSql(tabela, campos);
-
-            ps.setString(1, item.getDescricao());
-
-        } catch (Exception error) {
-
-            JOptionPane.showMessageDialog(null, error.getMessage());
-
-        }
+        ps.setString(1, item.getDescricao());
 
         return ps;
 
     }
 
     @Override
-    protected PreparedStatement statementAlterar(ItemMovel item) {
+    protected PreparedStatement statementAlterar(ItemMovel item) throws Exception {
 
-        try {
+        ps = criaStatement.updateSql(campos);
 
-            ps = criaStatement.updateSql(campos);
-
-            ps.setString(1, item.getDescricao());
-            ps.setInt(2, item.getId());
-
-        } catch (Exception error) {
-
-            JOptionPane.showMessageDialog(null, error.getMessage());
-
-        }
+        ps.setString(1, item.getDescricao());
+        ps.setInt(2, item.getId());
 
         return ps;
 
     }
 
     @Override
-    protected ItemMovel criaItem(ResultSet rs) {
+    protected ItemMovel criaItem(ResultSet rs) throws Exception {
 
-        try {
+        if (rs.next()) {
 
-            if (rs.next()) {
-
-                return new ItemMovel(
-                        rs.getInt(id),
-                        rs.getString(vetorCampos[0])
-                );
-
-            }
-
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            return new ItemMovel(
+                    rs.getInt(id),
+                    rs.getString(vetorCampos[0])
+            );
 
         }
 

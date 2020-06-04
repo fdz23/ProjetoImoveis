@@ -9,7 +9,6 @@ import fabricas.AbstractFactory;
 import interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.swing.JOptionPane;
 import model.Imovel;
 import util.CriaStatement;
 
@@ -18,7 +17,7 @@ import util.CriaStatement;
  * @author fdz
  */
 public class ImovelDao extends Dao<Imovel> {
-    
+
     private FuncionarioDao funcionarioDao = new FuncionarioDao();
     private PessoaDao pessoaDao = new PessoaDao();
     private TipoImovelDao tipoImovelDao = new TipoImovelDao();
@@ -36,142 +35,100 @@ public class ImovelDao extends Dao<Imovel> {
         vetorCampos = campos.split(",");
 
     }
-    
-    public Imovel getByIdEndereco(int idEndereco) {
 
-        try {
+    public Imovel getByIdEndereco(int idEndereco) throws Exception {
 
-            ps = statementByIdEndereco(idEndereco);
+        ps = statementByIdEndereco(idEndereco);
 
-            rs = ps.executeQuery();
+        rs = ps.executeQuery();
 
-            return criaItem(rs);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-
-        return null;
+        return criaItem(rs);
 
     }
 
-    protected PreparedStatement statementByIdEndereco(int idEndereco) {
+    protected PreparedStatement statementByIdEndereco(int idEndereco) throws Exception {
 
-        try {
+        ps = criaStatement.selectSql(tabela, true, "imo_end_iden");
 
-            ps = criaStatement.selectSql(tabela, true, "imo_end_iden");
-
-            ps.setInt(1, idEndereco);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
+        ps.setInt(1, idEndereco);
 
         return ps;
     }
-    
+
     @Override
     protected void verificaExistente(Imovel item) throws Exception {
-    
-        if (getByIdEndereco(item.getEndereco().getId()) != null)
+
+        if (getByIdEndereco(item.getEndereco().getId()) != null) {
             throw new Exception("Endereço já cadastrado.");
-    
+        }
+
     }
 
-
     @Override
-    protected PreparedStatement statementInserir(Imovel item) {
+    protected PreparedStatement statementInserir(Imovel item) throws Exception {
 
-        try {
+        ps = criaStatement.insertSql(tabela, campos);
 
-            ps = criaStatement.insertSql(tabela, campos);
-
-            ps.setDate(1, item.getDataInclusao());
-            ps.setDouble(2, item.getPreco());
-            ps.setDouble(3, item.getTamanho());
-            ps.setString(4, item.getObservacao());
-            ps.setDate(5, item.getBaixaData());
-            ps.setString(6, item.getBaixaMotivo());
-            ps.setInt(7, item.getQuantidadeParcelas());
-            ps.setDouble(8, item.getValorComissao());
-            ps.setInt(9, item.getFuncionario().getId());
-            ps.setInt(10, item.getPessoa().getId());
-            ps.setInt(11, item.getIdTipoImovel().getId());
-            ps.setInt(12, item.getEndereco().getId());
-
-        } catch (Exception error) {
-
-            JOptionPane.showMessageDialog(null, error.getMessage());
-
-        }
+        ps.setDate(1, item.getDataInclusao());
+        ps.setDouble(2, item.getPreco());
+        ps.setDouble(3, item.getTamanho());
+        ps.setString(4, item.getObservacao());
+        ps.setDate(5, item.getBaixaData());
+        ps.setString(6, item.getBaixaMotivo());
+        ps.setInt(7, item.getQuantidadeParcelas());
+        ps.setDouble(8, item.getValorComissao());
+        ps.setInt(9, item.getFuncionario().getId());
+        ps.setInt(10, item.getPessoa().getId());
+        ps.setInt(11, item.getIdTipoImovel().getId());
+        ps.setInt(12, item.getEndereco().getId());
 
         return ps;
 
     }
 
     @Override
-    protected PreparedStatement statementAlterar(Imovel item) {
+    protected PreparedStatement statementAlterar(Imovel item) throws Exception {
 
-        try {
+        ps = criaStatement.updateSql(campos);
 
-            ps = criaStatement.updateSql(campos);
-
-            ps.setDate(1, item.getDataInclusao());
-            ps.setDouble(2, item.getPreco());
-            ps.setDouble(3, item.getTamanho());
-            ps.setString(4, item.getObservacao());
-            ps.setDate(5, item.getBaixaData());
-            ps.setString(6, item.getBaixaMotivo());
-            ps.setInt(7, item.getQuantidadeParcelas());
-            ps.setDouble(8, item.getValorComissao());
-            ps.setInt(9, item.getFuncionario().getId());
-            ps.setInt(10, item.getPessoa().getId());
-            ps.setInt(11, item.getIdTipoImovel().getId());
-            ps.setInt(12, item.getEndereco().getId());
-            ps.setInt(13, item.getId());
-
-        } catch (Exception error) {
-
-            JOptionPane.showMessageDialog(null, error.getMessage());
-
-        }
+        ps.setDate(1, item.getDataInclusao());
+        ps.setDouble(2, item.getPreco());
+        ps.setDouble(3, item.getTamanho());
+        ps.setString(4, item.getObservacao());
+        ps.setDate(5, item.getBaixaData());
+        ps.setString(6, item.getBaixaMotivo());
+        ps.setInt(7, item.getQuantidadeParcelas());
+        ps.setDouble(8, item.getValorComissao());
+        ps.setInt(9, item.getFuncionario().getId());
+        ps.setInt(10, item.getPessoa().getId());
+        ps.setInt(11, item.getIdTipoImovel().getId());
+        ps.setInt(12, item.getEndereco().getId());
+        ps.setInt(13, item.getId());
 
         return ps;
 
     }
 
     @Override
-    protected Imovel criaItem(ResultSet rs) {
+    protected Imovel criaItem(ResultSet rs) throws Exception {
 
-        try {
+        if (rs.next()) {
 
-            if (rs.next()) {
-
-                return new Imovel(
-                        rs.getInt(vetorCampos[0]),
-                        rs.getDate(vetorCampos[1]),
-                        rs.getDouble(vetorCampos[2]),
-                        rs.getDouble(vetorCampos[3]),
-                        rs.getString(vetorCampos[4]),
-                        rs.getDate(vetorCampos[5]),
-                        rs.getString(vetorCampos[6]),
-                        rs.getInt(vetorCampos[7]),
-                        rs.getDouble(vetorCampos[8]),
-                        funcionarioDao.getByID(rs.getInt(vetorCampos[9])),
-                        pessoaDao.getByID(rs.getInt(vetorCampos[10])),
-                        tipoImovelDao.getByID(rs.getInt(vetorCampos[11])),
-                        enderecoDao.getByID(rs.getInt(vetorCampos[12]))
-                );
-
-            }
-
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            return new Imovel(
+                    rs.getInt(vetorCampos[0]),
+                    rs.getDate(vetorCampos[1]),
+                    rs.getDouble(vetorCampos[2]),
+                    rs.getDouble(vetorCampos[3]),
+                    rs.getString(vetorCampos[4]),
+                    rs.getDate(vetorCampos[5]),
+                    rs.getString(vetorCampos[6]),
+                    rs.getInt(vetorCampos[7]),
+                    rs.getDouble(vetorCampos[8]),
+                    funcionarioDao.getByID(rs.getInt(vetorCampos[9])),
+                    pessoaDao.getByID(rs.getInt(vetorCampos[10])),
+                    tipoImovelDao.getByID(rs.getInt(vetorCampos[11])),
+                    enderecoDao.getByID(rs.getInt(vetorCampos[12]))
+            );
 
         }
 

@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
-import javax.swing.JOptionPane;
 import util.CriaStatement;
 import util.ConectaDb;
 
@@ -39,246 +38,174 @@ public abstract class Dao<T> implements IDao<T> {
         rs = null;
 
     }
-    
-    protected abstract PreparedStatement statementInserir(T item);
-    protected abstract PreparedStatement statementAlterar(T item);
-    protected abstract T criaItem(ResultSet rs);
+
+    protected abstract PreparedStatement statementInserir(T item) throws Exception;
+
+    protected abstract PreparedStatement statementAlterar(T item) throws Exception;
+
+    protected abstract T criaItem(ResultSet rs) throws Exception;
+
     protected abstract void verificaExistente(T item) throws Exception;
-    
+
     //campo é o número correspondente à propriedade conforme a ordem na tabela do banco de dados!(começa do 0)
     //ascOuDesc true para ordem ascendente e false para descendente
     public Iterator<T> getTodosItensOrdenadosDuplamentePor(int campo1, int campo2, boolean ascOuDesc1, boolean ascOuDesc2) throws Exception {
-        
+
         //verifica se o número recebido é menor que 0 ou maior que o número máximo de campos
-        if (campo1 < 0 || campo1 > (vetorCampos.length - 1))
+        if (campo1 < 0 || campo1 > (vetorCampos.length - 1)) {
             throw new Exception("Campo1 para ser ordenado inexistente.");
-        if (campo2 < 0 || campo2 > (vetorCampos.length - 1))
+        }
+        if (campo2 < 0 || campo2 > (vetorCampos.length - 1)) {
             throw new Exception("Campo2 para ser ordenado inexistente.");
-        
+        }
+
         //vetorCampos é um vetor que contém o nome de todos os campos da tabela no banco de dados na ordem
         String coluna1 = vetorCampos[campo1];
         String coluna2 = vetorCampos[campo2];
-        
+
         //estrutura de dados 1 : Fila de prioridade
         Queue<T> itens = new PriorityQueue<T>();
 
-        try {
+        //cria um sql que recebe todos os itens ordenados conforme duas colunas
+        ps = criaStatement.selectSqlOrderDupla(tabela, coluna1, coluna2, ascOuDesc1, ascOuDesc2);
 
-            //cria um sql que recebe todos os itens ordenados conforme duas colunas
-            ps = criaStatement.selectSqlOrderDupla(tabela, coluna1, coluna2, ascOuDesc1, ascOuDesc2);
+        //faz o pedido de busca conforme o PreparedStatement criado
+        rs = ps.executeQuery();
 
-            //faz o pedido de busca conforme o PreparedStatement criado
-            rs = ps.executeQuery();
+        while (rs.next()) {
 
-            while (rs.next()) {
-
-                //adiciona na fila de prioridade todos os itens
-                itens.add(getByID(rs.getInt(id)));
-
-            }
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+            //adiciona na fila de prioridade todos os itens
+            itens.add(getByID(rs.getInt(id)));
 
         }
 
         return itens.iterator();
 
     }
-    
+
     //campo é o número correspondente à propriedade conforme a ordem na tabela do banco de dados!(começa do 0)
     //ascOuDesc true para ordem ascendente e false para descendente
     public Iterator<T> getTodosItensOrdenadosPor(int campo, boolean ascOuDesc) throws Exception {
-        
+
         //verifica se o número recebido é menor que 0 ou maior que o número máximo de campos
-        if (campo < 0 || campo > vetorCampos.length)
+        if (campo < 0 || campo > vetorCampos.length) {
             throw new Exception("Campo para ser ordenado inexistente.");
-        
+        }
+
         String coluna = "";
-        
+
         //vetorCampos é um vetor que contém o nome de todos os campos da tabela no banco de dados na ordem
-        if (campo == 0)
-             coluna = id;
-        else
+        if (campo == 0) {
+            coluna = id;
+        } else {
             coluna = vetorCampos[campo - 1];
-        
+        }
+
         //estrutura de dados 2 : Lista encadeada
         List<T> itens = new LinkedList<T>();
 
-        try {
+        //cria um sql que recebe todos os itens ordenados a coluna
+        ps = criaStatement.selectSqlOrder(tabela, coluna, ascOuDesc);
 
-            //cria um sql que recebe todos os itens ordenados a coluna
-            ps = criaStatement.selectSqlOrder(tabela, coluna, ascOuDesc);
+        //faz o pedido de busca conforme o PreparedStatement criado
+        rs = ps.executeQuery();
 
-            //faz o pedido de busca conforme o PreparedStatement criado
-            rs = ps.executeQuery();
+        while (rs.next()) {
 
-            while (rs.next()) {
-
-                //adiciona na fila de prioridade todos os itens
-                itens.add(getByID(rs.getInt(id)));
-
-            }
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+            //adiciona na fila de prioridade todos os itens
+            itens.add(getByID(rs.getInt(id)));
 
         }
 
         return itens.iterator();
 
     }
-    
-    protected PreparedStatement statementDeletar(int id) {
-         
-        try {
 
-            //cria um sql para deletar um item conforme seu id
-            ps = criaStatement.deleteSql();
+    protected PreparedStatement statementDeletar(int id) throws Exception {
 
-            ps.setInt(1, id);
-            
-            return ps;
+        //cria um sql para deletar um item conforme seu id
+        ps = criaStatement.deleteSql();
 
-        } catch (Exception ex) {
+        ps.setInt(1, id);
 
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
+        return ps;
 
-        return null;
-            
     }
-    
-    protected PreparedStatement statementGetTodos() {
-        
-        try {
 
-            //cria um sql para selecionar todos os itens
-            ps = criaStatement.selectSql(tabela, false, null);
+    protected PreparedStatement statementGetTodos() throws Exception {
 
-            return ps;
+        //cria um sql para selecionar todos os itens
+        ps = criaStatement.selectSql(tabela, false, null);
 
-        } catch (Exception ex) {
+        return ps;
 
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-        
-        return null;
     }
-    
-    protected PreparedStatement statementGetItem(int id) {
-        
-        try {
 
-            //cria um sql para seleciona o item que possue esse id
-            ps = criaStatement.selectSql(tabela, true, this.id);
-            
-            ps.setInt(1, id);
+    protected PreparedStatement statementGetItem(int id) throws Exception {
 
-            return ps;
-        
-        } catch (Exception ex) {
+        //cria um sql para seleciona o item que possue esse id
+        ps = criaStatement.selectSql(tabela, true, this.id);
 
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+        ps.setInt(1, id);
 
-        }
-        
-        return null;
+        return ps;
 
     }
 
     //comenta!
     @Override
-    public boolean inserir(T item) {
+    public boolean inserir(T item) throws Exception {
 
-        try {
-            
-            verificaExistente(item);
+        verificaExistente(item);
 
-            //cria um sql para inserir o item
-            ps = statementInserir(item);
+        //cria um sql para inserir o item
+        ps = statementInserir(item);
 
-            ps.executeUpdate();
-
-        } catch (Exception error) {
-
-            JOptionPane.showMessageDialog(null, error.getMessage());
-            return false;
-
-        }
+        ps.executeUpdate();
 
         return true;
 
     }
 
     @Override
-    public boolean alterar(T item) {
+    public boolean alterar(T item) throws Exception {
 
-        try {
-            
-            verificaExistente(item);
+        verificaExistente(item);
 
-            //cria um sql para alterar o item
-            ps = statementAlterar(item);
+        //cria um sql para alterar o item
+        ps = statementAlterar(item);
 
-            ps.executeUpdate();
-
-        } catch (Exception error) {
-
-            JOptionPane.showMessageDialog(null, error.getMessage());
-            return false;
-
-        }
+        ps.executeUpdate();
 
         return true;
 
     }
 
     @Override
-    public boolean deletar(int id) {
+    public boolean deletar(int id) throws Exception {
 
-        try {
+        //cria um sql para deletar o item
+        ps = statementDeletar(id);
 
-            //cria um sql para deletar o item
-            ps = statementDeletar(id);
-
-            ps.executeUpdate();
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-            return false;
-
-        }
+        ps.executeUpdate();
 
         return true;
 
     }
 
     @Override
-    public Iterator<T> getAll() {
+    public Iterator<T> getAll() throws Exception {
 
         //estrutura de dados 3 : pilha
         List<T> itens = new Stack<T>();
 
-        try {
+        ps = statementGetTodos();
 
-            ps = statementGetTodos();
+        rs = ps.executeQuery();
 
-            rs = ps.executeQuery();
+        while (rs.next()) {
 
-            while (rs.next()) {
-
-                itens.add(getByID(rs.getInt(id)));
-
-            }
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+            itens.add(getByID(rs.getInt(id)));
 
         }
 
@@ -287,29 +214,19 @@ public abstract class Dao<T> implements IDao<T> {
     }
 
     @Override
-    public T getByID(int id) {
+    public T getByID(int id) throws Exception {
 
-        try {
+        ps = statementGetItem(id);
 
-            ps = statementGetItem(id);
+        ResultSet rs = ps.executeQuery();
 
-            ResultSet rs = ps.executeQuery();
-            
-            T item = criaItem(rs);
+        T item = criaItem(rs);
 
-            if (item == null)
-                throw new Exception("Erro ao encontrar um item " + item.getClass().getName());
-            
-            return item;
-                
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
+        if (item == null) {
+            throw new Exception("Erro ao encontrar um item " + item.getClass().getName());
         }
 
-        return null;
+        return item;
 
     }
 
