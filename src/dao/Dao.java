@@ -45,7 +45,9 @@ public abstract class Dao<T> implements IDao<T> {
 
     protected abstract T criaItem(ResultSet rs) throws Exception;
 
-    protected abstract void verificaExistente(T item) throws Exception;
+    protected abstract void verificaExistenteInserir(T item) throws Exception;
+    
+    protected abstract void verificaExistenteAlterar(T item) throws Exception;
 
     //campo é o número correspondente à propriedade conforme a ordem na tabela do banco de dados!(começa do 0)
     //ascOuDesc true para ordem ascendente e false para descendente
@@ -156,7 +158,7 @@ public abstract class Dao<T> implements IDao<T> {
     @Override
     public boolean inserir(T item) throws Exception {
 
-        verificaExistente(item);
+        verificaExistenteInserir(item);
 
         //cria um sql para inserir o item
         ps = statementInserir(item);
@@ -170,7 +172,7 @@ public abstract class Dao<T> implements IDao<T> {
     @Override
     public boolean alterar(T item) throws Exception {
 
-        verificaExistente(item);
+        verificaExistenteAlterar(item);
 
         //cria um sql para alterar o item
         ps = statementAlterar(item);

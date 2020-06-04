@@ -53,9 +53,18 @@ public class ImovelItemDao extends Dao<ImovelItem> {
     }
 
     @Override
-    protected void verificaExistente(ImovelItem item) throws Exception {
+    protected void verificaExistenteInserir(ImovelItem item) throws Exception {
 
         if (getByIdImovel(item.getImovel().getId()) != null) {
+            throw new Exception("Já existe um ImovelItem cadastrado para este imóvel.");
+        }
+
+    }
+
+    @Override
+    protected void verificaExistenteAlterar(ImovelItem item) throws Exception {
+
+        if (getByIdImovel(item.getImovel().getId()) != null && getByIdImovel(item.getImovel().getId()).getId() != getByID(item.getId()).getImovel().getId()) {
             throw new Exception("Já existe um ImovelItem cadastrado para este imóvel.");
         }
 

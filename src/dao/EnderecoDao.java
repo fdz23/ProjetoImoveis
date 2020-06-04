@@ -31,8 +31,13 @@ public class EnderecoDao extends Dao<Endereco> {
     }
 
     @Override
-    protected void verificaExistente(Endereco item) {
+    protected void verificaExistenteInserir(Endereco item) {
     }
+    
+    @Override
+    protected void verificaExistenteAlterar(Endereco item) throws Exception {
+    }
+
 
     @Override
     protected PreparedStatement statementInserir(Endereco item) throws Exception {

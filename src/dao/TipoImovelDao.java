@@ -50,9 +50,18 @@ public class TipoImovelDao extends Dao<TipoImovel> {
     }
 
     @Override
-    protected void verificaExistente(TipoImovel item) throws Exception {
+    protected void verificaExistenteInserir(TipoImovel item) throws Exception {
 
         if (getByDescricao(item.getDescricao()) != null) {
+            throw new Exception("Já existe um TipoImovel com esse nome.");
+        }
+
+    }
+
+    @Override
+    protected void verificaExistenteAlterar(TipoImovel item) throws Exception {
+
+        if (getByDescricao(item.getDescricao()) != null && getByDescricao(item.getDescricao()).getId() != getByID(item.getId()).getId()) {
             throw new Exception("Já existe um TipoImovel com esse nome.");
         }
 

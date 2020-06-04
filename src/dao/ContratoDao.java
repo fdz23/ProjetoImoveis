@@ -34,9 +34,18 @@ public class ContratoDao extends Dao<Contrato> {
     private OrcamentoDao orcamentoDao = new OrcamentoDao();
 
     @Override
-    protected void verificaExistente(Contrato item) throws Exception {
+    protected void verificaExistenteInserir(Contrato item) throws Exception {
 
         if (getByIdOrcamento(item.getOrcamento().getId()) != null) {
+            throw new Exception("Já existe um contrato para este orçamento.");
+        }
+
+    }
+    
+    @Override
+    protected void verificaExistenteAlterar(Contrato item) throws Exception {
+
+        if (getByIdOrcamento(item.getOrcamento().getId()) != null && getByIdOrcamento(item.getOrcamento().getId()).getOrcamento().getId() != getByID(item.getId()).getOrcamento().getId()) {
             throw new Exception("Já existe um contrato para este orçamento.");
         }
 

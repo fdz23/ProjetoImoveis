@@ -50,9 +50,18 @@ public class ItemMovelDao extends Dao<ItemMovel> {
     }
 
     @Override
-    protected void verificaExistente(ItemMovel item) throws Exception {
+    protected void verificaExistenteInserir(ItemMovel item) throws Exception {
 
         if (getByDescricao(item.getDescricao()) != null) {
+            throw new Exception("Já existe um ItemMovel com esse nome.");
+        }
+
+    }
+
+    @Override
+    protected void verificaExistenteAlterar(ItemMovel item) throws Exception {
+
+        if (getByDescricao(item.getDescricao()) != null && getByDescricao(item.getDescricao()).getId() != getByID(item.getId()).getId()) {
             throw new Exception("Já existe um ItemMovel com esse nome.");
         }
 

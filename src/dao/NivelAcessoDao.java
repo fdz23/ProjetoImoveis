@@ -51,10 +51,19 @@ public class NivelAcessoDao extends Dao<NivelAcesso> {
     }
 
     @Override
-    protected void verificaExistente(NivelAcesso item) throws Exception {
+    protected void verificaExistenteInserir(NivelAcesso item) throws Exception {
 
         if (getByDescricao(item.getDescricao()) != null) {
             throw new Exception("Já existe um NivelAcesso com essa descrição.");
+        }
+
+    }
+
+    @Override
+    protected void verificaExistenteAlterar(NivelAcesso item) throws Exception {
+
+        if (getByDescricao(item.getDescricao()) != null && getByDescricao(item.getDescricao()).getId() != getByID(item.getId()).getId()) {
+            throw new Exception("Já existe um NivelAcesso com esse nome.");
         }
 
     }
