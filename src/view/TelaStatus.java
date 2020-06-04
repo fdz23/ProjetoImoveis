@@ -10,49 +10,59 @@ import javax.swing.table.DefaultTableModel;
 import model.Status;
 
 public class TelaStatus extends javax.swing.JFrame {
-    
+
     StatusController sc = null;
     DefaultTableModel modelo = new DefaultTableModel();
     int linhaSelecionada = 0;
-    
+    TelaFuncionarios tela = null;
+
     public TelaStatus() throws ClassNotFoundException, Exception {
         CriarJTable();
         initComponents();
         iniciar();
         popularJtable();
-        
+
     }
-    
+
+    public TelaStatus(TelaFuncionarios tela) throws ClassNotFoundException, Exception {
+        CriarJTable();
+        initComponents();
+        iniciar();
+        popularJtable();
+        this.tela = tela;
+
+    }
+
     private void CriarJTable() {
         jTableTabela = new JTable(modelo);
         modelo.addColumn("Código");
         modelo.addColumn("Descrição");
-        
+
     }
-    
+
     private void popularJtable() throws ClassNotFoundException, Exception {
-        
+
         jTableTabela.setModel(sc.populaJTable(modelo));
-        
+
     }
-    
+
     public void iniciar() throws ClassNotFoundException, Exception {
-        
+
         sc = new StatusController();
-        
+
         jComboAcao.removeAllItems();
         jComboAcao.addItem("Ações");
         jComboAcao.addItem("Cadastrar");
         jComboAcao.addItem("Alterar");
         jComboAcao.addItem("Deletar");
-        
+
         JtextFielDescricao.setEnabled(false);
         jButton1.setEnabled(false);
         jTextField2.setEnabled(false);
         jTextFieldId.setEnabled(false);
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -157,7 +167,7 @@ public class TelaStatus extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
-        
+
         linhaSelecionada = jTableTabela.getSelectedRow();
         jTextFieldId.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
         JtextFielDescricao.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
@@ -165,102 +175,105 @@ public class TelaStatus extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableTabelaMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         try {
-            
+
             int action = jComboAcao.getSelectedIndex();
-            
+
             String descricao = JtextFielDescricao.getText();
-            
+
             switch (action) {
-                
+
                 case 0:
-                    
+
                     iniciar();
-                    
+
                     break;
-                
+
                 case 1:
-                    
+
                     Status sa = new Status(0, descricao);
-                    
+
                     sc.inserirItem(sa);
-                    
+                    tela.popularComboboxStatus();
+
                     JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
-                    
+
                     popularJtable();
-                    
+
                     break;
-                
+
                 case 2:
-                    
+
                     int alterarIntem = Integer.parseInt(jTextFieldId.getText());
-                    
+
                     sa = new Status(alterarIntem, descricao);
-                    
+
                     sc.alterarItem(sa);
-                    
+                    tela.popularComboboxStatus();
+
                     popularJtable();
-                    
+
                     JOptionPane.showMessageDialog(null, "Status alterado com sucesso!");
-                    
+
                     break;
-                
+
                 case 3:
-                    
+
                     int deleteItem = Integer.parseInt(jTextFieldId.getText());
-                    
+
                     sc.deletarItem(deleteItem);
-                    
+                    tela.popularComboboxStatus();
+
                     popularJtable();
-                    
+
                     JOptionPane.showMessageDialog(null, "Status excluído com sucesso!");
-                
+
             }
-            
+
         } catch (Exception ex) {
-            
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar o status");
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboAcaoActionPerformed
-        
+
         int indexCombo = jComboAcao.getSelectedIndex();
-        
+
         switch (indexCombo) {
-            
+
             case 0:
-                
+
                 break;
-            
+
             case 1:
-                
+
                 JtextFielDescricao.setEnabled(true);
                 jButton1.setEnabled(true);
                 jTextField2.setEnabled(true);
-                
+
                 break;
-            
+
             case 2:
-                
+
                 JtextFielDescricao.setEnabled(true);
                 jButton1.setEnabled(true);
                 jTextField2.setEnabled(true);
-                
+
                 break;
-            
+
             case 3:
-                
+
                 JOptionPane.showMessageDialog(null, "Selecione uma linha e clique em 'Ação' para excluir");
-                
+
                 JtextFielDescricao.setEnabled(false);
                 jButton1.setEnabled(true);
                 jTextField2.setEnabled(true);
-                
+
                 break;
-            
+
             default:
 
             // JOptionPane.showMessageDialog(null, "Nenhuma ação foi selecionada.");

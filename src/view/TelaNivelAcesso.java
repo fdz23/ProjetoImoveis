@@ -14,7 +14,7 @@ public class TelaNivelAcesso extends javax.swing.JFrame {
 
     NivelAcessoController nac = null;
     DefaultTableModel modelo = new DefaultTableModel();
-    TelaTipoFuncionario tela;
+    TelaTipoFuncionario tela = null;
     DefaultComboBoxModel modelo1;
 
     int linhaSelecionada = 0;
@@ -28,15 +28,13 @@ public class TelaNivelAcesso extends javax.swing.JFrame {
 
     }
 
-    public TelaNivelAcesso(TelaTipoFuncionario tela, DefaultComboBoxModel modelo1) throws ClassNotFoundException, Exception {
+    public TelaNivelAcesso(TelaTipoFuncionario tela) throws ClassNotFoundException, Exception {
 
         CriarJTable();
         initComponents();
         iniciar();
         popularJtable();
-
         this.tela = tela;
-        this.modelo1 = modelo1;
 
     }
 
@@ -194,12 +192,10 @@ public class TelaNivelAcesso extends javax.swing.JFrame {
                     NivelAcesso na = new NivelAcesso(0, descricao);
 
                     nac.inserirItem(na);
+                    popularJtable();
+                    tela.popularCombox();
 
                     JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
-
-                    popularJtable();
-
-                    tela.nac.popularCombox(modelo1);
 
                     break;
 
@@ -210,11 +206,11 @@ public class TelaNivelAcesso extends javax.swing.JFrame {
                     na = new NivelAcesso(alterarIntem, descricao);
 
                     nac.alterarItem(na);
+                    tela.popularCombox();
 
                     popularJtable();
 
                     JOptionPane.showMessageDialog(null, "Nível alterado com sucesso!");
-                    tela.nac.popularCombox(modelo1);
 
                     break;
 
@@ -224,16 +220,17 @@ public class TelaNivelAcesso extends javax.swing.JFrame {
 
                     nac.deletarItem(deleteItem);
 
+                    tela.popularCombox();
+
                     popularJtable();
 
                     JOptionPane.showMessageDialog(null, "Nível excluído com sucesso!");
-                    tela.nac.popularCombox(modelo1);
 
             }
 
         } catch (Exception ex) {
 
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar o nivel");
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
 
