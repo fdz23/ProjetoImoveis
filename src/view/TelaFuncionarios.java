@@ -508,7 +508,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         try {
 
             int action = jComboAcao.getSelectedIndex();
-            int idacao1 = Integer.parseInt(idacao.getText());
+          //  int idacao1 = Integer.parseInt(idacao.getText());
             java.sql.Date datanasc = new java.sql.Date(format.parse("00/00/0000 00:00:00").getTime());
             java.sql.Date dataResci = new java.sql.Date(format.parse("00/00/0000 00:00:00").getTime());
 
@@ -555,7 +555,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
                         java.sql.Date dataRescic = new java.sql.Date(format.parse(jTextFieldDataRescicao.getText()).getTime());
 
-                        fun = new Funcionario(idacao1, email, pe, tf, status, dataRescic);
+                    //    fun = new Funcionario(idacao1, email, pe, tf, status, dataRescic);
                         fc.alterarItem(fun);
                         popularJtable();
                         JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
@@ -566,7 +566,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
                 case 3:
 
-                    fc.deletarItem(idacao1);
+                 //   fc.deletarItem(idacao1);
                     popularJtable();
                     JOptionPane.showMessageDialog(null, "Status excluído com sucesso!");
 
@@ -574,7 +574,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
         } catch (Exception ex) {
 
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar funcionario");
+           ex.printStackTrace();
         }
 
 
