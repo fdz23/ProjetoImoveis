@@ -14,6 +14,7 @@ import java.sql.Date;
  */
 public class Funcionario extends Pessoa implements Tabela {
     
+    private int id;
     private Status status;
     private Date dataRescisao;
     private String matricula;
@@ -32,6 +33,16 @@ public class Funcionario extends Pessoa implements Tabela {
         return nomeTabela;
     }
     
+    @Override
+    public int getId() {
+        return id;
+    }
+    
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public Funcionario() {}
     
     public Funcionario(int id, String matricula, Pessoa pessoa, TipoFuncionario tipoFuncionario, Status status, Date dataRescisao) {
@@ -42,6 +53,7 @@ public class Funcionario extends Pessoa implements Tabela {
         this.matricula = matricula;
         this.status = status;
         this.dataRescisao = dataRescisao;
+        this.id = id;
     }
 
     public Pessoa getPessoa() {
