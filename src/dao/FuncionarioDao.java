@@ -270,33 +270,20 @@ public class FuncionarioDao extends Dao<Funcionario> {
         return ps;
 
     }
-
+    
     @Override
-    protected PreparedStatement statementDeletar(int id) throws Exception {
+    public boolean deletar(int id) throws Exception {
+        
+        int idPessoa = getByID(id).getPessoa().getId();
 
-        //cria um statement que pesquisa o funcionario com esse id
-        ps = criaStatement.selectSql(tabela, true, this.id);
+        //cria um sql para deletar o item
+        ps = statementDeletar(id);
 
-        rs = ps.executeQuery();
+        ps.executeUpdate();
+        
+        pessoaDao.deletar(idPessoa);
 
-        if (rs.next()) {
-
-            //pega o id referente à tabela pessoa
-            int idPessoa = rs.getInt("fun_pes_iden");
-
-            //e deleta o mesmo na tabela pessoa
-            pessoaDao.deletar(idPessoa);
-
-        } else {
-            throw new Exception("Erro na remoção de um item Funcionario(parte de remoção por id pessoa para remover a pessoa)");
-        }
-
-        //cria o statemente para deletar o funcionario
-        ps = criaStatement.deleteSql();
-
-        ps.setInt(1, id);
-
-        return ps;
+        return true;
 
     }
 
