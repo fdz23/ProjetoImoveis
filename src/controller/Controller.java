@@ -8,7 +8,6 @@ package controller;
 import dao.Dao;
 import java.sql.Connection;
 import java.util.Iterator;
-import javax.swing.table.DefaultTableModel;
 import util.ConectaDb;
 /**
  *
@@ -26,35 +25,35 @@ public abstract class Controller<T> implements IController<T> {
     }
 
     @Override
-    public boolean inserirItem(T item) {
+    public boolean inserirItem(T item) throws Exception {
         
         return dao.inserir(item);
         
     }
 
     @Override
-    public boolean alterarItem(T item) {
+    public boolean alterarItem(T item) throws Exception {
         
         return dao.alterar(item);
         
     }
 
     @Override
-    public boolean deletarItem(int id) {
+    public boolean deletarItem(int id) throws Exception {
         
         return dao.deletar(id);
         
     }
 
     @Override
-    public Iterator<T> getTodosItens() {
+    public Iterator<T> getTodosItens() throws Exception {
         
         return dao.getAll();
         
     }
 
     @Override
-    public T getItem(int id) {
+    public T getItem(int id) throws Exception {
         
         return dao.getByID(id);
         

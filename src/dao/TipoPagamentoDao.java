@@ -7,10 +7,8 @@ package dao;
 
 import fabricas.AbstractFactory;
 import interfaces.Tabela;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.swing.JOptionPane;
 import model.TipoPagamento;
 import util.CriaStatement;
 
@@ -19,11 +17,11 @@ import util.CriaStatement;
  * @author fdz
  */
 public class TipoPagamentoDao extends Dao<TipoPagamento> {
-    
+
     public TipoPagamentoDao() throws ClassNotFoundException {
 
-          Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("TIPO_PAGAMENTO");
-        
+        Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("TIPO_PAGAMENTO");
+
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
@@ -31,113 +29,72 @@ public class TipoPagamentoDao extends Dao<TipoPagamento> {
         vetorCampos = campos.split(",");
 
     }
-    
-    public TipoPagamento getByDescricao(String descricao) {
 
-        try {
+    public TipoPagamento getByDescricao(String descricao) throws Exception {
 
-            ps = statementByDescricao(descricao);
+        ps = statementByDescricao(descricao);
 
-            rs = ps.executeQuery();
+        rs = ps.executeQuery();
 
-            return criaItem(rs);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-
-        return null;
+        return criaItem(rs);
 
     }
 
-    protected PreparedStatement statementByDescricao(String descricao) {
+    protected PreparedStatement statementByDescricao(String descricao) throws Exception {
 
-        try {
+        ps = criaStatement.selectSql(tabela, true, "tpa_descricao");
 
-            ps = criaStatement.selectSql(tabela, true, "tpa_descricao");
-
-            ps.setString(1, descricao);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
+        ps.setString(1, descricao);
 
         return ps;
     }
-    
+
     @Override
     protected void verificaExistente(TipoPagamento item) throws Exception {
-    
-        if (getByDescricao(item.getDescricao()) != null)
+
+        if (getByDescricao(item.getDescricao()) != null) {
             throw new Exception("Já existe um TipoPagamento com essa descrição.");
-    
+        }
+
     }
 
     @Override
-    protected PreparedStatement statementInserir(TipoPagamento item) {
-        
-        try {
+    protected PreparedStatement statementInserir(TipoPagamento item) throws Exception {
 
-            ps = criaStatement.insertSql(tabela, campos);
+        ps = criaStatement.insertSql(tabela, campos);
 
-            ps.setString(1, item.getDescricao());
-
-        } catch (Exception error) {
-
-            JOptionPane.showMessageDialog(null, error.getMessage());
-
-        }
+        ps.setString(1, item.getDescricao());
 
         return ps;
-        
+
     }
 
     @Override
-    protected PreparedStatement statementAlterar(TipoPagamento item) {
-        
-        try {
+    protected PreparedStatement statementAlterar(TipoPagamento item) throws Exception {
 
-            ps = criaStatement.updateSql(campos);
+        ps = criaStatement.updateSql(campos);
 
-            ps.setString(1, item.getDescricao());
-            ps.setInt(2, item.getId());
-
-        } catch (Exception error) {
-
-            JOptionPane.showMessageDialog(null, error.getMessage());
-
-        }
+        ps.setString(1, item.getDescricao());
+        ps.setInt(2, item.getId());
 
         return ps;
-        
+
     }
 
     @Override
-    protected TipoPagamento criaItem(ResultSet rs) {
-        
-        try {
-            
-            if (rs.next()) {
+    protected TipoPagamento criaItem(ResultSet rs) throws Exception {
 
-                return new TipoPagamento(
-                        rs.getInt(id), 
-                        rs.getString("tpa_descricao")
-                );
+        if (rs.next()) {
 
-            }
-            
-        } catch (Exception e) {
-            
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            
+            return new TipoPagamento(
+                    rs.getInt(id),
+                    rs.getString("tpa_descricao")
+            );
+
         }
-        
+
         return null;
-        
+
     }
 
 }

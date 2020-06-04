@@ -9,7 +9,6 @@ import fabricas.AbstractFactory;
 import interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.swing.JOptionPane;
 import model.NivelAcesso;
 import util.CriaStatement;
 import util.ConectaDb;
@@ -31,108 +30,67 @@ public class NivelAcessoDao extends Dao<NivelAcesso> {
         vetorCampos = campos.split(",");
 
     }
-    
-    public NivelAcesso getByDescricao(String descricao) {
 
-        try {
+    public NivelAcesso getByDescricao(String descricao) throws Exception {
 
-            ps = statementByDescricao(descricao);
+        ps = statementByDescricao(descricao);
 
-            rs = ps.executeQuery();
+        rs = ps.executeQuery();
 
-            return criaItem(rs);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-
-        return null;
+        return criaItem(rs);
 
     }
 
-    protected PreparedStatement statementByDescricao(String descricao) {
+    protected PreparedStatement statementByDescricao(String descricao) throws Exception {
 
-        try {
+        ps = criaStatement.selectSql(tabela, true, "nac_descricao");
 
-            ps = criaStatement.selectSql(tabela, true, "nac_descricao");
-
-            ps.setString(1, descricao);
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
+        ps.setString(1, descricao);
 
         return ps;
     }
-    
+
     @Override
     protected void verificaExistente(NivelAcesso item) throws Exception {
-    
-        if (getByDescricao(item.getDescricao()) != null)
+
+        if (getByDescricao(item.getDescricao()) != null) {
             throw new Exception("Já existe um NivelAcesso com essa descrição.");
-    
+        }
+
     }
 
     @Override
-    protected PreparedStatement statementInserir(NivelAcesso item) {
+    protected PreparedStatement statementInserir(NivelAcesso item) throws Exception {
 
-        try {
+        ps = criaStatement.insertSql(tabela, campos);
 
-            ps = criaStatement.insertSql(tabela, campos);
-
-            ps.setString(1, item.getDescricao());
-
-        } catch (Exception error) {
-
-            JOptionPane.showMessageDialog(null, error.getMessage());
-
-        }
+        ps.setString(1, item.getDescricao());
 
         return ps;
 
     }
 
     @Override
-    protected PreparedStatement statementAlterar(NivelAcesso item) {
+    protected PreparedStatement statementAlterar(NivelAcesso item) throws Exception {
 
-        try {
+        ps = criaStatement.updateSql(campos);
 
-            ps = criaStatement.updateSql(campos);
-
-            ps.setString(1, item.getDescricao());
-            ps.setInt(2, item.getId());
-
-        } catch (Exception error) {
-
-            JOptionPane.showMessageDialog(null, error.getMessage());
-
-        }
+        ps.setString(1, item.getDescricao());
+        ps.setInt(2, item.getId());
 
         return ps;
 
     }
 
     @Override
-    protected NivelAcesso criaItem(ResultSet rs) {
+    protected NivelAcesso criaItem(ResultSet rs) throws Exception {
 
-        try {
+        if (rs.next()) {
 
-            if (rs.next()) {
-
-                return new NivelAcesso(
-                        rs.getInt(id),
-                        rs.getString(vetorCampos[0])
-                );
-
-            }
-
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            return new NivelAcesso(
+                    rs.getInt(id),
+                    rs.getString(vetorCampos[0])
+            );
 
         }
 
