@@ -195,7 +195,7 @@ public class TelaStatus extends javax.swing.JFrame {
                     Status sa = new Status(0, descricao);
 
                     sc.inserirItem(sa);
-                    tela.popularComboboxStatus();
+                  //  tela.popularComboboxStatus();
 
                     JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
 
@@ -233,7 +233,7 @@ public class TelaStatus extends javax.swing.JFrame {
 
         } catch (Exception ex) {
 
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+          ex.printStackTrace();
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

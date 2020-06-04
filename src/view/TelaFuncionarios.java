@@ -515,7 +515,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
             String nome = jTextFieldNome.getText();
             String email = jTextFieldEmail.getText();
             datanasc = new java.sql.Date(format.parse(jFormattedTextField1.getText()).getTime());
-            String cpf = jFormattedTextField1.getText();
+            String cpf = jFormattedTextFieldCPF.getText();
             String telefone = jFormattedTextFieldTelefone.getText();
             String matricula = jTextFieldMatricula.getText();
 

@@ -295,7 +295,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
         ps.setInt(1, id);
 
-        ResultSet rs = ps.executeQuery();
+        rs = ps.executeQuery();
 
         if (rs.next()) {
 
@@ -320,17 +320,15 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
         //recebe um resultset com as informações da tabela pessoa referente ao id usado 
         //e cria um objeto Funcionario com essas informações e as do resultset normal de funcionario
-        if (rs.next()) {
-            if (rsPessoa.next()) {
-                return new Funcionario(
-                        rs.getInt(id),
-                        rs.getString(vetorCampos[0]),
-                        pessoaDao.getByID(rs.getInt(vetorCampos[1])),
-                        tipoFuncionarioDao.getByID(rs.getInt(vetorCampos[2])),
-                        statusDao.getByID(rs.getInt(vetorCampos[3])),
-                        rs.getDate(vetorCampos[4])
-                );
-            }
+        if (rsPessoa.next()) {
+            return new Funcionario(
+                    rs.getInt(id),
+                    rs.getString(vetorCampos[0]),
+                    pessoaDao.getByID(rs.getInt(vetorCampos[1])),
+                    tipoFuncionarioDao.getByID(rs.getInt(vetorCampos[2])),
+                    statusDao.getByID(rs.getInt(vetorCampos[3])),
+                    rs.getDate(vetorCampos[4])
+            );
         }
 
         return null;
