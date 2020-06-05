@@ -6,6 +6,7 @@
 package controller;
 
 import dao.SituacaoDao;
+import java.sql.SQLException;
 import model.Situacao;
 
 /**
@@ -14,7 +15,7 @@ import model.Situacao;
  */
 public class SituacaoController extends Controller<Situacao> {
 
-    public SituacaoController() throws ClassNotFoundException {
+    public SituacaoController() throws ClassNotFoundException, SQLException {
 
         dao = new SituacaoDao();
 

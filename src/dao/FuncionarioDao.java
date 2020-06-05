@@ -5,10 +5,11 @@
  */
 package dao;
 
-import fabricas.AbstractFactory;
-import interfaces.Tabela;
+import model.fabricas.AbstractFactory;
+import model.interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
     private TipoFuncionarioDao tipoFuncionarioDao = new TipoFuncionarioDao();
     private StatusDao statusDao = new StatusDao();
 
-    public FuncionarioDao() throws ClassNotFoundException {
+    public FuncionarioDao() throws ClassNotFoundException, SQLException {
 
         Tabela obj = AbstractFactory.getInstance("HUMANO").getTabela("FUNCIONARIO");
 
@@ -47,9 +48,12 @@ public class FuncionarioDao extends Dao<Funcionario> {
     //campo é o número correspondente à propriedade conforme a ordem na tabela do banco de dados!(começa do 0)
     //ascOuDesc true para ordem ascendente e false para descendente
     @Override
-    public Iterator<Funcionario> getTodosItensOrdenadosDuplamentePor(int campo1, int campo2, boolean ascOuDesc1, boolean ascOuDesc2) throws Exception {
+    public Iterator<Funcionario> getAllDoubleOrderBy(int campo1, int campo2, boolean ascOuDesc1, boolean ascOuDesc2) throws Exception {
 
-        String[] vetorCamposPessoa = pessoaDao.getVetorCampos();
+        ResultSet rs;
+
+        //estrutura de dados 1 : Fila de prioridade
+        Queue<Funcionario> itens = new PriorityQueue<Funcionario>();
 
         //verifica se o número recebido é menor que 0 ou maior que o número máximo de campos
         if (campo1 < 0 || campo1 > vetorCampos.length + vetorCamposPessoa.length) {
@@ -59,50 +63,48 @@ public class FuncionarioDao extends Dao<Funcionario> {
             throw new Exception("Campo2 para ser ordenado inexistente.");
         }
 
-        String coluna1 = "";
-        String coluna2 = "";
+        //uma série de verificações sobre a ordem dos campos(se pertencem a qual tabela)
+        //para a criação do preparedstatement com o sql correto para cada caso
+        if (isPessoaCampo(campo1) && isPessoaCampo(campo2)) {
 
-        //vetorCampos é um vetor que contém o nome de todos os campos da tabela no banco de dados na ordem
-        if (campo1 == 0) {
-            coluna1 = "pes_iden";
+            ps = criaStatement.selectSqlOrderDuplaPessoaPessoa(
+                    colunaPessoa(campo1),
+                    colunaPessoa(campo2),
+                    ascOuDesc1, ascOuDesc2);
+
         } else {
-            coluna1 = vetorCamposPessoa[campo1 - 1];
+            if (isPessoaCampo(campo1) && isFuncionarioCampo(campo2)) {
+
+                ps = criaStatement.selectSqlOrderDuplaPessoaFunc(
+                        colunaPessoa(campo1),
+                        colunaFuncionario(campo2),
+                        ascOuDesc1, ascOuDesc2);
+
+            } else {
+                if (isFuncionarioCampo(campo1) && isPessoaCampo(campo2)) {
+
+                    ps = criaStatement.selectSqlOrderDuplaFuncPessoa(
+                            colunaFuncionario(campo1),
+                            colunaPessoa(campo2),
+                            ascOuDesc1, ascOuDesc2);
+
+                } else {
+
+                    ps = criaStatement.selectSqlOrderDuplaFuncFunc(
+                            colunaFuncionario(campo1),
+                            colunaFuncionario(campo2),
+                            ascOuDesc1, ascOuDesc2);
+
+                }
+            }
         }
-
-        if (campo1 == vetorCamposPessoa.length + 1) {
-            coluna1 = id;
-        } else {
-            coluna1 = vetorCampos[campo1 - vetorCamposPessoa.length - 1];
-        }
-
-        if (campo2 == 0) {
-            coluna2 = "pes_iden";
-        } else {
-            coluna2 = vetorCamposPessoa[campo2 - 1];
-        }
-
-        if (campo2 == vetorCamposPessoa.length + 1) {
-            coluna2 = id;
-        } else {
-            coluna2 = vetorCampos[campo2 - vetorCamposPessoa.length - 1];
-        }
-
-        //estrutura de dados 1 : Fila de prioridade
-        Queue<Funcionario> itens = new PriorityQueue<Funcionario>();
-
-        //cria um sql que recebe todos os itens ordenados conforme duas colunas
-        ps = criaStatement.selectSqlOrderDupla("pessoas", coluna1, coluna2, ascOuDesc1, ascOuDesc2);
 
         //faz o pedido de busca conforme o PreparedStatement criado
         rs = ps.executeQuery();
 
         while (rs.next()) {
-
             //adiciona na fila de prioridade todos os itens
-            if (checarPessoaFuncionario(rs.getInt("pes_iden"))) {
-                itens.add(getByID(rs.getInt(id)));
-            }
-
+            itens.add(getByID(rs.getInt(id)));
         }
 
         return itens.iterator();
@@ -112,9 +114,9 @@ public class FuncionarioDao extends Dao<Funcionario> {
     //campo é o número correspondente à propriedade conforme a ordem na tabela do banco de dados!(começa do 0)
     //ascOuDesc true para ordem ascendente e false para descendente
     @Override
-    public Iterator<Funcionario> getTodosItensOrdenadosPor(int campo, boolean ascOuDesc) throws Exception {
+    public Iterator<Funcionario> getAllOrderBy(int campo, boolean ascOuDesc) throws Exception {
 
-        String[] vetorCamposPessoa = pessoaDao.getVetorCampos();
+        ResultSet rs;
 
         //verifica se o número recebido é menor que 0 ou maior que o número máximo de campos
         if (campo < 0 || campo > vetorCampos.length + vetorCamposPessoa.length) {
@@ -127,15 +129,10 @@ public class FuncionarioDao extends Dao<Funcionario> {
         List<Funcionario> itens = new LinkedList<Funcionario>();
 
         //vetorCampos é um vetor que contém o nome de todos os campos da tabela no banco de dados na ordem
-        if (campo < vetorCamposPessoa.length + 1) {
-            if (campo == 0) {
-                coluna = "pes_iden";
-            } else {
-                coluna = vetorCamposPessoa[campo - 1];
-            }
+        if (isPessoaCampo(campo)) {
 
             //cria um sql que recebe todos os itens ordenados a coluna
-            ps = criaStatement.selectSqlOrder("pessoas", coluna, ascOuDesc);
+            ps = criaStatement.selectSqlOrder("pessoas", colunaPessoa(campo), ascOuDesc);
 
             //faz o pedido de busca conforme o PreparedStatement criado
             rs = ps.executeQuery();
@@ -144,31 +141,21 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
                 //adiciona na fila de prioridade todos os itens
                 if (checarPessoaFuncionario(rs.getInt("pes_iden"))) {
-                    itens.add(getByID(rs.getInt(id)));
+                    itens.add(getByIDPessoa(rs.getInt("pes_iden")));
                 }
-
             }
-
         } else {
-            if (campo == vetorCamposPessoa.length + 1) {
-                coluna = id;
-            } else {
-                coluna = vetorCampos[campo - vetorCamposPessoa.length - 1];
-            }
 
             //cria um sql que recebe todos os itens ordenados a coluna
-            ps = criaStatement.selectSqlOrder(tabela, coluna, ascOuDesc);
+            ps = criaStatement.selectSqlOrder(tabela, colunaFuncionario(campo), ascOuDesc);
 
             //faz o pedido de busca conforme o PreparedStatement criado
             rs = ps.executeQuery();
 
             while (rs.next()) {
-
                 //adiciona na fila de prioridade todos os itens
                 itens.add(getByID(rs.getInt(id)));
-
             }
-
         }
 
         return itens.iterator();
@@ -177,7 +164,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
     private boolean checarPessoaFuncionario(int idPessoa) throws Exception {
 
-        Iterator<Funcionario> itens = getAll();
+        Iterator<Funcionario> itens = new FuncionarioDao().getAll();
         boolean result = false;
 
         while (itens.hasNext()) {
@@ -201,7 +188,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
         if (!getAll().hasNext()) {
             return 1;
         } else {
-            return getTodosItensOrdenadosPor(7, false).next().getId();
+            return getAllOrderBy(8, false).next().getId();
         }
 
     }
@@ -220,7 +207,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
         ps = criaStatement.insertSql(tabela, campos);
 
         //insere uma pessoa com os valores recebidos
-        pessoaDao.inserir(
+        pessoaDao.insert(
                 new Pessoa(
                         0,
                         item.getNome(),
@@ -248,7 +235,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
     @Override
     protected PreparedStatement statementAlterar(Funcionario item) throws Exception {
 
-        //cria statement para alterar os dados dos campos da tabela funcionario
+        //cria statement para update os dados dos campos da tabela funcionario
         ps = criaStatement.updateSql(campos);
 
         //cria um objeto pessoa com os dados pertencentes a tabela pessoa
@@ -264,7 +251,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
         );
 
         //altera a tabela pessoa também com os dados
-        pessoaDao.alterar(pessoa);
+        pessoaDao.update(pessoa);
 
         ps.setString(1, item.getMatricula());
         ps.setInt(2, item.getPessoa().getId());
@@ -276,18 +263,18 @@ public class FuncionarioDao extends Dao<Funcionario> {
         return ps;
 
     }
-    
+
     @Override
-    public boolean deletar(int id) throws Exception {
-        
+    public boolean delete(int id) throws Exception {
+
         int idPessoa = getByID(id).getPessoa().getId();
 
-        //cria um sql para deletar o item
+        //cria um sql para delete o item
         ps = statementDeletar(id);
 
         ps.executeUpdate();
-        
-        pessoaDao.deletar(idPessoa);
+
+        pessoaDao.delete(idPessoa);
 
         return true;
 
@@ -338,6 +325,75 @@ public class FuncionarioDao extends Dao<Funcionario> {
         }
 
         return null;
+
+    }
+
+    public Funcionario getByIDPessoa(int idPessoa) throws Exception {
+
+        ps = criaStatement.selectSql(tabela, true, "fun_pes_iden");
+
+        ps.setInt(1, idPessoa);
+
+        ResultSet rs = ps.executeQuery();
+
+        Funcionario item = null;
+
+        if (rs.next()) {
+            item = new Funcionario(
+                    rs.getInt(id),
+                    rs.getString(vetorCampos[0]),
+                    pessoaDao.getByID(rs.getInt(vetorCampos[1])),
+                    tipoFuncionarioDao.getByID(rs.getInt(vetorCampos[2])),
+                    statusDao.getByID(rs.getInt(vetorCampos[3])),
+                    rs.getDate(vetorCampos[4])
+            );
+        }
+
+        if (item == null) {
+            throw new Exception("Erro ao encontrar um item Funcionario por id pessoa");
+        }
+
+        return item;
+
+    }
+
+    private boolean isPessoaCampo(int campo) {
+
+        return campo < vetorCamposPessoa.length + 1;
+
+    }
+
+    private boolean isFuncionarioCampo(int campo) {
+
+        return campo >= vetorCamposPessoa.length + 1;
+
+    }
+
+    private String colunaPessoa(int campo) {
+
+        String coluna = "";
+
+        if (campo == 0) {
+            coluna = "pes_iden";
+        } else {
+            coluna = vetorCamposPessoa[campo - 1];
+        }
+
+        return coluna;
+
+    }
+
+    private String colunaFuncionario(int campo) {
+
+        String coluna = "";
+
+        if (campo == vetorCamposPessoa.length + 1) {
+            coluna = id;
+        } else {
+            coluna = vetorCampos[campo - vetorCamposPessoa.length - 1];
+        }
+
+        return coluna;
 
     }
 

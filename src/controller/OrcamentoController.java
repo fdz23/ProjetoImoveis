@@ -6,6 +6,7 @@
 package controller;
 
 import dao.OrcamentoDao;
+import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.Orcamento;
@@ -16,7 +17,7 @@ import model.Orcamento;
  */
 public class OrcamentoController extends Controller<Orcamento> {
 
-    public OrcamentoController() throws ClassNotFoundException {
+    public OrcamentoController() throws ClassNotFoundException, SQLException {
 
         dao = new OrcamentoDao();
 
@@ -25,7 +26,7 @@ public class OrcamentoController extends Controller<Orcamento> {
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
-        Iterator<Orcamento> lista = dao.getTodosItensOrdenadosPor(0, true);
+        Iterator<Orcamento> lista = dao.getAllOrderBy(0, true);
 
         model.setNumRows(0);
 

@@ -5,10 +5,11 @@
  */
 package dao;
 
-import fabricas.AbstractFactory;
-import interfaces.Tabela;
+import model.fabricas.AbstractFactory;
+import model.interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
@@ -23,7 +24,7 @@ public class PessoaDao extends Dao<Pessoa> {
 
     private EnderecoDao enderecoDao = new EnderecoDao();
 
-    public PessoaDao() throws ClassNotFoundException {
+    public PessoaDao() throws ClassNotFoundException, SQLException {
 
         Tabela obj = AbstractFactory.getInstance("HUMANO").getTabela("PESSOA");
 
@@ -110,6 +111,8 @@ public class PessoaDao extends Dao<Pessoa> {
         ps.setString(4, item.getCpf());
         ps.setString(5, item.getTelefone());
         ps.setInt(6, item.getEndereco().getId());
+        ps.setInt(7, item.getCliente());
+        
         return ps;
 
     }
@@ -125,7 +128,8 @@ public class PessoaDao extends Dao<Pessoa> {
         ps.setString(4, item.getCpf());
         ps.setString(5, item.getTelefone());
         ps.setInt(6, item.getEndereco().getId());
-        ps.setInt(7, item.getId());
+        ps.setInt(7, item.getCliente());
+        ps.setInt(8, item.getId());
 
         return ps;
 
@@ -189,7 +193,7 @@ public class PessoaDao extends Dao<Pessoa> {
         
         pessoa.setCliente(0);
 
-        return alterar(pessoa);
+        return update(pessoa);
         
     }
 

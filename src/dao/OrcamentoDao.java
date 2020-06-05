@@ -5,10 +5,11 @@
  */
 package dao;
 
-import fabricas.AbstractFactory;
-import interfaces.Tabela;
+import model.fabricas.AbstractFactory;
+import model.interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import model.Orcamento;
 import util.CriaStatement;
 
@@ -23,7 +24,7 @@ public class OrcamentoDao extends Dao<Orcamento> {
     private ImovelDao imovelDao = new ImovelDao();
     private TipoPagamentoDao tipoPagamentoDao = new TipoPagamentoDao();
 
-    public OrcamentoDao() throws ClassNotFoundException {
+    public OrcamentoDao() throws ClassNotFoundException, SQLException {
 
         Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("ORCAMENTO");
 

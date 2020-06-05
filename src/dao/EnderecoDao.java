@@ -5,10 +5,11 @@
  */
 package dao;
 
-import fabricas.AbstractFactory;
-import interfaces.Tabela;
+import model.fabricas.AbstractFactory;
+import model.interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import model.Endereco;
 import util.CriaStatement;
 
@@ -18,7 +19,7 @@ import util.CriaStatement;
  */
 public class EnderecoDao extends Dao<Endereco> {
 
-    public EnderecoDao() throws ClassNotFoundException {
+    public EnderecoDao() throws ClassNotFoundException, SQLException {
 
         Tabela obj = AbstractFactory.getInstance("MATERIAL").getTabela("ENDERECO");
 

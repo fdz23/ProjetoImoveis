@@ -6,6 +6,7 @@
 package controller;
 
 import dao.FuncionarioDao;
+import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.Funcionario;
@@ -16,7 +17,7 @@ import model.Funcionario;
  */
 public class FuncionarioController extends Controller<Funcionario> {
 
-    public FuncionarioController() throws ClassNotFoundException {
+    public FuncionarioController() throws ClassNotFoundException, SQLException {
 
         dao = new FuncionarioDao();
 
@@ -25,7 +26,7 @@ public class FuncionarioController extends Controller<Funcionario> {
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
-        Iterator<Funcionario> lista = dao.getTodosItensOrdenadosPor(7, true);
+        Iterator<Funcionario> lista = dao.getAllOrderBy(8, true);
 
         model.setNumRows(0);
 

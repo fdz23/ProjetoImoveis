@@ -13,10 +13,12 @@ import java.util.Iterator;
  */
 public interface IDao<T> {
 
-    public boolean inserir(T item) throws Exception;
-    public boolean alterar(T item) throws Exception;
-    public boolean deletar(int id) throws Exception;
+    public boolean insert(T item) throws Exception;
+    public boolean update(T item) throws Exception;
+    public boolean delete(int id) throws Exception;
     public Iterator<T> getAll() throws Exception;
+    public Iterator<T> getAllDoubleOrderBy(int campo1, int campo2, boolean ascOuDesc1, boolean ascOuDesc2) throws Exception;
+    public Iterator<T> getAllOrderBy(int campo, boolean ascOuDesc) throws Exception;
     public T getByID(int id) throws Exception;
     
 }

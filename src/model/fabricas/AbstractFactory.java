@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fabricas;
+package model.fabricas;
 
-import interfaces.Tabela;
-import fabricasconcretas.*;
+import model.fabricasconcretas.Venda;
+import model.fabricasconcretas.Humano;
+import model.fabricasconcretas.Material;
+import model.interfaces.Tabela;
 
 /**
  *

@@ -6,6 +6,7 @@
 package controller;
 
 import dao.EnderecoDao;
+import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.Endereco;
@@ -16,7 +17,7 @@ import model.Endereco;
  */
 public class EnderecoController extends Controller<Endereco> {
 
-    public EnderecoController() throws ClassNotFoundException {
+    public EnderecoController() throws ClassNotFoundException, SQLException {
 
         dao = new EnderecoDao();
 
@@ -25,7 +26,7 @@ public class EnderecoController extends Controller<Endereco> {
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
-        Iterator<Endereco> lista = dao.getTodosItensOrdenadosPor(0, true);
+        Iterator<Endereco> lista = dao.getAllOrderBy(0, true);
 
         model.setNumRows(0);
 

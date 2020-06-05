@@ -5,10 +5,11 @@
  */
 package dao;
 
-import fabricas.AbstractFactory;
-import interfaces.Tabela;
+import model.fabricas.AbstractFactory;
+import model.interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import model.ImovelItem;
 import util.CriaStatement;
 
@@ -21,7 +22,7 @@ public class ImovelItemDao extends Dao<ImovelItem> {
     private ItemMovelDao itemMovelDao = new ItemMovelDao();
     private ImovelDao imovelDao = new ImovelDao();
 
-    public ImovelItemDao() throws ClassNotFoundException {
+    public ImovelItemDao() throws ClassNotFoundException, SQLException {
 
         Tabela obj = AbstractFactory.getInstance("MATERIAL").getTabela("IMOVEL_ITEM");
 

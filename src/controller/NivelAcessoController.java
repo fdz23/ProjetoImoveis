@@ -7,6 +7,7 @@ package controller;
 
 import dao.NivelAcessoDao;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +19,7 @@ import model.NivelAcesso;
  */
 public class NivelAcessoController extends Controller<NivelAcesso> {
 
-    public NivelAcessoController() throws ClassNotFoundException {
+    public NivelAcessoController() throws ClassNotFoundException, SQLException {
 
         dao = new NivelAcessoDao();
 
@@ -27,7 +28,7 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
-        Iterator<NivelAcesso> lista = dao.getTodosItensOrdenadosPor(0, true);
+        Iterator<NivelAcesso> lista = dao.getAllOrderBy(0, true);
 
         model.setNumRows(0);
 

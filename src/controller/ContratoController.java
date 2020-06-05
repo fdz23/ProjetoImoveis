@@ -6,6 +6,7 @@
 package controller;
 
 import dao.ContratoDao;
+import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.Contrato;
@@ -17,7 +18,7 @@ import model.Contrato;
 public class ContratoController extends Controller<Contrato> {
 
     
-    public ContratoController() throws ClassNotFoundException {
+    public ContratoController() throws ClassNotFoundException, SQLException {
         
         dao = new ContratoDao( );
         
@@ -26,7 +27,7 @@ public class ContratoController extends Controller<Contrato> {
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
-        Iterator<Contrato> lista = dao.getTodosItensOrdenadosPor(0, true);
+        Iterator<Contrato> lista = dao.getAllOrderBy(0, true);
 
         model.setNumRows(0);
 

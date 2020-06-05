@@ -6,6 +6,7 @@
 package controller;
 
 import dao.TipoImovelDao;
+import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.TipoImovel;
@@ -16,7 +17,7 @@ import model.TipoImovel;
  */
 public class TipoImovelController extends Controller<TipoImovel> {
 
-    public TipoImovelController() throws ClassNotFoundException {
+    public TipoImovelController() throws ClassNotFoundException, SQLException {
 
         dao = new TipoImovelDao();
 
@@ -25,7 +26,7 @@ public class TipoImovelController extends Controller<TipoImovel> {
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
-        Iterator<TipoImovel> lista = dao.getTodosItensOrdenadosPor(0, true);
+        Iterator<TipoImovel> lista = dao.getAllOrderBy(0, true);
 
         model.setNumRows(0);
 
