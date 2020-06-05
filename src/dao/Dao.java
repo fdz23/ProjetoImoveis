@@ -8,6 +8,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,7 +33,7 @@ public abstract class Dao<T> implements IDao<T> {
     protected String campos;
     protected String[] vetorCampos;
 
-    public Dao() throws Exception {
+    public Dao() throws ClassNotFoundException, SQLException {
 
         this.con = ConectaDb.getInstance().getConnection();
         rs = null;
