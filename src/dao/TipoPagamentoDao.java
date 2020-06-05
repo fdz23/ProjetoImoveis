@@ -9,6 +9,7 @@ import fabricas.AbstractFactory;
 import interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import model.TipoPagamento;
 import util.CriaStatement;
 
@@ -18,7 +19,7 @@ import util.CriaStatement;
  */
 public class TipoPagamentoDao extends Dao<TipoPagamento> {
 
-    public TipoPagamentoDao() throws ClassNotFoundException {
+    public TipoPagamentoDao() throws ClassNotFoundException, SQLException {
 
         Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("TIPO_PAGAMENTO");
 

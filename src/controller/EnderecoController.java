@@ -6,6 +6,7 @@
 package controller;
 
 import dao.EnderecoDao;
+import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.Endereco;
@@ -16,7 +17,7 @@ import model.Endereco;
  */
 public class EnderecoController extends Controller<Endereco> {
 
-    public EnderecoController() throws ClassNotFoundException {
+    public EnderecoController() throws ClassNotFoundException, SQLException {
 
         dao = new EnderecoDao();
 

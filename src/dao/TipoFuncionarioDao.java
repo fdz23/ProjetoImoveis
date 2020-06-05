@@ -9,6 +9,7 @@ import fabricas.AbstractFactory;
 import interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import model.TipoFuncionario;
 import util.CriaStatement;
 
@@ -20,7 +21,7 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
 
     private NivelAcessoDao nivelAcessoDao = new NivelAcessoDao();
 
-    public TipoFuncionarioDao() throws ClassNotFoundException {
+    public TipoFuncionarioDao() throws ClassNotFoundException, SQLException {
 
         Tabela obj = AbstractFactory.getInstance("HUMANO").getTabela("TIPO_FUNCIONARIO");
 

@@ -6,6 +6,7 @@
 package controller;
 
 import dao.StatusDao;
+import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +18,7 @@ import model.Status;
  */
 public class StatusController extends Controller<Status> {
 
-    public StatusController() throws ClassNotFoundException {
+    public StatusController() throws ClassNotFoundException, SQLException {
 
         dao = new StatusDao();
 

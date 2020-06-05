@@ -7,6 +7,7 @@ package controller;
 
 import dao.NivelAcessoDao;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +19,7 @@ import model.NivelAcesso;
  */
 public class NivelAcessoController extends Controller<NivelAcesso> {
 
-    public NivelAcessoController() throws ClassNotFoundException {
+    public NivelAcessoController() throws ClassNotFoundException, SQLException {
 
         dao = new NivelAcessoDao();
 

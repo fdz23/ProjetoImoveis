@@ -9,9 +9,9 @@ import fabricas.AbstractFactory;
 import interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import model.NivelAcesso;
 import util.CriaStatement;
-import util.ConectaDb;
 
 /**
  *
@@ -19,13 +19,13 @@ import util.ConectaDb;
  */
 public class NivelAcessoDao extends Dao<NivelAcesso> {
 
-    public NivelAcessoDao() throws ClassNotFoundException {
+    public NivelAcessoDao() throws ClassNotFoundException, SQLException {
 
         Tabela obj = AbstractFactory.getInstance("HUMANO").getTabela("NIVEL_ACESSO");
 
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
-        this.criaStatement = new CriaStatement(ConectaDb.conectadb(), tabela, id);
+        this.criaStatement = new CriaStatement(con, tabela, id);
         campos = "nac_descricao";
         vetorCampos = campos.split(",");
 

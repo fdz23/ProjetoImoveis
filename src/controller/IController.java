@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.Iterator;
-import javax.swing.table.DefaultTableModel;
 
 public interface IController<T> {
 

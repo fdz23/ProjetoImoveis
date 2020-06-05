@@ -6,6 +6,7 @@
 package controller;
 
 import dao.TipoPagamentoDao;
+import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.TipoPagamento;
@@ -16,7 +17,7 @@ import model.TipoPagamento;
  */
 public class TipoPagamentoController extends Controller<TipoPagamento> {
 
-    public TipoPagamentoController() throws ClassNotFoundException {
+    public TipoPagamentoController() throws ClassNotFoundException, SQLException {
         
        dao = new TipoPagamentoDao();
         

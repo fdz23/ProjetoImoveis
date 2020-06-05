@@ -6,6 +6,7 @@
 package controller;
 
 import dao.FuncionarioDao;
+import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.Funcionario;
@@ -16,7 +17,7 @@ import model.Funcionario;
  */
 public class FuncionarioController extends Controller<Funcionario> {
 
-    public FuncionarioController() throws ClassNotFoundException {
+    public FuncionarioController() throws ClassNotFoundException, SQLException {
 
         dao = new FuncionarioDao();
 

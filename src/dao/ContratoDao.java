@@ -9,6 +9,7 @@ import fabricas.AbstractFactory;
 import interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import model.Contrato;
 import util.CriaStatement;
 
@@ -18,7 +19,7 @@ import util.CriaStatement;
  */
 public class ContratoDao extends Dao<Contrato> {
 
-    public ContratoDao() throws ClassNotFoundException {
+    public ContratoDao() throws ClassNotFoundException, SQLException {
 
         Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("CONTRATO");
 

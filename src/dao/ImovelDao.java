@@ -9,6 +9,7 @@ import fabricas.AbstractFactory;
 import interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import model.Imovel;
 import util.CriaStatement;
 
@@ -23,7 +24,7 @@ public class ImovelDao extends Dao<Imovel> {
     private TipoImovelDao tipoImovelDao = new TipoImovelDao();
     private EnderecoDao enderecoDao = new EnderecoDao();
 
-    public ImovelDao() throws ClassNotFoundException {
+    public ImovelDao() throws ClassNotFoundException, SQLException {
 
         Tabela obj = AbstractFactory.getInstance("MATERIAL").getTabela("IMOVEL");
 

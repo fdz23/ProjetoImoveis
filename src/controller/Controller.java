@@ -6,24 +6,15 @@
 package controller;
 
 import dao.Dao;
-import java.sql.Connection;
 import java.util.Iterator;
-import util.ConectaDb;
 /**
  *
  * @author fdz
  */
 public abstract class Controller<T> implements IController<T> {
     
-    protected Connection con;
     protected Dao<T> dao;
-
-    protected Controller() throws ClassNotFoundException {
-        
-        this.con = ConectaDb.conectadb();
-        
-    }
-
+    
     @Override
     public boolean inserirItem(T item) throws Exception {
         
