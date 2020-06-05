@@ -19,6 +19,7 @@ import model.Funcionario;
 import model.Pessoa;
 import model.Status;
 import model.TipoFuncionario;
+import util.OrdenaClickTabela;
 import util.Validacao;
 
 public class TelaFuncionarios extends javax.swing.JFrame {
@@ -50,6 +51,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         popularJtable();
         popularComboboxCargo();
         popularComboboxStatus();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, fc);
 
     }
 

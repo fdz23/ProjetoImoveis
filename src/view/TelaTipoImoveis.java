@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.TipoImovel;
+import util.OrdenaClickTabela;
 
 public class TelaTipoImoveis extends javax.swing.JFrame {
 
@@ -19,6 +20,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         initComponents();
         iniciar();
         popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, tic);
     }
 
     public void iniciar() throws ClassNotFoundException, Exception {

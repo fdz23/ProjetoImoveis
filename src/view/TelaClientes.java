@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Endereco;
 import model.Pessoa;
+import util.OrdenaClickTabela;
 import util.Validacao;
 
 public class TelaClientes extends javax.swing.JFrame {
@@ -27,6 +28,7 @@ public class TelaClientes extends javax.swing.JFrame {
         initComponents();
         iniciar();
         popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, pec);
     }
 
     public void popularJtable() throws ClassNotFoundException, Exception {
