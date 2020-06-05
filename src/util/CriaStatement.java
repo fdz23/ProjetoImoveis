@@ -122,4 +122,73 @@ public class CriaStatement {
         
         return con.prepareStatement(sql);
     }
+    
+    public PreparedStatement selectSqlOrderDuplaFuncPessoa(String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {
+        
+        String ascOuDesc1 = "DESC";
+        String ascOuDesc2 = "DESC";
+        
+        if(asc1)
+            ascOuDesc1 = "ASC";
+        if(asc2)
+            ascOuDesc2 = "ASC";
+        
+        String sql = "SELECT * FROM funcionarios" +
+                    " INNER JOIN pessoas ON funcionarios.fun_pes_iden = pessoas.pes_iden" +
+                    " ORDER BY funcionarios." + coluna1 + " " + ascOuDesc1 + ", pessoas." + coluna2 + " " + ascOuDesc2;
+        
+        return con.prepareStatement(sql);   
+    }
+    
+    public PreparedStatement selectSqlOrderDuplaPessoaFunc(String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {
+        
+        String ascOuDesc1 = "DESC";
+        String ascOuDesc2 = "DESC";
+        
+        if(asc1)
+            ascOuDesc1 = "ASC";
+        if(asc2)
+            ascOuDesc2 = "ASC";
+        
+        String sql = "SELECT * FROM funcionarios" +
+                    " INNER JOIN pessoas ON funcionarios.fun_pes_iden = pessoas.pes_iden" +
+                    " ORDER BY pessoas." + coluna1 + " " + ascOuDesc1 + ", funcionarios." + coluna2 + " " + ascOuDesc2;
+        
+        return con.prepareStatement(sql);   
+    }
+    
+    public PreparedStatement selectSqlOrderDuplaFuncFunc(String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {
+        
+        String ascOuDesc1 = "DESC";
+        String ascOuDesc2 = "DESC";
+        
+        if(asc1)
+            ascOuDesc1 = "ASC";
+        if(asc2)
+            ascOuDesc2 = "ASC";
+        
+        String sql = "SELECT * FROM funcionarios" +
+                    " INNER JOIN pessoas ON funcionarios.fun_pes_iden = pessoas.pes_iden" +
+                    " ORDER BY funcionarios." + coluna1 + " " + ascOuDesc1 + ", funcionarios." + coluna2 + " " + ascOuDesc2;
+        
+        return con.prepareStatement(sql);   
+    }
+    
+    public PreparedStatement selectSqlOrderDuplaPessoaPessoa(String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {
+        
+        String ascOuDesc1 = "DESC";
+        String ascOuDesc2 = "DESC";
+        
+        if(asc1)
+            ascOuDesc1 = "ASC";
+        if(asc2)
+            ascOuDesc2 = "ASC";
+        
+        String sql = "SELECT * FROM funcionarios" +
+                    " INNER JOIN pessoas ON funcionarios.fun_pes_iden = pessoas.pes_iden" +
+                    " ORDER BY pessoas." + coluna1 + " " + ascOuDesc1 + ", pessoas." + coluna2 + " " + ascOuDesc2;
+        
+        return con.prepareStatement(sql);   
+    }
+    
 }
