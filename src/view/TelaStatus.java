@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Status;
+import util.OrdenaClickTabela;
 
 public class TelaStatus extends javax.swing.JFrame {
 
@@ -30,6 +31,7 @@ public class TelaStatus extends javax.swing.JFrame {
         iniciar();
         popularJtable();
         this.tela = tela;
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, sc);
 
     }
 
