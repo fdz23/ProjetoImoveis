@@ -2,6 +2,7 @@ package view;
 
 import controller.PessoaController;
 import dao.PessoaDao;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -34,7 +35,7 @@ public class TelaClientes extends javax.swing.JFrame {
 
     }
 
-    public void iniciar() throws ClassNotFoundException {
+    public void iniciar() throws ClassNotFoundException, SQLException {
 
         pe = new Pessoa();
         pec = new PessoaController();
@@ -302,16 +303,16 @@ public class TelaClientes extends javax.swing.JFrame {
 
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
 
-        try{
-        linhaSelecionada = jTableTabela.getSelectedRow();
-        jtextidacao.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
-        jTextFieldNome.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
-        jTextFieldEmail.setText(jTableTabela.getValueAt(linhaSelecionada, 2).toString());
-        jFormattedTextFieldCPF.setText(jTableTabela.getValueAt(linhaSelecionada, 4).toString());
-        jFormattedTextFieldTelefone.setText(jTableTabela.getValueAt(linhaSelecionada, 5).toString());
-        
-        }catch(Exception ex){
-            
+        try {
+            linhaSelecionada = jTableTabela.getSelectedRow();
+            jtextidacao.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
+            jTextFieldNome.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
+            jTextFieldEmail.setText(jTableTabela.getValueAt(linhaSelecionada, 2).toString());
+            jFormattedTextFieldCPF.setText(jTableTabela.getValueAt(linhaSelecionada, 4).toString());
+            jFormattedTextFieldTelefone.setText(jTableTabela.getValueAt(linhaSelecionada, 5).toString());
+
+        } catch (Exception ex) {
+
             ex.printStackTrace();
         }
 
@@ -323,8 +324,7 @@ public class TelaClientes extends javax.swing.JFrame {
 
             int action = jComboAcao.getSelectedIndex();
             int idacao1 = Integer.parseInt(jtextidacao.getText());
-            
-          
+
             if (Validacao.validarCPF(jFormattedTextFieldCPF.getText())) {
 
                 if (Validacao.validarEmail(jTextFieldEmail.getText())) {
@@ -344,6 +344,8 @@ public class TelaClientes extends javax.swing.JFrame {
 
                         case 1:
 
+                            pe = new Pessoa(idacao1, nome, email, null, cpf, telefone, ende, 1);
+
                             pec.inserirItem(pe);
 
                             JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
@@ -355,6 +357,7 @@ public class TelaClientes extends javax.swing.JFrame {
 
                             if (idacao1 != 0) {
 
+                                pe = new Pessoa(idacao1, nome, email, null, cpf, telefone, ende, 1);
 
                                 pec.alterarItem(pe);
 

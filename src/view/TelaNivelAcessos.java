@@ -2,6 +2,7 @@ package view;
 
 import controller.NivelAcessoController;
 import dao.NivelAcessoDao;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -51,7 +52,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
     }
 
-    public void iniciar() throws ClassNotFoundException {
+    public void iniciar() throws ClassNotFoundException, SQLException {
 
         nac = new NivelAcessoController();
 
