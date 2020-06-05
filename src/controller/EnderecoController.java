@@ -26,7 +26,7 @@ public class EnderecoController extends Controller<Endereco> {
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
-        Iterator<Endereco> lista = dao.getTodosItensOrdenadosPor(0, true);
+        Iterator<Endereco> lista = dao.getAllOrderBy(0, true);
 
         model.setNumRows(0);
 

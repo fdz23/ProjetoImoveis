@@ -52,7 +52,8 @@ public abstract class Dao<T> implements IDao<T> {
 
     //campo é o número correspondente à propriedade conforme a ordem na tabela do banco de dados!(começa do 0)
     //ascOuDesc true para ordem ascendente e false para descendente
-    public Iterator<T> getTodosItensOrdenadosDuplamentePor(int campo1, int campo2, boolean ascOuDesc1, boolean ascOuDesc2) throws Exception {
+    @Override
+    public Iterator<T> getAllDoubleOrderBy(int campo1, int campo2, boolean ascOuDesc1, boolean ascOuDesc2) throws Exception {
 
         //verifica se o número recebido é menor que 0 ou maior que o número máximo de campos
         if (campo1 < 0 || campo1 > (vetorCampos.length - 1)) {
@@ -88,7 +89,8 @@ public abstract class Dao<T> implements IDao<T> {
 
     //campo é o número correspondente à propriedade conforme a ordem na tabela do banco de dados!(começa do 0)
     //ascOuDesc true para ordem ascendente e false para descendente
-    public Iterator<T> getTodosItensOrdenadosPor(int campo, boolean ascOuDesc) throws Exception {
+    @Override
+    public Iterator<T> getAllOrderBy(int campo, boolean ascOuDesc) throws Exception {
 
         //verifica se o número recebido é menor que 0 ou maior que o número máximo de campos
         if (campo < 0 || campo > vetorCampos.length) {
@@ -126,7 +128,7 @@ public abstract class Dao<T> implements IDao<T> {
 
     protected PreparedStatement statementDeletar(int id) throws Exception {
 
-        //cria um sql para deletar um item conforme seu id
+        //cria um sql para delete um item conforme seu id
         ps = criaStatement.deleteSql();
 
         ps.setInt(1, id);
@@ -157,11 +159,11 @@ public abstract class Dao<T> implements IDao<T> {
 
     //comenta!
     @Override
-    public boolean inserir(T item) throws Exception {
+    public boolean insert(T item) throws Exception {
 
         verificaExistenteInserir(item);
 
-        //cria um sql para inserir o item
+        //cria um sql para insert o item
         ps = statementInserir(item);
 
         ps.executeUpdate();
@@ -171,11 +173,11 @@ public abstract class Dao<T> implements IDao<T> {
     }
 
     @Override
-    public boolean alterar(T item) throws Exception {
+    public boolean update(T item) throws Exception {
 
         verificaExistenteAlterar(item);
 
-        //cria um sql para alterar o item
+        //cria um sql para update o item
         ps = statementAlterar(item);
 
         ps.executeUpdate();
@@ -185,9 +187,9 @@ public abstract class Dao<T> implements IDao<T> {
     }
 
     @Override
-    public boolean deletar(int id) throws Exception {
+    public boolean delete(int id) throws Exception {
 
-        //cria um sql para deletar o item
+        //cria um sql para delete o item
         ps = statementDeletar(id);
 
         ps.executeUpdate();

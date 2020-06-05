@@ -26,7 +26,7 @@ public class TipoPagamentoController extends Controller<TipoPagamento> {
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
-        Iterator<TipoPagamento> lista = dao.getTodosItensOrdenadosPor(0, true);
+        Iterator<TipoPagamento> lista = dao.getAllOrderBy(0, true);
 
         model.setNumRows(0);
 

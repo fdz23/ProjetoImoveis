@@ -193,7 +193,7 @@ public class PessoaDao extends Dao<Pessoa> {
         
         pessoa.setCliente(0);
 
-        return alterar(pessoa);
+        return update(pessoa);
         
     }
 
