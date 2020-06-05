@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Endereco;
+import util.OrdenaClickTabela;
 import util.api.ViaCEP;
 import util.api.ViaCEPException;
 
@@ -24,18 +25,18 @@ public class TelaEnderecos extends javax.swing.JFrame {
         initComponents();
         iniciar();
         popularJtable();
+        
     }
-    
-    public TelaEnderecos(TelaFuncionarios tf) throws Exception{
-        
-        
+
+    public TelaEnderecos(TelaFuncionarios tf) throws Exception {
+
         CriarJTable();
         initComponents();
         iniciar();
         popularJtable();
         this.tf = tf;
-        
-        
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, ec);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -341,7 +342,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
                 JtextFielCep.setEnabled(false);
                 jButtonBuscarCep.setEnabled(false);
                 jButton1.setEnabled(false);
-                
+
                 break;
 
             case 1:
@@ -415,7 +416,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
             if (JtextFielCep.getText().isEmpty()) {
 
                 JOptionPane.showMessageDialog(null, "Não é possivel fazer a bsuca com o campo em branco. Digite um cep válido.");
-                
+
             } else {
 
                 cep.buscar(JtextFielCep.getText());
