@@ -28,7 +28,7 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
     public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
-        Iterator<NivelAcesso> lista = dao.getTodosItensOrdenadosPor(0, true);
+        Iterator<NivelAcesso> lista = dao.getAllOrderBy(0, true);
 
         model.setNumRows(0);
 

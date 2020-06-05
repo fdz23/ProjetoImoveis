@@ -15,24 +15,36 @@ public abstract class Controller<T> implements IController<T> {
     
     protected Dao<T> dao;
     
+    public Iterator<T> getTodosItensOrdenadosDuplamentePor(int campo1, int campo2, boolean ascOuDesc1, boolean ascOuDesc2) throws Exception {
+        
+        return dao.getAllDoubleOrderBy(campo1, campo2, ascOuDesc1, ascOuDesc2);
+        
+    }
+    
+    public Iterator<T> getTodosItensOrdenadosPor(int campo, boolean ascOuDesc) throws Exception {
+        
+        return dao.getAllOrderBy(campo, ascOuDesc);
+        
+    }
+    
     @Override
     public boolean inserirItem(T item) throws Exception {
         
-        return dao.inserir(item);
+        return dao.insert(item);
         
     }
 
     @Override
     public boolean alterarItem(T item) throws Exception {
         
-        return dao.alterar(item);
+        return dao.update(item);
         
     }
 
     @Override
     public boolean deletarItem(int id) throws Exception {
         
-        return dao.deletar(id);
+        return dao.delete(id);
         
     }
 

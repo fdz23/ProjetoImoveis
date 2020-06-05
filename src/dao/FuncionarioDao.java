@@ -48,7 +48,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
     //campo é o número correspondente à propriedade conforme a ordem na tabela do banco de dados!(começa do 0)
     //ascOuDesc true para ordem ascendente e false para descendente
     @Override
-    public Iterator<Funcionario> getTodosItensOrdenadosDuplamentePor(int campo1, int campo2, boolean ascOuDesc1, boolean ascOuDesc2) throws Exception {
+    public Iterator<Funcionario> getAllDoubleOrderBy(int campo1, int campo2, boolean ascOuDesc1, boolean ascOuDesc2) throws Exception {
 
         ResultSet rs;
 
@@ -114,7 +114,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
     //campo é o número correspondente à propriedade conforme a ordem na tabela do banco de dados!(começa do 0)
     //ascOuDesc true para ordem ascendente e false para descendente
     @Override
-    public Iterator<Funcionario> getTodosItensOrdenadosPor(int campo, boolean ascOuDesc) throws Exception {
+    public Iterator<Funcionario> getAllOrderBy(int campo, boolean ascOuDesc) throws Exception {
 
         ResultSet rs;
 
@@ -188,7 +188,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
         if (!getAll().hasNext()) {
             return 1;
         } else {
-            return getTodosItensOrdenadosPor(8, false).next().getId();
+            return getAllOrderBy(8, false).next().getId();
         }
 
     }
@@ -207,7 +207,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
         ps = criaStatement.insertSql(tabela, campos);
 
         //insere uma pessoa com os valores recebidos
-        pessoaDao.inserir(
+        pessoaDao.insert(
                 new Pessoa(
                         0,
                         item.getNome(),
@@ -235,7 +235,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
     @Override
     protected PreparedStatement statementAlterar(Funcionario item) throws Exception {
 
-        //cria statement para alterar os dados dos campos da tabela funcionario
+        //cria statement para update os dados dos campos da tabela funcionario
         ps = criaStatement.updateSql(campos);
 
         //cria um objeto pessoa com os dados pertencentes a tabela pessoa
@@ -251,7 +251,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
         );
 
         //altera a tabela pessoa também com os dados
-        pessoaDao.alterar(pessoa);
+        pessoaDao.update(pessoa);
 
         ps.setString(1, item.getMatricula());
         ps.setInt(2, item.getPessoa().getId());
@@ -265,16 +265,16 @@ public class FuncionarioDao extends Dao<Funcionario> {
     }
 
     @Override
-    public boolean deletar(int id) throws Exception {
+    public boolean delete(int id) throws Exception {
 
         int idPessoa = getByID(id).getPessoa().getId();
 
-        //cria um sql para deletar o item
+        //cria um sql para delete o item
         ps = statementDeletar(id);
 
         ps.executeUpdate();
 
-        pessoaDao.deletar(idPessoa);
+        pessoaDao.delete(idPessoa);
 
         return true;
 
