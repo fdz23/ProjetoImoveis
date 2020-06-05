@@ -344,7 +344,7 @@ public class TelaClientes extends javax.swing.JFrame {
 
                         case 1:
 
-                            pe = new Pessoa(0, nome, email, null, cpf, telefone, ende);
+                            pe = new Pessoa(0, nome, email, null, cpf, telefone, ende,0);
                             pec.inserirItem(pe);
 
                             JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
@@ -356,7 +356,7 @@ public class TelaClientes extends javax.swing.JFrame {
 
                             if (idacao1 != 0) {
 
-                                pe = new Pessoa(idacao1, nome, email, null, cpf, telefone, ende);
+                                pe = new Pessoa(idacao1, nome, email, null, cpf, telefone, ende,0);
                                 pec.alterarItem(pe);
 
                                 popularJtable();
