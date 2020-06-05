@@ -228,7 +228,8 @@ public class FuncionarioDao extends Dao<Funcionario> {
                         item.getDataNascimento(),
                         item.getCpf(),
                         item.getTelefone(),
-                        item.getEndereco()
+                        item.getEndereco(),
+                        item.getCliente()
                 )
         );
 
@@ -258,7 +259,8 @@ public class FuncionarioDao extends Dao<Funcionario> {
                 item.getDataNascimento(),
                 item.getCpf(),
                 item.getTelefone(),
-                item.getEndereco()
+                item.getEndereco(),
+                item.getCliente()
         );
 
         //altera a tabela pessoa também com os dados
