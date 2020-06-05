@@ -28,12 +28,12 @@ public class TelaClientes extends javax.swing.JFrame {
         initComponents();
         iniciar();
         popularJtable();
-        OrdenaClickTabela.ordenarPorClick(jTableTabela, pec);
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, pec, modelo);
     }
 
     public void popularJtable() throws ClassNotFoundException, Exception {
 
-        jTableTabela.setModel(pec.populaJTable(modelo));
+        jTableTabela.setModel(pec.populaJTable(modelo, 0));
 
     }
 

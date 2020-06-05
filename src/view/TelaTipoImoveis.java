@@ -20,7 +20,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         initComponents();
         iniciar();
         popularJtable();
-        OrdenaClickTabela.ordenarPorClick(jTableTabela, tic);
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, tic, modelo);
     }
 
     public void iniciar() throws ClassNotFoundException, Exception {
@@ -56,7 +56,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
 
     private void popularJtable() throws ClassNotFoundException, Exception {
 
-        jTableTabela.setModel(tic.populaJTable(modelo));
+        jTableTabela.setModel(tic.populaJTable(modelo, 0));
 
     }
 

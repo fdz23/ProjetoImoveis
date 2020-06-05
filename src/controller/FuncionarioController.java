@@ -23,10 +23,10 @@ public class FuncionarioController extends Controller<Funcionario> {
 
     }
     
-    public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
+    public DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
-        Iterator<Funcionario> lista = dao.getAllOrderBy(8, true);
+        Iterator<Funcionario> lista = dao.getAllOrderBy(campo, true);
 
         model.setNumRows(0);
 

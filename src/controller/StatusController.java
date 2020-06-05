@@ -24,9 +24,9 @@ public class StatusController extends Controller<Status> {
 
     }
 
-    public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
+    public DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception {
 
-        Iterator<Status> lista = dao.getAll();
+        Iterator<Status> lista = dao.getAllOrderBy(campo, true);
 
         model.setNumRows(0);
 

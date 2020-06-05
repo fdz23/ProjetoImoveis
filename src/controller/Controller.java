@@ -7,6 +7,7 @@ package controller;
 
 import dao.Dao;
 import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author fdz
@@ -62,5 +63,6 @@ public abstract class Controller<T> implements IController<T> {
         
     }
     
+    public abstract DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception;
     
 }

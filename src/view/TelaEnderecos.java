@@ -35,7 +35,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         iniciar();
         popularJtable();
         this.tf = tf;
-        OrdenaClickTabela.ordenarPorClick(jTableTabela, ec);
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, ec, modelo);
 
     }
 
@@ -251,7 +251,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
     private void popularJtable() throws ClassNotFoundException, Exception {
 
-        jTableTabela.setModel(ec.populaJTable(modelo));
+        jTableTabela.setModel(ec.populaJTable(modelo, 0));
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

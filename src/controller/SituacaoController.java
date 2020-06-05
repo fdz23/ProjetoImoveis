@@ -7,6 +7,7 @@ package controller;
 
 import dao.SituacaoDao;
 import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
 import model.Situacao;
 
 /**
@@ -19,5 +20,12 @@ public class SituacaoController extends Controller<Situacao> {
 
         dao = new SituacaoDao();
 
+    }
+    
+    @Override
+    public DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception {
+    
+        return null;
+        
     }
 }

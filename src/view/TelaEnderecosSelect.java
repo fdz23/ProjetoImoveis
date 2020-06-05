@@ -31,7 +31,7 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         iniciar();
         popularJtable();
         this.td = tf;
-        OrdenaClickTabela.ordenarPorClick(jTableTabela, ec);
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, ec, modelo);
     }
 
     public TelaEnderecosSelect(TelaClientes tela) throws Exception {
@@ -80,7 +80,7 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
 
     private void popularJtable() throws ClassNotFoundException, Exception {
 
-        jTableTabela.setModel(ec.populaJTable(modelo));
+        jTableTabela.setModel(ec.populaJTable(modelo, 0));
     }
 
     @SuppressWarnings("unchecked")

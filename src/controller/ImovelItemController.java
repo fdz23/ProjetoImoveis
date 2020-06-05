@@ -7,6 +7,7 @@ package controller;
 
 import dao.ImovelItemDao;
 import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
 import model.ImovelItem;
 
 /**
@@ -19,5 +20,12 @@ public class ImovelItemController extends Controller<ImovelItem> {
 
         dao = new ImovelItemDao();
 
+    }
+    
+    @Override
+    public DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception {
+    
+        return null;
+        
     }
 }

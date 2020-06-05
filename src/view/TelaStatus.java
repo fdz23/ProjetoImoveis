@@ -31,7 +31,7 @@ public class TelaStatus extends javax.swing.JFrame {
         iniciar();
         popularJtable();
         this.tela = tela;
-        OrdenaClickTabela.ordenarPorClick(jTableTabela, sc);
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, sc, modelo);
 
     }
 
@@ -44,7 +44,7 @@ public class TelaStatus extends javax.swing.JFrame {
 
     private void popularJtable() throws ClassNotFoundException, Exception {
 
-        jTableTabela.setModel(sc.populaJTable(modelo));
+        jTableTabela.setModel(sc.populaJTable(modelo, 0));
 
     }
 

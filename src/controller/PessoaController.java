@@ -28,7 +28,7 @@ public class PessoaController extends Controller<Pessoa> {
         return new PessoaDao().getByCpf(cpf);
     }
     
-    public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
+    public DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
         Iterator<Pessoa> lista = getTodosClientes();

@@ -206,7 +206,7 @@ public abstract class Dao<T> implements IDao<T> {
 
         ps = statementGetTodos();
 
-        rs = ps.executeQuery();
+        ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
 

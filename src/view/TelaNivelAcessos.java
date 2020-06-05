@@ -37,7 +37,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         iniciar();
         popularJtable();
         this.tela = tela;
-        OrdenaClickTabela.ordenarPorClick(jTableTabela, nac);
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, nac, modelo);
 
     }
 
@@ -50,7 +50,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
     private void popularJtable() throws ClassNotFoundException, Exception {
 
-        jTableTabela.setModel(nac.populaJTable(modelo));
+        jTableTabela.setModel(nac.populaJTable(modelo, 0));
 
     }
 

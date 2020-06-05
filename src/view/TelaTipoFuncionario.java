@@ -41,7 +41,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         popularJtable();
         popularCombox();
         this.tela1 = tela;
-        OrdenaClickTabela.ordenarPorClick(jTableTabela, tfc);
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, tfc, modelo);
         
         
     }
@@ -57,7 +57,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
     private void popularJtable() throws ClassNotFoundException, Exception {
 
-        jTableTabela.setModel(tfc.populaJTable(modelo));
+        jTableTabela.setModel(tfc.populaJTable(modelo, 0));
 
     }
 

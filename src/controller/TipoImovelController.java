@@ -22,26 +22,25 @@ public class TipoImovelController extends Controller<TipoImovel> {
         dao = new TipoImovelDao();
 
     }
-    
-    public DefaultTableModel populaJTable(DefaultTableModel model) throws Exception {
 
-        //Pega o item ordenando por id em ordem crescente
-        Iterator<TipoImovel> lista = dao.getAllOrderBy(0, true);
+    @Override
+    public DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception {
+
+        Iterator<TipoImovel> lista = dao.getAllOrderBy(campo, true);
 
         model.setNumRows(0);
 
         while (lista.hasNext()) {
-            
+
             TipoImovel item = lista.next();
 
             model.addRow(
                     new Object[]{
                         item.getId(),
-                        item.getDescricao()
-                    });
+                        item.getDescricao(),});
 
         }
-
+        
         return model;
 
     }

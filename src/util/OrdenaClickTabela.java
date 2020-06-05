@@ -8,6 +8,7 @@ package util;
 import controller.Controller;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,7 +16,7 @@ import javax.swing.JTable;
  */
 public class OrdenaClickTabela {
     
-    public static void ordenarPorClick(JTable jtable, Controller controller) {
+    public static void ordenarPorClick(JTable jtable, Controller controller, DefaultTableModel modelo) throws Exception {
         jtable.getTableHeader().addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -23,6 +24,7 @@ public class OrdenaClickTabela {
                 
                 try {
                     controller.getTodosItensOrdenadosPor(col, true);
+                    controller.populaJTable(modelo, col);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Erro ao popular a tela conforme o clique na header da jtable.");
                     e.printStackTrace();

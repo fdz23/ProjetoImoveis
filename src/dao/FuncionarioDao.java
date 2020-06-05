@@ -123,8 +123,6 @@ public class FuncionarioDao extends Dao<Funcionario> {
             throw new Exception("Campo para ser ordenado inexistente.");
         }
 
-        String coluna = "";
-
         //estrutura de dados 2 : Lista encadeada
         List<Funcionario> itens = new LinkedList<Funcionario>();
 
