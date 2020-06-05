@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.NivelAcesso;
 import model.TipoFuncionario;
+import util.OrdenaClickTabela;
 
 public class TelaTipoFuncionario extends javax.swing.JFrame {
 
@@ -40,6 +41,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         popularJtable();
         popularCombox();
         this.tela1 = tela;
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, tfc);
         
         
     }

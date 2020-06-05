@@ -7,6 +7,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Endereco;
 import model.Funcionario;
+import util.OrdenaClickTabela;
 
 public class TelaEnderecosSelect extends javax.swing.JFrame {
 
@@ -30,6 +31,7 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         iniciar();
         popularJtable();
         this.td = tf;
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, ec);
     }
 
     public TelaEnderecosSelect(TelaClientes tela) throws Exception {
