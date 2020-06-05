@@ -6,6 +6,7 @@
 package controller;
 
 import dao.ImovelItemDao;
+import java.sql.SQLException;
 import model.ImovelItem;
 
 /**
@@ -14,7 +15,7 @@ import model.ImovelItem;
  */
 public class ImovelItemController extends Controller<ImovelItem> {
 
-    public ImovelItemController() throws ClassNotFoundException {
+    public ImovelItemController() throws ClassNotFoundException, SQLException {
 
         dao = new ImovelItemDao();
 

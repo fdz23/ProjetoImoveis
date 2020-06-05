@@ -6,6 +6,7 @@
 package controller;
 
 import dao.ImovelDao;
+import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.Imovel;
@@ -16,7 +17,7 @@ import model.Imovel;
  */
 public class ImovelController extends Controller<Imovel> {
 
-    public ImovelController() throws ClassNotFoundException {
+    public ImovelController() throws ClassNotFoundException, SQLException {
 
         dao = new ImovelDao();
 

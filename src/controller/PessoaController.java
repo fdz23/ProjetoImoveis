@@ -6,6 +6,7 @@
 package controller;
 
 import dao.PessoaDao;
+import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.Pessoa;
@@ -16,7 +17,7 @@ import model.Pessoa;
  */
 public class PessoaController extends Controller<Pessoa> {
 
-    public PessoaController() throws ClassNotFoundException {
+    public PessoaController() throws ClassNotFoundException, SQLException {
 
         dao = new PessoaDao();
 

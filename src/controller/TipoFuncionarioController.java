@@ -7,6 +7,7 @@ package controller;
 
 import dao.NivelAcessoDao;
 import dao.TipoFuncionarioDao;
+import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -15,7 +16,7 @@ import model.TipoFuncionario;
 
 public class TipoFuncionarioController extends Controller<TipoFuncionario> {
 
-    public TipoFuncionarioController() throws ClassNotFoundException {
+    public TipoFuncionarioController() throws ClassNotFoundException, SQLException {
 
         dao = new TipoFuncionarioDao();
 

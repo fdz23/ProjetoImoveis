@@ -9,6 +9,7 @@ import fabricas.AbstractFactory;
 import interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
@@ -23,7 +24,7 @@ public class PessoaDao extends Dao<Pessoa> {
 
     private EnderecoDao enderecoDao = new EnderecoDao();
 
-    public PessoaDao() throws ClassNotFoundException {
+    public PessoaDao() throws ClassNotFoundException, SQLException {
 
         Tabela obj = AbstractFactory.getInstance("HUMANO").getTabela("PESSOA");
 

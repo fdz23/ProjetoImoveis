@@ -32,9 +32,9 @@ public abstract class Dao<T> implements IDao<T> {
     protected String campos;
     protected String[] vetorCampos;
 
-    public Dao() throws ClassNotFoundException {
+    public Dao() throws Exception {
 
-        this.con = ConectaDb.conectadb();
+        this.con = ConectaDb.getInstance().getConnection();
         rs = null;
 
     }

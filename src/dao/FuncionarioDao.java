@@ -9,6 +9,7 @@ import fabricas.AbstractFactory;
 import interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
     private TipoFuncionarioDao tipoFuncionarioDao = new TipoFuncionarioDao();
     private StatusDao statusDao = new StatusDao();
 
-    public FuncionarioDao() throws ClassNotFoundException {
+    public FuncionarioDao() throws ClassNotFoundException, SQLException {
 
         Tabela obj = AbstractFactory.getInstance("HUMANO").getTabela("FUNCIONARIO");
 

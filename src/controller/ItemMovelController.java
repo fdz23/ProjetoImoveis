@@ -6,6 +6,7 @@
 package controller;
 
 import dao.ItemMovelDao;
+import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.ItemMovel;
@@ -16,7 +17,7 @@ import model.ItemMovel;
  */
 public class ItemMovelController extends Controller<ItemMovel> {
 
-    public ItemMovelController() throws ClassNotFoundException {
+    public ItemMovelController() throws ClassNotFoundException, SQLException {
 
         dao = new ItemMovelDao();
 

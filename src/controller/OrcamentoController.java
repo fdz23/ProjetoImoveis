@@ -6,6 +6,7 @@
 package controller;
 
 import dao.OrcamentoDao;
+import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.Orcamento;
@@ -16,7 +17,7 @@ import model.Orcamento;
  */
 public class OrcamentoController extends Controller<Orcamento> {
 
-    public OrcamentoController() throws ClassNotFoundException {
+    public OrcamentoController() throws ClassNotFoundException, SQLException {
 
         dao = new OrcamentoDao();
 
