@@ -32,9 +32,6 @@ public class Material extends AbstractFactory {
         else if( tipo.equals("IMOVEL_ITEM") ) {
             return new ImovelItem(); 
         }
-        else if( tipo.equals("ITEM_MOVEL") ) {
-            return new ItemMovel(); 
-        }
         else if( tipo.equals("TIPO_IMOVEL") ) {
             return new TipoImovel(); 
         }

@@ -19,7 +19,6 @@ import util.CriaStatement;
  */
 public class ImovelItemDao extends Dao<ImovelItem> {
 
-    private ItemMovelDao itemMovelDao = new ItemMovelDao();
     private ImovelDao imovelDao = new ImovelDao();
 
     public ImovelItemDao() throws ClassNotFoundException, SQLException {
@@ -29,7 +28,7 @@ public class ImovelItemDao extends Dao<ImovelItem> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
-        campos = "iit_valor,iit_iti_iden,iit_imo_iden";
+        campos = "iit_valor,iit_descricao,iit_imo_iden";
         vetorCampos = campos.split(",");
 
     }
@@ -77,7 +76,7 @@ public class ImovelItemDao extends Dao<ImovelItem> {
         ps = criaStatement.insertSql(tabela, campos);
 
         ps.setDouble(1, item.getValor());
-        ps.setInt(2, item.getItemMovel().getId());
+        ps.setString(2, item.getDescricao());
         ps.setInt(3, item.getImovel().getId());
 
         return ps;
@@ -90,7 +89,7 @@ public class ImovelItemDao extends Dao<ImovelItem> {
         ps = criaStatement.updateSql(campos);
 
         ps.setDouble(1, item.getValor());
-        ps.setInt(2, item.getItemMovel().getId());
+        ps.setString(2, item.getDescricao());
         ps.setInt(3, item.getImovel().getId());
         ps.setInt(5, item.getId());
 
@@ -106,7 +105,7 @@ public class ImovelItemDao extends Dao<ImovelItem> {
             return new ImovelItem(
                     rs.getInt(id),
                     rs.getDouble(vetorCampos[0]),
-                    itemMovelDao.getByID(rs.getInt(vetorCampos[1])),
+                    rs.getString(vetorCampos[1]),
                     imovelDao.getByID(rs.getInt(vetorCampos[2]))
             );
 
