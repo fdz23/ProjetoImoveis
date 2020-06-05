@@ -525,7 +525,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                     status = sta.getItem(pegarIDNivelStatus());
                     tf = tfc.getItem(pegarIDNivelCargo());
                     end = endc.getItem(pegarIDNivelEndereco());
-                    pe = new Pessoa(0, nome, email, null, cpf, telefone, end, 0);
+ 
 
                     fun = new Funcionario(0, matricula, pe, tf, status, null);
 
