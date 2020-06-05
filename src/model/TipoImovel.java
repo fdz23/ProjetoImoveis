@@ -5,7 +5,7 @@
  */
 package model;
 
-import interfaces.Tabela;
+import model.interfaces.Tabela;
 
 /**
  *
