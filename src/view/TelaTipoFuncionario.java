@@ -18,7 +18,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     NivelAcesso na = null;
     DefaultComboBoxModel modelo1 = new DefaultComboBoxModel();
     DefaultTableModel modelo = new DefaultTableModel();
-    TelaNivelAcesso tela = null;
+    TelaNivelAcessos tela = null;
     TelaFuncionarios tela1 = null;
     int linhaSelecionada = 0;
     int login = 1;
@@ -385,7 +385,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         try {
-           tela = new TelaNivelAcesso(this);
+           tela = new TelaNivelAcessos(this);
            tela.setVisible(true);
 
         } catch (Exception ex) {

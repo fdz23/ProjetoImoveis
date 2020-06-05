@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ 
 package util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- *
- * @author fdz
- */
+ 
 public class Validacao {
     
     public static boolean validarCPF(String cpf) throws Exception {
@@ -47,6 +40,7 @@ public class Validacao {
                 strDigitoResultado = String.valueOf(iDigito1) + String.valueOf(iDigito2);
                 strDigitoVerificador.equals(strDigitoResultado);
                 return true;
+                
             } catch (Exception e) {
                 return false;
             }

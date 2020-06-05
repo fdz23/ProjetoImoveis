@@ -14,6 +14,7 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
     Endereco end = null;
     int linhaSelecionada = 0;
     EnderecoController ec = null;
+    TelaClientes tc = null;
     TelaFuncionarios td = null;
 
     public TelaEnderecosSelect() throws Exception {
@@ -22,17 +23,23 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         iniciar();
         popularJtable();
     }
-    
-      public TelaEnderecosSelect(TelaFuncionarios tf) throws Exception {
+
+    public TelaEnderecosSelect(TelaFuncionarios tf) throws Exception {
         CriarJTable();
         initComponents();
         iniciar();
         popularJtable();
         this.td = tf;
     }
-    
-    
-    
+
+    public TelaEnderecosSelect(TelaClientes tela) throws Exception {
+
+        CriarJTable();
+        initComponents();
+        iniciar();
+        popularJtable();
+        this.tc = tela;
+    }
 
     private void CriarJTable() {
         jTableTabela = new JTable(modelo);
@@ -64,6 +71,8 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         JtextFielCep.setEnabled(false);
 
         jButton1.setEnabled(true);
+        
+        
 
     }
 
@@ -202,35 +211,39 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-            int id = Integer.parseInt(jTextFieldID.getText());
-            String cep = JtextFielCep.getText();
-            String ibge = jTextFieldIbge.getText();
-            String logradouro = JtextFielLogradouro.getText();
-            String bairro = JtextFielBairro.getText();
-            String cidade = JtextFielCidade.getText();
-            String estado = JtextFieldEstado.getText();
-            String complemento = JtextFielComplemento.getText();
-            String numero = JtextFielNumero.getText();
-            String referencia = JtextFielReferencia.getText();
-        
-        
-          end = new Endereco(id, ibge, logradouro, bairro, cidade, estado, complemento, numero, referencia, cep);
-          
-          td.receberObjeto(end,0);
-          
-          td.popularEndereco();
-         
-           this.dispose();
-        
-        
-        
-        
+        int id = Integer.parseInt(jTextFieldID.getText());
+        String cep = JtextFielCep.getText();
+        String ibge = jTextFieldIbge.getText();
+        String logradouro = JtextFielLogradouro.getText();
+        String bairro = JtextFielBairro.getText();
+        String cidade = JtextFielCidade.getText();
+        String estado = JtextFieldEstado.getText();
+        String complemento = JtextFielComplemento.getText();
+        String numero = JtextFielNumero.getText();
+        String referencia = JtextFielReferencia.getText();
+
+        end = new Endereco(id, ibge, logradouro, bairro, cidade, estado, complemento, numero, referencia, cep);
+
+        if (td != null) {
+            td.receberObjeto(end, 0);
+
+            td.popularEndereco();
+        }
+        if (tc != null) {
+
+            tc.setarIDEnd(end);
+
+        }
+
+        this.dispose();
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
 
         linhaSelecionada = jTableTabela.getSelectedRow();
-        
+
         jTextFieldID.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
         jTextFieldIbge.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
         JtextFielLogradouro.setText(jTableTabela.getValueAt(linhaSelecionada, 2).toString());

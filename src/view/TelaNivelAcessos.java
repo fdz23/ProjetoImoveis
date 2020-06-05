@@ -10,7 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.NivelAcesso;
 
-public class TelaNivelAcesso extends javax.swing.JFrame {
+public class TelaNivelAcessos extends javax.swing.JFrame {
 
     NivelAcessoController nac = null;
     DefaultTableModel modelo = new DefaultTableModel();
@@ -19,7 +19,7 @@ public class TelaNivelAcesso extends javax.swing.JFrame {
 
     int linhaSelecionada = 0;
 
-    public TelaNivelAcesso() throws ClassNotFoundException, Exception {
+    public TelaNivelAcessos() throws ClassNotFoundException, Exception {
 
         CriarJTable();
         initComponents();
@@ -28,7 +28,7 @@ public class TelaNivelAcesso extends javax.swing.JFrame {
 
     }
 
-    public TelaNivelAcesso(TelaTipoFuncionario tela) throws ClassNotFoundException, Exception {
+    public TelaNivelAcessos(TelaTipoFuncionario tela) throws ClassNotFoundException, Exception {
 
         CriarJTable();
         initComponents();
@@ -307,24 +307,25 @@ public class TelaNivelAcesso extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaNivelAcesso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaNivelAcessos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaNivelAcesso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaNivelAcessos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaNivelAcesso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaNivelAcessos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaNivelAcesso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaNivelAcessos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new TelaNivelAcesso().setVisible(true);
+                    new TelaNivelAcessos().setVisible(true);
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(TelaNivelAcesso.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TelaNivelAcessos.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (Exception ex) {
-                    Logger.getLogger(TelaNivelAcesso.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TelaNivelAcessos.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
