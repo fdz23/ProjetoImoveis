@@ -354,7 +354,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
                     int deleteItem = Integer.parseInt(jTextFieldId.getText());
 
-                    tfc.deletarItem(deleteItem);
+                    tfc.desativarItem(deleteItem);
                     tela1.popularComboboxCargo();
                     popularJtable();
 

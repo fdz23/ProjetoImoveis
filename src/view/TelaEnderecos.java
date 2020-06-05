@@ -308,7 +308,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
                     int deleteItem = Integer.parseInt(jTextFieldIbge.getText());
 
-                    ec.deletarItem(deleteItem);
+                    ec.desativarItem(deleteItem);
 
                     popularJtable();
 

@@ -570,7 +570,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
                         case 3:
 
-                            fc.deletarItem(idacao1);
+                            fc.desativarItem(idacao1);
                             popularJtable();
                             JOptionPane.showMessageDialog(null, "Status excluído com sucesso!");
 

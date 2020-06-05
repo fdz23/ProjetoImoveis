@@ -222,7 +222,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
 
                         if (!verificarId(deleteItem)) {
 
-                            tic.deletarItem(deleteItem);
+                            tic.desativarItem(deleteItem);
 
                             popularJtable();
 

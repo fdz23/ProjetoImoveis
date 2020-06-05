@@ -221,7 +221,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
                     int deleteItem = Integer.parseInt(jTextFieldId.getText());
 
-                    nac.deletarItem(deleteItem);
+                    nac.desativarItem(deleteItem);
 
                     tela.popularCombox();
 

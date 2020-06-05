@@ -43,9 +43,16 @@ public abstract class Controller<T> implements IController<T> {
     }
 
     @Override
-    public boolean deletarItem(int id) throws Exception {
+    public boolean desativarItem(int id) throws Exception {
         
-        return dao.delete(id);
+        return dao.deactivate(id);
+        
+    }
+
+    @Override
+    public boolean ativarItem(int id) throws Exception {
+        
+        return dao.activate(id);
         
     }
 

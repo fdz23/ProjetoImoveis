@@ -126,10 +126,21 @@ public abstract class Dao<T> implements IDao<T> {
 
     }
 
-    protected PreparedStatement statementDeletar(int id) throws Exception {
+    protected PreparedStatement statementDesativar(int id) throws Exception {
 
-        //cria um sql para delete um item conforme seu id
-        ps = criaStatement.deleteSql();
+        //cria um sql para deactivate um item conforme seu id
+        ps = criaStatement.deactivateSql();
+
+        ps.setInt(1, id);
+
+        return ps;
+
+    }
+
+    protected PreparedStatement statementAtivar(int id) throws Exception {
+
+        //cria um sql para deactivate um item conforme seu id
+        ps = criaStatement.activateSql();
 
         ps.setInt(1, id);
 
@@ -187,10 +198,22 @@ public abstract class Dao<T> implements IDao<T> {
     }
 
     @Override
-    public boolean delete(int id) throws Exception {
+    public boolean deactivate(int id) throws Exception {
 
-        //cria um sql para delete o item
-        ps = statementDeletar(id);
+        //cria um sql para deactivate o item
+        ps = statementDesativar(id);
+
+        ps.executeUpdate();
+
+        return true;
+
+    }
+
+    @Override
+    public boolean activate(int id) throws Exception {
+
+        //cria um sql para deactivate o item
+        ps = statementAtivar(id);
 
         ps.executeUpdate();
 

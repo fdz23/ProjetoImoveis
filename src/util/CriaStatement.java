@@ -57,9 +57,22 @@ public class CriaStatement {
         return con.prepareStatement(sql);
     }
     
-    //cria um PreparedStatement de remoção genericamente o nome da tabela e o id foram definidos previamente
-    public PreparedStatement deleteSql() throws Exception {
-        String sql = "DELETE FROM " + tabela + " WHERE " + id + " = ?";
+    //cria um PreparedStatement de desativação genericamente o nome da tabela e o id foram definidos previamente
+    public PreparedStatement deactivateSql() throws Exception {
+        
+        String coluna = id.split("_")[0] + "_ativado";
+        
+        String sql = "UPDATE " + tabela + " SET " + coluna + " = 0 WHERE " + id + " = ?";
+        
+        return con.prepareStatement(sql);
+    }
+    
+    //cria um PreparedStatement de ativação genericamente o nome da tabela e o id foram definidos previamente
+    public PreparedStatement activateSql() throws Exception {
+        
+        String coluna = id.split("_")[0] + "_ativado";
+        
+        String sql = "UPDATE " + tabela + " SET " + coluna + " = 1 WHERE " + id + " = ?";
         
         return con.prepareStatement(sql);
     }

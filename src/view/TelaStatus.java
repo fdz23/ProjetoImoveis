@@ -224,7 +224,7 @@ public class TelaStatus extends javax.swing.JFrame {
 
                     int deleteItem = Integer.parseInt(jTextFieldId.getText());
 
-                    sc.deletarItem(deleteItem);
+                    sc.desativarItem(deleteItem);
                     tela.popularComboboxStatus();
 
                     popularJtable();

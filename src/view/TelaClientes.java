@@ -375,7 +375,7 @@ public class TelaClientes extends javax.swing.JFrame {
 
                             if (idacao1 != 0) {
 
-                                pec.deletarItem(idacao1);
+                                pec.desativarItem(idacao1);
                                 popularJtable();
 
                                 JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso!");

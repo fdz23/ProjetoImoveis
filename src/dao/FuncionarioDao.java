@@ -263,16 +263,16 @@ public class FuncionarioDao extends Dao<Funcionario> {
     }
 
     @Override
-    public boolean delete(int id) throws Exception {
+    public boolean deactivate(int id) throws Exception {
 
         int idPessoa = getByID(id).getPessoa().getId();
 
-        //cria um sql para delete o item
-        ps = statementDeletar(id);
+        //cria um sql para deactivate o item
+        ps = statementDesativar(id);
 
         ps.executeUpdate();
 
-        pessoaDao.delete(idPessoa);
+        pessoaDao.deactivate(idPessoa);
 
         return true;
 
