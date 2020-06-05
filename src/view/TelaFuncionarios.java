@@ -19,6 +19,7 @@ import model.Funcionario;
 import model.Pessoa;
 import model.Status;
 import model.TipoFuncionario;
+import util.Validacao;
 
 public class TelaFuncionarios extends javax.swing.JFrame {
 
@@ -509,74 +510,81 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
         try {
 
-            int action = jComboAcao.getSelectedIndex();
-            int idacao1 = Integer.parseInt(idacao.getText());
-            java.sql.Date datanasc = new java.sql.Date(format.parse("00/00/0000 00:00:00").getTime());
-            java.sql.Date dataResci = new java.sql.Date(format.parse("00/00/0000 00:00:00").getTime());
+            if (Validacao.validarCPF(jFormattedTextFieldCPF.getText())) {
+                if (Validacao.validarEmail(jTextFieldEmail.getText())) {
 
-            String nome = jTextFieldNome.getText();
-            String email = jTextFieldEmail.getText();
-            datanasc = new java.sql.Date(format.parse(jFormattedTextField1.getText()).getTime());
-            String cpf = jFormattedTextFieldCPF.getText();
-            String telefone = jFormattedTextFieldTelefone.getText();
-            String matricula = jTextFieldMatricula.getText();
+                    int action = jComboAcao.getSelectedIndex();
+                    int idacao1 = Integer.parseInt(idacao.getText());
 
-            switch (action) {
-
-                case 0:
-
-                    iniciar();
-
-                    break;
-
-                case 1:
+                    String nome = jTextFieldNome.getText();
+                    String email = jTextFieldEmail.getText();
+                    String cpf = jFormattedTextFieldCPF.getText();
+                    String telefone = jFormattedTextFieldTelefone.getText();
+                    String matricula = jTextFieldMatricula.getText();
 
                     status = sta.getItem(pegarIDNivelStatus());
                     tf = tfc.getItem(pegarIDNivelCargo());
                     end = endc.getItem(pegarIDNivelEndereco());
-                    pe = new Pessoa(0, nome, email, datanasc, cpf, telefone, end);
+                    pe = new Pessoa(0, nome, email, null, cpf, telefone, end);
 
-                    fun = new Funcionario(0, matricula, pe, tf, status, dataResci);
-                    fc.inserirItem(fun);
+                    fun = new Funcionario(0, matricula, pe, tf, status, null);
 
-                    JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
-                    popularJtable();
-                    setarMatricula();
+                    switch (action) {
 
-                    break;
+                        case 0:
 
-                case 2:
+                            iniciar();
 
-                    if (!jCheckBox1.isSelected()) {
+                            break;
 
-                        fc.alterarItem(fun);
-                        popularJtable();
-                        JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
+                        case 1:
 
-                    } else {
+                            fc.inserirItem(fun);
 
-                        java.sql.Date dataRescic = new java.sql.Date(format.parse(jTextFieldDataRescicao.getText()).getTime());
+                            JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
+                            popularJtable();
+                            setarMatricula();
 
-                     fun = new Funcionario(idacao1, email, pe, tf, status, dataRescic);
-                        fc.alterarItem(fun);
-                        popularJtable();
-                        JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
+                            break;
+
+                        case 2:
+
+                            if (!jCheckBox1.isSelected()) {
+
+                                fc.alterarItem(fun);
+                                popularJtable();
+                                JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
+
+                            } else {
+
+                                fun = new Funcionario(idacao1, email, pe, tf, status, null);
+                                fc.alterarItem(fun);
+                                popularJtable();
+                                JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
+
+                            }
+
+                            break;
+
+                        case 3:
+
+                            fc.deletarItem(idacao1);
+                            popularJtable();
+                            JOptionPane.showMessageDialog(null, "Status excluído com sucesso!");
 
                     }
+                } else {
 
-                    break;
+                    JOptionPane.showMessageDialog(null, "Digite um E-mail Válido");
+                }
+            } else {
 
-                case 3:
-
-                    fc.deletarItem(idacao1);
-                    popularJtable();
-                    JOptionPane.showMessageDialog(null, "Status excluído com sucesso!");
-
+                JOptionPane.showMessageDialog(null, "Digite um CPF Válido");
             }
 
         } catch (Exception ex) {
 
-           ex.printStackTrace();
+            ex.printStackTrace();
         }
 
 
@@ -622,7 +630,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(TelaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
 
     }//GEN-LAST:event_jTableTabelaMouseClicked
 
