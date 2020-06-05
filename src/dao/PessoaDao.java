@@ -110,6 +110,8 @@ public class PessoaDao extends Dao<Pessoa> {
         ps.setString(4, item.getCpf());
         ps.setString(5, item.getTelefone());
         ps.setInt(6, item.getEndereco().getId());
+        ps.setInt(7, item.getCliente());
+        
         return ps;
 
     }
@@ -125,7 +127,8 @@ public class PessoaDao extends Dao<Pessoa> {
         ps.setString(4, item.getCpf());
         ps.setString(5, item.getTelefone());
         ps.setInt(6, item.getEndereco().getId());
-        ps.setInt(7, item.getId());
+        ps.setInt(7, item.getCliente());
+        ps.setInt(8, item.getId());
 
         return ps;
 

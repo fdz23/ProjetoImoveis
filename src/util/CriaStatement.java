@@ -97,7 +97,7 @@ public class CriaStatement {
         String sql = "SELECT * FROM " + tabela 
                   + " ORDER BY " + coluna + " " + ascOuDesc;
         
-        return con.prepareStatement(sql);
+        return con.prepareStatement(sql);   
     }
     
     //cria um PreparedStatement de seleção genérica de ordenação

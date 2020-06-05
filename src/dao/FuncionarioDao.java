@@ -100,7 +100,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
             //adiciona na fila de prioridade todos os itens
             if (checarPessoaFuncionario(rs.getInt("pes_iden"))) {
-                itens.add(getByID(rs.getInt(id)));
+                itens.add(getByIDPessoa(rs.getInt("pes_iden")));
             }
 
         }
@@ -144,7 +144,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
                 //adiciona na fila de prioridade todos os itens
                 if (checarPessoaFuncionario(rs.getInt("pes_iden"))) {
-                    itens.add(getByID(rs.getInt(id)));
+                    itens.add(getByIDPessoa(rs.getInt("pes_iden")));
                 }
 
             }
@@ -177,7 +177,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
     private boolean checarPessoaFuncionario(int idPessoa) throws Exception {
 
-        Iterator<Funcionario> itens = getAll();
+        Iterator<Funcionario> itens = new FuncionarioDao().getAll();
         boolean result = false;
 
         while (itens.hasNext()) {
@@ -276,17 +276,17 @@ public class FuncionarioDao extends Dao<Funcionario> {
         return ps;
 
     }
-    
+
     @Override
     public boolean deletar(int id) throws Exception {
-        
+
         int idPessoa = getByID(id).getPessoa().getId();
 
         //cria um sql para deletar o item
         ps = statementDeletar(id);
 
         ps.executeUpdate();
-        
+
         pessoaDao.deletar(idPessoa);
 
         return true;
@@ -338,6 +338,35 @@ public class FuncionarioDao extends Dao<Funcionario> {
         }
 
         return null;
+
+    }
+
+    public Funcionario getByIDPessoa(int idPessoa) throws Exception {
+
+        ps = criaStatement.selectSql(tabela, true, "fun_pes_iden");
+
+        ps.setInt(1, idPessoa);
+
+        ResultSet rs = ps.executeQuery();
+
+        Funcionario item = null;
+
+        if (rs.next()) {
+            item = new Funcionario(
+                    rs.getInt(id),
+                    rs.getString(vetorCampos[0]),
+                    pessoaDao.getByID(rs.getInt(vetorCampos[1])),
+                    tipoFuncionarioDao.getByID(rs.getInt(vetorCampos[2])),
+                    statusDao.getByID(rs.getInt(vetorCampos[3])),
+                    rs.getDate(vetorCampos[4])
+            );
+        }
+
+        if (item == null) {
+            throw new Exception("Erro ao encontrar um item Funcionario por id pessoa");
+        }
+
+        return item;
 
     }
 
