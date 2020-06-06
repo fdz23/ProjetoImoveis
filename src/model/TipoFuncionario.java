@@ -17,7 +17,6 @@ public class TipoFuncionario implements Tabela {
     private NivelAcesso nivelAcesso;
     private Double salario;
     private String descricao;
-    private int login;
     private int ativado;
     private String nomeId = "tfu_iden";
     private String nomeTabela = "tipo_funcionarios";
@@ -34,12 +33,11 @@ public class TipoFuncionario implements Tabela {
     
     public TipoFuncionario() {}
     
-    public TipoFuncionario(int id, String descricao, NivelAcesso nivelAcesso, Double salario, int login, int ativado) {
+    public TipoFuncionario(int id, String descricao, NivelAcesso nivelAcesso, Double salario, int ativado) {
         this.id = id;
         this.nivelAcesso = nivelAcesso;
         this.salario = salario;
         this.descricao = descricao;
-        this.login = login;
         this.ativado = ativado;
     }
 
@@ -73,16 +71,6 @@ public class TipoFuncionario implements Tabela {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    
-    public int getLogin() {
-        return login;
-    }
-
-   
-    public void setLogin(int login) {
-        this.login = login;
     }
 
     public int getAtivado() {

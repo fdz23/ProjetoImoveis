@@ -28,7 +28,7 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
-        campos = "tfu_descricao,tfu_nac_iden,tfu_salario,tfu_login,tfu_ativado";
+        campos = "tfu_descricao,tfu_nac_iden,tfu_salario,tfu_ativado";
         vetorCampos = campos.split(",");
 
     }
@@ -78,8 +78,7 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
         ps.setString(1, item.getDescricao());
         ps.setInt(2, item.getNivelAcesso().getId());
         ps.setDouble(3, item.getSalario());
-        ps.setInt(4, item.getLogin());
-        ps.setInt(5, item.getAtivado());
+        ps.setInt(4, item.getAtivado());
 
         return ps;
 
@@ -93,9 +92,8 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
         ps.setString(1, item.getDescricao());
         ps.setInt(2, item.getNivelAcesso().getId());
         ps.setDouble(3, item.getSalario());
-        ps.setInt(4, item.getLogin());
-        ps.setInt(5, item.getAtivado());
-        ps.setInt(6, item.getId());
+        ps.setInt(4, item.getAtivado());
+        ps.setInt(5, item.getId());
 
         return ps;
 
@@ -111,8 +109,7 @@ public class TipoFuncionarioDao extends Dao<TipoFuncionario> {
                     rs.getString(vetorCampos[0]),
                     nivelAcessoDao.getByID(rs.getInt(vetorCampos[1])),
                     rs.getDouble(vetorCampos[2]),
-                    rs.getInt(vetorCampos[3]),
-                    rs.getInt(vetorCampos[4])
+                    rs.getInt(vetorCampos[3])
             );
 
         }

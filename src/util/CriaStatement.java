@@ -52,12 +52,20 @@ public class CriaStatement {
         
         String colunaAtivado = id.split("_")[0] + "_ativado";
         
+        String sql = "SELECT * FROM " + tabela + " WHERE " + colunaAtivado + " = 1";
+        
+        if(especificacao)
+            sql += " AND " + coluna + " = ?";
+        
+        return con.prepareStatement(sql);
+    }
+    
+    public PreparedStatement selectAllSql(String tabela, boolean especificacao, String coluna) throws Exception {
+        
         String sql = "SELECT * FROM " + tabela;
         
         if(especificacao)
             sql += " WHERE " + coluna + " = ?";
-        
-        sql += " AND " + colunaAtivado + " = 1";
         
         return con.prepareStatement(sql);
     }
@@ -107,12 +115,15 @@ public class CriaStatement {
     //asc true para ordenação ascendente e false para descendente
     public PreparedStatement selectSqlOrder(String tabela, String coluna, boolean asc) throws Exception {
         
+        String colunaAtivado = id.split("_")[0] + "_ativado";
+        
         String ascOuDesc = "DESC";
         
         if(asc)
             ascOuDesc = "ASC";
         
         String sql = "SELECT * FROM " + tabela 
+                  + " WHERE " + colunaAtivado + " = 1"
                   + " ORDER BY " + coluna + " " + ascOuDesc;
         
         return con.prepareStatement(sql);   
@@ -126,6 +137,8 @@ public class CriaStatement {
     //asc2 true para ordenação ascendente e false para descendente da segunda coluna
     public PreparedStatement selectSqlOrderDupla(String tabela, String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {
         
+        String colunaAtivado = id.split("_")[0] + "_ativado";
+        
         String ascOuDesc1 = "DESC";
         String ascOuDesc2 = "DESC";
         
@@ -135,6 +148,7 @@ public class CriaStatement {
             ascOuDesc2 = "ASC";
         
         String sql = "SELECT * FROM " + tabela 
+                  + " WHERE " + colunaAtivado + " = 1"
                   + " ORDER BY " + coluna1 + " " + ascOuDesc1 + ", " 
                   + coluna2 + " " + ascOuDesc2;
         
@@ -143,6 +157,8 @@ public class CriaStatement {
     
     public PreparedStatement selectSqlOrderDuplaFuncPessoa(String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {
         
+        String colunaAtivado = id.split("_")[0] + "_ativado";
+        
         String ascOuDesc1 = "DESC";
         String ascOuDesc2 = "DESC";
         
@@ -152,14 +168,17 @@ public class CriaStatement {
             ascOuDesc2 = "ASC";
         
         String sql = "SELECT * FROM funcionarios" +
-                    " INNER JOIN pessoas ON funcionarios.fun_pes_iden = pessoas.pes_iden" +
-                    " ORDER BY funcionarios." + coluna1 + " " + ascOuDesc1 + ", pessoas." + coluna2 + " " + ascOuDesc2;
+                     " INNER JOIN pessoas ON funcionarios.fun_pes_iden = pessoas.pes_iden" +
+                     " WHERE " + colunaAtivado + " = 1" +
+                     " ORDER BY funcionarios." + coluna1 + " " + ascOuDesc1 + ", pessoas." + coluna2 + " " + ascOuDesc2;
         
         return con.prepareStatement(sql);   
     }
     
     public PreparedStatement selectSqlOrderDuplaPessoaFunc(String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {
         
+        String colunaAtivado = id.split("_")[0] + "_ativado";
+        
         String ascOuDesc1 = "DESC";
         String ascOuDesc2 = "DESC";
         
@@ -169,14 +188,17 @@ public class CriaStatement {
             ascOuDesc2 = "ASC";
         
         String sql = "SELECT * FROM funcionarios" +
-                    " INNER JOIN pessoas ON funcionarios.fun_pes_iden = pessoas.pes_iden" +
-                    " ORDER BY pessoas." + coluna1 + " " + ascOuDesc1 + ", funcionarios." + coluna2 + " " + ascOuDesc2;
+                     " INNER JOIN pessoas ON funcionarios.fun_pes_iden = pessoas.pes_iden" +
+                     " WHERE " + colunaAtivado + " = 1" +
+                     " ORDER BY pessoas." + coluna1 + " " + ascOuDesc1 + ", funcionarios." + coluna2 + " " + ascOuDesc2;
         
         return con.prepareStatement(sql);   
     }
     
     public PreparedStatement selectSqlOrderDuplaFuncFunc(String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {
         
+        String colunaAtivado = id.split("_")[0] + "_ativado";
+        
         String ascOuDesc1 = "DESC";
         String ascOuDesc2 = "DESC";
         
@@ -186,14 +208,17 @@ public class CriaStatement {
             ascOuDesc2 = "ASC";
         
         String sql = "SELECT * FROM funcionarios" +
-                    " INNER JOIN pessoas ON funcionarios.fun_pes_iden = pessoas.pes_iden" +
-                    " ORDER BY funcionarios." + coluna1 + " " + ascOuDesc1 + ", funcionarios." + coluna2 + " " + ascOuDesc2;
+                     " INNER JOIN pessoas ON funcionarios.fun_pes_iden = pessoas.pes_iden" +
+                     " WHERE " + colunaAtivado + " = 1" +
+                     " ORDER BY funcionarios." + coluna1 + " " + ascOuDesc1 + ", funcionarios." + coluna2 + " " + ascOuDesc2;
         
         return con.prepareStatement(sql);   
     }
     
     public PreparedStatement selectSqlOrderDuplaPessoaPessoa(String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {
         
+        String colunaAtivado = id.split("_")[0] + "_ativado";
+        
         String ascOuDesc1 = "DESC";
         String ascOuDesc2 = "DESC";
         
@@ -203,8 +228,9 @@ public class CriaStatement {
             ascOuDesc2 = "ASC";
         
         String sql = "SELECT * FROM funcionarios" +
-                    " INNER JOIN pessoas ON funcionarios.fun_pes_iden = pessoas.pes_iden" +
-                    " ORDER BY pessoas." + coluna1 + " " + ascOuDesc1 + ", pessoas." + coluna2 + " " + ascOuDesc2;
+                     " INNER JOIN pessoas ON funcionarios.fun_pes_iden = pessoas.pes_iden" +
+                     " WHERE " + colunaAtivado + " = 1" +
+                     " ORDER BY pessoas." + coluna1 + " " + ascOuDesc1 + ", pessoas." + coluna2 + " " + ascOuDesc2;
         
         return con.prepareStatement(sql);   
     }
