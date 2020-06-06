@@ -31,7 +31,7 @@ public class PessoaDao extends Dao<Pessoa> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
-        campos = "pes_nome,pes_email,pes_nascimento,pes_cpf,pes_telefone,pes_end_iden,pes_cliente";
+        campos = "pes_nome,pes_email,pes_nascimento,pes_cpf,pes_telefone,pes_end_iden,pes_cliente,pes_ativado";
         vetorCampos = campos.split(",");
 
     }
@@ -112,6 +112,7 @@ public class PessoaDao extends Dao<Pessoa> {
         ps.setString(5, item.getTelefone());
         ps.setInt(6, item.getEndereco().getId());
         ps.setInt(7, item.getCliente());
+        ps.setInt(8, item.getAtivado());
         
         return ps;
 
@@ -129,7 +130,8 @@ public class PessoaDao extends Dao<Pessoa> {
         ps.setString(5, item.getTelefone());
         ps.setInt(6, item.getEndereco().getId());
         ps.setInt(7, item.getCliente());
-        ps.setInt(8, item.getId());
+        ps.setInt(8, item.getAtivado());
+        ps.setInt(9, item.getId());
 
         return ps;
 
@@ -148,7 +150,8 @@ public class PessoaDao extends Dao<Pessoa> {
                     rs.getString(vetorCampos[3]),
                     rs.getString(vetorCampos[4]),
                     enderecoDao.getByID(rs.getInt(vetorCampos[5])),
-                    rs.getInt(vetorCampos[6])
+                    rs.getInt(vetorCampos[6]),
+                    rs.getInt(vetorCampos[7])
             );
 
         }

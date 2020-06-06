@@ -39,7 +39,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
         this.tabela = obj.getNomeTabela();
         pessoaDao = new PessoaDao();
         this.criaStatement = new CriaStatement(con, tabela, id);
-        campos = "fun_matricula,fun_pes_iden,fun_tfu_iden,fun_sta_iden,fun_data_rescisao";
+        campos = "fun_matricula,fun_pes_iden,fun_tfu_iden,fun_sta_iden,fun_data_rescisao,fun_ativado";
         vetorCampos = campos.split(",");
         vetorCamposPessoa = pessoaDao.getVetorCampos();
 
@@ -214,7 +214,8 @@ public class FuncionarioDao extends Dao<Funcionario> {
                         item.getCpf(),
                         item.getTelefone(),
                         item.getEndereco(),
-                        item.getCliente()
+                        item.getCliente(),
+                        item.getAtivado()
                 )
         );
 
@@ -226,6 +227,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
         ps.setInt(3, item.getTipoFuncionario().getId());
         ps.setInt(4, item.getStatus().getId());
         ps.setDate(5, item.getDataRescisao());
+        ps.setInt(6, item.getAtivado());
 
         return ps;
     }
@@ -245,7 +247,8 @@ public class FuncionarioDao extends Dao<Funcionario> {
                 item.getCpf(),
                 item.getTelefone(),
                 item.getEndereco(),
-                item.getCliente()
+                item.getCliente(),
+                item.getAtivado()
         );
 
         //altera a tabela pessoa também com os dados
@@ -256,7 +259,8 @@ public class FuncionarioDao extends Dao<Funcionario> {
         ps.setInt(3, item.getTipoFuncionario().getId());
         ps.setInt(4, item.getStatus().getId());
         ps.setDate(5, item.getDataRescisao());
-        ps.setInt(6, item.getId());
+        ps.setInt(6, item.getAtivado());
+        ps.setInt(7, item.getId());
 
         return ps;
 
@@ -318,7 +322,8 @@ public class FuncionarioDao extends Dao<Funcionario> {
                     pessoaDao.getByID(rs.getInt(vetorCampos[1])),
                     tipoFuncionarioDao.getByID(rs.getInt(vetorCampos[2])),
                     statusDao.getByID(rs.getInt(vetorCampos[3])),
-                    rs.getDate(vetorCampos[4])
+                    rs.getDate(vetorCampos[4]),
+                    rs.getInt(vetorCampos[5])
             );
         }
 
@@ -343,7 +348,8 @@ public class FuncionarioDao extends Dao<Funcionario> {
                     pessoaDao.getByID(rs.getInt(vetorCampos[1])),
                     tipoFuncionarioDao.getByID(rs.getInt(vetorCampos[2])),
                     statusDao.getByID(rs.getInt(vetorCampos[3])),
-                    rs.getDate(vetorCampos[4])
+                    rs.getDate(vetorCampos[4]),
+                    rs.getInt(vetorCampos[5])
             );
         }
 

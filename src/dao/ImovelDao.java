@@ -32,7 +32,7 @@ public class ImovelDao extends Dao<Imovel> {
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
         campos = "imo_data_inclusao,imo_preco,imo_tamanho,imo_observacao,imo_baixa_data,imo_baixa_motivo,"
-                + "imo_quantidade_parcelas,imo_valor_comissao,imo_fun_iden,imo_pes_iden,imo_tim_iden,imo_end_iden";
+                + "imo_quantidade_parcelas,imo_valor_comissao,imo_fun_iden,imo_pes_iden,imo_tim_iden,imo_end_iden,imo_ativado";
         vetorCampos = campos.split(",");
 
     }
@@ -91,6 +91,7 @@ public class ImovelDao extends Dao<Imovel> {
         ps.setInt(10, item.getPessoa().getId());
         ps.setInt(11, item.getIdTipoImovel().getId());
         ps.setInt(12, item.getEndereco().getId());
+        ps.setInt(13, item.getAtivado());
 
         return ps;
 
@@ -113,7 +114,8 @@ public class ImovelDao extends Dao<Imovel> {
         ps.setInt(10, item.getPessoa().getId());
         ps.setInt(11, item.getIdTipoImovel().getId());
         ps.setInt(12, item.getEndereco().getId());
-        ps.setInt(13, item.getId());
+        ps.setInt(13, item.getAtivado());
+        ps.setInt(14, item.getId());
 
         return ps;
 
@@ -137,7 +139,8 @@ public class ImovelDao extends Dao<Imovel> {
                     funcionarioDao.getByID(rs.getInt(vetorCampos[9])),
                     pessoaDao.getByID(rs.getInt(vetorCampos[10])),
                     tipoImovelDao.getByID(rs.getInt(vetorCampos[11])),
-                    enderecoDao.getByID(rs.getInt(vetorCampos[12]))
+                    enderecoDao.getByID(rs.getInt(vetorCampos[12])),
+                    rs.getInt(vetorCampos[13])
             );
 
         }

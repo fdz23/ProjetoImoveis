@@ -15,6 +15,7 @@ public class Status implements Tabela {
     
     private int id;
     private String descricao;
+    private int ativado;
     private String nomeId = "sta_iden";
     private String nomeTabela = "status";
 
@@ -30,9 +31,10 @@ public class Status implements Tabela {
     
     public Status() {}
     
-    public Status(int id, String descricao) {
+    public Status(int id, String descricao, int ativado) {
         this.id = id;
         this.descricao = descricao;
+        this.ativado = ativado;
     }
 
     public int getId() {
@@ -49,6 +51,14 @@ public class Status implements Tabela {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public int getAtivado() {
+        return ativado;
+    }
+
+    public void setAtivado(int ativado) {
+        this.ativado = ativado;
     }
     
 }

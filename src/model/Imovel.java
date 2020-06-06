@@ -27,6 +27,7 @@ public class Imovel implements Tabela {
     private Endereco endereco;
     private Pessoa pessoa;
     private Funcionario funcionario;
+    private int ativado;
     private String nomeId = "imo_iden";
     private String nomeTabela = "imoveis";
 
@@ -43,7 +44,7 @@ public class Imovel implements Tabela {
     public Imovel() {}
     
     public Imovel(int id, Date dataInclusao, double preco, double tamanho, String observacao, Date baixaData, String baixaMotivo, 
-            int quantidadeParcelas, double valorComissao, Funcionario funcionario, Pessoa pessoa, TipoImovel tipoImovel, Endereco endereco) {
+            int quantidadeParcelas, double valorComissao, Funcionario funcionario, Pessoa pessoa, TipoImovel tipoImovel, Endereco endereco, int ativado) {
         
         this.id = id;
         this.dataInclusao = dataInclusao;
@@ -58,6 +59,7 @@ public class Imovel implements Tabela {
         this.endereco = endereco;
         this.baixaData = baixaData;
         this.pessoa = pessoa;
+        this.ativado = ativado;
     }
 
     public int getId() {
@@ -162,5 +164,13 @@ public class Imovel implements Tabela {
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
+    }
+
+    public int getAtivado() {
+        return ativado;
+    }
+
+    public void setAtivado(int ativado) {
+        this.ativado = ativado;
     }
 }

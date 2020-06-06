@@ -28,7 +28,7 @@ public class ImovelItemDao extends Dao<ImovelItem> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
-        campos = "iit_valor,iit_descricao,iit_imo_iden";
+        campos = "iit_valor,iit_descricao,iit_imo_iden,iit_ativado";
         vetorCampos = campos.split(",");
 
     }
@@ -78,6 +78,7 @@ public class ImovelItemDao extends Dao<ImovelItem> {
         ps.setDouble(1, item.getValor());
         ps.setString(2, item.getDescricao());
         ps.setInt(3, item.getImovel().getId());
+        ps.setInt(4, item.getAtivado());
 
         return ps;
 
@@ -91,6 +92,7 @@ public class ImovelItemDao extends Dao<ImovelItem> {
         ps.setDouble(1, item.getValor());
         ps.setString(2, item.getDescricao());
         ps.setInt(3, item.getImovel().getId());
+        ps.setInt(4, item.getAtivado());
         ps.setInt(5, item.getId());
 
         return ps;
@@ -106,7 +108,8 @@ public class ImovelItemDao extends Dao<ImovelItem> {
                     rs.getInt(id),
                     rs.getDouble(vetorCampos[0]),
                     rs.getString(vetorCampos[1]),
-                    imovelDao.getByID(rs.getInt(vetorCampos[2]))
+                    imovelDao.getByID(rs.getInt(vetorCampos[2])),
+                    rs.getInt(vetorCampos[3])
             );
 
         }

@@ -20,6 +20,7 @@ public class Funcionario extends Pessoa implements Tabela {
     private String matricula;
     private TipoFuncionario tipoFuncionario;
     private Pessoa pessoa;
+    private int ativado;
     private String nomeId = "fun_iden";
     private String nomeTabela = "funcionarios";
 
@@ -45,15 +46,16 @@ public class Funcionario extends Pessoa implements Tabela {
     
     public Funcionario() {}
     
-    public Funcionario(int id, String matricula, Pessoa pessoa, TipoFuncionario tipoFuncionario, Status status, Date dataRescisao) {
+    public Funcionario(int id, String matricula, Pessoa pessoa, TipoFuncionario tipoFuncionario, Status status, Date dataRescisao, int ativado) {
         
-        super(pessoa.getId(), pessoa.getNome(), pessoa.getEmail(), pessoa.getDataNascimento(), pessoa.getCpf(), pessoa.getTelefone(), pessoa.getEndereco(), pessoa.getCliente());
+        super(pessoa.getId(), pessoa.getNome(), pessoa.getEmail(), pessoa.getDataNascimento(), pessoa.getCpf(), pessoa.getTelefone(), pessoa.getEndereco(), pessoa.getCliente(), pessoa.getAtivado());
         this.pessoa = pessoa;
         this.tipoFuncionario = tipoFuncionario;
         this.matricula = matricula;
         this.status = status;
         this.dataRescisao = dataRescisao;
         this.id = id;
+        this.ativado = ativado;
     }
 
     public Pessoa getPessoa() {
@@ -94,6 +96,14 @@ public class Funcionario extends Pessoa implements Tabela {
 
     public void setDataRescisao(Date dataRescisao) {
         this.dataRescisao = dataRescisao;
+    }
+
+    public int getAtivado() {
+        return ativado;
+    }
+
+    public void setAtivado(int ativado) {
+        this.ativado = ativado;
     }
     
 }

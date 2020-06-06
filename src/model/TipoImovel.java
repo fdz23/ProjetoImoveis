@@ -15,6 +15,7 @@ public class TipoImovel implements Tabela {
     
     private int id;
     private String descricao;
+    private int ativado;
     private String nomeId = "tim_iden";
     private String nomeTabela = "tipo_imoveis";
 
@@ -30,9 +31,10 @@ public class TipoImovel implements Tabela {
     
     public TipoImovel() {}
     
-    public TipoImovel(int id, String descricao) {
+    public TipoImovel(int id, String descricao, int ativado) {
         this.id = id;
         this.descricao = descricao;
+        this.ativado = ativado;
     }
 
     public int getId() {
@@ -49,5 +51,13 @@ public class TipoImovel implements Tabela {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public int getAtivado() {
+        return ativado;
+    }
+
+    public void setAtivado(int ativado) {
+        this.ativado = ativado;
     }
 }

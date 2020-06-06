@@ -26,7 +26,7 @@ public class EnderecoDao extends Dao<Endereco> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, id, tabela);
-        campos = "end_codigo_ibge,end_logradouro,end_bairro,end_cidade,end_estado,end_complemento,end_numero,end_ponto_referencia,end_cep";
+        campos = "end_codigo_ibge,end_logradouro,end_bairro,end_cidade,end_estado,end_complemento,end_numero,end_ponto_referencia,end_cep,end_ativado";
         vetorCampos = campos.split(",");
 
     }
@@ -54,6 +54,7 @@ public class EnderecoDao extends Dao<Endereco> {
         ps.setString(7, item.getNumero());
         ps.setString(8, item.getPontoReferencia());
         ps.setString(9, item.getCep());
+        ps.setInt(10, item.getAtivado());
 
         return ps;
 
@@ -73,7 +74,8 @@ public class EnderecoDao extends Dao<Endereco> {
         ps.setString(7, item.getNumero());
         ps.setString(8, item.getPontoReferencia());
         ps.setString(9, item.getCep());
-        ps.setInt(10, item.getId());
+        ps.setInt(10, item.getAtivado());
+        ps.setInt(11, item.getId());
 
         return ps;
 
@@ -94,7 +96,8 @@ public class EnderecoDao extends Dao<Endereco> {
                     rs.getString(vetorCampos[5]),
                     rs.getString(vetorCampos[6]),
                     rs.getString(vetorCampos[7]),
-                    rs.getString(vetorCampos[8])
+                    rs.getString(vetorCampos[8]),
+                    rs.getInt(vetorCampos[9])
             );
 
         }

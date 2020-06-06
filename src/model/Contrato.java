@@ -19,17 +19,19 @@ public class Contrato implements Tabela {
     private Date dataAlteracao;
     private Situacao situacao;
     private Orcamento orcamento;
+    private int ativado;
     private String nomeId = "con_iden";
     private String nomeTabela = "contratos";
     
     public Contrato() {}
     
-    public Contrato(int id, Date dataOrcamento, Date dataAlteracao, Situacao situacao, Orcamento orcamento) {
+    public Contrato(int id, Date dataOrcamento, Date dataAlteracao, Situacao situacao, Orcamento orcamento, int ativado) {
         this.id = id;
         this.data = dataOrcamento;
         this.dataAlteracao = dataAlteracao;
         this.situacao = situacao;
         this.orcamento = orcamento;
+        this.ativado = ativado;
     }
 
     public int getId() {
@@ -80,6 +82,14 @@ public class Contrato implements Tabela {
     @Override
     public String getNomeTabela() {
         return nomeTabela;
+    }
+
+    public int getAtivado() {
+        return ativado;
+    }
+
+    public void setAtivado(int ativado) {
+        this.ativado = ativado;
     }
     
 }

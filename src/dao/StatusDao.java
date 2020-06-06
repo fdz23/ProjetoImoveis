@@ -26,7 +26,7 @@ public class StatusDao extends Dao<Status> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
-        campos = "sta_descricao";
+        campos = "sta_descricao,sta_ativado";
         vetorCampos = campos.split(",");
 
     }
@@ -74,6 +74,7 @@ public class StatusDao extends Dao<Status> {
         ps = criaStatement.insertSql(tabela, campos);
 
         ps.setString(1, item.getDescricao());
+        ps.setInt(2, item.getAtivado());
 
         return ps;
 
@@ -85,7 +86,8 @@ public class StatusDao extends Dao<Status> {
         ps = criaStatement.updateSql(campos);
 
         ps.setString(1, item.getDescricao());
-        ps.setInt(2, item.getId());
+        ps.setInt(2, item.getAtivado());
+        ps.setInt(3, item.getId());
 
         return ps;
 
@@ -98,7 +100,8 @@ public class StatusDao extends Dao<Status> {
 
             return new Status(
                     rs.getInt(id),
-                    rs.getString(vetorCampos[0])
+                    rs.getString(vetorCampos[0]),
+                    rs.getInt(vetorCampos[1])
             );
 
         }

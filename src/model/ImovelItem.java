@@ -17,6 +17,7 @@ public class ImovelItem implements Tabela {
     private double valor;
     private String descricao;
     private Imovel imovel;
+    private int ativado;
     private String nomeId = "iit_iden";
     private String nomeTabela = "imoveis_itens";
 
@@ -32,11 +33,12 @@ public class ImovelItem implements Tabela {
     
     public ImovelItem() {}
     
-    public ImovelItem(int id, double valor, String descricao, Imovel imovel) {
+    public ImovelItem(int id, double valor, String descricao, Imovel imovel, int ativado) {
         this.id = id;
         this.valor = valor;
         this.imovel = imovel;
         this.descricao = descricao;
+        this.ativado = ativado;
     }
 
     public int getId() {
@@ -69,5 +71,13 @@ public class ImovelItem implements Tabela {
 
     public void setImovel(Imovel imovel) {
         this.imovel = imovel;
+    }
+
+    public int getAtivado() {
+        return ativado;
+    }
+
+    public void setAtivado(int ativado) {
+        this.ativado = ativado;
     }
 }

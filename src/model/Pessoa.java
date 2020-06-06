@@ -22,6 +22,7 @@ public class Pessoa implements Tabela {
     private String telefone;
     private Endereco endereco;
     private int cliente;
+    private int ativado;
     private String nomeId = "pes_iden";
     private String nomeTabela = "pessoas";
 
@@ -37,7 +38,7 @@ public class Pessoa implements Tabela {
     
     public Pessoa() {}
     
-    public Pessoa(int id, String nome, String email, Date dataNascimento, String cpf, String telefone, Endereco endereco, int cliente) {
+    public Pessoa(int id, String nome, String email, Date dataNascimento, String cpf, String telefone, Endereco endereco, int cliente, int ativado) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -46,6 +47,7 @@ public class Pessoa implements Tabela {
         this.telefone = telefone;
         this.endereco = endereco;
         this.cliente = cliente;
+        this.ativado = ativado;
     }
 
     public int getId() {
@@ -110,6 +112,14 @@ public class Pessoa implements Tabela {
 
     public void setCliente(int cliente) {
         this.cliente = cliente;
+    }
+
+    public int getAtivado() {
+        return ativado;
+    }
+
+    public void setAtivado(int ativado) {
+        this.ativado = ativado;
     }
     
 }

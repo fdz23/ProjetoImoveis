@@ -23,6 +23,7 @@ public class Endereco implements Tabela {
     private String cep;
     private String logradouro;
     private String complemento;
+    private int ativado;
     private String nomeId = "end_iden";
     private String nomeTabela = "enderecos";
 
@@ -38,7 +39,7 @@ public class Endereco implements Tabela {
     
     public Endereco() {}
     
-    public Endereco(int id, String codigoIBGE, String logradouro, String bairro, String cidade, String estado, String complemento, String numero, String pontoReferencia, String cep) {
+    public Endereco(int id, String codigoIBGE, String logradouro, String bairro, String cidade, String estado, String complemento, String numero, String pontoReferencia, String cep, int ativado) {
         this.id = id;
         this.codigoIBGE = codigoIBGE;
         this.cidade = cidade;
@@ -49,6 +50,7 @@ public class Endereco implements Tabela {
         this.cep = cep;
         this.logradouro = logradouro;
         this.complemento = complemento;
+        this.ativado = ativado;
     }
 
     public int getId() {
@@ -129,6 +131,14 @@ public class Endereco implements Tabela {
 
     public void setComplemento(String complemento) {
         this.complemento = complemento;
+    }
+
+    public int getAtivado() {
+        return ativado;
+    }
+
+    public void setAtivado(int ativado) {
+        this.ativado = ativado;
     }
     
 }

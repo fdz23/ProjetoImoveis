@@ -31,7 +31,7 @@ public class OrcamentoDao extends Dao<Orcamento> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
-        campos = "orc_data,orc_descricao,orc_func_iden,orc_pes_iden,orc_imo_iden,orc_tpa_iden";
+        campos = "orc_data,orc_descricao,orc_func_iden,orc_pes_iden,orc_imo_iden,orc_tpa_iden,orc_ativado";
         vetorCampos = campos.split(",");
 
     }
@@ -48,7 +48,7 @@ public class OrcamentoDao extends Dao<Orcamento> {
 
     protected PreparedStatement statementByIdImovel(int idImovel) throws Exception {
 
-        ps = criaStatement.selectSql(tabela, true, "nac_descricao");
+        ps = criaStatement.selectSql(tabela, true, "orc_descricao");
 
         ps.setInt(1, idImovel);
 
@@ -84,6 +84,7 @@ public class OrcamentoDao extends Dao<Orcamento> {
         ps.setInt(4, item.getPessoa().getId());
         ps.setInt(5, item.getImovel().getId());
         ps.setInt(6, item.getTipoPagamento().getId());
+        ps.setInt(7, item.getAtivado());
 
         return ps;
 
@@ -100,7 +101,8 @@ public class OrcamentoDao extends Dao<Orcamento> {
         ps.setInt(4, item.getPessoa().getId());
         ps.setInt(5, item.getImovel().getId());
         ps.setInt(6, item.getTipoPagamento().getId());
-        ps.setInt(7, item.getId());
+        ps.setInt(7, item.getAtivado());
+        ps.setInt(8, item.getId());
 
         return ps;
 
@@ -118,7 +120,8 @@ public class OrcamentoDao extends Dao<Orcamento> {
                     funcionarioDao.getByID(rs.getInt(vetorCampos[2])),
                     pessoaDao.getByID(rs.getInt(vetorCampos[3])),
                     imovelDao.getByID(rs.getInt(vetorCampos[4])),
-                    tipoPagamentoDao.getByID(rs.getInt(vetorCampos[5]))
+                    tipoPagamentoDao.getByID(rs.getInt(vetorCampos[5])),
+                    rs.getInt(vetorCampos[6])
             );
 
         }

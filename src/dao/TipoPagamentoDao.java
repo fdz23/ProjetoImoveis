@@ -26,7 +26,7 @@ public class TipoPagamentoDao extends Dao<TipoPagamento> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
-        campos = "tpa_descricao";
+        campos = "tpa_descricao,tpa_ativado";
         vetorCampos = campos.split(",");
 
     }
@@ -74,6 +74,7 @@ public class TipoPagamentoDao extends Dao<TipoPagamento> {
         ps = criaStatement.insertSql(tabela, campos);
 
         ps.setString(1, item.getDescricao());
+        ps.setInt(2, item.getAtivado());
 
         return ps;
 
@@ -85,7 +86,8 @@ public class TipoPagamentoDao extends Dao<TipoPagamento> {
         ps = criaStatement.updateSql(campos);
 
         ps.setString(1, item.getDescricao());
-        ps.setInt(2, item.getId());
+        ps.setInt(2, item.getAtivado());
+        ps.setInt(3, item.getId());
 
         return ps;
 
@@ -98,7 +100,8 @@ public class TipoPagamentoDao extends Dao<TipoPagamento> {
 
             return new TipoPagamento(
                     rs.getInt(id),
-                    rs.getString("tpa_descricao")
+                    rs.getString(vetorCampos[0]),
+                    rs.getInt(vetorCampos[1])
             );
 
         }

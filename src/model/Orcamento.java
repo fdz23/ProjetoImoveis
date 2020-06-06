@@ -21,6 +21,7 @@ public class Orcamento implements Tabela {
     private Pessoa pessoa;
     private Funcionario funcionario;
     private Imovel imovel;
+    private int ativado;
     private String nomeId = "orc_iden";
     private String nomeTabela = "orcamentos";
 
@@ -36,7 +37,7 @@ public class Orcamento implements Tabela {
     
     public Orcamento() {}
     
-    public Orcamento(int id, Date data, String descricao, Funcionario funcionario, Pessoa pessoa, Imovel imovel, TipoPagamento tipoPagamento) {
+    public Orcamento(int id, Date data, String descricao, Funcionario funcionario, Pessoa pessoa, Imovel imovel, TipoPagamento tipoPagamento, int ativado) {
         this.id = id;
         this.data = data;
         this.funcionario = funcionario;
@@ -44,6 +45,7 @@ public class Orcamento implements Tabela {
         this.descricao = descricao;
         this.tipoPagamento = tipoPagamento;
         this.pessoa = pessoa;
+        this.ativado = ativado;
     }
 
     public int getId() {
@@ -100,6 +102,14 @@ public class Orcamento implements Tabela {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+    }
+
+    public int getAtivado() {
+        return ativado;
+    }
+
+    public void setAtivado(int ativado) {
+        this.ativado = ativado;
     }
     
 }

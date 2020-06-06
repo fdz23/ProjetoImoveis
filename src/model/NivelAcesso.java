@@ -15,6 +15,7 @@ public class NivelAcesso implements Tabela {
     
     private int id;
     private String descricao;
+    private int ativado;
     private String nomeId = "nac_iden";
     private String nomeTabela = "nivel_acessos";
 
@@ -30,9 +31,10 @@ public class NivelAcesso implements Tabela {
     
     public NivelAcesso() {}
     
-    public NivelAcesso(int id, String descricao) {
+    public NivelAcesso(int id, String descricao, int ativado) {
         this.id = id;
         this.descricao = descricao;
+        this.ativado = ativado;
     }
 
     public int getId() {
@@ -49,6 +51,14 @@ public class NivelAcesso implements Tabela {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public int getAtivado() {
+        return ativado;
+    }
+
+    public void setAtivado(int ativado) {
+        this.ativado = ativado;
     }
     
 }

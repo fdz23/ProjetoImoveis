@@ -26,7 +26,7 @@ public class NivelAcessoDao extends Dao<NivelAcesso> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
-        campos = "nac_descricao";
+        campos = "nac_descricao,nac_ativado";
         vetorCampos = campos.split(",");
 
     }
@@ -74,6 +74,7 @@ public class NivelAcessoDao extends Dao<NivelAcesso> {
         ps = criaStatement.insertSql(tabela, campos);
 
         ps.setString(1, item.getDescricao());
+        ps.setInt(2, item.getAtivado());
 
         return ps;
 
@@ -85,7 +86,8 @@ public class NivelAcessoDao extends Dao<NivelAcesso> {
         ps = criaStatement.updateSql(campos);
 
         ps.setString(1, item.getDescricao());
-        ps.setInt(2, item.getId());
+        ps.setInt(2, item.getAtivado());
+        ps.setInt(3, item.getId());
 
         return ps;
 
@@ -98,7 +100,8 @@ public class NivelAcessoDao extends Dao<NivelAcesso> {
 
             return new NivelAcesso(
                     rs.getInt(id),
-                    rs.getString(vetorCampos[0])
+                    rs.getString(vetorCampos[0]),
+                    rs.getInt(vetorCampos[1])
             );
 
         }
