@@ -25,7 +25,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         initComponents();
         iniciar();
         popularJtable();
-        
+
     }
 
     public TelaEnderecos(TelaFuncionarios tf) throws Exception {
@@ -72,6 +72,8 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jButtonBuscarCep = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jTextFieldId = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -95,7 +97,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableTabela);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, 800, 490));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 290, 740, 530));
 
         jButton1.setText("Ação ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +105,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 740, 140, 50));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 740, 140, 50));
         jPanel1.add(jTextFieldIbge, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 180, -1));
 
         jLabel4.setText("Cod. IBGE :");
@@ -129,10 +131,10 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
         jLabel2.setText("Escolha sua ação :");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, -1));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 170, -1));
+        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 250, 170, -1));
 
         jLabel3.setText("Pesquisa : ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 250, -1, -1));
         jPanel1.add(JtextFielLogradouro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 180, -1));
 
         jLabel5.setText("Logradouro :");
@@ -174,17 +176,23 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, -1, -1));
         jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 700, 150, -1));
 
+        jButton2.setText("Ativar");
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 690, 90, -1));
+
+        jButton3.setText("Desativar");
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 690, 90, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -217,7 +225,6 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jComboAcao.addItem("Ações");
         jComboAcao.addItem("Cadastrar");
         jComboAcao.addItem("Alterar");
-        jComboAcao.addItem("Deletar");
 
         jTextFieldId.setEnabled(false);
         jTextFieldIbge.setEnabled(false);
@@ -254,6 +261,54 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jTableTabela.setModel(ec.populaJTable(modelo, 0));
     }
 
+    public boolean verificarId(int id) throws Exception {
+
+        if (id == 0) {
+
+            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
+
+        }
+
+        return false;
+
+    }
+
+    public boolean verificarVazio(Endereco obj) throws Exception {
+
+        if (obj.getCep().equals("")) {
+
+            throw new Exception("O campo CEP não pode estar vazio");
+        } else if (obj.getNumero().equals("")) {
+
+            throw new Exception("O campo Numero não pode estar vazio");
+        } else if (obj.getLogradouro().equals("")) {
+
+            throw new Exception("O campo Logradouro não pode estar vazio");
+        } else if (obj.getCidade().equals("")) {
+
+            throw new Exception("O campo Cidade não pode estar vazio");
+        } else if (obj.getEstado().equals("")) {
+
+            throw new Exception("O campo Estado não pode estar vazio");
+        } else if (obj.getCodigoIBGE().equals("")) {
+
+            throw new Exception("O campo Codigo IBGE  não pode estar vazio");
+        } else if (obj.getComplemento().equals("")) {
+
+            throw new Exception("O campo Complemento não pode estar vazio");
+        } else if (obj.getPontoReferencia().equals("")) {
+
+            throw new Exception("O campo Referencia não pode estar vazio");
+        } else if (obj.getBairro().equals("")) {
+
+            throw new Exception("O campo Bairro não pode estar vazio");
+        }
+
+        return false;
+
+    }
+
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         try {
@@ -270,55 +325,54 @@ public class TelaEnderecos extends javax.swing.JFrame {
             String numero = JtextFielNumero.getText();
             String referencia = JtextFielReferencia.getText();
 
-            end = new Endereco(0, ibge, logradouro, bairro, cidade, estado, complemento, numero, referencia, cep);
+            end = new Endereco(0, ibge, logradouro, bairro, cidade, estado, complemento, numero, referencia, cep, 1);
 
-            switch (action) {
+            if (!verificarVazio(end)) {
 
-                case 0:
+                switch (action) {
 
-                    iniciar();
+                    case 0:
 
-                    break;
+                        iniciar();
 
-                case 1:
+                        break;
 
-                    ec.inserirItem(end);
+                    case 1:
 
-                    JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
+                        ec.inserirItem(end);
 
-                    popularJtable();
+                        JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
 
-                    break;
+                        popularJtable();
 
-                case 2:
+                        break;
 
-                    int alterarIntem = Integer.parseInt(jTextFieldId.getText());
+                    case 2:
 
-                    end = new Endereco(alterarIntem, ibge, logradouro, bairro, cidade, estado, complemento, numero, referencia, cep);
+                        int alterarIntem = Integer.parseInt(jTextFieldId.getText());
 
-                    ec.alterarItem(end);
+                        if (verificarId(alterarIntem)) {
+                            end = new Endereco(alterarIntem, ibge, logradouro, bairro, cidade, estado, complemento, numero, referencia, cep, 1);
+                        }
 
-                    popularJtable();
+                        ec.alterarItem(end);
 
-                    JOptionPane.showMessageDialog(null, "Status alterado com sucesso!");
+                        popularJtable();
 
-                    break;
+                        JOptionPane.showMessageDialog(null, "Status alterado com sucesso!");
 
-                case 3:
+                        break;
 
-                    int deleteItem = Integer.parseInt(jTextFieldIbge.getText());
+                    default:
 
-                    ec.desativarItem(deleteItem);
+                        break;
 
-                    popularJtable();
-
-                    JOptionPane.showMessageDialog(null, "Status excluído com sucesso!");
-
+                }
             }
 
         } catch (Exception ex) {
 
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar o status");
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -379,26 +433,9 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
                 break;
 
-            case 3:
-
-                JOptionPane.showMessageDialog(null, "Selecione uma linha e clique em 'Ação' para excluir");
-
-                jTextFieldId.setEnabled(false);
-                jTextFieldIbge.setEnabled(false);
-                JtextFielLogradouro.setEnabled(false);
-                JtextFielBairro.setEnabled(false);
-                JtextFielCidade.setEnabled(false);
-                JtextFieldEstado.setEnabled(false);
-                JtextFielComplemento.setEnabled(false);
-                JtextFielNumero.setEnabled(false);
-                JtextFielReferencia.setEnabled(false);
-                JtextFielCep.setEnabled(false);
-                jButtonBuscarCep.setEnabled(false);
-                jButton1.setEnabled(true);
+            default:
 
                 break;
-
-            default:
 
             // JOptionPane.showMessageDialog(null, "Nenhuma ação foi selecionada.");
         }
@@ -415,7 +452,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
             if (JtextFielCep.getText().isEmpty()) {
 
-                JOptionPane.showMessageDialog(null, "Não é possivel fazer a bsuca com o campo em branco. Digite um cep válido.");
+                JOptionPane.showMessageDialog(null, "Não é possivel fazer a busca com o campo em branco. Digite um cep válido.");
 
             } else {
 
@@ -481,6 +518,8 @@ public class TelaEnderecos extends javax.swing.JFrame {
     private javax.swing.JTextField JtextFielReferencia;
     private javax.swing.JTextField JtextFieldEstado;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonBuscarCep;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;

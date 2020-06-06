@@ -223,8 +223,9 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         String complemento = JtextFielComplemento.getText();
         String numero = JtextFielNumero.getText();
         String referencia = JtextFielReferencia.getText();
-
-        end = new Endereco(id, ibge, logradouro, bairro, cidade, estado, complemento, numero, referencia, cep);
+        
+//Trazer campo ativo, e verificar se ele vai poder ativar um endereço nesta tela de select
+        end = new Endereco(id, ibge, logradouro, bairro, cidade, estado, complemento, numero, referencia, cep,1);
 
         if (td != null) {
             td.receberObjeto(end, 0);

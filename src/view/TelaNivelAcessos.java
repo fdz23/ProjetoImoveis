@@ -62,12 +62,35 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         jComboAcao.addItem("Ações");
         jComboAcao.addItem("Cadastrar");
         jComboAcao.addItem("Alterar");
-        jComboAcao.addItem("Deletar");
 
         JtextFielDescricao.setEnabled(false);
         jButton1.setEnabled(false);
         jTextField2.setEnabled(false);
         jTextFieldId.setEnabled(false);
+        jTextFieldId.setText("0");
+
+    }
+
+    public boolean verificarVazio(NivelAcesso obj) throws Exception {
+
+        if (obj.getDescricao().equals("")) {
+
+            throw new Exception("O campo descrição não pode estar vazio");
+        }
+
+        return false;
+
+    }
+
+    public boolean verificarId(int id) throws Exception {
+
+        if (id == 0) {
+
+            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
+
+        }
+
+        return false;
 
     }
 
@@ -88,6 +111,8 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextFieldId = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -124,7 +149,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableTabela);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 670, 450));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 690, 450));
 
         jLabel1.setText("Descrição :");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
@@ -136,7 +161,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 120, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, 100, 40));
 
         jLabel2.setText("Escolha sua ação :");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
@@ -150,12 +175,28 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         jPanel1.add(jComboAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 140, -1));
 
         jLabel3.setText("Pesquisa : ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, -1, -1));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, 120, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, -1, -1));
+        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 200, 140, -1));
 
         jLabel4.setText("ID");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
-        jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 150, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
+        jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 140, -1));
+
+        jButton2.setText("Ativar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 360, 100, 40));
+
+        jButton3.setText("Desativar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, 100, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,7 +207,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 634, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -182,53 +223,50 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
             String descricao = JtextFielDescricao.getText();
 
-            switch (action) {
+            NivelAcesso na = new NivelAcesso(0, descricao, 1);
 
-                case 0:
+            if (verificarVazio(na)) {
 
-                    iniciar();
+                switch (action) {
 
-                    break;
+                    case 0:
 
-                case 1:
+                        iniciar();
 
-                    NivelAcesso na = new NivelAcesso(0, descricao);
+                        break;
 
-                    nac.inserirItem(na);
-                    popularJtable();
-                    tela.popularCombox();
+                    case 1:
 
-                    JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
+                        nac.inserirItem(na);
+                        popularJtable();
+                        tela.popularCombox();
 
-                    break;
+                        JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
 
-                case 2:
+                        break;
 
-                    int alterarIntem = Integer.parseInt(jTextFieldId.getText());
+                    case 2:
 
-                    na = new NivelAcesso(alterarIntem, descricao);
+                        int alterarIntem = Integer.parseInt(jTextFieldId.getText());
+                        if (verificarId(action)) {
 
-                    nac.alterarItem(na);
-                    tela.popularCombox();
+                            na = new NivelAcesso(alterarIntem, descricao, 1);
 
-                    popularJtable();
+                            nac.alterarItem(na);
+                            tela.popularCombox();
 
-                    JOptionPane.showMessageDialog(null, "Nível alterado com sucesso!");
+                            popularJtable();
 
-                    break;
+                            JOptionPane.showMessageDialog(null, "Nível alterado com sucesso!");
+                        }
 
-                case 3:
+                        break;
 
-                    int deleteItem = Integer.parseInt(jTextFieldId.getText());
+                    default:
 
-                    nac.desativarItem(deleteItem);
+                        break;
 
-                    tela.popularCombox();
-
-                    popularJtable();
-
-                    JOptionPane.showMessageDialog(null, "Nível excluído com sucesso!");
-
+                }
             }
 
         } catch (Exception ex) {
@@ -265,19 +303,11 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
                 break;
 
-            case 3:
-
-                JOptionPane.showMessageDialog(null, "Selecione uma linha e clique em 'Ação' para excluir");
-
-                JtextFielDescricao.setEnabled(false);
-                jButton1.setEnabled(true);
-                jTextField2.setEnabled(true);
-
-                break;
+              
 
             default:
 
-            // JOptionPane.showMessageDialog(null, "Nenhuma ação foi selecionada.");
+                break;
         }
 
 
@@ -291,6 +321,46 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jTableTabelaMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            int id = Integer.parseInt(jTextFieldId.getText());
+
+            if (!verificarId(id)) {
+
+                nac.ativarItem(id);
+                popularJtable();
+
+                JOptionPane.showMessageDialog(null, "Nivel ativado com sucesso!");
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            int id = Integer.parseInt(jTextFieldId.getText());
+
+            if (!verificarId(id)) {
+
+                nac.desativarItem(id);
+                popularJtable();
+
+                JOptionPane.showMessageDialog(null, "Nivel Desativado com sucesso!");
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     public void resultAction(String texto) {
 
@@ -337,6 +407,8 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JtextFielDescricao;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -42,6 +42,28 @@ public class TelaStatus extends javax.swing.JFrame {
 
     }
 
+    public boolean verificarVazio(Status obj) throws Exception {
+
+        if (obj.getDescricao().equals("")) {
+
+            throw new Exception("O campo descrição não pode estar vazio");
+        }
+
+        return false;
+
+    }
+
+    public boolean verificarId(int id) throws Exception {
+
+        if (id == 0) {
+
+            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
+
+        }
+
+        return false;
+    }
+
     private void popularJtable() throws ClassNotFoundException, Exception {
 
         jTableTabela.setModel(sc.populaJTable(modelo, 0));
@@ -56,12 +78,12 @@ public class TelaStatus extends javax.swing.JFrame {
         jComboAcao.addItem("Ações");
         jComboAcao.addItem("Cadastrar");
         jComboAcao.addItem("Alterar");
-        jComboAcao.addItem("Deletar");
 
         JtextFielDescricao.setEnabled(false);
         jButton1.setEnabled(false);
         jTextField2.setEnabled(false);
         jTextFieldId.setEnabled(false);
+        jTextFieldId.setText("0");
 
     }
 
@@ -82,6 +104,8 @@ public class TelaStatus extends javax.swing.JFrame {
         jComboAcao = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -105,11 +129,11 @@ public class TelaStatus extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableTabela);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 670, 450));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, 120, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 680, 460));
+        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, 120, -1));
 
         jLabel3.setText("Pesquisa : ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, -1, -1));
 
         jButton1.setText("Ação ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +141,7 @@ public class TelaStatus extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 120, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 120, 50));
         jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 150, -1));
 
         jLabel4.setText("ID");
@@ -142,26 +166,43 @@ public class TelaStatus extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 860, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 860, 90));
+
+        jButton2.setText("Ativar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 80, -1));
+
+        jButton3.setText("Desativar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1131, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
         );
 
         pack();
@@ -183,59 +224,57 @@ public class TelaStatus extends javax.swing.JFrame {
             int action = jComboAcao.getSelectedIndex();
 
             String descricao = JtextFielDescricao.getText();
+            Status sa = new Status(0, descricao, 1);
 
-            switch (action) {
+            if (verificarVazio(sa)) {
 
-                case 0:
+                switch (action) {
 
-                    iniciar();
+                    case 0:
 
-                    break;
+                        iniciar();
 
-                case 1:
+                        break;
 
-                    Status sa = new Status(0, descricao);
+                    case 1:
 
-                    sc.inserirItem(sa);
-                    tela.popularComboboxStatus();
+                        sc.inserirItem(sa);
+                        tela.popularComboboxStatus();
 
-                    JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
+                        JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
 
-                    popularJtable();
+                        popularJtable();
 
-                    break;
+                        break;
 
-                case 2:
+                    case 2:
 
-                    int alterarIntem = Integer.parseInt(jTextFieldId.getText());
+                        int alterarIntem = Integer.parseInt(jTextFieldId.getText());
 
-                    sa = new Status(alterarIntem, descricao);
+                        if (verificarId(alterarIntem)) {
 
-                    sc.alterarItem(sa);
-                    tela.popularComboboxStatus();
+                            sa = new Status(alterarIntem, descricao, 1);
 
-                    popularJtable();
+                            sc.alterarItem(sa);
+                            tela.popularComboboxStatus();
 
-                    JOptionPane.showMessageDialog(null, "Status alterado com sucesso!");
+                            popularJtable();
 
-                    break;
+                            JOptionPane.showMessageDialog(null, "Status alterado com sucesso!");
+                        }
 
-                case 3:
+                        break;
 
-                    int deleteItem = Integer.parseInt(jTextFieldId.getText());
+                    default:
 
-                    sc.desativarItem(deleteItem);
-                    tela.popularComboboxStatus();
+                        break;
 
-                    popularJtable();
-
-                    JOptionPane.showMessageDialog(null, "Status excluído com sucesso!");
-
+                }
             }
 
         } catch (Exception ex) {
 
-          ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -283,11 +322,51 @@ public class TelaStatus extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jComboAcaoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            int id = Integer.parseInt(jTextFieldId.getText());
+
+            if (!verificarId(id)) {
+
+                sc.ativarItem(id);
+                popularJtable();
+
+                JOptionPane.showMessageDialog(null, "Produto ativado com sucesso!");
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        try {
+            int id = Integer.parseInt(jTextFieldId.getText());
+
+            if (!verificarId(id)) {
+
+                sc.desativarItem(id);
+                popularJtable();
+
+                JOptionPane.showMessageDialog(null, "Produto ativado com sucesso!");
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -310,7 +389,6 @@ public class TelaStatus extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -325,6 +403,8 @@ public class TelaStatus extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JtextFielDescricao;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
