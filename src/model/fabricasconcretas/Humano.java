@@ -35,6 +35,9 @@ public class Humano extends AbstractFactory {
         else if( tipo.equals("TIPO_FUNCIONARIO") ) {
             return new TipoFuncionario(); 
         }
+        else if( tipo.equals("USUARIO") ) {
+            return new Usuario(); 
+        }
         else { return null;} 
     }
 }
