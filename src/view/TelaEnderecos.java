@@ -18,7 +18,9 @@ public class TelaEnderecos extends javax.swing.JFrame {
     EnderecoController ec = null;
     TelaFuncionarios tf = null;
     DefaultTableModel modelo = new DefaultTableModel();
+    TelaImoveis telaI = null;
     int linhaSelecionada = 0;
+    int telaAtiva = 0;
 
     public TelaEnderecos() throws Exception {
         CriarJTable();
@@ -36,6 +38,17 @@ public class TelaEnderecos extends javax.swing.JFrame {
         popularJtable();
         this.tf = tf;
         OrdenaClickTabela.ordenarPorClick(jTableTabela, ec, modelo);
+
+    }
+
+    public TelaEnderecos(TelaImoveis telaI, int telaAtiva) throws Exception {
+
+        CriarJTable();
+        initComponents();
+        this.telaAtiva = telaAtiva;
+        this.telaI = telaI;
+        iniciar();
+        popularJtable();
 
     }
 
@@ -74,6 +87,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jTextFieldId = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButtonUtilizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -177,10 +191,28 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 700, 150, -1));
 
         jButton2.setText("Ativar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 690, 90, -1));
 
         jButton3.setText("Desativar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 690, 90, -1));
+
+        jButtonUtilizar.setText("Utilizar");
+        jButtonUtilizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUtilizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonUtilizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 140, 180, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -192,7 +224,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 831, Short.MAX_VALUE)
         );
 
         pack();
@@ -217,28 +249,56 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
     public void iniciar() throws ClassNotFoundException, Exception {
 
-        cep = new ViaCEP();
-        end = new Endereco();
-        ec = new EnderecoController();
+        if (telaAtiva == 1) {
+            cep = new ViaCEP();
+            end = new Endereco();
+            ec = new EnderecoController();
 
-        jComboAcao.removeAllItems();
-        jComboAcao.addItem("Ações");
-        jComboAcao.addItem("Cadastrar");
-        jComboAcao.addItem("Alterar");
+            jComboAcao.removeAllItems();
+            jComboAcao.addItem("Ações");
+            jComboAcao.addItem("Cadastrar");
+            jComboAcao.addItem("Alterar");
 
-        jTextFieldId.setEnabled(false);
-        jTextFieldIbge.setEnabled(false);
-        JtextFielLogradouro.setEnabled(false);
-        JtextFielBairro.setEnabled(false);
-        JtextFielCidade.setEnabled(false);
-        JtextFieldEstado.setEnabled(false);
-        JtextFielComplemento.setEnabled(false);
-        JtextFielNumero.setEnabled(false);
-        JtextFielReferencia.setEnabled(false);
-        JtextFielCep.setEnabled(false);
-        jButtonBuscarCep.setEnabled(false);
-        jButton1.setEnabled(false);
+            jTextFieldId.setEnabled(false);
+            jTextFieldIbge.setEnabled(false);
+            JtextFielLogradouro.setEnabled(false);
+            JtextFielBairro.setEnabled(false);
+            JtextFielCidade.setEnabled(false);
+            JtextFieldEstado.setEnabled(false);
+            JtextFielComplemento.setEnabled(false);
+            JtextFielNumero.setEnabled(false);
+            JtextFielReferencia.setEnabled(false);
+            JtextFielCep.setEnabled(false);
+            jButtonBuscarCep.setEnabled(false);
+            jButton1.setEnabled(false);
+            jButtonUtilizar.setEnabled(true);
 
+        } else {
+
+            cep = new ViaCEP();
+            end = new Endereco();
+            ec = new EnderecoController();
+
+            jComboAcao.removeAllItems();
+            jComboAcao.addItem("Ações");
+            jComboAcao.addItem("Cadastrar");
+            jComboAcao.addItem("Alterar");
+
+            jTextFieldId.setEnabled(false);
+            jTextFieldIbge.setEnabled(false);
+            JtextFielLogradouro.setEnabled(false);
+            JtextFielBairro.setEnabled(false);
+            JtextFielCidade.setEnabled(false);
+            JtextFieldEstado.setEnabled(false);
+            JtextFielComplemento.setEnabled(false);
+            JtextFielNumero.setEnabled(false);
+            JtextFielReferencia.setEnabled(false);
+            JtextFielCep.setEnabled(false);
+            jButtonBuscarCep.setEnabled(false);
+            jButton1.setEnabled(false);
+            jButtonUtilizar.setEnabled(false);
+
+        }
     }
 
     private void CriarJTable() {
@@ -473,6 +533,77 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonBuscarCepActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            int id = Integer.parseInt(jTextFieldId.getText());
+
+            if (!verificarId(id)) {
+
+                ec.ativarItem(id);
+                popularJtable();
+
+                JOptionPane.showMessageDialog(null, "Endereço ativado com sucesso!");
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            int id = Integer.parseInt(jTextFieldId.getText());
+
+            if (!verificarId(id)) {
+
+                ec.desativarItem(id);
+                popularJtable();
+
+                JOptionPane.showMessageDialog(null, "Endereço ativado com sucesso!");
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButtonUtilizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUtilizarActionPerformed
+        try {
+
+            int action = jComboAcao.getSelectedIndex();
+
+            String cep = JtextFielCep.getText();
+            String ibge = jTextFieldIbge.getText();
+            String logradouro = JtextFielLogradouro.getText();
+            String bairro = JtextFielBairro.getText();
+            String cidade = JtextFielCidade.getText();
+            String estado = JtextFieldEstado.getText();
+            String complemento = JtextFielComplemento.getText();
+            String numero = JtextFielNumero.getText();
+            String referencia = JtextFielReferencia.getText();
+
+            end = new Endereco(0, ibge, logradouro, bairro, cidade, estado, complemento, numero, referencia, cep, 1);
+
+            if (!verificarVazio(end)) {
+
+                telaI.recebeObjeto(end);
+                this.dispose();
+
+            }
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+
+    }//GEN-LAST:event_jButtonUtilizarActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -521,6 +652,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonBuscarCep;
+    private javax.swing.JButton jButtonUtilizar;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
