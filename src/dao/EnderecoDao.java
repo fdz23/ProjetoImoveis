@@ -25,7 +25,7 @@ public class EnderecoDao extends Dao<Endereco> {
 
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
-        this.criaStatement = new CriaStatement(con, id, tabela);
+        this.criaStatement = new CriaStatement(con, tabela, id);
         campos = "end_codigo_ibge,end_logradouro,end_bairro,end_cidade,end_estado,end_complemento,end_numero,end_ponto_referencia,end_cep,end_ativado";
         vetorCampos = campos.split(",");
 
