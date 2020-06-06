@@ -49,10 +49,15 @@ public class CriaStatement {
     //recebe o nome da coluna(conforme ao banco)
     //Para mais de uma coluna/valores utilize "," entre cada um deles(sem espaço)
     public PreparedStatement selectSql(String tabela, boolean especificacao, String coluna) throws Exception {
+        
+        String colunaAtivado = id.split("_")[0] + "_ativado";
+        
         String sql = "SELECT * FROM " + tabela;
         
         if(especificacao)
             sql += " WHERE " + coluna + " = ?";
+        
+        sql += " AND " + colunaAtivado + " = 1";
         
         return con.prepareStatement(sql);
     }
