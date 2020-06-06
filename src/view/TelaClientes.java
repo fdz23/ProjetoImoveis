@@ -33,7 +33,7 @@ public class TelaClientes extends javax.swing.JFrame {
 
     public void popularJtable() throws ClassNotFoundException, Exception {
 
-        jTableTabela.setModel(pec.populaJTable(modelo, 0));
+        jTableTabela.setModel(pec.populaJTable(modelo, 1));
 
     }
 
@@ -41,7 +41,7 @@ public class TelaClientes extends javax.swing.JFrame {
 
         pe = new Pessoa();
         pec = new PessoaController();
-        pdao = new PessoaDao();
+        
 
         jComboAcao.removeAllItems();
         jComboAcao.addItem("Ações");
