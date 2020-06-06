@@ -32,9 +32,29 @@ public class ImovelDao extends Dao<Imovel> {
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
         campos = "imo_data_inclusao,imo_preco,imo_tamanho,imo_observacao,imo_baixa_data,imo_baixa_motivo,"
-                + "imo_quantidade_parcelas,imo_valor_comissao,imo_fun_iden,imo_pes_iden,imo_tim_iden,imo_end_iden,imo_ativado";
+                + "imo_quantidade_parcelas,imo_valor_comissao,imo_fun_iden,imo_pes_iden,imo_tim_iden,imo_end_iden,"
+                + "imo_ativado,imo_descricao";
         vetorCampos = campos.split(",");
 
+    }
+
+    public Imovel getByDescricao(String descricao) throws Exception {
+
+        ps = statementByDescricao(descricao);
+
+        rs = ps.executeQuery();
+
+        return criaItem(rs);
+
+    }
+
+    protected PreparedStatement statementByDescricao(String descricao) throws Exception {
+
+        ps = criaStatement.selectSql(tabela, true, "imo_descricao");
+
+        ps.setString(1, descricao);
+
+        return ps;
     }
 
     public Imovel getByIdEndereco(int idEndereco) throws Exception {
@@ -62,6 +82,9 @@ public class ImovelDao extends Dao<Imovel> {
         if (getByIdEndereco(item.getEndereco().getId()) != null) {
             throw new Exception("Endereço já cadastrado.");
         }
+        if (getByDescricao(item.getDescricao()) != null) {
+            throw new Exception("Já existe um Imovel com essa descrição.");
+        }
 
     }
 
@@ -70,6 +93,9 @@ public class ImovelDao extends Dao<Imovel> {
 
         if (getByIdEndereco(item.getEndereco().getId()) != null && getByIdEndereco(item.getEndereco().getId()).getId() != getByID(item.getId()).getEndereco().getId()) {
             throw new Exception("Endereço já cadastrado.");
+        }
+        if (getByDescricao(item.getDescricao()) != null && getByDescricao(item.getDescricao()).getId() != getByID(item.getId()).getId()) {
+            throw new Exception("Já existe um Imovel com esse nome.");
         }
 
     }
@@ -92,6 +118,7 @@ public class ImovelDao extends Dao<Imovel> {
         ps.setInt(11, item.getIdTipoImovel().getId());
         ps.setInt(12, item.getEndereco().getId());
         ps.setInt(13, item.getAtivado());
+        ps.setString(14, item.getDescricao());
 
         return ps;
 
@@ -115,7 +142,8 @@ public class ImovelDao extends Dao<Imovel> {
         ps.setInt(11, item.getIdTipoImovel().getId());
         ps.setInt(12, item.getEndereco().getId());
         ps.setInt(13, item.getAtivado());
-        ps.setInt(14, item.getId());
+        ps.setString(14, item.getDescricao());
+        ps.setInt(15, item.getId());
 
         return ps;
 
@@ -140,7 +168,8 @@ public class ImovelDao extends Dao<Imovel> {
                     pessoaDao.getByID(rs.getInt(vetorCampos[10])),
                     tipoImovelDao.getByID(rs.getInt(vetorCampos[11])),
                     enderecoDao.getByID(rs.getInt(vetorCampos[12])),
-                    rs.getInt(vetorCampos[13])
+                    rs.getInt(vetorCampos[13]),
+                    rs.getString(vetorCampos[14])
             );
 
         }
