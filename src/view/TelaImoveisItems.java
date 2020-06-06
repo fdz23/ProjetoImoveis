@@ -107,7 +107,7 @@ public class TelaImoveisItems extends javax.swing.JFrame {
                 jButtonactionActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonaction, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 710, 130, 50));
+        jPanel1.add(jButtonaction, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 670, 130, 50));
 
         jTableTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -169,7 +169,7 @@ public class TelaImoveisItems extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 90, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 590, 90, -1));
 
         jButtonAtivar.setText("Desativar");
         jButtonAtivar.addActionListener(new java.awt.event.ActionListener() {
@@ -177,7 +177,7 @@ public class TelaImoveisItems extends javax.swing.JFrame {
                 jButtonAtivarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 650, 100, 30));
+        jPanel1.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 590, 100, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,7 +206,7 @@ public class TelaImoveisItems extends javax.swing.JFrame {
             double valor = Double.parseDouble(jTextFieldValor.getText());
             int status = 1;
 
-             iit = new ImovelItem(id, valor, descricao, null,1);
+            iit = new ImovelItem(id, valor, descricao, null, 1);
             if (!verificarVazio(iit)) {
 
                 switch (action) {
@@ -232,7 +232,7 @@ public class TelaImoveisItems extends javax.swing.JFrame {
 
                         if (!verificarId(alterarIntem)) {
 
-                            iit = new ImovelItem(alterarIntem, valor, descricao, null,1);
+                            iit = new ImovelItem(alterarIntem, valor, descricao, null, 1);
 
                             im.alterarItem(iit);
 
@@ -328,8 +328,8 @@ public class TelaImoveisItems extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
-         
-               try {
+
+        try {
             int id = Integer.parseInt(jTextFieldImoveis.getText());
 
             if (!verificarId(id)) {
@@ -337,7 +337,7 @@ public class TelaImoveisItems extends javax.swing.JFrame {
                 im.desativarItem(id);
                 popularJtable();
 
-                JOptionPane.showMessageDialog(null, "Produto ativado com sucesso!");
+                JOptionPane.showMessageDialog(null, "Produto desativado com sucesso!");
 
             }
         } catch (Exception ex) {

@@ -23,13 +23,12 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
 
     public void iniciar() throws ClassNotFoundException, Exception {
 
-         tpc = new TipoPagamentoController();
+        tpc = new TipoPagamentoController();
 
         jComboAcao.removeAllItems();
         jComboAcao.addItem("Ações");
         jComboAcao.addItem("Cadastrar");
         jComboAcao.addItem("Alterar");
-        jComboAcao.addItem("Desativar");
 
         JtextFielDescricao.setEnabled(false);
         jButton1.setEnabled(false);
@@ -46,16 +45,16 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         modelo.addColumn("Descrição");
 
     }
-      private void popularJtable() throws ClassNotFoundException, Exception {
 
-        jTableTabela.setModel(tpc.populaJTable(modelo));
+    private void popularJtable() throws ClassNotFoundException, Exception {
+
+        jTableTabela.setModel(tpc.populaJTable(modelo, 0));
 
     }
 
-    
     public boolean verificarVazio(TipoPagamento tp) throws Exception {
 
-        if (tp.getDescricao().equals("") || tp.getDescricao() == null) {
+        if (tp.getDescricao().equals("")) {
 
             throw new Exception("O campo descrição não pode estar vazio");
         }
@@ -63,7 +62,8 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         return false;
 
     }
-        public boolean verificarId(int id) throws Exception {
+
+    public boolean verificarId(int id) throws Exception {
 
         if (id == 0) {
 
@@ -91,6 +91,8 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jComboAcao = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -114,11 +116,11 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableTabela);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, 770, 480));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 120, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 790, 480));
+        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, 120, -1));
 
         jLabel3.setText("Pesquisa : ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, -1, -1));
 
         jButton1.setText("Ação ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -126,15 +128,15 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, 120, 40));
-        jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 160, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 120, 50));
+        jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 160, -1));
 
         jLabel4.setText("ID");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
-        jPanel1.add(JtextFielDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 150, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
+        jPanel1.add(JtextFielDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 150, -1));
 
         jLabel1.setText("Descrição :");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         jComboAcao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboAcao.addActionListener(new java.awt.event.ActionListener() {
@@ -147,11 +149,17 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         jLabel2.setText("Escolha sua ação :");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
+        jButton2.setText("Ativar");
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 100, -1));
+
+        jButton3.setText("Desativar");
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 100, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1230, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,9 +190,8 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
             int action = jComboAcao.getSelectedIndex();
 
             String descricao = JtextFielDescricao.getText();
-            
-            TipoPagamento tp = new TipoPagamento(0, descricao);
-            
+
+            TipoPagamento tp = new TipoPagamento(0, descricao, 1);
 
             if (!verificarVazio(tp)) {
 
@@ -212,30 +219,20 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
 
                         if (!verificarId(alterarIntem)) {
 
-                            tp = new TipoPagamento(alterarIntem, descricao);
+                            tp = new TipoPagamento(alterarIntem, descricao, 1);
 
                             tpc.alterarItem(tp);
 
                             popularJtable();
 
-                            JOptionPane.showMessageDialog(null, "Status alterado com sucesso!");
+                            JOptionPane.showMessageDialog(null, "Tipo Pagamento alterado com sucesso!");
                         }
 
                         break;
 
-                    case 3:
+                    default:
 
-                        int deleteItem = Integer.parseInt(jTextFieldId.getText());
-
-                        if (!verificarId(deleteItem)) {
-
-                            tpc.deletarItem(deleteItem);
-
-                            popularJtable();
-
-                            JOptionPane.showMessageDialog(null, "Status excluído com sucesso!");
-
-                        }
+                        break;
                 }
             }
 
@@ -273,17 +270,9 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
 
                     break;
 
-                case 3:
-
-                    JOptionPane.showMessageDialog(null, "Selecione uma linha e clique em 'Ação' para excluir");
-
-                    JtextFielDescricao.setEnabled(false);
-                    jButton1.setEnabled(true);
-                    jTextField2.setEnabled(true);
+                default:
 
                     break;
-
-                default:
 
             }
         } catch (Exception ex) {
@@ -292,7 +281,6 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboAcaoActionPerformed
 
-   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -317,7 +305,6 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -332,6 +319,8 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JtextFielDescricao;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

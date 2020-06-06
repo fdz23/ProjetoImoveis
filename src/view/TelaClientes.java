@@ -47,7 +47,6 @@ public class TelaClientes extends javax.swing.JFrame {
         jComboAcao.addItem("Ações");
         jComboAcao.addItem("Cadastrar");
         jComboAcao.addItem("Alterar");
-        jComboAcao.addItem("Deletar");
 
         jFormattedTextField1.setEnabled(false);
         jTextFieldEmail.setEnabled(false);
@@ -73,6 +72,42 @@ public class TelaClientes extends javax.swing.JFrame {
 
             ex.printStackTrace();
         }
+
+    }
+
+    public boolean verificarId(int id) throws Exception {
+
+        if (id == 0) {
+
+            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
+
+        }
+
+        return false;
+
+    }
+
+    public boolean verificarVazio(Pessoa obj) throws Exception {
+
+        if (obj.getNome().equals("")) {
+            throw new Exception("O campo nome  não pode estar vazio");
+        }
+        else if (obj.getCpf().equals("")) {
+            throw new Exception("O campo CPF não pode estar vazio");
+
+        }
+       else if (obj.getEmail().equals("")) {
+
+            throw new Exception("O campo E-Mail não pode estar vazio");
+        }
+       else if (obj.getDataNascimento() == null) {
+            throw new Exception("O campo data de nascimento não pode estar vazio");
+        }
+       else if (obj.getTelefone().equals("")) {
+             throw new Exception("O campo telefone  não pode estar vazio");
+        }
+
+        return false;
 
     }
 
@@ -111,6 +146,8 @@ public class TelaClientes extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jtextidacao = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -207,7 +244,23 @@ public class TelaClientes extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 620, 140, 40));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 700, 140, 40));
+
+        jButton3.setText("Ativar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 620, 80, -1));
+
+        jButton4.setText("Desativar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 620, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -266,23 +319,10 @@ public class TelaClientes extends javax.swing.JFrame {
 
                 break;
 
-            case 3:
-
-                JOptionPane.showMessageDialog(null, "Selecione uma linha e clique em 'Ação' para excluir");
-
-                jFormattedTextField1.setEnabled(false);
-                jTextFieldEmail.setEnabled(false);
-                jTextFieldEndereco.setEnabled(false);
-                jFormattedTextField1.setEnabled(false);
-                jTextFieldNome.setEnabled(false);
-                jFormattedTextFieldTelefone.setEnabled(false);
-                jButton1.setEnabled(false);
-
-                break;
-
             default:
 
-            // JOptionPane.showMessageDialog(null, "Nenhuma ação foi selecionada.");
+                // JOptionPane.showMessageDialog(null, "Nenhuma ação foi selecionada.");
+                break;
         }
 
     }//GEN-LAST:event_jComboAcaoActionPerformed
@@ -346,7 +386,7 @@ public class TelaClientes extends javax.swing.JFrame {
 
                         case 1:
 
-                            pe = new Pessoa(idacao1, nome, email, null, cpf, telefone, ende, 1);
+                            pe = new Pessoa(idacao1, nome, email, null, cpf, telefone, ende, 1, 1);
 
                             pec.inserirItem(pe);
 
@@ -357,9 +397,9 @@ public class TelaClientes extends javax.swing.JFrame {
 
                         case 2:
 
-                            if (idacao1 != 0) {
+                            if (!verificarId(idacao1)) {
 
-                                pe = new Pessoa(idacao1, nome, email, null, cpf, telefone, ende, 1);
+                                pe = new Pessoa(idacao1, nome, email, null, cpf, telefone, ende, 1, 1);
 
                                 pec.alterarItem(pe);
 
@@ -371,24 +411,9 @@ public class TelaClientes extends javax.swing.JFrame {
                             }
                             break;
 
-                        case 3:
-
-                            if (idacao1 != 0) {
-
-                                pec.desativarItem(idacao1);
-                                popularJtable();
-
-                                JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso!");
-
-                            } else {
-
-                                JOptionPane.showMessageDialog(null, "Selecione uma linha da tabela!");
-
-                            }
+                        default:
 
                             break;
-
-                        default:
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Digite um E-mail Válido");
@@ -406,6 +431,49 @@ public class TelaClientes extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        try {
+            int id = Integer.parseInt(jtextidacao.getText());
+
+            if (!verificarId(id)) {
+
+                pec.ativarItem(id);
+                popularJtable();
+
+                JOptionPane.showMessageDialog(null, "Produto ativado com sucesso!");
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+        try {
+            int id = Integer.parseInt(jtextidacao.getText());
+
+            if (!verificarId(id)) {
+
+                pec.desativarItem(id);
+                popularJtable();
+
+                JOptionPane.showMessageDialog(null, "Produto desativado com sucesso!");
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     public static void main(String args[]) {
 
@@ -447,6 +515,8 @@ public class TelaClientes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPF;

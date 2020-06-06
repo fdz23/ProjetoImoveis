@@ -26,7 +26,6 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
     DefaultTableModel modelo = new DefaultTableModel();
     DefaultComboBoxModel modelo1 = null;
-    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
     FuncionarioController fc = null;
     FuncionarioDao fda = null;
@@ -98,7 +97,6 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jComboAcao.addItem("Ações");
         jComboAcao.addItem("Cadastrar");
         jComboAcao.addItem("Alterar");
-        jComboAcao.addItem("Deletar");
 
         jFormattedTextField1.setEnabled(false);
         jTextFieldCargo.setEnabled(false);
@@ -113,7 +111,6 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jComboBoxCargo.setEnabled(false);
         jButton1.setEnabled(false);
         idacao.setText("0");
-        jFormattedTextField1.setText("00/00/0000");
 
         setarMatricula();
 
@@ -173,6 +170,50 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
     }
 
+    public boolean verificarVazio(Funcionario obj) throws Exception {
+
+        if (obj.getPessoa().getNome().equals("")) {
+
+            throw new Exception("O campo nome não pode estar vazio");
+        } else if (obj.getPessoa().getCpf().equals("")) {
+
+            throw new Exception("O campo CPF não pode estar vazio");
+        } else if (obj.getPessoa().getDataNascimento() == null) {
+
+            throw new Exception("O campo Data Nascimento não pode estar vazio");
+
+        } else if (obj.getPessoa().getTelefone().equals("")) {
+
+            throw new Exception("O campo Data Telefone não pode estar vazio");
+
+        } else if (obj.getTipoFuncionario().getDescricao().equals("")) {
+
+            throw new Exception("O campo Cargo não pode estar vazio");
+        } else if (obj.getStatus().getDescricao().equals("")) {
+
+            throw new Exception("O campo Status não pode estar vazio");
+
+        } else if (obj.getEndereco().getId() == 0) {
+
+            throw new Exception("O campo Endereço não pode ser 0. Escolha um endereço!");
+        }
+
+        return false;
+
+    }
+
+    public boolean verificarId(int id) throws Exception {
+
+        if (id == 0) {
+
+            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
+
+        }
+
+        return false;
+
+    }
+
     public void popularPessoaClick(Pessoa pe) {
 
         jTextFieldNome.setText(pe.getNome());
@@ -221,6 +262,8 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jFormattedTextFieldCPF = new javax.swing.JFormattedTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -244,7 +287,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableTabela);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, 810, 550));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 810, 690));
 
         jLabel1.setText("Nome");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 40, -1));
@@ -309,7 +352,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 750, 140, 40));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 840, 160, 50));
 
         jLabel10.setText("Escolha sua ação : ");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 120, -1));
@@ -365,7 +408,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 110, 110, 40));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 170, 110, 40));
 
         jButton4.setText("Tela Status");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -373,14 +416,30 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 160, 110, 40));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 170, 110, 40));
+
+        jButton5.setText("Desativar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 760, 90, 40));
+
+        jButton6.setText("Ativar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 760, 90, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1131, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -512,81 +571,70 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
         try {
 
-            if (Validacao.validarCPF(jFormattedTextFieldCPF.getText())) {
-                if (Validacao.validarEmail(jTextFieldEmail.getText())) {
+            int action = jComboAcao.getSelectedIndex();
+            int idacao1 = Integer.parseInt(idacao.getText());
 
-                    int action = jComboAcao.getSelectedIndex();
-                    int idacao1 = Integer.parseInt(idacao.getText());
+            String nome = jTextFieldNome.getText();
+            String email = jTextFieldEmail.getText();
+            String cpf = jFormattedTextFieldCPF.getText();
+            String telefone = jFormattedTextFieldTelefone.getText();
+            String matricula = jTextFieldMatricula.getText();
 
-                    String nome = jTextFieldNome.getText();
-                    String email = jTextFieldEmail.getText();
-                    String cpf = jFormattedTextFieldCPF.getText();
-                    String telefone = jFormattedTextFieldTelefone.getText();
-                    String matricula = jTextFieldMatricula.getText();
+            status = sta.getItem(pegarIDNivelStatus());
+            tf = tfc.getItem(pegarIDNivelCargo());
+            end = endc.getItem(pegarIDNivelEndereco());
+            pe = new Pessoa(0, nome, email, null, cpf, telefone, end, 0, 1);
 
-                    status = sta.getItem(pegarIDNivelStatus());
-                    tf = tfc.getItem(pegarIDNivelCargo());
-                    end = endc.getItem(pegarIDNivelEndereco());
-                    pe = new Pessoa(0, nome, email, null, cpf, telefone, end, 0);
+            fun = new Funcionario(0, matricula, pe, tf, status, null, 1);
 
-                    fun = new Funcionario(0, matricula, pe, tf, status, null);
+            if (!verificarVazio(fun)) {
 
-                    switch (action) {
+                switch (action) {
 
-                        case 0:
+                    case 0:
 
-                            iniciar();
+                        iniciar();
 
-                            break;
+                        break;
 
-                        case 1:
+                    case 1:
 
-                            fc.inserirItem(fun);
+                        fc.inserirItem(fun);
 
-                            JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
+                        JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
+                        popularJtable();
+                        setarMatricula();
+
+                        break;
+
+                    case 2:
+
+                        if (!jCheckBox1.isSelected()) {
+
+                            fc.alterarItem(fun);
                             popularJtable();
-                            setarMatricula();
+                            JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
 
-                            break;
+                        } else {
 
-                        case 2:
-
-                            if (!jCheckBox1.isSelected()) {
-
-                                fc.alterarItem(fun);
-                                popularJtable();
-                                JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
-
-                            } else {
-
-                                fun = new Funcionario(idacao1, email, pe, tf, status, null);
-                                fc.alterarItem(fun);
-                                popularJtable();
-                                JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
-
-                            }
-
-                            break;
-
-                        case 3:
-
-                            fc.desativarItem(idacao1);
+                            fun = new Funcionario(idacao1, email, pe, tf, status, null, 1);
+                            fc.alterarItem(fun);
                             popularJtable();
-                            JOptionPane.showMessageDialog(null, "Status excluído com sucesso!");
+                            JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
 
-                    }
-                } else {
+                        }
 
-                    JOptionPane.showMessageDialog(null, "Digite um E-mail Válido");
+                        break;
+
+                    default:
+
+                        break;
                 }
-            } else {
-
-                JOptionPane.showMessageDialog(null, "Digite um CPF Válido");
             }
 
         } catch (Exception ex) {
 
-            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
 
@@ -666,6 +714,44 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        try {
+            int id = Integer.parseInt(idacao.getText());
+
+            if (!verificarId(id)) {
+
+                fc.ativarItem(id);
+                popularJtable();
+
+                JOptionPane.showMessageDialog(null, "Funcionário ativado com sucesso!");
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        try {
+            int id = Integer.parseInt(idacao.getText());
+
+            if (!verificarId(id)) {
+
+                fc.desativarItem(id);
+                popularJtable();
+
+                JOptionPane.showMessageDialog(null, "Funcionáio desativado com sucesso!");
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -707,6 +793,8 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JComboBox jComboBoxCargo;

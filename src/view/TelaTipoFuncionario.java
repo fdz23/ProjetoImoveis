@@ -33,17 +33,18 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         popularCombox();
 
     }
-    public TelaTipoFuncionario(TelaFuncionarios tela) throws Exception{
-        
-         CriarJTable();
+
+    public TelaTipoFuncionario(TelaFuncionarios tela) throws Exception {
+
+        CriarJTable();
         initComponents();
         iniciar();
-        popularJtable();
         popularCombox();
+        popularJtable();
+
         this.tela1 = tela;
         OrdenaClickTabela.ordenarPorClick(jTableTabela, tfc, modelo);
-        
-        
+
     }
 
     private void CriarJTable() {
@@ -64,6 +65,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     public void popularCombox() throws ClassNotFoundException, Exception {
 
         jComboBox1.setModel(nac.popularCombox(modelo1));
+        JtextFielDescricaoNivelAcesso.setText(jComboBox1.getSelectedItem().toString());
 
     }
 
@@ -77,6 +79,33 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         int id = Integer.parseInt(idAux1[0]);
 
         return id;
+    }
+
+    public boolean verificarVazio(TipoFuncionario obj) throws Exception {
+
+        if (obj.getDescricao().equals("") || obj.getDescricao() == null) {
+
+            throw new Exception("O campo descrição não pode estar vazio");
+
+        } else if (obj.getSalario() == 0) {
+
+            throw new Exception("O campo salario não pode ser 0");
+        }
+
+        return false;
+
+    }
+
+    public boolean verificarId(int id) throws Exception {
+
+        if (id == 0) {
+
+            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
+
+        }
+
+        return false;
+
     }
 
     public void iniciar() throws ClassNotFoundException, Exception {
@@ -100,9 +129,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         jTextFieldPesquisa.setEnabled(false);
 
         JtextFielDescricaoSalario.setText("0.0");
-
-        JtextFielDescricaoNivelAcesso.setText(jComboBox1.getSelectedItem().toString());
-
+        jTextFieldId.setText("0");
     }
 
     @SuppressWarnings("unchecked")
@@ -128,7 +155,8 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jButton2 = new javax.swing.JButton();
-        jCheckBoxLogin = new javax.swing.JCheckBox();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -148,10 +176,10 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
         jLabel2.setText("Escolha sua ação :");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 140, -1));
-        jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 140, -1));
+        jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 140, -1));
 
         jLabel4.setText("ID");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
 
         jButton1.setText("Ação ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +187,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 590, 110, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 630, 110, 40));
 
         jTableTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -179,11 +207,11 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableTabela);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 660, 450));
-        jPanel1.add(jTextFieldPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 150, 110, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, 660, 530));
+        jPanel1.add(jTextFieldPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, 110, -1));
 
         jLabel3.setText("Pesquisa : ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 80, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 80, -1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -220,15 +248,23 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 100, 130, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 180, 130, -1));
 
-        jCheckBoxLogin.setText("Login");
-        jCheckBoxLogin.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.setText("Ativar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxLoginActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jCheckBoxLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 140, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, 80, 40));
+
+        jButton4.setText("Desativar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 480, 90, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -243,7 +279,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 23, Short.MAX_VALUE))
         );
 
         pack();
@@ -285,24 +321,9 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
                 break;
 
-            case 3:
-
-                JOptionPane.showMessageDialog(null, "Selecione uma linha e clique em 'Ação' para excluir");
-
-                JtextFielDescricao.setEnabled(false);
-                jButton1.setEnabled(true);
-                jTextFieldPesquisa.setEnabled(true);
-                JtextFielDescricaoSalario.setEnabled(false);
-                JtextFielDescricaoNivelAcesso.setEnabled(false);
-                JtextFielDescricaoSalario.setEnabled(false);
-                jComboBox1.setEnabled(false);
-                jTextFieldPesquisa.setEnabled(false);
-
-                break;
-
             default:
 
-            // JOptionPane.showMessageDialog(null, "Nenhuma ação foi selecionada.");
+                break;
         }
 
     }//GEN-LAST:event_jComboAcaoActionPerformed
@@ -318,48 +339,49 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
             na = nac.getItem(pegarIDNivelAcesso());
 
-            switch (action) {
+            TipoFuncionario tip = new TipoFuncionario(0, descricao, na, salario, 1);
 
-                case 0:
+            if (verificarVazio(tip)) {
 
-                    iniciar();
+                switch (action) {
 
-                    break;
+                    case 0:
 
-                case 1:
+                        iniciar();
 
-                    TipoFuncionario tip = new TipoFuncionario(0, descricao, na, salario, 1);
-                    tfc.inserirItem(tip);
-                    tela1.popularComboboxCargo();
-                    JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
+                        break;
 
-                    popularJtable();
+                    case 1:
 
-                    break;
+                        tfc.inserirItem(tip);
+                        tela1.popularComboboxCargo();
+                        JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
 
-                case 2:
+                        popularJtable();
 
-                    int alterarIntem = Integer.parseInt(jTextFieldId.getText());
+                        break;
 
-                    tip = new TipoFuncionario(alterarIntem, descricao, na, salario, login);
-                    tfc.alterarItem(tip);
-                    tela1.popularComboboxCargo();
-                    popularJtable();
+                    case 2:
 
-                    JOptionPane.showMessageDialog(null, "Tipo Funcionario alterado com sucesso!");
+                        int alterarIntem = Integer.parseInt(jTextFieldId.getText());
 
-                    break;
+                        if (verificarId(alterarIntem)) {
 
-                case 3:
+                            tip = new TipoFuncionario(alterarIntem, descricao, na, salario, 1);
+                            tfc.alterarItem(tip);
+                            tela1.popularComboboxCargo();
+                            popularJtable();
 
-                    int deleteItem = Integer.parseInt(jTextFieldId.getText());
+                            JOptionPane.showMessageDialog(null, "Tipo Funcionario alterado com sucesso!");
+                        }
 
-                    tfc.desativarItem(deleteItem);
-                    tela1.popularComboboxCargo();
-                    popularJtable();
+                        break;
 
-                    JOptionPane.showMessageDialog(null, "Tipo funcionario excluído com sucesso!");
+                    default:
 
+                        break;
+
+                }
             }
 
         } catch (Exception ex) {
@@ -387,8 +409,8 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         try {
-           tela = new TelaNivelAcessos(this);
-           tela.setVisible(true);
+            tela = new TelaNivelAcessos(this);
+            tela.setVisible(true);
 
         } catch (Exception ex) {
             Logger.getLogger(TelaTipoFuncionario.class.getName()).log(Level.SEVERE, null, ex);
@@ -396,22 +418,52 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jCheckBoxLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxLoginActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        if (jCheckBoxLogin.isSelected()) {
+        try {
+            int id = Integer.parseInt(jTextFieldId.getText());
 
-            login = 1;
+            if (!verificarId(id)) {
 
-        } else {
+                tfc.ativarItem(id);
+                popularJtable();
 
-            login = 0;
+                JOptionPane.showMessageDialog(null, "Tipo Funcionário ativado com sucesso!");
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
 
         }
 
-    }//GEN-LAST:event_jCheckBoxLoginActionPerformed
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+        try {
+            int id = Integer.parseInt(jTextFieldId.getText());
+
+            if (!verificarId(id)) {
+
+                tfc.desativarItem(id);
+                popularJtable();
+
+                JOptionPane.showMessageDialog(null, "Tipo Funcionário desativado com sucesso!");
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -434,7 +486,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -452,7 +504,8 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField JtextFielDescricaoSalario;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBoxLogin;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
