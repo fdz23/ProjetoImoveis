@@ -184,7 +184,7 @@ public class PessoaDao extends Dao<Pessoa> {
     protected PreparedStatement statementGetTodosClientes() throws Exception {
 
         //cria um sql para selecionar todos os itens clientes
-        ps = criaStatement.selectSql("pessoas WHERE pes_cliente = 1", true, "pes_cliente");
+        ps = criaStatement.selectSql("pessoas", true, "pes_cliente");
 
         return ps;
 
