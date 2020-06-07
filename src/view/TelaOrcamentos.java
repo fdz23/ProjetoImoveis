@@ -311,7 +311,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
 
     private void jButtonSelecionarTipoPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarTipoPagamentoActionPerformed
         try {
-            //new TelaTipoPagamento(this).setVisible(true);
+           new TelaTipoPagamento(this).setVisible(true);
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(rootPane, "Erro ao selecionar tipo de pagamento");

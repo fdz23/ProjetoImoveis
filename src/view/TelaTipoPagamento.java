@@ -7,14 +7,26 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.TipoPagamento;
+import util.OrdenaClickTabela;
 
 public class TelaTipoPagamento extends javax.swing.JFrame {
 
     int linhaSelecionada = 0;
     DefaultTableModel modelo = new DefaultTableModel();
+    private TipoPagamento tipoPagamento = null;
     TipoPagamentoController tpc = null;
+    TelaOrcamentos telaOrcamentos = null;
+    private boolean isSelected = false;
 
     public TelaTipoPagamento() throws Exception {
+        CriarJTable();
+        initComponents();
+        iniciar();
+        popularJtable();
+    }
+    
+    public TelaTipoPagamento(TelaOrcamentos telaOrcamentos) throws ClassNotFoundException, Exception {
+        this.telaOrcamentos = telaOrcamentos;
         CriarJTable();
         initComponents();
         iniciar();
@@ -34,6 +46,11 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         jButton1.setEnabled(false);
         jTextField2.setEnabled(false);
         jTextFieldId.setEnabled(false);
+        if (telaOrcamentos != null) {
+            jButtonUsar.setEnabled(true);
+        } else {
+            jButtonUsar.setEnabled(false);
+        }
 
         jTextFieldId.setText("0");
 
@@ -93,6 +110,7 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButtonUsar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -155,6 +173,14 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         jButton3.setText("Desativar");
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 100, -1));
 
+        jButtonUsar.setText("Usar");
+        jButtonUsar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUsarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonUsar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 170, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,8 +200,13 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         try {
 
             linhaSelecionada = jTableTabela.getSelectedRow();
-            jTextFieldId.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
+            
+            tipoPagamento = tpc.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+            
+            jTextFieldId.setText("" + tipoPagamento.getId());
             JtextFielDescricao.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
+            
+            isSelected = true;
         } catch (Exception ex) {
 
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -281,6 +312,21 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboAcaoActionPerformed
 
+    private void jButtonUsarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsarActionPerformed
+        try {
+            if (isSelected) {
+
+                telaOrcamentos.setarIDTipoPagamento(tipoPagamento);
+                this.dispose();
+
+            } else
+            throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonUsarActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -321,6 +367,7 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonUsar;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
