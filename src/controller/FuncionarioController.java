@@ -6,10 +6,12 @@
 package controller;
 
 import dao.FuncionarioDao;
+import dao.UsuarioDao;
 import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.Funcionario;
+import util.Login;
 
 /**
  *
@@ -38,8 +40,8 @@ public class FuncionarioController extends Controller<Funcionario> {
                     new Object[]{
                         item.getId(),
                         item.getMatricula(),
-                        item.getTipoFuncionario().getDescricao(),
-                        item.getStatus().getDescricao(),
+                        //item.getTipoFuncionario().getDescricao(),
+                        //item.getStatus().getDescricao(),
                         item.getDataRescisao()
                     });
 
@@ -47,5 +49,22 @@ public class FuncionarioController extends Controller<Funcionario> {
 
         return model;
 
+    }
+    
+    public Funcionario login(String email, String senha) throws Exception {
+        
+        Funcionario funcionario = new FuncionarioDao().verificaEmail(email);
+        
+        if (funcionario == null)
+            throw new Exception("E-mail incorreto.");
+        else {
+            if(new UsuarioDao().verificaSenha(funcionario, senha)) {
+                return Login.funcionario = funcionario;
+            }
+            else
+                throw new Exception("Senha incorreta.");
+        }
+        
+        
     }
 }

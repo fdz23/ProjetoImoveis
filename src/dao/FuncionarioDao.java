@@ -401,4 +401,15 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
     }
 
+    public Funcionario verificaEmail(String email) throws Exception {
+        
+        Pessoa pessoa = pessoaDao.getByEmailFunc(email);
+        
+        if (pessoa == null)
+            return null;
+        else
+            return getByIDPessoa(pessoa.getId());
+        
+    }
+
 }
