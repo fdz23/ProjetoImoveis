@@ -10,6 +10,7 @@ import model.interfaces.Tabela;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.Funcionario;
 import model.Usuario;
 import util.CriaStatement;
 
@@ -113,6 +114,20 @@ public class UsuarioDao extends Dao<Usuario> {
 
         return null;
 
+    }
+
+    public boolean verificaSenha(Funcionario funcionario, String senha) throws Exception {
+        
+        Usuario usuario = getByID(funcionario.getId());
+        
+        if (usuario == null)
+            return false;
+        else {
+            if (usuario.getSenha().equals(senha))
+                return true;
+        }
+        
+        return false;
     }
 
 }

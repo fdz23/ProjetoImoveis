@@ -60,6 +60,16 @@ public class CriaStatement {
         return con.prepareStatement(sql);
     }
     
+    public PreparedStatement selectSqlPessoaClienteIdFunc(String coluna) throws Exception {
+        
+        String sql = "SELECT * FROM pessoas"
+                   + " WHERE pes_ativado = 1"
+                   + " AND pes_cliente = 0"
+                   + " AND pes_iden = ?";
+        
+        return con.prepareStatement(sql);
+    }
+    
     public PreparedStatement selectAllSql(String tabela, boolean especificacao, String coluna) throws Exception {
         
         String sql = "SELECT * FROM " + tabela;

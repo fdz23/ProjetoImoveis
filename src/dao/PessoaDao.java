@@ -82,11 +82,30 @@ public class PessoaDao extends Dao<Pessoa> {
 
     }
 
+    public Pessoa getByEmailFunc(String email) throws Exception {
+
+        ps = statementGetPessoaPorEmailFunc(email);
+
+        rs = ps.executeQuery();
+
+        return criaItem(rs);
+
+    }
+
     protected PreparedStatement statementGetPessoaPorCpf(String cpf) throws Exception {
 
         ps = criaStatement.selectSql(tabela, true, "pes_cpf");
 
         ps.setString(1, cpf);
+
+        return ps;
+    }
+    
+    protected PreparedStatement statementGetPessoaPorEmailFunc(String email) throws Exception {
+
+        ps = criaStatement.selectSqlPessoaClienteEmail();
+
+        ps.setString(1, email);
 
         return ps;
     }

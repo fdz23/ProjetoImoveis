@@ -6,10 +6,12 @@
 package controller;
 
 import dao.FuncionarioDao;
+import dao.UsuarioDao;
 import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.Funcionario;
+import util.Login;
 
 /**
  *
@@ -47,5 +49,22 @@ public class FuncionarioController extends Controller<Funcionario> {
 
         return model;
 
+    }
+    
+    public Funcionario login(String email, String senha) throws Exception {
+        
+        Funcionario funcionario = new FuncionarioDao().verificaEmail(email);
+        
+        if (funcionario == null)
+            throw new Exception("Funcionario não encontrado.");
+        else {
+            if(new UsuarioDao().verificaSenha(funcionario, senha)) {
+                return Login.funcionario = funcionario;
+            }
+            else
+                throw new Exception("Usuário não possui as credenciais corretas.");
+        }
+        
+        
     }
 }

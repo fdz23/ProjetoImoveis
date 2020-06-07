@@ -250,10 +250,6 @@ public abstract class Dao<T> implements IDao<T> {
 
         T item = criaItem(rs);
 
-        if (item == null) {
-            throw new Exception("Erro ao encontrar um item por id");
-        }
-
         return item;
 
     }
