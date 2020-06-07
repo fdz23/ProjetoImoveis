@@ -34,14 +34,23 @@ public class ContratoController extends Controller<Contrato> {
         while (lista.hasNext()) {
             
             Contrato item = lista.next();
+            
+            String pago = "";
+            
+            if(item.getPago() == 0)
+                pago = "Aguardando pagamento";
+            else if(item.getPago() == 1)
+                pago = "Pago";
+            else
+                pago = "Financiado";
 
             model.addRow(
                     new Object[]{
                         item.getId(),
                         item.getData(),
                         item.getDataAlteracao(),
-                        item.getSituacao().getId(),
-                        item.getOrcamento().getId()
+                        pago,
+                        item.getOrcamento().getDescricao()
                     });
 
         }

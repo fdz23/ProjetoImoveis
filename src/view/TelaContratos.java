@@ -22,7 +22,6 @@ public class TelaContratos extends javax.swing.JFrame {
 
     private ContratoController contratoController = null;
     private Contrato contrato = null;
-    private Situacao situacao = null;
     private Orcamento orcamento = null;
     private DefaultTableModel modelo = new DefaultTableModel();
 
@@ -53,29 +52,20 @@ public class TelaContratos extends javax.swing.JFrame {
         jComboAcao.addItem("Ações");
         jComboAcao.addItem("Cadastrar");
         jComboAcao.addItem("Alterar");
+        
+        jComboBoxSituacao.removeAllItems();
+        jComboBoxSituacao.addItem("Aguardando pagamento");
+        jComboBoxSituacao.addItem("Pago");
+        jComboBoxSituacao.addItem("Financiado");
 
-        jTextFieldSituacao.setEnabled(false);
+        jComboBoxSituacao.setEnabled(false);
         jTextFieldOrcamento.setEnabled(false);
-        jButtonSituacao.setEnabled(false);
         jtextidacao.setEnabled(false);
         jButtonAtivar.setEnabled(false);
         jButtonDesativar.setEnabled(false);
 
         jtextidacao.setText("0");
 
-    }
-
-    public void setarSituacao(Situacao situacao) {
-
-        try {
-            this.situacao = situacao;
-            jTextFieldSituacao.setText(situacao.getDescricao());
-
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
-            ex.printStackTrace();
-        }
     }
 
     public boolean verificarId(int id) throws Exception {
@@ -109,8 +99,6 @@ public class TelaContratos extends javax.swing.JFrame {
             throw new Exception("O campo Data de criação não pode estar vazio");
         } else if (obj.getDataAlteracao().equals("")) {
             throw new Exception("O campo Data de alteração não pode estar vazio");
-        } else if (obj.getSituacao().equals("")) {
-            throw new Exception("O campo Situação não pode estar vazio");
         } else if (obj.getOrcamento().equals("")) {
             throw new Exception("O campo Orçamento não pode estar vazio");
         }
@@ -142,8 +130,6 @@ public class TelaContratos extends javax.swing.JFrame {
         jComboAcao = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextFieldSituacao = new javax.swing.JTextField();
-        jButtonSituacao = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTabela = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
@@ -153,6 +139,7 @@ public class TelaContratos extends javax.swing.JFrame {
         jButtonDesativar = new javax.swing.JButton();
         jTextFieldOrcamento = new javax.swing.JTextField();
         jButtonOrcamento = new javax.swing.JButton();
+        jComboBoxSituacao = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -174,15 +161,6 @@ public class TelaContratos extends javax.swing.JFrame {
 
         jLabel9.setText("Orçamento");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
-        jPanel1.add(jTextFieldSituacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 130, -1));
-
-        jButtonSituacao.setText("Selecionar");
-        jButtonSituacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSituacaoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonSituacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 130, -1));
 
         jTableTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -240,6 +218,9 @@ public class TelaContratos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonOrcamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 130, -1));
+
+        jComboBoxSituacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(jComboBoxSituacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 260, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -301,6 +282,7 @@ public class TelaContratos extends javax.swing.JFrame {
 
             int action = jComboAcao.getSelectedIndex();
             int idacao1 = Integer.parseInt(jtextidacao.getText());
+            int pago = jComboBoxSituacao.getSelectedIndex();
 
             Date dataAtual = new Date(System.currentTimeMillis());
 
@@ -314,7 +296,7 @@ public class TelaContratos extends javax.swing.JFrame {
 
                 case 1:
 
-                    contrato = new Contrato(0, dataAtual, dataAtual, situacao, orcamento, 1);
+                    contrato = new Contrato(0, dataAtual, dataAtual, pago, orcamento, 1);
 
                     contratoController.inserirItem(contrato);
 
@@ -327,7 +309,7 @@ public class TelaContratos extends javax.swing.JFrame {
 
                     if (!verificarId(idacao1)) {
 
-                        contrato = new Contrato(0, contrato.getData(), dataAtual, situacao, orcamento, 1);
+                        contrato = new Contrato(0, contrato.getData(), dataAtual, pago, orcamento, 1);
 
                         contratoController.alterarItem(contrato);
 
@@ -359,26 +341,13 @@ public class TelaContratos extends javax.swing.JFrame {
 
             jtextidacao.setText("" + contrato.getId());
             jTextFieldOrcamento.setText(contrato.getOrcamento().getDescricao());
-            jTextFieldSituacao.setText(contrato.getSituacao().getDescricao());
+            jComboBoxSituacao.setSelectedIndex(contrato.getPago());
 
         } catch (Exception ex) {
 
             ex.printStackTrace();
         }
     }//GEN-LAST:event_jTableTabelaMouseClicked
-
-    private void jButtonSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSituacaoActionPerformed
-
-        try {
-
-            //new TelaSituacao(this).setVisible(true);
-
-        } catch (Exception ex) {
-
-            System.out.println(ex.getMessage());
-
-        }
-    }//GEN-LAST:event_jButtonSituacaoActionPerformed
 
     private void jComboAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboAcaoActionPerformed
 
@@ -389,21 +358,21 @@ public class TelaContratos extends javax.swing.JFrame {
             case 0:
 
                 jButtonOrcamento.setEnabled(false);
-                jButtonSituacao.setEnabled(false);
+                jComboBoxSituacao.setEnabled(false);
 
                 break;
 
             case 1:
 
                 jButtonOrcamento.setEnabled(true);
-                jButtonSituacao.setEnabled(true);
+                jComboBoxSituacao.setEnabled(true);
 
                 break;
 
             case 2:
 
                 jButtonOrcamento.setEnabled(true);
-                jButtonSituacao.setEnabled(true);
+                jComboBoxSituacao.setEnabled(true);
 
                 break;
 
@@ -466,8 +435,8 @@ public class TelaContratos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAtivar;
     private javax.swing.JButton jButtonDesativar;
     private javax.swing.JButton jButtonOrcamento;
-    private javax.swing.JButton jButtonSituacao;
     private javax.swing.JComboBox jComboAcao;
+    private javax.swing.JComboBox jComboBoxSituacao;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel5;
@@ -476,7 +445,6 @@ public class TelaContratos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableTabela;
     private javax.swing.JTextField jTextFieldOrcamento;
-    private javax.swing.JTextField jTextFieldSituacao;
     private javax.swing.JTextField jtextidacao;
     // End of variables declaration//GEN-END:variables
 }

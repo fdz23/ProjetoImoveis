@@ -17,7 +17,7 @@ public class Contrato implements Tabela {
     private int id;
     private Date data;
     private Date dataAlteracao;
-    private Situacao situacao;
+    private int pago;
     private Orcamento orcamento;
     private int ativado;
     private String nomeId = "con_iden";
@@ -25,11 +25,11 @@ public class Contrato implements Tabela {
     
     public Contrato() {}
     
-    public Contrato(int id, Date dataOrcamento, Date dataAlteracao, Situacao situacao, Orcamento orcamento, int ativado) {
+    public Contrato(int id, Date dataOrcamento, Date dataAlteracao, int pago, Orcamento orcamento, int ativado) {
         this.id = id;
         this.data = dataOrcamento;
         this.dataAlteracao = dataAlteracao;
-        this.situacao = situacao;
+        this.pago = pago;
         this.orcamento = orcamento;
         this.ativado = ativado;
     }
@@ -58,12 +58,12 @@ public class Contrato implements Tabela {
         this.dataAlteracao = dataAlteracao;
     }
 
-    public Situacao getSituacao() {
-        return situacao;
+    public int getPago() {
+        return pago;
     }
 
-    public void setSituacao(Situacao situacao) {
-        this.situacao = situacao;
+    public void setPago(int pago) {
+        this.pago = pago;
     }
 
     public Orcamento getOrcamento() {

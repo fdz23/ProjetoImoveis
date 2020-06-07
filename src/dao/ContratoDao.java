@@ -26,7 +26,7 @@ public class ContratoDao extends Dao<Contrato> {
         id = obj.getNomeId();
         tabela = obj.getNomeTabela();
         criaStatement = new CriaStatement(con, tabela, id);
-        campos = "con_data,con_data_alteracao,con_sit_iden,con_orc_iden,con_ativado";
+        campos = "con_data,con_data_alteracao,con_pago,con_orc_iden,con_ativado";
         vetorCampos = campos.split(",");
 
     }
@@ -78,7 +78,7 @@ public class ContratoDao extends Dao<Contrato> {
 
         ps.setDate(1, item.getData());
         ps.setDate(2, item.getDataAlteracao());
-        ps.setInt(3, item.getSituacao().getId());
+        ps.setInt(3, item.getPago());
         ps.setInt(4, item.getOrcamento().getId());
         ps.setInt(5, item.getAtivado());
 
@@ -93,7 +93,7 @@ public class ContratoDao extends Dao<Contrato> {
 
         ps.setDate(1, item.getData());
         ps.setDate(2, item.getDataAlteracao());
-        ps.setInt(3, item.getSituacao().getId());
+        ps.setInt(3, item.getPago());
         ps.setInt(4, item.getOrcamento().getId());
         ps.setInt(5, item.getAtivado());
         ps.setInt(6, item.getId());
@@ -111,7 +111,7 @@ public class ContratoDao extends Dao<Contrato> {
                     rs.getInt(id),
                     rs.getDate(vetorCampos[0]),
                     rs.getDate(vetorCampos[1]),
-                    situacaoDao.getByID(rs.getInt(vetorCampos[2])),
+                    rs.getInt(vetorCampos[2]),
                     orcamentoDao.getByID(rs.getInt(vetorCampos[3])),
                     rs.getInt(vetorCampos[4])
             );
