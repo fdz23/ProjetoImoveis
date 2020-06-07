@@ -22,7 +22,7 @@ public class UsuarioDao extends Dao<Usuario> {
 
     public UsuarioDao() throws ClassNotFoundException, SQLException {
 
-        Tabela obj = AbstractFactory.getInstance("VENDA").getTabela("USUARIO");
+        Tabela obj = AbstractFactory.getInstance("HUMANO").getTabela("USUARIO");
 
         id = obj.getNomeId();
         tabela = obj.getNomeTabela();
@@ -118,7 +118,10 @@ public class UsuarioDao extends Dao<Usuario> {
 
     public boolean verificaSenha(Funcionario funcionario, String senha) throws Exception {
         
-        Usuario usuario = getByID(funcionario.getId());
+        Usuario usuario = getByIDFun(funcionario.getId());
+        
+        System.out.println(usuario.getSenha());
+        System.out.println(senha);
         
         if (usuario == null)
             return false;
@@ -128,6 +131,21 @@ public class UsuarioDao extends Dao<Usuario> {
         }
         
         return false;
+    }
+    
+    public Usuario getByIDFun(int idFuncionario) throws Exception {
+        
+        String sql = "SELECT * FROM usuarios"
+                   + " WHERE usu_fun_iden = ?";
+        
+        ps = con.prepareStatement(sql);
+        
+        ps.setInt(1, idFuncionario);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        return criaItem(rs);
+        
     }
 
 }

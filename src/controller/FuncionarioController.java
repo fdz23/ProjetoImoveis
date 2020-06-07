@@ -40,8 +40,8 @@ public class FuncionarioController extends Controller<Funcionario> {
                     new Object[]{
                         item.getId(),
                         item.getMatricula(),
-                        item.getTipoFuncionario().getDescricao(),
-                        item.getStatus().getDescricao(),
+                        //item.getTipoFuncionario().getDescricao(),
+                        //item.getStatus().getDescricao(),
                         item.getDataRescisao()
                     });
 
@@ -56,13 +56,13 @@ public class FuncionarioController extends Controller<Funcionario> {
         Funcionario funcionario = new FuncionarioDao().verificaEmail(email);
         
         if (funcionario == null)
-            throw new Exception("Funcionario não encontrado.");
+            throw new Exception("E-mail incorreto.");
         else {
             if(new UsuarioDao().verificaSenha(funcionario, senha)) {
                 return Login.funcionario = funcionario;
             }
             else
-                throw new Exception("Usuário não possui as credenciais corretas.");
+                throw new Exception("Senha incorreta.");
         }
         
         

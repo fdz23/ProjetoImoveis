@@ -50,12 +50,17 @@ public class CriaStatement {
     //Para mais de uma coluna/valores utilize "," entre cada um deles(sem espaço)
     public PreparedStatement selectSql(String tabela, boolean especificacao, String coluna) throws Exception {
         
-        String colunaAtivado = id.split("_")[0] + "_ativado";
-        
+        String colunaAtivado = "";
+        if(tabela.equals("pessoas"))
+            colunaAtivado = tabela.substring(0, 3) + "_ativado";
+        else
+            colunaAtivado = id.split("_")[0] + "_ativado";
+            
         String sql = "SELECT * FROM " + tabela + " WHERE " + colunaAtivado + " = 1";
         
-        if(especificacao)
+        if(especificacao) {
             sql += " AND " + coluna + " = ?";
+        }
         
         return con.prepareStatement(sql);
     }
@@ -125,7 +130,7 @@ public class CriaStatement {
     //asc true para ordenação ascendente e false para descendente
     public PreparedStatement selectSqlOrder(String tabela, String coluna, boolean asc) throws Exception {
         
-        String colunaAtivado = id.split("_")[0] + "_ativado";
+        String colunaAtivado = coluna.split("_")[0] + "_ativado";
         
         String ascOuDesc = "DESC";
         
@@ -147,7 +152,7 @@ public class CriaStatement {
     //asc2 true para ordenação ascendente e false para descendente da segunda coluna
     public PreparedStatement selectSqlOrderDupla(String tabela, String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {
         
-        String colunaAtivado = id.split("_")[0] + "_ativado";
+        String colunaAtivado = coluna1.split("_")[0] + "_ativado";
         
         String ascOuDesc1 = "DESC";
         String ascOuDesc2 = "DESC";
@@ -167,7 +172,7 @@ public class CriaStatement {
     
     public PreparedStatement selectSqlOrderDuplaFuncPessoa(String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {
         
-        String colunaAtivado = id.split("_")[0] + "_ativado";
+        String colunaAtivado = coluna1.split("_")[0] + "_ativado";
         
         String ascOuDesc1 = "DESC";
         String ascOuDesc2 = "DESC";
@@ -187,7 +192,7 @@ public class CriaStatement {
     
     public PreparedStatement selectSqlOrderDuplaPessoaFunc(String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {
         
-        String colunaAtivado = id.split("_")[0] + "_ativado";
+        String colunaAtivado = coluna1.split("_")[0] + "_ativado";
         
         String ascOuDesc1 = "DESC";
         String ascOuDesc2 = "DESC";
@@ -207,7 +212,7 @@ public class CriaStatement {
     
     public PreparedStatement selectSqlOrderDuplaFuncFunc(String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {
         
-        String colunaAtivado = id.split("_")[0] + "_ativado";
+        String colunaAtivado = coluna1.split("_")[0] + "_ativado";
         
         String ascOuDesc1 = "DESC";
         String ascOuDesc2 = "DESC";
@@ -227,7 +232,7 @@ public class CriaStatement {
     
     public PreparedStatement selectSqlOrderDuplaPessoaPessoa(String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {
         
-        String colunaAtivado = id.split("_")[0] + "_ativado";
+        String colunaAtivado = coluna1.split("_")[0] + "_ativado";
         
         String ascOuDesc1 = "DESC";
         String ascOuDesc2 = "DESC";
