@@ -323,7 +323,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
 
     private void jButtonSelecionarImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarImovelActionPerformed
         try {
-            //new TelaImoveis(this).setVisible(true);
+            new TelaImoveis(this).setVisible(true);
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(rootPane, "Erro ao selecionar imovel");

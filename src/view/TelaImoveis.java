@@ -26,12 +26,23 @@ public class TelaImoveis extends javax.swing.JFrame {
     TipoImovel tp = null;
     Funcionario fun = null;
     int idFuncionário = 0;
+    TelaOrcamentos telaOrcamentos = null;
+    private boolean isSelected = false;
     
     public TelaImoveis() throws ClassNotFoundException, Exception {
         CriarJTable();
         initComponents();
         iniciar();
         popularJtable();
+    }
+    
+    public TelaImoveis(TelaOrcamentos telaOrcamentos) throws ClassNotFoundException, Exception {
+        CriarJTable();
+        initComponents();
+        iniciar();
+        popularJtable();
+        this.telaOrcamentos = telaOrcamentos;
+        jButtonUsar.setVisible(true);
     }
     
     public void CriarJTable() {
@@ -96,6 +107,7 @@ public class TelaImoveis extends javax.swing.JFrame {
             jTextFieldParcelas.setText("0");
             jTextFieldTamanho.setText("0");
             jTextFieldComissao.setText("0.0");
+            jButtonUsar.setVisible(false);
             
         } catch (Exception ex) {
             
@@ -186,6 +198,7 @@ public class TelaImoveis extends javax.swing.JFrame {
         jButtonProp = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jTextFieldTamanho = new javax.swing.JTextField();
+        jButtonUsar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -310,6 +323,14 @@ public class TelaImoveis extends javax.swing.JFrame {
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
         jPanel1.add(jTextFieldTamanho, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 260, -1));
 
+        jButtonUsar.setText("Usar");
+        jButtonUsar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUsarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonUsar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 170, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -350,6 +371,8 @@ public class TelaImoveis extends javax.swing.JFrame {
                 
                 jButtonDesativar.setEnabled(true);
             }
+            
+            isSelected = true;
             
         } catch (Exception ex) {
             
@@ -523,6 +546,21 @@ public class TelaImoveis extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jComboAcaoActionPerformed
+
+    private void jButtonUsarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsarActionPerformed
+        try {
+            if (isSelected) {
+
+                telaOrcamentos.setarIDImovel(im);
+                this.dispose();
+
+            } else
+            throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonUsarActionPerformed
     
     public static void main(String args[]) {
 
@@ -569,6 +607,7 @@ public class TelaImoveis extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEnd;
     private javax.swing.JButton jButtonProp;
     private javax.swing.JButton jButtonTP;
+    private javax.swing.JButton jButtonUsar;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataInclusao;
     private javax.swing.JLabel jLabel1;

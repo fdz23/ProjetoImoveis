@@ -31,6 +31,7 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         initComponents();
         iniciar();
         popularJtable();
+        jButtonUsar.setVisible(true);
     }
 
     public void iniciar() throws ClassNotFoundException, Exception {
@@ -46,6 +47,7 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         jButton1.setEnabled(false);
         jTextField2.setEnabled(false);
         jTextFieldId.setEnabled(false);
+        jButtonUsar.setVisible(false);
         if (telaOrcamentos != null) {
             jButtonUsar.setEnabled(true);
         } else {
