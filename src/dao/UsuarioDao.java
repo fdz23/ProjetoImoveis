@@ -120,9 +120,6 @@ public class UsuarioDao extends Dao<Usuario> {
         
         Usuario usuario = getByIDFun(funcionario.getId());
         
-        System.out.println(usuario.getSenha());
-        System.out.println(senha);
-        
         if (usuario == null)
             return false;
         else {
