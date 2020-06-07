@@ -9,73 +9,106 @@ import javax.swing.table.DefaultTableModel;
 import model.TipoImovel;
 
 public class TelaTipoImoveis extends javax.swing.JFrame {
-    
-    int linhaSelecionada = 0;
-    TipoImovelController tic = null;
-    DefaultTableModel modelo = new DefaultTableModel();
-    TipoImovel tp = null;
-    
+
+    private int linhaSelecionada = 0;
+    private TipoImovelController tic = null;
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private TipoImovel tp = null;
+    private int telaAtiva = 0;
+    private TelaImoveis tm = null;
+
     public TelaTipoImoveis() throws Exception {
         CriarJTable();
         initComponents();
         iniciar();
         popularJtable();
     }
-    
+
+    public TelaTipoImoveis(TelaImoveis tm, int telaAtiva) throws Exception {
+        CriarJTable();
+        initComponents();
+        this.telaAtiva = telaAtiva;
+        this.tm = tm;
+        iniciar();
+        popularJtable();
+    }
+
     public void iniciar() throws ClassNotFoundException, Exception {
-        
-        tic = new TipoImovelController();
-        
-        jComboAcao.removeAllItems();
-        jComboAcao.addItem("Ações");
-        jComboAcao.addItem("Cadastrar");
-        jComboAcao.addItem("Alterar");
-        
-        JtextFielDescricao.setEnabled(false);
-        jButton1.setEnabled(false);
-        jTextField2.setEnabled(false);
-        jTextFieldId.setEnabled(false);
-        
-        jTextFieldId.setText("0");
-        
-    }
-    
-    public boolean verificarId(int id) throws Exception {
-        
-        if (id == 0) {
-            
-            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
-            
+
+        if (telaAtiva == 1) {
+            tic = new TipoImovelController();
+
+            jComboAcao.removeAllItems();
+            jComboAcao.addItem("Ações");
+            jComboAcao.addItem("Cadastrar");
+            jComboAcao.addItem("Alterar");
+
+            JtextFielDescricao.setEnabled(false);
+            jButton1.setEnabled(false);
+            jTextField2.setEnabled(false);
+            jTextFieldId.setEnabled(false);
+            jButtonAtivar.setEnabled(false);
+            jButtonDesativar.setEnabled(false);
+
+            jTextFieldId.setText("0");
+        } else {
+            tic = new TipoImovelController();
+
+            jComboAcao.removeAllItems();
+            jComboAcao.addItem("Ações");
+            jComboAcao.addItem("Cadastrar");
+            jComboAcao.addItem("Alterar");
+
+            JtextFielDescricao.setEnabled(false);
+            jButton1.setEnabled(false);
+            jTextField2.setEnabled(false);
+            jTextFieldId.setEnabled(false);
+            jButtonAtivar.setEnabled(false);
+            jButtonDesativar.setEnabled(false);
+            jButtonUtiliza.setEnabled(false);
+
+            jTextFieldId.setText("0");
+
         }
-        
+
+    }
+
+    public boolean verificarId(int id) throws Exception {
+
+        if (id == 0) {
+
+            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
+
+        }
+
         return false;
-        
+
     }
-    
+
     private void popularJtable() throws ClassNotFoundException, Exception {
-        
+
         jTableTabela.setModel(tic.populaJTable(modelo, 1));
-        
+
     }
-    
+
     private void CriarJTable() {
         jTableTabela = new JTable(modelo);
         modelo.addColumn("Código");
         modelo.addColumn("Descrição");
-        
+
     }
-    
+
     public boolean verificarVazio(TipoImovel tp) throws Exception {
-        
+
         if (tp.getDescricao().equals("")) {
-            
+
             throw new Exception("O campo descrição não pode estar vazio");
         }
-        
+
         return false;
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -94,7 +127,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         jTableTabela = new javax.swing.JTable();
         jButtonAtivar = new javax.swing.JButton();
         jButtonDesativar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtonUtiliza = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -167,8 +200,13 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, 100, 40));
 
-        jButton4.setText("Utilizar");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 180, 110, 40));
+        jButtonUtiliza.setText("Utilizar");
+        jButtonUtiliza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUtilizaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonUtiliza, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 180, 110, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,171 +224,198 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         try {
-            
+
             int action = jComboAcao.getSelectedIndex();
-            
+
             String descricao = JtextFielDescricao.getText();
-            
+
             TipoImovel tp = new TipoImovel(0, descricao, 1);
-            
+
             if (!verificarVazio(tp)) {
-                
+
                 switch (action) {
-                    
+
                     case 0:
-                        
+
                         iniciar();
-                        
+
                         break;
-                    
+
                     case 1:
-                        
+
                         tic.inserirItem(tp);
-                        
+
                         JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
-                        
+
                         popularJtable();
-                        
+
                         break;
-                    
+
                     case 2:
-                        
+
                         int alterarIntem = Integer.parseInt(jTextFieldId.getText());
-                        
+
                         if (!verificarId(alterarIntem)) {
-                            
+
                             tp = new TipoImovel(alterarIntem, descricao, 1);
-                            
+
                             tic.alterarItem(tp);
-                            
+
                             popularJtable();
-                            
+
                             JOptionPane.showMessageDialog(null, "Status alterado com sucesso!");
                         }
-                        
+
                         break;
-                    
+
                     default:
-                        
+
                         break;
-                    
+
                 }
             }
-            
+
         } catch (Exception ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboAcaoActionPerformed
-        
+
         try {
-            
+
             int indexCombo = jComboAcao.getSelectedIndex();
-            
+
             switch (indexCombo) {
-                
+
                 case 0:
-                    
+
                     break;
-                
+
                 case 1:
-                    
+
                     JtextFielDescricao.setEnabled(true);
                     jButton1.setEnabled(true);
                     jTextField2.setEnabled(true);
-                    
+
                     break;
-                
+
                 case 2:
-                    
+
                     JtextFielDescricao.setEnabled(true);
                     jButton1.setEnabled(true);
                     jTextField2.setEnabled(true);
-                    
+
                     break;
-                
+
                 default:
-                    
+
                     break;
-                
+
             }
         } catch (Exception ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jComboAcaoActionPerformed
 
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
         try {
-            
+
             tp = tic.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
             jTextFieldId.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
             JtextFielDescricao.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
-            
+
             if (tp.getAtivado() == 0) {
-                
+                jButtonAtivar.setEnabled(true);
+
                 jButtonDesativar.setEnabled(false);
-                
+
             } else {
-                
+
                 jButtonAtivar.setEnabled(false);
-                
+                jButtonDesativar.setEnabled(true);
+
             }
         } catch (Exception ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
-            
+
         }
     }//GEN-LAST:event_jTableTabelaMouseClicked
 
     private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
-        
+
         try {
             int id = Integer.parseInt(jTextFieldId.getText());
-            
+
             if (!verificarId(id)) {
-                
+
                 tic.ativarItem(id);
                 popularJtable();
-                
+
                 JOptionPane.showMessageDialog(null, "Imovel ativado com sucesso!");
-                
+
             }
         } catch (Exception ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
-            
+
         }
-        
+
 
     }//GEN-LAST:event_jButtonAtivarActionPerformed
 
     private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
-        
+
         try {
             int id = Integer.parseInt(jTextFieldId.getText());
-            
+
             if (!verificarId(id)) {
-                
+
                 tic.desativarItem(id);
                 popularJtable();
-                
+
                 JOptionPane.showMessageDialog(null, "Imovel ativado com sucesso!");
-                
+
             }
         } catch (Exception ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
-            
+
         }
-        
+
 
     }//GEN-LAST:event_jButtonDesativarActionPerformed
-    
+
+    private void jButtonUtilizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUtilizaActionPerformed
+
+        try {
+
+            int action = jComboAcao.getSelectedIndex();
+
+            String descricao = JtextFielDescricao.getText();
+
+            TipoImovel tp = new TipoImovel(0, descricao, 1);
+
+            if (!verificarVazio(tp)) {
+
+                tm.recebeObj(tp);
+                this.dispose();
+            }
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+
+
+    }//GEN-LAST:event_jButtonUtilizaActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -390,9 +455,9 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JtextFielDescricao;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonAtivar;
     private javax.swing.JButton jButtonDesativar;
+    private javax.swing.JButton jButtonUtiliza;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

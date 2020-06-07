@@ -15,15 +15,17 @@ import util.Validacao;
 
 public class TelaClientes extends javax.swing.JFrame {
 
-    int linhaSelecionada = 0;
-    DefaultTableModel modelo = new DefaultTableModel();
-    Pessoa pe = null;
-    PessoaController pec = null;
-    PessoaDao pdao = null;
-    TelaEnderecosSelect ted = null;
-    Endereco ende = null;
-    TelaOrcamentos telaOrcamentos = null;
+    private int linhaSelecionada = 0;
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private Pessoa pe = null;
+    private PessoaController pec = null;
+    private PessoaDao pdao = null;
+    private TelaEnderecosSelect ted = null;
+    private Endereco ende = null;
+    private TelaOrcamentos telaOrcamentos = null;
     private boolean isSelected = false;
+    private TelaImoveis ti = null;
+    private int telaAtiva = 0;
 
     public TelaClientes() throws ClassNotFoundException, Exception {
         CriarJTable();
@@ -42,6 +44,17 @@ public class TelaClientes extends javax.swing.JFrame {
         OrdenaClickTabela.ordenarPorClick(jTableTabela, pec, modelo);
     }
 
+    public TelaClientes(TelaImoveis ti, int telaAtiva) throws ClassNotFoundException, Exception {
+        this.telaOrcamentos = telaOrcamentos;
+        CriarJTable();
+        this.ti = ti;
+        this.telaAtiva = telaAtiva;
+        initComponents();
+        iniciar();
+        popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, pec, modelo);
+    }
+
     public void popularJtable() throws ClassNotFoundException, Exception {
 
         jTableTabela.setModel(pec.populaJTable(modelo, 1));
@@ -50,28 +63,56 @@ public class TelaClientes extends javax.swing.JFrame {
 
     public void iniciar() throws ClassNotFoundException, SQLException {
 
-        pe = new Pessoa();
-        pec = new PessoaController();
+        if (telaAtiva == 1) {
 
-        jComboAcao.removeAllItems();
-        jComboAcao.addItem("Ações");
-        jComboAcao.addItem("Cadastrar");
-        jComboAcao.addItem("Alterar");
+            pe = new Pessoa();
+            pec = new PessoaController();
 
-        jFormattedTextField1.setEnabled(false);
-        jTextFieldEmail.setEnabled(false);
-        jTextFieldEndereco.setEnabled(false);
-        jFormattedTextField1.setEnabled(false);
-        jTextFieldNome.setEnabled(false);
-        jFormattedTextFieldTelefone.setEnabled(false);
-        jButton1.setEnabled(false);
-        if (telaOrcamentos != null) {
-            jButtonUsar.setEnabled(true);
+            jComboAcao.removeAllItems();
+            jComboAcao.addItem("Ações");
+            jComboAcao.addItem("Cadastrar");
+            jComboAcao.addItem("Alterar");
+
+            jFormattedTextField1.setEnabled(false);
+            jTextFieldEmail.setEnabled(false);
+            jTextFieldEndereco.setEnabled(false);
+            jFormattedTextField1.setEnabled(false);
+            jTextFieldNome.setEnabled(false);
+            jFormattedTextFieldTelefone.setEnabled(false);
+            jButton1.setEnabled(false);
+            if (telaOrcamentos != null) {
+                jButtonUsar.setEnabled(true);
+            } else {
+                jButtonUsar.setEnabled(false);
+            }
+
+            jtextidacao.setText("0");
         } else {
-            jButtonUsar.setEnabled(false);
-        }
 
-        jtextidacao.setText("0");
+            pe = new Pessoa();
+            pec = new PessoaController();
+
+            jComboAcao.removeAllItems();
+            jComboAcao.addItem("Ações");
+            jComboAcao.addItem("Cadastrar");
+            jComboAcao.addItem("Alterar");
+
+            jFormattedTextField1.setEnabled(false);
+            jTextFieldEmail.setEnabled(false);
+            jTextFieldEndereco.setEnabled(false);
+            jFormattedTextField1.setEnabled(false);
+            jTextFieldNome.setEnabled(false);
+            jFormattedTextFieldTelefone.setEnabled(false);
+            jButton1.setEnabled(false);
+            if (telaOrcamentos != null) {
+                jButtonUsar.setEnabled(true);
+            } else {
+                jButtonUsar.setEnabled(false);
+            }
+
+            jtextidacao.setText("0");
+
+        }
 
     }
 
@@ -280,7 +321,7 @@ public class TelaClientes extends javax.swing.JFrame {
                 jButtonUsarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonUsar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 170, 40));
+        jPanel1.add(jButtonUsar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 110, 170, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -373,9 +414,9 @@ public class TelaClientes extends javax.swing.JFrame {
 
         try {
             linhaSelecionada = jTableTabela.getSelectedRow();
-            
+
             pe = pec.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
-            
+
             jtextidacao.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
             jTextFieldNome.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
             jTextFieldEmail.setText(jTableTabela.getValueAt(linhaSelecionada, 2).toString());
@@ -509,14 +550,20 @@ public class TelaClientes extends javax.swing.JFrame {
     private void jButtonUsarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsarActionPerformed
         try {
             if (isSelected) {
-                
-                telaOrcamentos.setarIDCliente(pe);
-                this.dispose();
+                if (telaOrcamentos != null) {
 
-            } else
-                throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+                    telaOrcamentos.setarIDCliente(pe);
+                    this.dispose();
+
+                } else if (ti != null) {
+
+                    ti.recebeObje(pe);
+                    this.dispose();
+
+                }
+            }
         } catch (Exception ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jButtonUsarActionPerformed
