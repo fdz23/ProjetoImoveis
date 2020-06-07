@@ -15,15 +15,17 @@ import util.Validacao;
 
 public class TelaClientes extends javax.swing.JFrame {
 
-    int linhaSelecionada = 0;
-    DefaultTableModel modelo = new DefaultTableModel();
-    Pessoa pe = null;
-    PessoaController pec = null;
-    PessoaDao pdao = null;
-    TelaEnderecosSelect ted = null;
-    Endereco ende = null;
-    TelaOrcamentos telaOrcamentos = null;
+    private int linhaSelecionada = 0;
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private Pessoa pe = null;
+    private PessoaController pec = null;
+    private PessoaDao pdao = null;
+    private TelaEnderecosSelect ted = null;
+    private Endereco ende = null;
+    private TelaOrcamentos telaOrcamentos = null;
     private boolean isSelected = false;
+    private TelaImoveis tc = null;
+    
 
     public TelaClientes() throws ClassNotFoundException, Exception {
         CriarJTable();
@@ -35,6 +37,15 @@ public class TelaClientes extends javax.swing.JFrame {
 
     public TelaClientes(TelaOrcamentos telaOrcamentos) throws ClassNotFoundException, Exception {
         this.telaOrcamentos = telaOrcamentos;
+        CriarJTable();
+        initComponents();
+        iniciar();
+        popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, pec, modelo);
+    }
+
+    public TelaClientes(TelaImoveis tela) throws ClassNotFoundException, Exception {
+        this.tc = tela;
         CriarJTable();
         initComponents();
         iniciar();
@@ -64,9 +75,17 @@ public class TelaClientes extends javax.swing.JFrame {
         jFormattedTextField1.setEnabled(false);
         jTextFieldNome.setEnabled(false);
         jFormattedTextFieldTelefone.setEnabled(false);
+        jtextidacao.setEnabled(false);
         jButton1.setEnabled(false);
+        jButton3.setEnabled(false);
+        jButton4.setEnabled(false);
+       jButton2.setEnabled(false);
         if (telaOrcamentos != null) {
             jButtonUsar.setEnabled(true);
+        }
+        if (tc != null) {
+            jButtonUsar.setEnabled(true);
+
         } else {
             jButtonUsar.setEnabled(false);
         }
@@ -330,6 +349,7 @@ public class TelaClientes extends javax.swing.JFrame {
                 jTextFieldNome.setEnabled(true);
                 jFormattedTextFieldTelefone.setEnabled(true);
                 jButton1.setEnabled(true);
+                 jButton2.setEnabled(true);
 
                 break;
 
@@ -342,6 +362,7 @@ public class TelaClientes extends javax.swing.JFrame {
                 jTextFieldNome.setEnabled(true);
                 jFormattedTextFieldTelefone.setEnabled(true);
                 jButton1.setEnabled(true);
+                 jButton2.setEnabled(true);
 
                 break;
 
@@ -373,9 +394,9 @@ public class TelaClientes extends javax.swing.JFrame {
 
         try {
             linhaSelecionada = jTableTabela.getSelectedRow();
-            
+
             pe = pec.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
-            
+
             jtextidacao.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
             jTextFieldNome.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
             jTextFieldEmail.setText(jTableTabela.getValueAt(linhaSelecionada, 2).toString());
@@ -509,15 +530,24 @@ public class TelaClientes extends javax.swing.JFrame {
     private void jButtonUsarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsarActionPerformed
         try {
             if (isSelected) {
-                
-                telaOrcamentos.setarIDCliente(pe);
-                this.dispose();
 
-            } else
+                if (telaOrcamentos != null) {
+
+                    telaOrcamentos.setarIDCliente(pe);
+                    this.dispose();
+
+                }
+                if (tc != null) {
+
+                    tc.receberPessoa(pe);
+                    this.dispose();
+                }
+            } else {
                 throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+            }
         } catch (Exception ex) {
-            
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+          ex.printStackTrace();
         }
     }//GEN-LAST:event_jButtonUsarActionPerformed
 

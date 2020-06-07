@@ -3,6 +3,7 @@ package view;
 import controller.EnderecoController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Endereco;
@@ -10,39 +11,41 @@ import model.Funcionario;
 import util.OrdenaClickTabela;
 
 public class TelaEnderecosSelect extends javax.swing.JFrame {
-
-    DefaultTableModel modelo = new DefaultTableModel();
-    Endereco end = null;
-    int linhaSelecionada = 0;
-    EnderecoController ec = null;
-    TelaClientes tc = null;
-    TelaFuncionarios td = null;
-
+    
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private Endereco end = null;
+    private int linhaSelecionada = 0;
+    private EnderecoController ec = null;
+    private TelaClientes tc = null;
+    private TelaFuncionarios td = null;
+    
     public TelaEnderecosSelect() throws Exception {
         CriarJTable();
         initComponents();
         iniciar();
         popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, ec, modelo);
     }
-
+    
     public TelaEnderecosSelect(TelaFuncionarios tf) throws Exception {
         CriarJTable();
         initComponents();
+        this.td = tf;
         iniciar();
         popularJtable();
-        this.td = tf;
         OrdenaClickTabela.ordenarPorClick(jTableTabela, ec, modelo);
     }
-
+    
     public TelaEnderecosSelect(TelaClientes tela) throws Exception {
-
+        
         CriarJTable();
         initComponents();
+        this.tc = tela;
         iniciar();
         popularJtable();
-        this.tc = tela;
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, ec, modelo);
     }
-
+    
     private void CriarJTable() {
         jTableTabela = new JTable(modelo);
         modelo.addColumn("Código");
@@ -55,13 +58,13 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         modelo.addColumn("Numero");
         modelo.addColumn("Referencia");
         modelo.addColumn("CEP");
-
+        
     }
-
+    
     public void iniciar() throws ClassNotFoundException, Exception {
-
+        
         ec = new EnderecoController();
-
+        
         jTextFieldIbge.setEnabled(false);
         JtextFielLogradouro.setEnabled(false);
         JtextFielBairro.setEnabled(false);
@@ -71,18 +74,19 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         JtextFielNumero.setEnabled(false);
         JtextFielReferencia.setEnabled(false);
         JtextFielCep.setEnabled(false);
-
-        jButton1.setEnabled(true);
+        jButton1.setEnabled(false);
+        if (tc != null || td != null) {
+            
+            jButton1.setEnabled(true);
+        }
         
-        
-
     }
-
+    
     private void popularJtable() throws ClassNotFoundException, Exception {
-
+        
         jTableTabela.setModel(ec.populaJTable(modelo, 0));
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -190,7 +194,7 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         jLabel11.setText("Referencia :");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 700, 80, -1));
         jPanel1.add(JtextFielReferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 720, 180, -1));
-        jPanel1.add(jTextFieldID, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 140, -1));
+        jPanel1.add(jTextFieldID, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 140, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,7 +216,7 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
     }//GEN-LAST:event_JtextFielCepKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
         int id = Integer.parseInt(jTextFieldID.getText());
         String cep = JtextFielCep.getText();
         String ibge = jTextFieldIbge.getText();
@@ -223,44 +227,49 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         String complemento = JtextFielComplemento.getText();
         String numero = JtextFielNumero.getText();
         String referencia = JtextFielReferencia.getText();
-        
-//Trazer campo ativo, e verificar se ele vai poder ativar um endereço nesta tela de select
-        end = new Endereco(id, ibge, logradouro, bairro, cidade, estado, complemento, numero, referencia, cep,1);
 
+//Trazer campo ativo, e verificar se ele vai poder ativar um endereço nesta tela de select
+        end = new Endereco(id, ibge, logradouro, bairro, cidade, estado, complemento, numero, referencia, cep, 1);
+        
         if (td != null) {
             td.receberObjeto(end, 0);
-
+            
             td.popularEndereco();
         }
         if (tc != null) {
-
+            
             tc.setarIDEnd(end);
-
+            
         }
-
+        
         this.dispose();
-
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
-
+        
         linhaSelecionada = jTableTabela.getSelectedRow();
-
-        jTextFieldID.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
-        jTextFieldIbge.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
-        JtextFielLogradouro.setText(jTableTabela.getValueAt(linhaSelecionada, 2).toString());
-        JtextFielBairro.setText(jTableTabela.getValueAt(linhaSelecionada, 3).toString());
-        JtextFielCidade.setText(jTableTabela.getValueAt(linhaSelecionada, 4).toString());
-        JtextFieldEstado.setText(jTableTabela.getValueAt(linhaSelecionada, 5).toString());
-        JtextFielComplemento.setText(jTableTabela.getValueAt(linhaSelecionada, 6).toString());
-        JtextFielNumero.setText(jTableTabela.getValueAt(linhaSelecionada, 7).toString());
-        JtextFielReferencia.setText(jTableTabela.getValueAt(linhaSelecionada, 8).toString());
-        JtextFielCep.setText(jTableTabela.getValueAt(linhaSelecionada, 9).toString());
-
+        
+        try {
+            end = ec.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+            
+            jTextFieldID.setText("" + end.getId());
+            jTextFieldIbge.setText(end.getCodigoIBGE());
+            JtextFielLogradouro.setText(end.getLogradouro());
+            JtextFielBairro.setText(end.getBairro());
+            JtextFielCidade.setText(end.getCidade());
+            JtextFieldEstado.setText(end.getEstado());
+            JtextFielComplemento.setText(end.getComplemento());
+            JtextFielNumero.setText("" + end.getNumero());
+            JtextFielReferencia.setText(end.getPontoReferencia());
+            JtextFielCep.setText(end.getCep());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
 
     }//GEN-LAST:event_jTableTabelaMouseClicked
-
+    
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

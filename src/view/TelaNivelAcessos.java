@@ -14,10 +14,10 @@ import util.OrdenaClickTabela;
 
 public class TelaNivelAcessos extends javax.swing.JFrame {
 
-    NivelAcessoController nac = null;
-    DefaultTableModel modelo = new DefaultTableModel();
-    TelaTipoFuncionario tela = null;
-    DefaultComboBoxModel modelo1;
+    private NivelAcessoController nac = null;
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private TelaTipoFuncionario tela = null;
+    private DefaultComboBoxModel modelo1;
 
     int linhaSelecionada = 0;
 
@@ -27,6 +27,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         initComponents();
         iniciar();
         popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, nac, modelo);
 
     }
 
@@ -67,6 +68,8 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         jButton1.setEnabled(false);
         jTextField2.setEnabled(false);
         jTextFieldId.setEnabled(false);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
         jTextFieldId.setText("0");
 
     }
@@ -285,6 +288,10 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
             case 0:
 
+                JtextFielDescricao.setEnabled(false);
+                jButton1.setEnabled(false);
+                jTextField2.setEnabled(false);
+
                 break;
 
             case 1:
@@ -302,8 +309,6 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
                 jTextField2.setEnabled(true);
 
                 break;
-
-              
 
             default:
 

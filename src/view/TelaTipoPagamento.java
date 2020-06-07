@@ -11,11 +11,11 @@ import util.OrdenaClickTabela;
 
 public class TelaTipoPagamento extends javax.swing.JFrame {
 
-    int linhaSelecionada = 0;
-    DefaultTableModel modelo = new DefaultTableModel();
+    private int linhaSelecionada = 0;
+    private DefaultTableModel modelo = new DefaultTableModel();
     private TipoPagamento tipoPagamento = null;
-    TipoPagamentoController tpc = null;
-    TelaOrcamentos telaOrcamentos = null;
+    private TipoPagamentoController tpc = null;
+    private TelaOrcamentos telaOrcamentos = null;
     private boolean isSelected = false;
 
     public TelaTipoPagamento() throws Exception {
@@ -23,14 +23,16 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         initComponents();
         iniciar();
         popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, tpc, modelo);
     }
-    
+
     public TelaTipoPagamento(TelaOrcamentos telaOrcamentos) throws ClassNotFoundException, Exception {
         this.telaOrcamentos = telaOrcamentos;
         CriarJTable();
         initComponents();
         iniciar();
         popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, tpc, modelo);
     }
 
     public void iniciar() throws ClassNotFoundException, Exception {
@@ -46,6 +48,8 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         jButton1.setEnabled(false);
         jTextField2.setEnabled(false);
         jTextFieldId.setEnabled(false);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
         if (telaOrcamentos != null) {
             jButtonUsar.setEnabled(true);
         } else {
@@ -200,12 +204,12 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         try {
 
             linhaSelecionada = jTableTabela.getSelectedRow();
-            
+
             tipoPagamento = tpc.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
-            
+
             jTextFieldId.setText("" + tipoPagamento.getId());
-            JtextFielDescricao.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
-            
+            JtextFielDescricao.setText(tipoPagamento.getDescricao());
+
             isSelected = true;
         } catch (Exception ex) {
 
@@ -283,6 +287,13 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
 
                 case 0:
 
+                    JtextFielDescricao.setEnabled(false);
+                    jButton1.setEnabled(false);
+                    jTextField2.setEnabled(false);
+                    jTextFieldId.setEnabled(false);
+                    jButton2.setEnabled(false);
+                    jButton3.setEnabled(false);
+
                     break;
 
                 case 1:
@@ -319,8 +330,9 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
                 telaOrcamentos.setarIDTipoPagamento(tipoPagamento);
                 this.dispose();
 
-            } else
-            throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+            } else {
+                throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+            }
         } catch (Exception ex) {
 
             JOptionPane.showMessageDialog(null, ex.getMessage());

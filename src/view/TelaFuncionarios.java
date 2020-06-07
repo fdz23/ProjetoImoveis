@@ -24,24 +24,24 @@ import util.Validacao;
 
 public class TelaFuncionarios extends javax.swing.JFrame {
 
-    DefaultTableModel modelo = new DefaultTableModel();
-    DefaultComboBoxModel modelo1 = null;
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultComboBoxModel modelo1 = null;
 
-    FuncionarioController fc = null;
-    FuncionarioDao fda = null;
-    Endereco end = null;
-    EnderecoController endc = null;
-    TipoFuncionarioController tfc = null;
-    StatusController sta = null;
-    Pessoa pe = null;
-    Funcionario fun = null;
-    Endereco end1 = null;
-    TelaEnderecosSelect ted = null;
-    TipoFuncionario tf = null;
-    Status status = null;
-    TelaTipoFuncionario ttf = null;
-    TelaStatus tst = null;
-    int linhaSelecionada = 0;
+    private FuncionarioController fc = null;
+    private FuncionarioDao fda = null;
+    private Endereco end = null;
+    private EnderecoController endc = null;
+    private TipoFuncionarioController tfc = null;
+    private StatusController sta = null;
+    private Pessoa pe = null;
+    private Funcionario fun = null;
+    private Endereco end1 = null;
+    private TelaEnderecosSelect ted = null;
+    private TipoFuncionario tf = null;
+    private Status status = null;
+    private TelaTipoFuncionario ttf = null;
+    private TelaStatus tst = null;
+    private int linhaSelecionada = 0;
 
     public TelaFuncionarios() throws ClassNotFoundException, Exception {
         CriarJTable();
@@ -264,6 +264,9 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jLabel13 = new javax.swing.JLabel();
+        jTextFieldSenha = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -297,22 +300,22 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jPanel1.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 250, -1));
 
         jLabel3.setText("E-MAIL");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
-        jPanel1.add(jTextFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 250, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
+        jPanel1.add(jTextFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 250, -1));
 
         jLabel4.setText("Data Nascimento");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
 
         jLabel5.setText("TELEFONE");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
 
         jLabel6.setText("Matricula");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
-        jPanel1.add(jTextFieldMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 250, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
+        jPanel1.add(jTextFieldMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 250, -1));
 
         jLabel7.setText("Cargo");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
-        jPanel1.add(jTextFieldCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 90, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, -1, -1));
+        jPanel1.add(jTextFieldCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 90, -1));
 
         jComboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxCargo.addActionListener(new java.awt.event.ActionListener() {
@@ -320,7 +323,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jComboBoxCargoActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, 140, -1));
+        jPanel1.add(jComboBoxCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 440, 140, -1));
 
         jCheckBox1.setText("Demitir");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -328,7 +331,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jCheckBox1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 90, -1));
+        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 90, -1));
 
         jLabel8.setText("Data Rescisão");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, -1, -1));
@@ -386,21 +389,21 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel1.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 250, 30));
+        jPanel1.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 250, 30));
 
         try {
             jFormattedTextFieldTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)# ####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel1.add(jFormattedTextFieldTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 250, 30));
+        jPanel1.add(jFormattedTextFieldTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 250, 30));
 
         try {
             jFormattedTextFieldCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel1.add(jFormattedTextFieldCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 250, 30));
+        jPanel1.add(jFormattedTextFieldCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 250, 30));
 
         jButton3.setText("Tela Cargo");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -433,6 +436,18 @@ public class TelaFuncionarios extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 760, 90, 40));
+
+        jCheckBox2.setText("Login");
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, -1, -1));
+
+        jLabel13.setText("Senha :");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, -1, -1));
+        jPanel1.add(jTextFieldSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, 190, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -667,14 +682,15 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
 
         linhaSelecionada = jTableTabela.getSelectedRow();
-        idacao.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
-        jTextFieldCargo.setText(jTableTabela.getValueAt(linhaSelecionada, 2).toString());
-        jTextFieldStatus.setText(jTableTabela.getValueAt(linhaSelecionada, 3).toString());
-        jTextFieldDataRescicao.setText(jTableTabela.getValueAt(linhaSelecionada, 4).toString());
-
-        int idAux = Integer.parseInt(idacao.getText());
-
         try {
+            fun = fc.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+            idacao.setText("" + fun.getId());
+            jTextFieldCargo.setText(fun.getTipoFuncionario().getDescricao());
+            jTextFieldStatus.setText(fun.getStatus().getDescricao());
+            jTextFieldDataRescicao.setText(""+fun.getDataRescisao());
+
+            int idAux = Integer.parseInt(idacao.getText());
+
             pe = fc.getItem(idAux).getPessoa();
             popularPessoaClick(pe);
         } catch (Exception ex) {
@@ -752,6 +768,16 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+
+        if (jCheckBox2.isSelected()) {
+
+            jTextFieldSenha.setVisible(true);
+        } else {
+            jTextFieldSenha.setVisible(false);
+        }
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -796,6 +822,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JComboBox jComboBoxCargo;
     private javax.swing.JComboBox jComboBoxStatus;
@@ -806,6 +833,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -823,6 +851,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldEndereco;
     private javax.swing.JTextField jTextFieldMatricula;
     private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldSenha;
     private javax.swing.JTextField jTextFieldStatus;
     // End of variables declaration//GEN-END:variables
 

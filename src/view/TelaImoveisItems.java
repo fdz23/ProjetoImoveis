@@ -8,19 +8,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.ImovelItem;
+import util.OrdenaClickTabela;
 
 public class TelaImoveisItems extends javax.swing.JFrame {
 
-    DefaultTableModel modelo = new DefaultTableModel();
-    ImovelItemController im = null;
-    int linhaSelecionada = 0;
-    ImovelItem iit = null;
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private ImovelItemController im = null;
+    private int linhaSelecionada = 0;
+    private ImovelItem iit = null;
 
     public TelaImoveisItems() throws Exception {
         CriarJTable();
         initComponents();
         iniciar();
         popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, im, modelo);
     }
 
     private void CriarJTable() {
@@ -200,7 +202,6 @@ public class TelaImoveisItems extends javax.swing.JFrame {
 
             int action = jComboAcao.getSelectedIndex();
 
-            int indexCombo = jComboAcao.getSelectedIndex();
             int id = 0;
             String descricao = jTextFieldDescricao.getText();
             double valor = Double.parseDouble(jTextFieldValor.getText());
@@ -259,9 +260,11 @@ public class TelaImoveisItems extends javax.swing.JFrame {
         try {
 
             linhaSelecionada = jTableTabela.getSelectedRow();
-            jTextField1.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
-            jTextFieldValor.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
-            jTextFieldDescricao.setText(jTableTabela.getValueAt(linhaSelecionada, 2).toString());
+            iit = im.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+
+            jTextField1.setText("" + iit.getId());
+            jTextFieldValor.setText("" + iit.getValor());
+            jTextFieldDescricao.setText(iit.getDescricao());
 
         } catch (Exception ex) {
 

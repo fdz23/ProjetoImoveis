@@ -12,16 +12,18 @@ import util.OrdenaClickTabela;
 
 public class TelaStatus extends javax.swing.JFrame {
 
-    StatusController sc = null;
-    DefaultTableModel modelo = new DefaultTableModel();
-    int linhaSelecionada = 0;
-    TelaFuncionarios tela = null;
+    private StatusController sc = null;
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private int linhaSelecionada = 0;
+    private TelaFuncionarios tela = null;
+    private Status sa = null;
 
     public TelaStatus() throws ClassNotFoundException, Exception {
         CriarJTable();
         initComponents();
         iniciar();
         popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, sc, modelo);
 
     }
 
@@ -78,6 +80,8 @@ public class TelaStatus extends javax.swing.JFrame {
         jComboAcao.addItem("Ações");
         jComboAcao.addItem("Cadastrar");
         jComboAcao.addItem("Alterar");
+        jButton2.setEnabled(false);
+        jButton2.setEnabled(false);
 
         JtextFielDescricao.setEnabled(false);
         jButton1.setEnabled(false);
@@ -181,7 +185,7 @@ public class TelaStatus extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 80, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 80, 40));
 
         jButton3.setText("Desativar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -212,9 +216,14 @@ public class TelaStatus extends javax.swing.JFrame {
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
 
         linhaSelecionada = jTableTabela.getSelectedRow();
-        jTextFieldId.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
-        JtextFielDescricao.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
 
+        try {
+            sa = sc.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+            jTextFieldId.setText("" + sa.getId());
+            JtextFielDescricao.setText(sa.getDescricao());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }//GEN-LAST:event_jTableTabelaMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -224,7 +233,7 @@ public class TelaStatus extends javax.swing.JFrame {
             int action = jComboAcao.getSelectedIndex();
 
             String descricao = JtextFielDescricao.getText();
-            Status sa = new Status(0, descricao, 1);
+            sa = new Status(0, descricao, 1);
 
             if (verificarVazio(sa)) {
 
@@ -286,6 +295,10 @@ public class TelaStatus extends javax.swing.JFrame {
         switch (indexCombo) {
 
             case 0:
+
+                JtextFielDescricao.setEnabled(false);
+                jButton1.setEnabled(false);
+                jTextField2.setEnabled(false);
 
                 break;
 
