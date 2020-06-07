@@ -45,7 +45,7 @@ public class TelaClientes extends javax.swing.JFrame {
 
     public void popularJtable() throws ClassNotFoundException, Exception {
 
-        jTableTabela.setModel(pec.populaJTable(modelo, 1));
+        jTableTabela.setModel(pec.populaJTable(modelo, 0));
 
     }
 
