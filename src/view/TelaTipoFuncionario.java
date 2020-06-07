@@ -15,14 +15,14 @@ import util.OrdenaClickTabela;
 public class TelaTipoFuncionario extends javax.swing.JFrame {
 
     TipoFuncionarioController tfc = null;
+    TelaFuncionarios telaFuncionarios = null;
     NivelAcessoController nac = null;
     NivelAcesso na = null;
-    DefaultComboBoxModel modelo1 = new DefaultComboBoxModel();
     DefaultTableModel modelo = new DefaultTableModel();
-    TelaNivelAcessos tela = null;
-    TelaFuncionarios tela1 = null;
+    TipoFuncionario tipoFuncionario = null;
     int linhaSelecionada = 0;
     int login = 1;
+    boolean isSelected = false;
 
     public TelaTipoFuncionario() throws ClassNotFoundException, Exception {
 
@@ -30,7 +30,6 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         initComponents();
         iniciar();
         popularJtable();
-        popularCombox();
 
     }
 
@@ -39,11 +38,9 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         CriarJTable();
         initComponents();
         iniciar();
-        popularCombox();
         popularJtable();
-
-        this.tela1 = tela;
         OrdenaClickTabela.ordenarPorClick(jTableTabela, tfc, modelo);
+        this.telaFuncionarios = tela;
 
     }
 
@@ -62,24 +59,11 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
     }
 
-    public void popularCombox() throws ClassNotFoundException, Exception {
+    public void setarNivelAcesso(NivelAcesso nivelAcesso) {
 
-        jComboBox1.setModel(nac.popularCombox(modelo1));
-        if(jComboBox1.getItemCount() != 0)
-            JtextFielDescricaoNivelAcesso.setText(jComboBox1.getSelectedItem().toString());
+        this.na = nivelAcesso;
+        JtextFielDescricaoNivelAcesso.setText(nivelAcesso.getDescricao());
 
-    }
-
-    private int pegarIDNivelAcesso() {
-
-        String idAux = jComboBox1.getSelectedItem().toString();
-
-        String idAux1[] = new String[1];
-        idAux1 = idAux.split("-");
-
-        int id = Integer.parseInt(idAux1[0]);
-
-        return id;
     }
 
     public boolean verificarVazio(TipoFuncionario obj) throws Exception {
@@ -126,7 +110,6 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         jTextFieldId.setEnabled(false);
         JtextFielDescricaoSalario.setEnabled(false);
         JtextFielDescricaoNivelAcesso.setEnabled(false);
-        jComboBox1.setEnabled(false);
         jTextFieldPesquisa.setEnabled(false);
 
         JtextFielDescricaoSalario.setText("0.0");
@@ -154,10 +137,10 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         JtextFielDescricaoNivelAcesso = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jButton2 = new javax.swing.JButton();
+        jButtonNivelAcesso = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButtonSelecionarFunc = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -235,21 +218,13 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         jLabel6.setText("Nivel Acesso : ");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 90, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNivelAcesso.setText("Selecionar");
+        jButtonNivelAcesso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jButtonNivelAcessoActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 110, -1));
-
-        jButton2.setText("Nivel Acesso");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 180, 130, -1));
+        jPanel1.add(jButtonNivelAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 130, -1));
 
         jButton3.setText("Ativar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -266,6 +241,14 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 480, 90, 40));
+
+        jButtonSelecionarFunc.setText("Selecionar");
+        jButtonSelecionarFunc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelecionarFuncActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonSelecionarFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 150, 170, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -304,7 +287,6 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
                 jTextFieldPesquisa.setEnabled(true);
                 JtextFielDescricaoSalario.setEnabled(true);
                 JtextFielDescricaoSalario.setEnabled(true);
-                jComboBox1.setEnabled(true);
                 jTextFieldPesquisa.setEnabled(true);
 
                 break;
@@ -317,7 +299,6 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
                 JtextFielDescricaoSalario.setEnabled(true);
                 JtextFielDescricaoNivelAcesso.setEnabled(false);
                 JtextFielDescricaoSalario.setEnabled(true);
-                jComboBox1.setEnabled(true);
                 jTextFieldPesquisa.setEnabled(true);
 
                 break;
@@ -338,11 +319,9 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
             String descricao = JtextFielDescricao.getText();
             Double salario = Double.parseDouble(JtextFielDescricaoSalario.getText());
 
-            na = nac.getItem(pegarIDNivelAcesso());
-
             TipoFuncionario tip = new TipoFuncionario(0, descricao, na, salario, 1);
 
-            if (verificarVazio(tip)) {
+            if (!verificarVazio(tip)) {
 
                 switch (action) {
 
@@ -355,7 +334,6 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
                     case 1:
 
                         tfc.inserirItem(tip);
-                        tela1.popularComboboxCargo();
                         JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
 
                         popularJtable();
@@ -370,7 +348,6 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
                             tip = new TipoFuncionario(alterarIntem, descricao, na, salario, 1);
                             tfc.alterarItem(tip);
-                            tela1.popularComboboxCargo();
                             popularJtable();
 
                             JOptionPane.showMessageDialog(null, "Tipo Funcionario alterado com sucesso!");
@@ -395,29 +372,34 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
 
-        linhaSelecionada = jTableTabela.getSelectedRow();
-        jTextFieldId.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
-        JtextFielDescricao.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
+        try {
+            linhaSelecionada = jTableTabela.getSelectedRow();
+            
+            tipoFuncionario = tfc.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+            
+            jTextFieldId.setText("" + tipoFuncionario.getId());
+            JtextFielDescricao.setText(tipoFuncionario.getDescricao());
+            JtextFielDescricaoNivelAcesso.setText(tipoFuncionario.getNivelAcesso().getDescricao());
+            JtextFielDescricaoSalario.setText("" + tipoFuncionario.getSalario());
+            
+            isSelected = true;
+        } catch (Exception ex) {
+            Logger.getLogger(TelaTipoFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
 
     }//GEN-LAST:event_jTableTabelaMouseClicked
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-
-        JtextFielDescricaoNivelAcesso.setText(jComboBox1.getSelectedItem().toString());
-
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonNivelAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNivelAcessoActionPerformed
 
         try {
-            tela = new TelaNivelAcessos(this);
-            tela.setVisible(true);
+            new TelaNivelAcessos(this).setVisible(true);
 
         } catch (Exception ex) {
             Logger.getLogger(TelaTipoFuncionario.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonNivelAcessoActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
@@ -463,8 +445,23 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButtonSelecionarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarFuncActionPerformed
+        try {
+            if (isSelected) {
+
+                telaFuncionarios.setarCargo(tipoFuncionario);
+                this.dispose();
+
+            } else
+            throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonSelecionarFuncActionPerformed
+
     public static void main(String args[]) {
-        
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -487,7 +484,6 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -504,11 +500,11 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField JtextFielDescricaoNivelAcesso;
     private javax.swing.JTextField JtextFielDescricaoSalario;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonNivelAcesso;
+    private javax.swing.JButton jButtonSelecionarFunc;
     private javax.swing.JComboBox jComboAcao;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

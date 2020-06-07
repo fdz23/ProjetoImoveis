@@ -28,43 +28,69 @@ public class TelaMenu extends javax.swing.JFrame {
 
     private void iniciar() {
         try {
+
+            jButtonClientes.setVisible(false);
+            jButtonContratos.setVisible(false);
+            jButtonEnderecos.setVisible(false);
+            jButtonFuncionarios.setVisible(false);
+            jButtonImoveis.setVisible(false);
+            jButtonImoveisItens.setVisible(false);
+            jButtonNiveisDeAcesso.setVisible(false);
+            jButtonOrcamentos.setVisible(false);
+            jButtonStatus.setVisible(false);
+            jButtonTiposDeFuncionarios.setVisible(false);
+            jButtonTiposDeImovel.setVisible(false);
+            jButtonTiposDePagamento.setVisible(false);
+
             funcionario = Login.funcionario;
             Array permissoes = funcionario.getTipoFuncionario().getNivelAcesso().getNivel();
 
             jLabelFuncionarioAtual.setText(funcionario.getNome());
             permitirBotoes(permissoes);
         } catch (Exception e) {
-            
+
         }
     }
 
     private void permitirBotoes(Array permissoes) throws SQLException {
-        int[] niveis = (int[])permissoes.getArray();
-        
-        if (niveis[0] == 0)
+        Integer[] niveis = (Integer[]) permissoes.getArray();
+
+        if (niveis[0] == 0) {
             jButtonClientes.setVisible(false);
-        if (niveis[1] == 0)
+        }
+        if (niveis[1] == 0) {
             jButtonContratos.setVisible(false);
-        if (niveis[2] == 0)
+        }
+        if (niveis[2] == 0) {
             jButtonEnderecos.setVisible(false);
-        if (niveis[3] == 0)
+        }
+        if (niveis[3] == 0) {
             jButtonFuncionarios.setVisible(false);
-        if (niveis[4] == 0)
+        }
+        if (niveis[4] == 0) {
             jButtonImoveis.setVisible(false);
-        if (niveis[5] == 0)
+        }
+        if (niveis[5] == 0) {
             jButtonImoveisItens.setVisible(false);
-        if (niveis[6] == 0)
+        }
+        if (niveis[6] == 0) {
             jButtonNiveisDeAcesso.setVisible(false);
-        if (niveis[7] == 0)
+        }
+        if (niveis[7] == 0) {
             jButtonOrcamentos.setVisible(false);
-        if (niveis[8] == 0)
+        }
+        if (niveis[8] == 0) {
             jButtonStatus.setVisible(false);
-        if (niveis[9] == 0)
+        }
+        if (niveis[9] == 0) {
             jButtonTiposDeFuncionarios.setVisible(false);
-        if (niveis[10] == 0)
+        }
+        if (niveis[10] == 0) {
             jButtonTiposDeImovel.setVisible(false);
-        if (niveis[11] == 0)
+        }
+        if (niveis[11] == 0) {
             jButtonTiposDePagamento.setVisible(false);
+        }
     }
 
     /**

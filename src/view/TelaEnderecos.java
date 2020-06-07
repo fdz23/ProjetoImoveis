@@ -21,6 +21,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
     TelaImoveis telaI = null;
     int linhaSelecionada = 0;
     int telaAtiva = 0;
+    boolean isSelected = false;
 
     public TelaEnderecos() throws Exception {
         CriarJTable();
@@ -38,6 +39,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         popularJtable();
         this.tf = tf;
         OrdenaClickTabela.ordenarPorClick(jTableTabela, ec, modelo);
+        jButtonUtilizarFunc.setVisible(true);
 
     }
 
@@ -88,6 +90,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButtonUtilizar = new javax.swing.JButton();
+        jButtonUtilizarFunc = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -214,6 +217,14 @@ public class TelaEnderecos extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonUtilizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 140, 180, 70));
 
+        jButtonUtilizarFunc.setText("Utilizar");
+        jButtonUtilizarFunc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUtilizarFuncActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonUtilizarFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 140, 180, 70));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -233,22 +244,36 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
 
-        linhaSelecionada = jTableTabela.getSelectedRow();
-        jTextFieldId.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
-        jTextFieldIbge.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
-        JtextFielLogradouro.setText(jTableTabela.getValueAt(linhaSelecionada, 2).toString());
-        JtextFielBairro.setText(jTableTabela.getValueAt(linhaSelecionada, 3).toString());
-        JtextFielCidade.setText(jTableTabela.getValueAt(linhaSelecionada, 4).toString());
-        JtextFieldEstado.setText(jTableTabela.getValueAt(linhaSelecionada, 5).toString());
-        JtextFielComplemento.setText(jTableTabela.getValueAt(linhaSelecionada, 6).toString());
-        JtextFielNumero.setText(jTableTabela.getValueAt(linhaSelecionada, 7).toString());
-        JtextFielReferencia.setText(jTableTabela.getValueAt(linhaSelecionada, 8).toString());
-        JtextFielCep.setText(jTableTabela.getValueAt(linhaSelecionada, 9).toString());
+        try {
+
+            linhaSelecionada = jTableTabela.getSelectedRow();
+
+            end = ec.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+
+            jTextFieldId.setText("" + end.getId());
+            jTextFieldIbge.setText(end.getCodigoIBGE());
+            JtextFielLogradouro.setText(end.getLogradouro());
+            JtextFielBairro.setText(end.getBairro());
+            JtextFielCidade.setText(end.getCidade());
+            JtextFieldEstado.setText(end.getEstado());
+            JtextFielComplemento.setText(end.getComplemento());
+            JtextFielNumero.setText(end.getNumero());
+            JtextFielReferencia.setText(end.getPontoReferencia());
+            JtextFielCep.setText(end.getCep());
+            
+            isSelected = true;
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            e.printStackTrace();
+        }
 
     }//GEN-LAST:event_jTableTabelaMouseClicked
 
     public void iniciar() throws ClassNotFoundException, Exception {
 
+        jButtonUtilizarFunc.setVisible(false);
+        
         if (telaAtiva == 1) {
             cep = new ViaCEP();
             end = new Endereco();
@@ -296,7 +321,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
             JtextFielCep.setEnabled(false);
             jButtonBuscarCep.setEnabled(false);
             jButton1.setEnabled(false);
-            jButtonUtilizar.setEnabled(false);
+            jButtonUtilizar.setVisible(false);
 
         }
     }
@@ -574,8 +599,6 @@ public class TelaEnderecos extends javax.swing.JFrame {
     private void jButtonUtilizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUtilizarActionPerformed
         try {
 
-            int action = jComboAcao.getSelectedIndex();
-
             String cep = JtextFielCep.getText();
             String ibge = jTextFieldIbge.getText();
             String logradouro = JtextFielLogradouro.getText();
@@ -603,6 +626,22 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButtonUtilizarActionPerformed
+
+    private void jButtonUtilizarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUtilizarFuncActionPerformed
+        try {
+            if (isSelected) {
+
+                tf.setarEndereco(end);
+                this.dispose();
+
+            }
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+    }//GEN-LAST:event_jButtonUtilizarFuncActionPerformed
 
     public static void main(String args[]) {
 
@@ -653,6 +692,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonBuscarCep;
     private javax.swing.JButton jButtonUtilizar;
+    private javax.swing.JButton jButtonUtilizarFunc;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

@@ -17,8 +17,10 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
     NivelAcessoController nac = null;
     DefaultTableModel modelo = new DefaultTableModel();
-    TelaTipoFuncionario telaFuncionarios = null;
+    TelaTipoFuncionario telaTipoFuncionarios = null;
     DefaultComboBoxModel modelo1;
+    NivelAcesso nivelAcesso = null;
+    boolean isSelected = false;
 
     int linhaSelecionada = 0;
 
@@ -28,6 +30,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         initComponents();
         iniciar();
         popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, nac, modelo);
 
     }
 
@@ -37,8 +40,10 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         initComponents();
         iniciar();
         popularJtable();
-        this.telaFuncionarios = tela;
+        setCheckBoxFalse();
+        this.telaTipoFuncionarios = tela;
         OrdenaClickTabela.ordenarPorClick(jTableTabela, nac, modelo);
+        jButtonSelecionarTipoFunc.setVisible(true);
 
     }
 
@@ -69,6 +74,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         jTextField2.setEnabled(false);
         jTextFieldId.setEnabled(false);
         jTextFieldId.setText("0");
+        jButtonSelecionarTipoFunc.setVisible(false);
 
     }
 
@@ -127,6 +133,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         jCheckBoxTiposFuncionario = new javax.swing.JCheckBox();
         jCheckBoxTiposImovel = new javax.swing.JCheckBox();
         jCheckBoxContratos = new javax.swing.JCheckBox();
+        jButtonSelecionarTipoFunc = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -251,6 +258,14 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         jCheckBoxContratos.setText("Tela Contratos");
         jPanel1.add(jCheckBoxContratos, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 540, -1, -1));
 
+        jButtonSelecionarTipoFunc.setText("Selecionar");
+        jButtonSelecionarTipoFunc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelecionarTipoFuncActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonSelecionarTipoFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 160, 160, 50));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -274,34 +289,46 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
             int action = jComboAcao.getSelectedIndex();
             Integer[] niveis = new Integer[12];
-            
-            if(jCheckBoxClientes.isSelected())
+
+            if (jCheckBoxClientes.isSelected()) {
                 niveis[0] = 1;
-            if(jCheckBoxContratos.isSelected())
+            }
+            if (jCheckBoxContratos.isSelected()) {
                 niveis[1] = 1;
-            if(jCheckBoxEnderecos.isSelected())
+            }
+            if (jCheckBoxEnderecos.isSelected()) {
                 niveis[2] = 1;
-            if(jCheckBoxFuncionarios.isSelected())
+            }
+            if (jCheckBoxFuncionarios.isSelected()) {
                 niveis[3] = 1;
-            if(jCheckBoxImoveis.isSelected())
+            }
+            if (jCheckBoxImoveis.isSelected()) {
                 niveis[4] = 1;
-            if(jCheckBoxImoveisItens.isSelected())
+            }
+            if (jCheckBoxImoveisItens.isSelected()) {
                 niveis[5] = 1;
-            if(jCheckBoxNivelAcesso.isSelected())
+            }
+            if (jCheckBoxNivelAcesso.isSelected()) {
                 niveis[6] = 1;
-            if(jCheckBoxOrcamentos.isSelected())
+            }
+            if (jCheckBoxOrcamentos.isSelected()) {
                 niveis[7] = 1;
-            if(jCheckBoxStatus.isSelected())
+            }
+            if (jCheckBoxStatus.isSelected()) {
                 niveis[8] = 1;
-            if(jCheckBoxTiposFuncionario.isSelected())
+            }
+            if (jCheckBoxTiposFuncionario.isSelected()) {
                 niveis[9] = 1;
-            if(jCheckBoxTiposImovel.isSelected())
+            }
+            if (jCheckBoxTiposImovel.isSelected()) {
                 niveis[10] = 1;
-            if(jCheckBoxTiposPagamento.isSelected())
+            }
+            if (jCheckBoxTiposPagamento.isSelected()) {
                 niveis[11] = 1;
+            }
 
             String descricao = JtextFielDescricao.getText();
-            
+
             Array niveisArray = nac.getArrayInt(niveis);
 
             NivelAcesso na = new NivelAcesso(0, descricao, 1, niveisArray);
@@ -321,7 +348,6 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
                         nac.inserirItem(na);
                         popularJtable();
 
-
                         JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
 
                         break;
@@ -334,7 +360,6 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
                             na = new NivelAcesso(alterarIntem, descricao, 1, niveisArray);
 
                             nac.alterarItem(na);
-                            telaFuncionarios.popularCombox();
 
                             popularJtable();
 
@@ -359,7 +384,6 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboAcaoActionPerformed
-
         int indexCombo = jComboAcao.getSelectedIndex();
 
         switch (indexCombo) {
@@ -384,21 +408,69 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
                 break;
 
-              
-
             default:
 
                 break;
         }
-
-
     }//GEN-LAST:event_jComboAcaoActionPerformed
 
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
 
-        linhaSelecionada = jTableTabela.getSelectedRow();
-        jTextFieldId.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
-        JtextFielDescricao.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
+        try {
+            
+            setCheckBoxFalse();
+
+            linhaSelecionada = jTableTabela.getSelectedRow();
+
+            nivelAcesso = nac.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+
+            jTextFieldId.setText("" + nivelAcesso.getId());
+            JtextFielDescricao.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
+
+            Integer[] niveis = (Integer[]) nivelAcesso.getNivel().getArray();
+
+            if (niveis[0] == 1) {
+                jCheckBoxClientes.setSelected(true);
+            }
+            if (niveis[1] == 1) {
+                jCheckBoxContratos.setSelected(true);
+            }
+            if (niveis[2] == 1) {
+                jCheckBoxEnderecos.setSelected(true);
+            }
+            if (niveis[3] == 1) {
+                jCheckBoxFuncionarios.setSelected(true);
+            }
+            if (niveis[4] == 1) {
+                jCheckBoxImoveis.setSelected(true);
+            }
+            if (niveis[5] == 1) {
+                jCheckBoxImoveisItens.setSelected(true);
+            }
+            if (niveis[6] == 1) {
+                jCheckBoxNivelAcesso.setSelected(true);
+            }
+            if (niveis[7] == 1) {
+                jCheckBoxOrcamentos.setSelected(true);
+            }
+            if (niveis[8] == 1) {
+                jCheckBoxStatus.setSelected(true);
+            }
+            if (niveis[9] == 1) {
+                jCheckBoxTiposFuncionario.setSelected(true);
+            }
+            if (niveis[10] == 1) {
+                jCheckBoxTiposImovel.setSelected(true);
+            }
+            if (niveis[11] == 1) {
+                jCheckBoxTiposPagamento.setSelected(true);
+            }
+            
+            isSelected = true;
+
+        } catch (Exception ex) {
+            Logger.getLogger(TelaNivelAcessos.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 
     }//GEN-LAST:event_jTableTabelaMouseClicked
@@ -442,6 +514,38 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButtonSelecionarTipoFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarTipoFuncActionPerformed
+        try {
+            if (isSelected) {
+
+                telaTipoFuncionarios.setarNivelAcesso(nivelAcesso);
+                this.dispose();
+
+            } else
+            throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonSelecionarTipoFuncActionPerformed
+
+    private void setCheckBoxFalse() {
+
+            jCheckBoxClientes.setSelected(false);
+            jCheckBoxContratos.setSelected(false);
+            jCheckBoxEnderecos.setSelected(false);
+            jCheckBoxFuncionarios.setSelected(false);
+            jCheckBoxImoveis.setSelected(false);
+            jCheckBoxImoveisItens.setSelected(false);
+            jCheckBoxNivelAcesso.setSelected(false);
+            jCheckBoxOrcamentos.setSelected(false);
+            jCheckBoxStatus.setSelected(false);
+            jCheckBoxTiposFuncionario.setSelected(false);
+            jCheckBoxTiposImovel.setSelected(false);
+            jCheckBoxTiposPagamento.setSelected(false);
+
+    }
 
     public void resultAction(String texto) {
 
@@ -490,6 +594,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonSelecionarTipoFunc;
     private javax.swing.JCheckBox jCheckBoxClientes;
     private javax.swing.JCheckBox jCheckBoxContratos;
     private javax.swing.JCheckBox jCheckBoxEnderecos;

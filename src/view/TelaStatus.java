@@ -16,6 +16,8 @@ public class TelaStatus extends javax.swing.JFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     int linhaSelecionada = 0;
     TelaFuncionarios tela = null;
+    boolean isSelected = false;
+    Status status = null;
 
     public TelaStatus() throws ClassNotFoundException, Exception {
         CriarJTable();
@@ -106,6 +108,7 @@ public class TelaStatus extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -191,6 +194,14 @@ public class TelaStatus extends javax.swing.JFrame {
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, -1, -1));
 
+        jButton4.setText("Selecionar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 110, 150, 50));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -211,9 +222,19 @@ public class TelaStatus extends javax.swing.JFrame {
 
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
 
-        linhaSelecionada = jTableTabela.getSelectedRow();
-        jTextFieldId.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
-        JtextFielDescricao.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
+        try {
+
+            linhaSelecionada = jTableTabela.getSelectedRow();
+            
+            status = sc.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+
+            jTextFieldId.setText("" + status.getId());
+            JtextFielDescricao.setText(status.getDescricao());
+            
+            isSelected = true;
+        } catch (Exception ex) {
+            Logger.getLogger(TelaStatus.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_jTableTabelaMouseClicked
 
@@ -363,6 +384,22 @@ public class TelaStatus extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            if (isSelected) {
+
+                tela.setarStatus(status);
+                this.dispose();
+
+            } else {
+                throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -403,6 +440,7 @@ public class TelaStatus extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
