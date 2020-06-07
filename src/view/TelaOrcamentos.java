@@ -32,6 +32,8 @@ public class TelaOrcamentos extends javax.swing.JFrame {
     Imovel imovel = null;
     TipoPagamento tipoPagamento = null;
     OrcamentoController orcamentoController = null;
+    TelaContratos telaContratos = null;
+    private boolean isSelected = false;
 
     public TelaOrcamentos() {
         try {
@@ -40,6 +42,19 @@ public class TelaOrcamentos extends javax.swing.JFrame {
             iniciar();
             popularJtable();
             OrdenaClickTabela.ordenarPorClick(jTableTabela, orcamentoController, modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        }
+    }
+    
+    public TelaOrcamentos(TelaContratos telaContratos) {
+        try {
+            criarJTable();
+            initComponents();
+            iniciar();
+            popularJtable();
+            OrdenaClickTabela.ordenarPorClick(jTableTabela, orcamentoController, modelo);
+            this.telaContratos = telaContratos;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
@@ -71,6 +86,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         jTextFieldId.setEnabled(false);
         jButtonAtivar.setEnabled(false);
         jButtonDesativar.setEnabled(false);
+        jButtonSelecionar.setVisible(false);
 
         jTextFieldId.setText("0");
 
@@ -187,6 +203,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jTextFieldTipoPagamento = new javax.swing.JTextField();
         jButtonSelecionarTipoPagamento = new javax.swing.JButton();
+        jButtonSelecionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -290,6 +307,14 @@ public class TelaOrcamentos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonSelecionarTipoPagamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 500, 130, 40));
+
+        jButtonSelecionar.setText("Selecionar");
+        jButtonSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelecionarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonSelecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 90, 180, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -458,6 +483,8 @@ public class TelaOrcamentos extends javax.swing.JFrame {
             } else {
                 jButtonAtivar.setEnabled(true);
             }
+            
+            isSelected = true;
 
         } catch (Exception ex) {
 
@@ -507,6 +534,21 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboAcaoActionPerformed
 
+    private void jButtonSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarActionPerformed
+        try {
+            if (isSelected) {
+                
+                telaContratos.setarOrcamento(orcamento);
+                this.dispose();
+
+            } else
+                throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+        } catch (Exception ex) {
+            
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonSelecionarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -547,6 +589,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAcao;
     private javax.swing.JButton jButtonAtivar;
     private javax.swing.JButton jButtonDesativar;
+    private javax.swing.JButton jButtonSelecionar;
     private javax.swing.JButton jButtonSelecionarCliente;
     private javax.swing.JButton jButtonSelecionarImovel;
     private javax.swing.JButton jButtonSelecionarTipoPagamento;
