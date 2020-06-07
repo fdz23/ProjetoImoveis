@@ -40,6 +40,7 @@ public class TelaClientes extends javax.swing.JFrame {
         iniciar();
         popularJtable();
         OrdenaClickTabela.ordenarPorClick(jTableTabela, pec, modelo);
+        jButtonUsar.setVisible(true);
     }
 
     public void popularJtable() throws ClassNotFoundException, Exception {
@@ -65,6 +66,7 @@ public class TelaClientes extends javax.swing.JFrame {
         jTextFieldNome.setEnabled(false);
         jFormattedTextFieldTelefone.setEnabled(false);
         jButton1.setEnabled(false);
+        jButtonUsar.setVisible(true);
         if (telaOrcamentos != null) {
             jButtonUsar.setEnabled(true);
         } else {

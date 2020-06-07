@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import util.Login;
 import util.OrdenaClickTabela;
 
 /**
@@ -27,7 +28,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     Orcamento orcamento = null;
     Pessoa pessoa = null;
-    Funcionario funcionario = null;
+    Funcionario funcionario = Login.funcionario;
     Imovel imovel = null;
     TipoPagamento tipoPagamento = null;
     OrcamentoController orcamentoController = null;
@@ -68,6 +69,8 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         jTextFieldImovel.setEnabled(false);
         jTextFieldTipoPagamento.setEnabled(false);
         jTextFieldId.setEnabled(false);
+        jButtonAtivar.setEnabled(false);
+        jButtonDesativar.setEnabled(false);
 
         jTextFieldId.setText("0");
 
