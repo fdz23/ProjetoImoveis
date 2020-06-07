@@ -189,7 +189,7 @@ public class TelaStatus extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, -1, 40));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -239,7 +239,6 @@ public class TelaStatus extends javax.swing.JFrame {
                     case 1:
 
                         sc.inserirItem(sa);
-                        tela.popularComboboxStatus();
 
                         JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso!");
 
@@ -256,7 +255,6 @@ public class TelaStatus extends javax.swing.JFrame {
                             sa = new Status(alterarIntem, descricao, 1);
 
                             sc.alterarItem(sa);
-                            tela.popularComboboxStatus();
 
                             popularJtable();
 

@@ -6,6 +6,7 @@
 package controller;
 
 import dao.NivelAcessoDao;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Iterator;
@@ -64,6 +65,10 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
 
         return model;
 
+    }
+    
+    public Array getArrayInt(Integer[] array) throws SQLException, ClassNotFoundException {
+        return new NivelAcessoDao().getArrayFromInt(array);
     }
 
 }

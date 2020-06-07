@@ -35,24 +35,9 @@
               <Component id="jLabelFuncionarioAtual" min="-2" pref="262" max="-2" attributes="0"/>
               <EmptySpace pref="430" max="32767" attributes="0"/>
           </Group>
-          <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jButtonTiposDePagamento" pref="152" max="32767" attributes="0"/>
-                          <Component id="jButtonOrcamentos" max="32767" attributes="0"/>
-                          <Component id="jButtonContratos" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButtonImoveis" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jButtonTiposDeImovel" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jButtonStatus" alignment="1" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jButtonTiposDeFuncionarios" alignment="1" max="32767" attributes="0"/>
@@ -65,7 +50,29 @@
                       <Component id="jButtonLogOff" min="-2" pref="117" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jButtonTiposDePagamento" pref="152" max="32767" attributes="0"/>
+                          <Component id="jButtonOrcamentos" max="32767" attributes="0"/>
+                          <Component id="jButtonContratos" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jButtonImoveisItens" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jButtonImoveis" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jButtonTiposDeImovel" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jButtonStatus" alignment="1" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
               </Group>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jSeparator2" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,8 +92,10 @@
               <Component id="jButtonTiposDeFuncionarios" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jButtonNiveisDeAcesso" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="108" max="32767" attributes="0"/>
+              <EmptySpace pref="72" max="32767" attributes="0"/>
               <Component id="jSeparator2" min="-2" pref="8" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+              <Component id="jButtonImoveisItens" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonImoveis" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -220,6 +229,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonContratosActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonImoveisItens">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Imoveis itens"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonImoveisItensActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
