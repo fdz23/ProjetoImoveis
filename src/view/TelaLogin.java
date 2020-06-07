@@ -98,6 +98,9 @@ public class TelaLogin extends javax.swing.JFrame {
             
 
             new FuncionarioController().login(email, senha);
+            
+            this.dispose();
+            new TelaMenu().setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
             e.printStackTrace();

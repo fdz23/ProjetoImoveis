@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import model.Funcionario;
 import model.Usuario;
 import util.CriaStatement;
+import util.GeradorPasswords;
 
 /**
  *
@@ -120,13 +121,10 @@ public class UsuarioDao extends Dao<Usuario> {
         
         Usuario usuario = getByIDFun(funcionario.getId());
         
-        System.out.println(usuario.getSenha());
-        System.out.println(senha);
-        
         if (usuario == null)
             return false;
         else {
-            if (usuario.getSenha().equals(senha))
+            if (GeradorPasswords.verifyUserPassword(senha, usuario.getSenha(), "Pacoca"))
                 return true;
         }
         

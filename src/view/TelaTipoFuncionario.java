@@ -65,7 +65,8 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     public void popularCombox() throws ClassNotFoundException, Exception {
 
         jComboBox1.setModel(nac.popularCombox(modelo1));
-        JtextFielDescricaoNivelAcesso.setText(jComboBox1.getSelectedItem().toString());
+        if(jComboBox1.getItemCount() != 0)
+            JtextFielDescricaoNivelAcesso.setText(jComboBox1.getSelectedItem().toString());
 
     }
 

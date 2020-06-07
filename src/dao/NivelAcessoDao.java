@@ -5,6 +5,7 @@
  */
 package dao;
 
+import java.sql.Array;
 import model.fabricas.AbstractFactory;
 import model.interfaces.Tabela;
 import java.sql.PreparedStatement;
@@ -26,7 +27,7 @@ public class NivelAcessoDao extends Dao<NivelAcesso> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
-        campos = "nac_descricao,nac_ativado";
+        campos = "nac_descricao,nac_ativado,nac_nivel";
         vetorCampos = campos.split(",");
 
     }
@@ -75,6 +76,7 @@ public class NivelAcessoDao extends Dao<NivelAcesso> {
 
         ps.setString(1, item.getDescricao());
         ps.setInt(2, item.getAtivado());
+        ps.setArray(3, item.getNivel());
 
         return ps;
 
@@ -87,7 +89,8 @@ public class NivelAcessoDao extends Dao<NivelAcesso> {
 
         ps.setString(1, item.getDescricao());
         ps.setInt(2, item.getAtivado());
-        ps.setInt(3, item.getId());
+        ps.setArray(3, item.getNivel());
+        ps.setInt(4, item.getId());
 
         return ps;
 
@@ -101,13 +104,18 @@ public class NivelAcessoDao extends Dao<NivelAcesso> {
             return new NivelAcesso(
                     rs.getInt(id),
                     rs.getString(vetorCampos[0]),
-                    rs.getInt(vetorCampos[1])
+                    rs.getInt(vetorCampos[1]),
+                    rs.getArray(vetorCampos[2])
             );
 
         }
 
         return null;
 
+    }
+    
+    public Array getArrayFromInt(Integer[] array) throws SQLException {
+        return con.createArrayOf("integer", array);
     }
 
 }

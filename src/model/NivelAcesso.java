@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.sql.Array;
 import model.interfaces.Tabela;
 
 /**
@@ -16,6 +17,7 @@ public class NivelAcesso implements Tabela {
     private int id;
     private String descricao;
     private int ativado;
+    private Array nivel;
     private String nomeId = "nac_iden";
     private String nomeTabela = "nivel_acessos";
 
@@ -31,10 +33,11 @@ public class NivelAcesso implements Tabela {
     
     public NivelAcesso() {}
     
-    public NivelAcesso(int id, String descricao, int ativado) {
+    public NivelAcesso(int id, String descricao, int ativado, Array nivel) {
         this.id = id;
         this.descricao = descricao;
         this.ativado = ativado;
+        this.nivel = nivel;
     }
 
     public int getId() {
@@ -59,6 +62,14 @@ public class NivelAcesso implements Tabela {
 
     public void setAtivado(int ativado) {
         this.ativado = ativado;
+    }
+
+    public Array getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(Array nivel) {
+        this.nivel = nivel;
     }
     
 }
