@@ -37,14 +37,15 @@ public class ImovelController extends Controller<Imovel> {
             model.addRow(
                     new Object[]{
                         item.getId(),
-                        item.getDataInclusao(),
+                        item.getDescricao(),
                         item.getPreco(),
                         item.getTamanho(),
-                        item.getObservacao(),
                         item.getBaixaData(),
                         item.getBaixaMotivo(),
                         item.getQuantidadeParcelas(),
-                        item.getValorComissao()
+                        item.getValorComissao(),
+                        item.getPessoa().getNome(),
+                        item.getAtivado()
                     });
 
         }
