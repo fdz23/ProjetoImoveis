@@ -22,8 +22,19 @@ public class TelaClientes extends javax.swing.JFrame {
     PessoaDao pdao = null;
     TelaEnderecosSelect ted = null;
     Endereco ende = null;
+    TelaOrcamentos telaOrcamentos = null;
+    private boolean isSelected = false;
 
     public TelaClientes() throws ClassNotFoundException, Exception {
+        CriarJTable();
+        initComponents();
+        iniciar();
+        popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, pec, modelo);
+    }
+
+    public TelaClientes(TelaOrcamentos telaOrcamentos) throws ClassNotFoundException, Exception {
+        this.telaOrcamentos = telaOrcamentos;
         CriarJTable();
         initComponents();
         iniciar();
@@ -41,7 +52,6 @@ public class TelaClientes extends javax.swing.JFrame {
 
         pe = new Pessoa();
         pec = new PessoaController();
-        
 
         jComboAcao.removeAllItems();
         jComboAcao.addItem("Ações");
@@ -55,6 +65,11 @@ public class TelaClientes extends javax.swing.JFrame {
         jTextFieldNome.setEnabled(false);
         jFormattedTextFieldTelefone.setEnabled(false);
         jButton1.setEnabled(false);
+        if (telaOrcamentos != null) {
+            jButtonUsar.setEnabled(true);
+        } else {
+            jButtonUsar.setEnabled(false);
+        }
 
         jtextidacao.setText("0");
 
@@ -91,20 +106,16 @@ public class TelaClientes extends javax.swing.JFrame {
 
         if (obj.getNome().equals("")) {
             throw new Exception("O campo nome  não pode estar vazio");
-        }
-        else if (obj.getCpf().equals("")) {
+        } else if (obj.getCpf().equals("")) {
             throw new Exception("O campo CPF não pode estar vazio");
 
-        }
-       else if (obj.getEmail().equals("")) {
+        } else if (obj.getEmail().equals("")) {
 
             throw new Exception("O campo E-Mail não pode estar vazio");
-        }
-       else if (obj.getDataNascimento() == null) {
+        } else if (obj.getDataNascimento() == null) {
             throw new Exception("O campo data de nascimento não pode estar vazio");
-        }
-       else if (obj.getTelefone().equals("")) {
-             throw new Exception("O campo telefone  não pode estar vazio");
+        } else if (obj.getTelefone().equals("")) {
+            throw new Exception("O campo telefone  não pode estar vazio");
         }
 
         return false;
@@ -148,6 +159,7 @@ public class TelaClientes extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButtonUsar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -262,15 +274,29 @@ public class TelaClientes extends javax.swing.JFrame {
         });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 620, -1, -1));
 
+        jButtonUsar.setText("Usar");
+        jButtonUsar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUsarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonUsar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 170, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(35, 35, 35))
         );
 
         pack();
@@ -347,11 +373,16 @@ public class TelaClientes extends javax.swing.JFrame {
 
         try {
             linhaSelecionada = jTableTabela.getSelectedRow();
+            
+            pe = pec.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+            
             jtextidacao.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
             jTextFieldNome.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
             jTextFieldEmail.setText(jTableTabela.getValueAt(linhaSelecionada, 2).toString());
             jFormattedTextFieldCPF.setText(jTableTabela.getValueAt(linhaSelecionada, 4).toString());
             jFormattedTextFieldTelefone.setText(jTableTabela.getValueAt(linhaSelecionada, 5).toString());
+
+            isSelected = true;
 
         } catch (Exception ex) {
 
@@ -475,6 +506,21 @@ public class TelaClientes extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButtonUsarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsarActionPerformed
+        try {
+            if (isSelected) {
+                
+                telaOrcamentos.setarIDCliente(pe);
+                this.dispose();
+
+            } else
+                throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+        } catch (Exception ex) {
+            
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonUsarActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -517,6 +563,7 @@ public class TelaClientes extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonUsar;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPF;

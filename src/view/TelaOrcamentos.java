@@ -302,10 +302,11 @@ public class TelaOrcamentos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(34, 34, 34))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSelecionarTipoPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarTipoPagamentoActionPerformed
@@ -328,7 +329,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
 
     private void jButtonSelecionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarClienteActionPerformed
         try {
-            //new TelaCliente(this).setVisible(true);
+            new TelaClientes(this).setVisible(true);
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(rootPane, "Erro ao selecionar cliente");
