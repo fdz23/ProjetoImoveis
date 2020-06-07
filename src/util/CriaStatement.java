@@ -60,12 +60,12 @@ public class CriaStatement {
         return con.prepareStatement(sql);
     }
     
-    public PreparedStatement selectSqlPessoaClienteIdFunc(String coluna) throws Exception {
+    public PreparedStatement selectSqlPessoaClienteEmail() throws Exception {
         
         String sql = "SELECT * FROM pessoas"
                    + " WHERE pes_ativado = 1"
                    + " AND pes_cliente = 0"
-                   + " AND pes_iden = ?";
+                   + " AND pes_email = ?";
         
         return con.prepareStatement(sql);
     }
