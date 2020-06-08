@@ -3,13 +3,19 @@ package view;
 import controller.PessoaController;
 import dao.PessoaDao;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Endereco;
+import model.Imovel;
 import model.Pessoa;
+import model.TipoImovel;
 import util.OrdenaClickTabela;
 import util.Validacao;
 
@@ -23,6 +29,7 @@ public class TelaClientes extends javax.swing.JFrame {
     TelaEnderecosSelect ted = null;
     Endereco ende = null;
     TelaOrcamentos telaOrcamentos = null;
+    TelaImoveis telaImoveis = null;
     private boolean isSelected = false;
 
     public TelaClientes() throws ClassNotFoundException, Exception {
@@ -40,7 +47,17 @@ public class TelaClientes extends javax.swing.JFrame {
         iniciar();
         popularJtable();
         OrdenaClickTabela.ordenarPorClick(jTableTabela, pec, modelo);
-        jButtonUsar.setVisible(true);
+        jButtonUsarContrato.setVisible(true);
+    }
+    
+    public TelaClientes(TelaImoveis telaImoveis) throws ClassNotFoundException, Exception {
+        this.telaImoveis = telaImoveis;
+        CriarJTable();
+        initComponents();
+        iniciar();
+        popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, pec, modelo);
+        jButtonUsarImovel.setVisible(true);
     }
 
     public void popularJtable() throws ClassNotFoundException, Exception {
@@ -66,12 +83,13 @@ public class TelaClientes extends javax.swing.JFrame {
         jTextFieldNome.setEnabled(false);
         jFormattedTextFieldTelefone.setEnabled(false);
         jButton1.setEnabled(false);
-        jButtonUsar.setVisible(true);
+        jButtonUsarContrato.setVisible(true);
         if (telaOrcamentos != null) {
-            jButtonUsar.setEnabled(true);
+            jButtonUsarContrato.setEnabled(true);
         } else {
-            jButtonUsar.setEnabled(false);
+            jButtonUsarContrato.setEnabled(false);
         }
+        jButtonUsarImovel.setVisible(false);
 
         jtextidacao.setText("0");
 
@@ -161,7 +179,8 @@ public class TelaClientes extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButtonUsar = new javax.swing.JButton();
+        jButtonUsarContrato = new javax.swing.JButton();
+        jButtonUsarImovel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -276,13 +295,21 @@ public class TelaClientes extends javax.swing.JFrame {
         });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 620, -1, -1));
 
-        jButtonUsar.setText("Usar");
-        jButtonUsar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonUsarContrato.setText("Usar");
+        jButtonUsarContrato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonUsarActionPerformed(evt);
+                jButtonUsarContratoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonUsar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 170, 40));
+        jPanel1.add(jButtonUsarContrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 170, 40));
+
+        jButtonUsarImovel.setText("Usar");
+        jButtonUsarImovel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUsarImovelActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonUsarImovel, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 170, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -383,7 +410,7 @@ public class TelaClientes extends javax.swing.JFrame {
             jTextFieldEmail.setText(jTableTabela.getValueAt(linhaSelecionada, 2).toString());
             jFormattedTextFieldCPF.setText(jTableTabela.getValueAt(linhaSelecionada, 4).toString());
             jFormattedTextFieldTelefone.setText(jTableTabela.getValueAt(linhaSelecionada, 5).toString());
-
+            
             isSelected = true;
 
         } catch (Exception ex) {
@@ -399,6 +426,12 @@ public class TelaClientes extends javax.swing.JFrame {
 
             int action = jComboAcao.getSelectedIndex();
             int idacao1 = Integer.parseInt(jtextidacao.getText());
+            Locale myLocale = new Locale("pt", "BR");
+            DateFormat format = new SimpleDateFormat("dd/MM/yyyy", myLocale);
+            format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+
+            java.util.Date date = format.parse(jFormattedTextField1.getText());
+            java.sql.Date dataNascimento = new java.sql.Date(date.getTime());
 
             if (Validacao.validarCPF(jFormattedTextFieldCPF.getText())) {
 
@@ -419,7 +452,7 @@ public class TelaClientes extends javax.swing.JFrame {
 
                         case 1:
 
-                            pe = new Pessoa(idacao1, nome, email, null, cpf, telefone, ende, 1, 1);
+                            pe = new Pessoa(idacao1, nome, email, dataNascimento, cpf, telefone, ende, 1, 1);
 
                             pec.inserirItem(pe);
 
@@ -430,9 +463,9 @@ public class TelaClientes extends javax.swing.JFrame {
 
                         case 2:
 
-                            if (!verificarId(idacao1)) {
+                            if (!verificarId(idacao1) && isSelected) {
 
-                                pe = new Pessoa(idacao1, nome, email, null, cpf, telefone, ende, 1, 1);
+                                pe = new Pessoa(idacao1, nome, email, dataNascimento, cpf, telefone, ende, 1, 1);
 
                                 pec.alterarItem(pe);
 
@@ -508,7 +541,7 @@ public class TelaClientes extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButtonUsarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsarActionPerformed
+    private void jButtonUsarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsarContratoActionPerformed
         try {
             if (isSelected) {
                 
@@ -521,7 +554,22 @@ public class TelaClientes extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-    }//GEN-LAST:event_jButtonUsarActionPerformed
+    }//GEN-LAST:event_jButtonUsarContratoActionPerformed
+
+    private void jButtonUsarImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsarImovelActionPerformed
+        try {
+            if (isSelected) {
+                
+                telaImoveis.setarCliente(pe);
+                this.dispose();
+
+            } else
+                throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+        } catch (Exception ex) {
+            
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonUsarImovelActionPerformed
 
     public static void main(String args[]) {
 
@@ -565,7 +613,8 @@ public class TelaClientes extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButtonUsar;
+    private javax.swing.JButton jButtonUsarContrato;
+    private javax.swing.JButton jButtonUsarImovel;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPF;

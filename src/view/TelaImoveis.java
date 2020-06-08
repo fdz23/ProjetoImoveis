@@ -75,6 +75,20 @@ public class TelaImoveis extends javax.swing.JFrame {
         
     }
     
+    public void setarTipoImovel(TipoImovel tipoImovel) {
+        
+        tp = tipoImovel;
+        jTextFieldTipoImovel.setText(tp.getDescricao());
+        
+    }
+    
+    public void setarCliente(Pessoa pessoa) {
+        
+        pe = pessoa;
+        jTextFieldTipoImovel.setText(pe.getNome());
+        
+    }
+    
     public void iniciar() throws ClassNotFoundException {
         
         try {
@@ -231,7 +245,7 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jButtonEndActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 560, 130, 30));
+        jPanel1.add(jButtonEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 560, 130, 30));
         jPanel1.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 250, -1));
         jPanel1.add(Jtextidacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 710, 40, -1));
 
@@ -309,6 +323,11 @@ public class TelaImoveis extends javax.swing.JFrame {
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 70, -1));
 
         jButtonTP.setText("Selecionar");
+        jButtonTP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTPActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButtonTP, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 620, 130, -1));
         jPanel1.add(jTextFieldTipoImovel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, 200, -1));
 
@@ -317,6 +336,11 @@ public class TelaImoveis extends javax.swing.JFrame {
         jPanel1.add(jTextFieldProprietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 680, 200, -1));
 
         jButtonProp.setText("Selecionar");
+        jButtonProp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPropActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButtonProp, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 680, 130, -1));
 
         jLabel5.setText("Tamanho");
@@ -438,13 +462,15 @@ public class TelaImoveis extends javax.swing.JFrame {
             int action = jComboAcao.getSelectedIndex();
             String nome = jTextFieldNome.getText();
             Date data = new Date(System.currentTimeMillis());
+            java.sql.Date dataSql = new java.sql.Date(data.getTime());
             double preco = Double.parseDouble(jTextFieldPreco.getText());
             double tamanho = Double.parseDouble(jTextFieldTamanho.getText());
             String observacao = jTextFieldObservacao.getText();
             int qtdParcelas = Integer.parseInt(jTextFieldParcelas.getText());
             Double comissao = Double.parseDouble(jTextFieldComissao.getText());
 
-            //  im = new Imovel(0, null, preco, tamanho, observacao, null, "Nenhuma", qtdParcelas, comissao, fun, pe, tp, end, 1,nome);
+            im = new Imovel(0, dataSql, preco, tamanho, observacao, dataSql, "Nenhuma", qtdParcelas, comissao, fun, pe, tp, end, 1, nome);
+            
             if (!verificarVazio(im)) {
                 
                 switch (action) {
@@ -465,10 +491,10 @@ public class TelaImoveis extends javax.swing.JFrame {
                         break;
                     
                     case 2:
+
+                        im = new Imovel(im.getId(), dataSql, preco, tamanho, observacao, dataSql, "Nenhuma", qtdParcelas, comissao, fun, pe, tp, end, 1, nome);
                         
-                        int idAlterar = Integer.parseInt(Jtextidacao.getText());
-                        
-                        if (verificarId(idAlterar)) {
+                        if (!verificarId(im.getId()) && isSelected) {
                             
                             ic.alterarItem(im);
                             popularJtable();
@@ -561,6 +587,26 @@ public class TelaImoveis extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jButtonUsarActionPerformed
+
+    private void jButtonTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTPActionPerformed
+        
+        try {
+            new TelaTipoImoveis(this).setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(TelaImoveis.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButtonTPActionPerformed
+
+    private void jButtonPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPropActionPerformed
+        
+        try {
+            new TelaClientes(this).setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(TelaImoveis.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButtonPropActionPerformed
     
     public static void main(String args[]) {
 

@@ -14,12 +14,23 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
     TipoImovelController tic = null;
     DefaultTableModel modelo = new DefaultTableModel();
     TipoImovel tp = null;
+    private boolean isSelected = false;
+    TelaImoveis telaImoveis = null;
     
     public TelaTipoImoveis() throws Exception {
         CriarJTable();
         initComponents();
         iniciar();
         popularJtable();
+    }
+    
+    public TelaTipoImoveis(TelaImoveis telaImoveis) throws Exception {
+        CriarJTable();
+        initComponents();
+        iniciar();
+        popularJtable();
+        this.telaImoveis = telaImoveis;
+        jButtonUtilizar.setVisible(true);
     }
     
     public void iniciar() throws ClassNotFoundException, Exception {
@@ -35,6 +46,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         jButton1.setEnabled(false);
         jTextField2.setEnabled(false);
         jTextFieldId.setEnabled(false);
+        jButtonUtilizar.setVisible(false);
         
         jTextFieldId.setText("0");
         
@@ -94,7 +106,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         jTableTabela = new javax.swing.JTable();
         jButtonAtivar = new javax.swing.JButton();
         jButtonDesativar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtonUtilizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -167,8 +179,13 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, 100, 40));
 
-        jButton4.setText("Utilizar");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 180, 110, 40));
+        jButtonUtilizar.setText("Utilizar");
+        jButtonUtilizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUtilizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonUtilizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 180, 140, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -288,8 +305,10 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         try {
             
             tp = tic.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
-            jTextFieldId.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
-            JtextFielDescricao.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
+            jTextFieldId.setText(tp.getId() + "");
+            JtextFielDescricao.setText(tp.getDescricao());
+            
+            isSelected = true;
             
             if (tp.getAtivado() == 0) {
                 
@@ -350,6 +369,21 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         
 
     }//GEN-LAST:event_jButtonDesativarActionPerformed
+
+    private void jButtonUtilizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUtilizarActionPerformed
+        try {
+            if (isSelected) {
+
+                telaImoveis.setarTipoImovel(tp);
+                this.dispose();
+
+            } else
+            throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonUtilizarActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -390,9 +424,9 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JtextFielDescricao;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonAtivar;
     private javax.swing.JButton jButtonDesativar;
+    private javax.swing.JButton jButtonUtilizar;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
