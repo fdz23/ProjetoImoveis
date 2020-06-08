@@ -21,17 +21,16 @@ import util.Validacao;
 
 public class TelaClientes extends javax.swing.JFrame {
 
-    int linhaSelecionada = 0;
-    DefaultTableModel modelo = new DefaultTableModel();
-    Pessoa pe = null;
-    PessoaController pec = null;
-    PessoaDao pdao = null;
-    TelaEnderecosSelect ted = null;
-    Endereco ende = null;
-    TelaOrcamentos telaOrcamentos = null;
-    TelaImoveis telaImoveis = null;
+    private int linhaSelecionada = 0;
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private Pessoa pe = null;
+    private PessoaController pec = null;
+    private PessoaDao pdao = null;
+    private TelaEnderecosSelect ted = null;
+    private Endereco ende = null;
+    private TelaOrcamentos telaOrcamentos = null;
     private boolean isSelected = false;
-
+    
     public TelaClientes() throws ClassNotFoundException, Exception {
         CriarJTable();
         initComponents();
@@ -39,7 +38,7 @@ public class TelaClientes extends javax.swing.JFrame {
         popularJtable();
         OrdenaClickTabela.ordenarPorClick(jTableTabela, pec, modelo);
     }
-
+    
     public TelaClientes(TelaOrcamentos telaOrcamentos) throws ClassNotFoundException, Exception {
         this.telaOrcamentos = telaOrcamentos;
         CriarJTable();
@@ -59,23 +58,23 @@ public class TelaClientes extends javax.swing.JFrame {
         OrdenaClickTabela.ordenarPorClick(jTableTabela, pec, modelo);
         jButtonUsarImovel.setVisible(true);
     }
-
+    
     public void popularJtable() throws ClassNotFoundException, Exception {
-
+        
         jTableTabela.setModel(pec.populaJTable(modelo, 0));
-
+        
     }
-
+    
     public void iniciar() throws ClassNotFoundException, SQLException {
-
+        
         pe = new Pessoa();
         pec = new PessoaController();
-
+        
         jComboAcao.removeAllItems();
         jComboAcao.addItem("Ações");
         jComboAcao.addItem("Cadastrar");
         jComboAcao.addItem("Alterar");
-
+        
         jFormattedTextField1.setEnabled(false);
         jTextFieldEmail.setEnabled(false);
         jTextFieldEndereco.setEnabled(false);
@@ -92,56 +91,56 @@ public class TelaClientes extends javax.swing.JFrame {
         jButtonUsarImovel.setVisible(false);
 
         jtextidacao.setText("0");
-
+        
     }
-
+    
     public void setarIDEnd(Endereco end) {
-
+        
         try {
-
+            
             jTextFieldEndereco.setText("" + end.getId());
-
+            
             this.ende = end;
-
+            
         } catch (Exception ex) {
-
+            
             ex.printStackTrace();
         }
-
+        
     }
-
+    
     public boolean verificarId(int id) throws Exception {
-
+        
         if (id == 0) {
-
+            
             throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
-
+            
         }
-
+        
         return false;
-
+        
     }
-
+    
     public boolean verificarVazio(Pessoa obj) throws Exception {
-
+        
         if (obj.getNome().equals("")) {
             throw new Exception("O campo nome  não pode estar vazio");
         } else if (obj.getCpf().equals("")) {
             throw new Exception("O campo CPF não pode estar vazio");
-
+            
         } else if (obj.getEmail().equals("")) {
-
+            
             throw new Exception("O campo E-Mail não pode estar vazio");
         } else if (obj.getDataNascimento() == null) {
             throw new Exception("O campo data de nascimento não pode estar vazio");
         } else if (obj.getTelefone().equals("")) {
             throw new Exception("O campo telefone  não pode estar vazio");
         }
-
+        
         return false;
-
+        
     }
-
+    
     public void CriarJTable() {
         jTableTabela = new JTable(modelo);
         modelo.addColumn("Código");
@@ -151,7 +150,7 @@ public class TelaClientes extends javax.swing.JFrame {
         modelo.addColumn("CPF");
         modelo.addColumn("Telefone");
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -333,13 +332,13 @@ public class TelaClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboAcaoActionPerformed
-
+        
         int indexCombo = jComboAcao.getSelectedIndex();
-
+        
         switch (indexCombo) {
-
+            
             case 0:
-
+                
                 jFormattedTextField1.setEnabled(false);
                 jTextFieldEmail.setEnabled(false);
                 jTextFieldEndereco.setEnabled(false);
@@ -347,11 +346,11 @@ public class TelaClientes extends javax.swing.JFrame {
                 jTextFieldNome.setEnabled(false);
                 jFormattedTextFieldTelefone.setEnabled(false);
                 jButton1.setEnabled(false);
-
+                
                 break;
-
+            
             case 1:
-
+                
                 jFormattedTextField1.setEnabled(true);
                 jTextFieldEmail.setEnabled(true);
                 jTextFieldEndereco.setEnabled(false);
@@ -359,11 +358,12 @@ public class TelaClientes extends javax.swing.JFrame {
                 jTextFieldNome.setEnabled(true);
                 jFormattedTextFieldTelefone.setEnabled(true);
                 jButton1.setEnabled(true);
-
+                jButton2.setEnabled(true);
+                
                 break;
-
+            
             case 2:
-
+                
                 jFormattedTextField1.setEnabled(true);
                 jTextFieldEmail.setEnabled(true);
                 jTextFieldEndereco.setEnabled(false);
@@ -371,9 +371,10 @@ public class TelaClientes extends javax.swing.JFrame {
                 jTextFieldNome.setEnabled(true);
                 jFormattedTextFieldTelefone.setEnabled(true);
                 jButton1.setEnabled(true);
-
+                jButton2.setEnabled(true);
+                
                 break;
-
+            
             default:
 
                 // JOptionPane.showMessageDialog(null, "Nenhuma ação foi selecionada.");
@@ -383,49 +384,59 @@ public class TelaClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboAcaoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
         try {
-
+            
             ted = new TelaEnderecosSelect(this);
-
+            
             ted.setVisible(true);
-
+            
         } catch (Exception ex) {
-
+            
             System.out.println(ex.getMessage());
-
+            
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
-
+        
         try {
             linhaSelecionada = jTableTabela.getSelectedRow();
             
             pe = pec.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
             
-            jtextidacao.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
-            jTextFieldNome.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
-            jTextFieldEmail.setText(jTableTabela.getValueAt(linhaSelecionada, 2).toString());
-            jFormattedTextFieldCPF.setText(jTableTabela.getValueAt(linhaSelecionada, 4).toString());
-            jFormattedTextFieldTelefone.setText(jTableTabela.getValueAt(linhaSelecionada, 5).toString());
+            jtextidacao.setText("" + pe.getId());
+            jTextFieldNome.setText(pe.getNome());
+            jTextFieldEmail.setText(pe.getEmail());
+            jFormattedTextFieldCPF.setText(pe.getCpf());
+            jFormattedTextFieldTelefone.setText(pe.getTelefone());
             
             isSelected = true;
-
+            
+            if (pe.getAtivado() == 1) {
+                
+                jButton3.setEnabled(false);
+            } else {
+                jButton4.setEnabled(true);
+                jButton3.setEnabled(false);
+            }
+          
+            
         } catch (Exception ex) {
-
+            
             ex.printStackTrace();
         }
 
     }//GEN-LAST:event_jTableTabelaMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        
         try {
-
+            
             int action = jComboAcao.getSelectedIndex();
             int idacao1 = Integer.parseInt(jtextidacao.getText());
+          
             Locale myLocale = new Locale("pt", "BR");
             DateFormat format = new SimpleDateFormat("dd/MM/yyyy", myLocale);
             format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
@@ -433,34 +444,36 @@ public class TelaClientes extends javax.swing.JFrame {
             java.util.Date date = format.parse(jFormattedTextField1.getText());
             java.sql.Date dataNascimento = new java.sql.Date(date.getTime());
 
+
             if (Validacao.validarCPF(jFormattedTextFieldCPF.getText())) {
-
+                
                 if (Validacao.validarEmail(jTextFieldEmail.getText())) {
-
+                    
                     String nome = jTextFieldNome.getText();
                     String email = jTextFieldEmail.getText();
                     String telefone = jFormattedTextFieldTelefone.getText();
                     String cpf = jFormattedTextFieldCPF.getText();
-
+                    
                     switch (action) {
-
+                        
                         case 0:
-
+                            
                             iniciar();
-
+                            
                             break;
-
+                        
                         case 1:
 
                             pe = new Pessoa(idacao1, nome, email, dataNascimento, cpf, telefone, ende, 1, 1);
 
-                            pec.inserirItem(pe);
 
+                            pec.inserirItem(pe);
+                            
                             JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
                             popularJtable();
-
+                            
                             break;
-
+                        
                         case 2:
 
                             if (!verificarId(idacao1) && isSelected) {
@@ -468,76 +481,76 @@ public class TelaClientes extends javax.swing.JFrame {
                                 pe = new Pessoa(idacao1, nome, email, dataNascimento, cpf, telefone, ende, 1, 1);
 
                                 pec.alterarItem(pe);
-
+                                
                                 popularJtable();
                                 JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso!");
                             } else {
-
+                                
                                 JOptionPane.showMessageDialog(null, "Selecione uma linha da tabela!");
                             }
                             break;
-
+                        
                         default:
-
+                            
                             break;
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Digite um E-mail Válido");
                 }
             } else {
-
+                
                 JOptionPane.showMessageDialog(null, "Digite um CPF Válido");
-
+                
             }
-
+            
         } catch (Exception ex) {
-
+            
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-
+        
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
+        
         try {
             int id = Integer.parseInt(jtextidacao.getText());
-
+            
             if (!verificarId(id)) {
-
+                
                 pec.ativarItem(id);
                 popularJtable();
-
+                
                 JOptionPane.showMessageDialog(null, "Produto ativado com sucesso!");
-
+                
             }
         } catch (Exception ex) {
-
+            
             JOptionPane.showMessageDialog(null, ex.getMessage());
-
+            
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
+        
         try {
             int id = Integer.parseInt(jtextidacao.getText());
-
+            
             if (!verificarId(id)) {
-
+                
                 pec.desativarItem(id);
                 popularJtable();
-
+                
                 JOptionPane.showMessageDialog(null, "Produto desativado com sucesso!");
-
+                
             }
         } catch (Exception ex) {
-
+            
             JOptionPane.showMessageDialog(null, ex.getMessage());
-
+            
         }
-
+        
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -547,9 +560,10 @@ public class TelaClientes extends javax.swing.JFrame {
                 
                 telaOrcamentos.setarIDCliente(pe);
                 this.dispose();
-
-            } else
+                
+            } else {
                 throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+            }
         } catch (Exception ex) {
             
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -570,6 +584,7 @@ public class TelaClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jButtonUsarImovelActionPerformed
+
 
     public static void main(String args[]) {
 
