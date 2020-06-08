@@ -67,4 +67,10 @@ public class FuncionarioController extends Controller<Funcionario> {
         
         
     }
+    
+    public Funcionario getItemByEmail(String email) throws Exception {
+        
+        return new FuncionarioDao().verificaEmail(email);
+        
+    }
 }

@@ -28,7 +28,7 @@ public class UsuarioDao extends Dao<Usuario> {
         id = obj.getNomeId();
         tabela = obj.getNomeTabela();
         criaStatement = new CriaStatement(con, tabela, id);
-        campos = "usu_senha,usu_fun_iden,usu_ativado";
+        campos = "usu_fun_iden,usu_senha,usu_ativado";
         vetorCampos = campos.split(",");
 
     }
@@ -77,8 +77,8 @@ public class UsuarioDao extends Dao<Usuario> {
 
         ps = criaStatement.insertSql(tabela, campos);
 
-        ps.setString(1, item.getSenha());
-        ps.setInt(2, item.getFuncionario().getId());
+        ps.setInt(1, item.getFuncionario().getId());
+        ps.setString(2, item.getSenha());
         ps.setInt(3, item.getAtivado());
 
         return ps;
@@ -90,8 +90,8 @@ public class UsuarioDao extends Dao<Usuario> {
 
         ps = criaStatement.updateSql(campos);
 
-        ps.setString(1, item.getSenha());
-        ps.setInt(2, item.getFuncionario().getId());
+        ps.setInt(1, item.getFuncionario().getId());
+        ps.setString(2, item.getSenha());
         ps.setInt(3, item.getAtivado());
         ps.setInt(4, item.getId());
 
@@ -106,8 +106,8 @@ public class UsuarioDao extends Dao<Usuario> {
 
             return new Usuario(
                     rs.getInt(id),
-                    rs.getString(vetorCampos[0]),
-                    funcionarioDao.getByID(rs.getInt(vetorCampos[1])),
+                    funcionarioDao.getByID(rs.getInt(vetorCampos[0])),
+                    rs.getString(vetorCampos[1]),
                     rs.getInt(vetorCampos[2])
             );
 

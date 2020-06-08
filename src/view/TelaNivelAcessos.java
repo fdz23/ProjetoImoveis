@@ -292,6 +292,10 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
             int action = jComboAcao.getSelectedIndex();
             Integer[] niveis = new Integer[12];
+            
+            for (int i = 0; i < niveis.length; i++) {
+                niveis[i] = 0;
+            }
 
             if (jCheckBoxClientes.isSelected()) {
                 niveis[0] = 1;
@@ -358,7 +362,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
                     case 2:
 
                         int alterarIntem = Integer.parseInt(jTextFieldId.getText());
-                        if (verificarId(action)) {
+                        if (!verificarId(action)) {
 
                             na = new NivelAcesso(alterarIntem, descricao, 1, niveisArray);
 

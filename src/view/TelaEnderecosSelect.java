@@ -72,7 +72,7 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         JtextFielReferencia.setEnabled(false);
         JtextFielCep.setEnabled(false);
 
-        jButton1.setEnabled(true);
+        jButtonFuncionario.setEnabled(true);
 
     }
 
@@ -90,7 +90,7 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         jTableTabela = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonFuncionario = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         JtextFielCep = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -110,6 +110,7 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         JtextFielReferencia = new javax.swing.JTextField();
         jTextFieldID = new javax.swing.JTextField();
+        jButtonCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -139,13 +140,13 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, -1, -1));
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 170, -1));
 
-        jButton1.setText("Usar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFuncionario.setText("Usar");
+        jButtonFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonFuncionarioActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 200, 170, 40));
+        jPanel1.add(jButtonFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 200, 170, 40));
 
         jLabel2.setText("CEP : ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 50, -1));
@@ -190,6 +191,14 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         jPanel1.add(JtextFielReferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 720, 180, -1));
         jPanel1.add(jTextFieldID, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 140, -1));
 
+        jButtonCliente.setText("Usar");
+        jButtonCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClienteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 200, 170, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,7 +218,7 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
 
     }//GEN-LAST:event_JtextFielCepKeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFuncionarioActionPerformed
 
         int id = Integer.parseInt(jTextFieldID.getText());
         String cep = JtextFielCep.getText();
@@ -239,7 +248,7 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         this.dispose();
 
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonFuncionarioActionPerformed
 
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
 
@@ -259,6 +268,10 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jTableTabelaMouseClicked
+
+    private void jButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonClienteActionPerformed
 
     public static void main(String args[]) {
 
@@ -304,7 +317,8 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
     private javax.swing.JTextField JtextFielNumero;
     private javax.swing.JTextField JtextFielReferencia;
     private javax.swing.JTextField JtextFieldEstado;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonCliente;
+    private javax.swing.JButton jButtonFuncionario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

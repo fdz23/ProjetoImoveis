@@ -22,6 +22,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
     private int linhaSelecionada = 0;
     private int telaAtiva = 0;
     private boolean isSelected = false;
+    private TelaClientes telaClientes = null;
 
     public TelaEnderecos() throws Exception {
         CriarJTable();
@@ -42,6 +43,19 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jButtonUtilizarFunc.setVisible(true);
 
     }
+    
+    public TelaEnderecos(TelaClientes telaClientes) throws Exception {
+
+        CriarJTable();
+        initComponents();
+        iniciar();
+        popularJtable();
+        this.tf = tf;
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, ec, modelo);
+        jButtonUtilizarClientes.setVisible(true);
+        this.telaClientes = telaClientes;
+
+    }
 
     public TelaEnderecos(TelaImoveis telaI, int telaAtiva) throws Exception {
 
@@ -51,6 +65,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         this.telaI = telaI;
         iniciar();
         popularJtable();
+        jButtonUtilizar.setVisible(true);
 
     }
 
@@ -91,6 +106,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jButtonDesativar = new javax.swing.JButton();
         jButtonUtilizar = new javax.swing.JButton();
         jButtonUtilizarFunc = new javax.swing.JButton();
+        jButtonUtilizarClientes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -225,6 +241,14 @@ public class TelaEnderecos extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonUtilizarFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 140, 180, 70));
 
+        jButtonUtilizarClientes.setText("Utilizar");
+        jButtonUtilizarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUtilizarClientesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonUtilizarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 140, 180, 70));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -283,6 +307,8 @@ public class TelaEnderecos extends javax.swing.JFrame {
     public void iniciar() throws ClassNotFoundException, Exception {
 
         jButtonUtilizarFunc.setVisible(false);
+        jButtonUtilizar.setVisible(false);
+        jButtonUtilizarClientes.setVisible(false);
 
         if (telaAtiva == 1) {
             cep = new ViaCEP();
@@ -306,7 +332,6 @@ public class TelaEnderecos extends javax.swing.JFrame {
             JtextFielCep.setEnabled(false);
             jButtonBuscarCep.setEnabled(false);
             jButton1.setEnabled(false);
-            jButtonUtilizar.setEnabled(true);
             jButtonAtivado.setEnabled(false);
             jButtonDesativar.setEnabled(false);
 
@@ -333,7 +358,6 @@ public class TelaEnderecos extends javax.swing.JFrame {
             JtextFielCep.setEnabled(false);
             jButtonBuscarCep.setEnabled(false);
             jButton1.setEnabled(false);
-            jButtonUtilizar.setVisible(false);
 
         }
     }
@@ -448,7 +472,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
                         int alterarIntem = Integer.parseInt(jTextFieldId.getText());
 
-                        if (verificarId(alterarIntem)) {
+                        if (!verificarId(alterarIntem)) {
                             end = new Endereco(alterarIntem, ibge, logradouro, bairro, cidade, estado, complemento, numero, referencia, cep, 1);
                         }
 
@@ -643,6 +667,22 @@ public class TelaEnderecos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonUtilizarFuncActionPerformed
 
+    private void jButtonUtilizarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUtilizarClientesActionPerformed
+        try {
+            if (isSelected) {
+
+                telaClientes.setarIDEnd(end);
+                this.dispose();
+
+            }
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+    }//GEN-LAST:event_jButtonUtilizarClientesActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -692,6 +732,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonBuscarCep;
     private javax.swing.JButton jButtonDesativar;
     private javax.swing.JButton jButtonUtilizar;
+    private javax.swing.JButton jButtonUtilizarClientes;
     private javax.swing.JButton jButtonUtilizarFunc;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;

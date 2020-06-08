@@ -42,6 +42,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         popularJtable();
         OrdenaClickTabela.ordenarPorClick(jTableTabela, tfc, modelo);
         this.telaFuncionarios = tela;
+        jButtonUtilizar.setVisible(true);
 
     }
 
@@ -111,7 +112,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         JtextFielDescricaoSalario.setEnabled(false);
         JtextFielDescricaoNivelAcesso.setEnabled(false);
         jTextFieldPesquisa.setEnabled(false);
-        jButtonUtilizar.setEnabled(false);
+        jButtonUtilizar.setVisible(false);
         jButtonAtivar.setEnabled(false);
         jButtonDesativar.setEnabled(false);
         jButtonNivelAcesso.setEnabled(false);
@@ -364,10 +365,13 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
                         int alterarIntem = Integer.parseInt(jTextFieldId.getText());
 
-                        if (verificarId(alterarIntem)) {
-
-                            tip = new TipoFuncionario(alterarIntem, descricao, na, salario, 1);
-                            tfc.alterarItem(tip);
+                        if (!verificarId(alterarIntem)) {
+                            
+                            tipoFuncionario.setDescricao(descricao);
+                            tipoFuncionario.setSalario(salario);
+                            tipoFuncionario.setNivelAcesso(na);
+                            
+                            tfc.alterarItem(tipoFuncionario);
                             popularJtable();
 
                             JOptionPane.showMessageDialog(null, "Tipo Funcionario alterado com sucesso!");
@@ -384,8 +388,8 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
         } catch (Exception ex) {
 
-            JOptionPane.showMessageDialog(null, "Erro ao realizar ação.");
-            System.out.println(ex.getStackTrace());
+            JOptionPane.showMessageDialog(null, "Erro ao realizar ação : " + ex.getMessage());
+            ex.getStackTrace();
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

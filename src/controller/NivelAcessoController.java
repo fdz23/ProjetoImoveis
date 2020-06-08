@@ -48,24 +48,6 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
         return model;
 
     }
-
-    public DefaultComboBoxModel popularCombox(DefaultComboBoxModel model) throws Exception {
-
-        Iterator<NivelAcesso> lista = dao.getAll();
-
-        model.removeAllElements();
-
-        while (lista.hasNext()) {
-
-            NivelAcesso item = lista.next();
-
-            model.addElement(item.getId() + "-" + item.getDescricao());
-
-        }
-
-        return model;
-
-    }
     
     public Array getArrayInt(Integer[] array) throws SQLException, ClassNotFoundException {
         return new NivelAcessoDao().getArrayFromInt(array);

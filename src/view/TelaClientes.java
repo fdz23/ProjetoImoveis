@@ -77,23 +77,17 @@ public class TelaClientes extends javax.swing.JFrame {
         jComboAcao.addItem("Alterar");
         
         jFormattedTextField1.setEnabled(false);
+        jButtonUsarContrato.setVisible(false);
         jTextFieldEmail.setEnabled(false);
         jTextFieldEndereco.setEnabled(false);
         jFormattedTextField1.setEnabled(false);
         jTextFieldNome.setEnabled(false);
         jFormattedTextFieldTelefone.setEnabled(false);
         jButton1.setEnabled(false);
-        jButtonUsarContrato.setVisible(true);
         jButtonAtivar.setEnabled(false);
         jButtonDesativar.setEnabled(false);
         jButtonAcao.setEnabled(false);
         jtextidacao.setEnabled(false);
-        
-        if (telaOrcamentos != null) {
-            jButtonUsarContrato.setEnabled(true);
-        } else {
-            jButtonUsarContrato.setEnabled(false);
-        }
         jButtonUsarImovel.setVisible(false);
         
         jtextidacao.setText("0");
@@ -155,6 +149,8 @@ public class TelaClientes extends javax.swing.JFrame {
         modelo.addColumn("Nascimento");
         modelo.addColumn("CPF");
         modelo.addColumn("Telefone");
+        modelo.addColumn("Endereço");
+        modelo.addColumn("Cliente");
     }
     
     @SuppressWarnings("unchecked")
@@ -306,7 +302,7 @@ public class TelaClientes extends javax.swing.JFrame {
                 jButtonUsarContratoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonUsarContrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 170, 40));
+        jPanel1.add(jButtonUsarContrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 130, 170, 40));
 
         jButtonUsarImovel.setText("Usar");
         jButtonUsarImovel.addActionListener(new java.awt.event.ActionListener() {
@@ -314,7 +310,7 @@ public class TelaClientes extends javax.swing.JFrame {
                 jButtonUsarImovelActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonUsarImovel, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 170, 40));
+        jPanel1.add(jButtonUsarImovel, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 130, 170, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -399,9 +395,7 @@ public class TelaClientes extends javax.swing.JFrame {
         
         try {
             
-            ted = new TelaEnderecosSelect(this);
-            
-            ted.setVisible(true);
+            new TelaEnderecos(this).setVisible(true);
             
         } catch (Exception ex) {
             

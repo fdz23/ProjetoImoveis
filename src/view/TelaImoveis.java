@@ -13,6 +13,7 @@ import model.Funcionario;
 import model.Imovel;
 import model.Pessoa;
 import model.TipoImovel;
+import util.Login;
 import util.OrdenaClickTabela;
 
 public class TelaImoveis extends javax.swing.JFrame {
@@ -51,15 +52,19 @@ public class TelaImoveis extends javax.swing.JFrame {
     public void CriarJTable() {
         jTableTabela = new JTable(modelo);
         modelo.addColumn("Código");
-        modelo.addColumn("Descricao");
+        modelo.addColumn("Data inclusão");
         modelo.addColumn("Preço");
         modelo.addColumn("Tamanho");
+        modelo.addColumn("Observação");
         modelo.addColumn("Baixa Data");
         modelo.addColumn("Motivo");
         modelo.addColumn("Quantidade Parcela");
         modelo.addColumn("Valor Comissão");
         modelo.addColumn("Proprietário");
-        modelo.addColumn("Ativado");
+        modelo.addColumn("Cliente");
+        modelo.addColumn("Tipo de imóvel");
+        modelo.addColumn("Endereço");
+        modelo.addColumn("Descricao");
 
         //Verificar para trazer o endereço concatenado
     }
@@ -88,7 +93,7 @@ public class TelaImoveis extends javax.swing.JFrame {
     public void setarCliente(Pessoa pessoa) {
 
         pe = pessoa;
-        jTextFieldTipoImovel.setText(pe.getNome());
+        jTextFieldProprietario.setText(pe.getNome());
 
     }
 
@@ -124,7 +129,7 @@ public class TelaImoveis extends javax.swing.JFrame {
             jTextFieldParcelas.setText("0");
             jTextFieldTamanho.setText("0");
             jTextFieldComissao.setText("0.0");
-            jButtonUsar.setEnabled(false);
+            jButtonUsar.setVisible(false);
             JTextFieldID.setEnabled(false);
             jTextFieldParcelas.setEnabled(false);
             jTextFieldTamanho.setEditable(false);
@@ -170,7 +175,7 @@ public class TelaImoveis extends javax.swing.JFrame {
         } else if (obj.getEndereco().getId() == 0) {
 
             throw new Exception("Esolha um endereço");
-        } else if (obj.getIdTipoImovel().getDescricao().equals("")) {
+        } else if (obj.getTipoImovel().getDescricao().equals("")) {
 
             throw new Exception("Escolha um Tipo Imovel");
         } else if (obj.getPessoa().getNome().equals("")) {
@@ -390,7 +395,7 @@ public class TelaImoveis extends javax.swing.JFrame {
             jTextFieldProprietario.setText(im.getPessoa().getNome());
             jTextFieldParcelas.setText("" + im.getQuantidadeParcelas());
             jTextFieldEndereco.setText("" + im.getEndereco().getId());
-            jTextFieldTipoImovel.setText(im.getIdTipoImovel().getDescricao());
+            jTextFieldTipoImovel.setText(im.getTipoImovel().getDescricao());
             jFormattedTextFieldDataInclusao.setText("" + im.getDataInclusao());
 
             if (im.getAtivado() == 0) {
@@ -474,7 +479,8 @@ public class TelaImoveis extends javax.swing.JFrame {
             String observacao = jTextFieldObservacao.getText();
             int qtdParcelas = Integer.parseInt(jTextFieldParcelas.getText());
             Double comissao = Double.parseDouble(jTextFieldComissao.getText());
-
+            fun = Login.funcionario;
+            
             im = new Imovel(0, dataSql, preco, tamanho, observacao, dataSql, "Nenhuma", qtdParcelas, comissao, fun, pe, tp, end, 1, nome);
 
             if (!verificarVazio(im)) {
@@ -518,6 +524,7 @@ public class TelaImoveis extends javax.swing.JFrame {
         } catch (Exception ex) {
 
             JOptionPane.showMessageDialog(null, ex.getMessage());
+            ex.printStackTrace();
         }
 
     }//GEN-LAST:event_jButtonActionActionPerformed
@@ -552,7 +559,6 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jTextFieldParcelas.setText("0");
                 jTextFieldTamanho.setText("0");
                 jTextFieldComissao.setText("0.0");
-                jButtonUsar.setEnabled(false);
                 JTextFieldID.setEnabled(false);
                 jTextFieldParcelas.setEnabled(false);
                 jTextFieldTamanho.setEditable(false);

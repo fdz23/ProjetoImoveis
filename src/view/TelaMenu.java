@@ -55,41 +55,41 @@ public class TelaMenu extends javax.swing.JFrame {
     private void permitirBotoes(Array permissoes) throws SQLException {
         Integer[] niveis = (Integer[]) permissoes.getArray();
 
-        if (niveis[0] == 0) {
-            jButtonClientes.setVisible(false);
+        if (niveis[0] == 1) {
+            jButtonClientes.setVisible(true);
         }
-        if (niveis[1] == 0) {
-            jButtonContratos.setVisible(false);
+        if (niveis[1] == 1) {
+            jButtonContratos.setVisible(true);
         }
-        if (niveis[2] == 0) {
-            jButtonEnderecos.setVisible(false);
+        if (niveis[2] == 1) {
+            jButtonEnderecos.setVisible(true);
         }
-        if (niveis[3] == 0) {
-            jButtonFuncionarios.setVisible(false);
+        if (niveis[3] == 1) {
+            jButtonFuncionarios.setVisible(true);
         }
-        if (niveis[4] == 0) {
-            jButtonImoveis.setVisible(false);
+        if (niveis[4] == 1) {
+            jButtonImoveis.setVisible(true);
         }
-        if (niveis[5] == 0) {
-            jButtonImoveisItens.setVisible(false);
+        if (niveis[5] == 1) {
+            jButtonImoveisItens.setVisible(true);
         }
-        if (niveis[6] == 0) {
-            jButtonNiveisDeAcesso.setVisible(false);
+        if (niveis[6] == 1) {
+            jButtonNiveisDeAcesso.setVisible(true);
         }
-        if (niveis[7] == 0) {
-            jButtonOrcamentos.setVisible(false);
+        if (niveis[7] == 1) {
+            jButtonOrcamentos.setVisible(true);
         }
-        if (niveis[8] == 0) {
-            jButtonStatus.setVisible(false);
+        if (niveis[8] == 1) {
+            jButtonStatus.setVisible(true);
         }
-        if (niveis[9] == 0) {
-            jButtonTiposDeFuncionarios.setVisible(false);
+        if (niveis[9] == 1) {
+            jButtonTiposDeFuncionarios.setVisible(true);
         }
-        if (niveis[10] == 0) {
-            jButtonTiposDeImovel.setVisible(false);
+        if (niveis[10] == 1) {
+            jButtonTiposDeImovel.setVisible(true);
         }
-        if (niveis[11] == 0) {
-            jButtonTiposDePagamento.setVisible(false);
+        if (niveis[11] == 1) {
+            jButtonTiposDePagamento.setVisible(true);
         }
     }
 
@@ -397,7 +397,7 @@ public class TelaMenu extends javax.swing.JFrame {
 
     private void jButtonStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStatusActionPerformed
         try {
-            new TelaTipoImoveis().setVisible(true);
+            new TelaStatus().setVisible(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
             ex.printStackTrace();
@@ -406,7 +406,7 @@ public class TelaMenu extends javax.swing.JFrame {
 
     private void jButtonContratosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonContratosActionPerformed
         try {
-            //new TelaContratos().setVisible(true);
+            new TelaContratos().setVisible(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
             ex.printStackTrace();

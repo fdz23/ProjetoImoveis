@@ -30,7 +30,7 @@ public class Usuario implements Tabela {
     
     public Usuario() {}
     
-    public Usuario(int id, String senha, Funcionario funcionario, int ativado) {
+    public Usuario(int id, Funcionario funcionario, String senha, int ativado) {
         this.id = id;
         this.senha = senha;
         this.funcionario = funcionario;

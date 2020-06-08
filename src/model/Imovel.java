@@ -129,11 +129,11 @@ public class Imovel implements Tabela {
         this.quantidadeParcelas = quantidadeParcelas;
     }
 
-    public TipoImovel getIdTipoImovel() {
+    public TipoImovel getTipoImovel() {
         return tipoImovel;
     }
 
-    public void setIdTipoImovel(TipoImovel idTipoImovel) {
+    public void setTipoImovel(TipoImovel idTipoImovel) {
         this.tipoImovel = idTipoImovel;
     }
 

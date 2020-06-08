@@ -115,7 +115,7 @@ public class ImovelDao extends Dao<Imovel> {
         ps.setDouble(8, item.getValorComissao());
         ps.setInt(9, item.getFuncionario().getId());
         ps.setInt(10, item.getPessoa().getId());
-        ps.setInt(11, item.getIdTipoImovel().getId());
+        ps.setInt(11, item.getTipoImovel().getId());
         ps.setInt(12, item.getEndereco().getId());
         ps.setInt(13, item.getAtivado());
         ps.setString(14, item.getDescricao());
@@ -139,7 +139,7 @@ public class ImovelDao extends Dao<Imovel> {
         ps.setDouble(8, item.getValorComissao());
         ps.setInt(9, item.getFuncionario().getId());
         ps.setInt(10, item.getPessoa().getId());
-        ps.setInt(11, item.getIdTipoImovel().getId());
+        ps.setInt(11, item.getTipoImovel().getId());
         ps.setInt(12, item.getEndereco().getId());
         ps.setInt(13, item.getAtivado());
         ps.setString(14, item.getDescricao());
@@ -155,21 +155,21 @@ public class ImovelDao extends Dao<Imovel> {
         if (rs.next()) {
 
             return new Imovel(
-                    rs.getInt(vetorCampos[0]),
-                    rs.getDate(vetorCampos[1]),
+                    rs.getInt(id),
+                    rs.getDate(vetorCampos[0]),
+                    rs.getDouble(vetorCampos[1]),
                     rs.getDouble(vetorCampos[2]),
-                    rs.getDouble(vetorCampos[3]),
-                    rs.getString(vetorCampos[4]),
-                    rs.getDate(vetorCampos[5]),
-                    rs.getString(vetorCampos[6]),
-                    rs.getInt(vetorCampos[7]),
-                    rs.getDouble(vetorCampos[8]),
-                    funcionarioDao.getByID(rs.getInt(vetorCampos[9])),
-                    pessoaDao.getByID(rs.getInt(vetorCampos[10])),
-                    tipoImovelDao.getByID(rs.getInt(vetorCampos[11])),
-                    enderecoDao.getByID(rs.getInt(vetorCampos[12])),
-                    rs.getInt(vetorCampos[13]),
-                    rs.getString(vetorCampos[14])
+                    rs.getString(vetorCampos[3]),
+                    rs.getDate(vetorCampos[4]),
+                    rs.getString(vetorCampos[5]),
+                    rs.getInt(vetorCampos[6]),
+                    rs.getDouble(vetorCampos[7]),
+                    funcionarioDao.getByID(rs.getInt(vetorCampos[8])),
+                    pessoaDao.getByID(rs.getInt(vetorCampos[9])),
+                    tipoImovelDao.getByID(rs.getInt(vetorCampos[10])),
+                    enderecoDao.getByID(rs.getInt(vetorCampos[11])),
+                    rs.getInt(vetorCampos[12]),
+                    rs.getString(vetorCampos[13])
             );
 
         }

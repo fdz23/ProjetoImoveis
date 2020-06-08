@@ -52,6 +52,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
             popularJtable();
             OrdenaClickTabela.ordenarPorClick(jTableTabela, orcamentoController, modelo);
             this.telaContratos = telaContratos;
+            jButtonUtilizar.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
@@ -166,7 +167,6 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         modelo.addColumn("Funcionário");
         modelo.addColumn("Cliente");
         modelo.addColumn("Imovel");
-        modelo.addColumn("Preço");
         modelo.addColumn("Tipo de pagamento");
 
     }
@@ -411,6 +411,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
             int id = 0;
             int action = jComboAcao.getSelectedIndex();
             Date data = new Date(System.currentTimeMillis());
+            funcionario = Login.funcionario;
 
             String descricao = jTextFieldDescricao.getText();
 
@@ -424,11 +425,11 @@ public class TelaOrcamentos extends javax.swing.JFrame {
 
                 case 1:
 
-                    id = Integer.parseInt(jTextFieldId.getText());
+                    orcamento = new Orcamento(0, data, descricao, funcionario, pessoa, imovel, tipoPagamento, 1);
 
-                    orcamento = new Orcamento(id, data, descricao, funcionario, pessoa, imovel, tipoPagamento, 1);
-
-                    JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
+                    orcamentoController.inserirItem(orcamento);
+                    
+                    JOptionPane.showMessageDialog(this, "Cadastro Realizado com sucesso");
                     popularJtable();
 
                     break;
@@ -460,6 +461,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         } catch (Exception ex) {
 
             JOptionPane.showMessageDialog(null, ex.getMessage());
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_jButtonAcaoActionPerformed
 

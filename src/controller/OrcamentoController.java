@@ -38,7 +38,11 @@ public class OrcamentoController extends Controller<Orcamento> {
                     new Object[]{
                         item.getId(),
                         item.getData(),
-                        item.getDescricao()
+                        item.getDescricao(),
+                        item.getFuncionario().getNome(),
+                        item.getPessoa().getNome(),
+                        item.getImovel().getDescricao(),
+                        item.getTipoPagamento().getDescricao()
                     });
 
         }

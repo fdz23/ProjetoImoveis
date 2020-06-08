@@ -35,6 +35,7 @@ public class TelaStatus extends javax.swing.JFrame {
         popularJtable();
         this.tela = tela;
         OrdenaClickTabela.ordenarPorClick(jTableTabela, sc, modelo);
+        jButtonUsar.setVisible(true);
         
     }
     
@@ -90,11 +91,8 @@ public class TelaStatus extends javax.swing.JFrame {
         jButtonAtivar.setEnabled(false);
         jButtonDesativar.setEnabled(false);
         jButton1.setEnabled(false);
-        jButtonUsar.setEnabled(false);
-        if (tela != null) {
-            jButtonUsar.setEnabled(true);
-            
-        }
+        jButtonUsar.setVisible(false);
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -265,7 +263,7 @@ public class TelaStatus extends javax.swing.JFrame {
             String descricao = JtextFielDescricao.getText();
             Status sa = new Status(0, descricao, 1);
             
-            if (verificarVazio(sa)) {
+            if (!verificarVazio(sa)) {
                 
                 switch (action) {
                     
@@ -289,7 +287,7 @@ public class TelaStatus extends javax.swing.JFrame {
                         
                         int alterarIntem = Integer.parseInt(jTextFieldId.getText());
                         
-                        if (verificarId(alterarIntem)) {
+                        if (!verificarId(alterarIntem)) {
                             
                             sa = new Status(alterarIntem, descricao, 1);
                             
@@ -332,7 +330,6 @@ public class TelaStatus extends javax.swing.JFrame {
                 jButtonAtivar.setEnabled(false);
                 jButtonDesativar.setEnabled(false);
                 jButton1.setEnabled(false);
-                jButtonUsar.setEnabled(false);
                 
                 break;
             

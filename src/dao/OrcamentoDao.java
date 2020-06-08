@@ -48,7 +48,7 @@ public class OrcamentoDao extends Dao<Orcamento> {
 
     protected PreparedStatement statementByIdImovel(int idImovel) throws Exception {
 
-        ps = criaStatement.selectSql(tabela, true, "orc_descricao");
+        ps = criaStatement.selectSql(tabela, true, "orc_imo_iden");
 
         ps.setInt(1, idImovel);
 

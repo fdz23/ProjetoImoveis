@@ -38,7 +38,11 @@ public class PessoaController extends Controller<Pessoa> {
         while (lista.hasNext()) {
             
             Pessoa item = lista.next();
-
+            
+            String cliente = "Sim";
+            if (item.getCliente() == 0)
+                cliente = "Não";
+                
             model.addRow(
                     new Object[]{
                         item.getId(),
@@ -46,7 +50,9 @@ public class PessoaController extends Controller<Pessoa> {
                         item.getEmail(),
                         item.getDataNascimento(),
                         item.getCpf(),
-                        item.getTelefone()
+                        item.getTelefone(),
+                        item.getEndereco().getCep(),
+                        cliente
                     });
 
         }
