@@ -11,11 +11,11 @@ import util.OrdenaClickTabela;
 
 public class TelaTipoPagamento extends javax.swing.JFrame {
 
-    int linhaSelecionada = 0;
-    DefaultTableModel modelo = new DefaultTableModel();
+    private int linhaSelecionada = 0;
+    private DefaultTableModel modelo = new DefaultTableModel();
     private TipoPagamento tipoPagamento = null;
-    TipoPagamentoController tpc = null;
-    TelaOrcamentos telaOrcamentos = null;
+    private TipoPagamentoController tpc = null;
+    private TelaOrcamentos telaOrcamentos = null;
     private boolean isSelected = false;
 
     public TelaTipoPagamento() throws Exception {
@@ -23,8 +23,9 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         initComponents();
         iniciar();
         popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, tpc, modelo);
     }
-    
+
     public TelaTipoPagamento(TelaOrcamentos telaOrcamentos) throws ClassNotFoundException, Exception {
         this.telaOrcamentos = telaOrcamentos;
         CriarJTable();
@@ -32,6 +33,7 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         iniciar();
         popularJtable();
         jButtonUsar.setVisible(true);
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, tpc, modelo);
     }
 
     public void iniciar() throws ClassNotFoundException, Exception {
@@ -44,10 +46,13 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         jComboAcao.addItem("Alterar");
 
         JtextFielDescricao.setEnabled(false);
-        jButton1.setEnabled(false);
+        jButtonAcao.setEnabled(false);
         jTextField2.setEnabled(false);
         jTextFieldId.setEnabled(false);
         jButtonUsar.setVisible(false);
+        jButtonAtivar.setEnabled(false);
+        jButtonDesativar.setEnabled(false);
+
         if (telaOrcamentos != null) {
             jButtonUsar.setEnabled(true);
         } else {
@@ -103,15 +108,15 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         jTableTabela = new javax.swing.JTable();
         jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonAcao = new javax.swing.JButton();
         jTextFieldId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         JtextFielDescricao = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jComboAcao = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonAtivar = new javax.swing.JButton();
+        jButtonDesativar = new javax.swing.JButton();
         jButtonUsar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -142,13 +147,13 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         jLabel3.setText("Pesquisa : ");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, -1, -1));
 
-        jButton1.setText("Ação ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAcao.setText("Ação ");
+        jButtonAcao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAcaoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 120, 50));
+        jPanel1.add(jButtonAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 120, 50));
         jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 160, -1));
 
         jLabel4.setText("ID");
@@ -169,11 +174,11 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         jLabel2.setText("Escolha sua ação :");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
-        jButton2.setText("Ativar");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 100, -1));
+        jButtonAtivar.setText("Ativar");
+        jPanel1.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 100, 40));
 
-        jButton3.setText("Desativar");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 100, -1));
+        jButtonDesativar.setText("Desativar");
+        jPanel1.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 100, 40));
 
         jButtonUsar.setText("Usar");
         jButtonUsar.addActionListener(new java.awt.event.ActionListener() {
@@ -202,12 +207,21 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         try {
 
             linhaSelecionada = jTableTabela.getSelectedRow();
-            
+
             tipoPagamento = tpc.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
-            
+
             jTextFieldId.setText("" + tipoPagamento.getId());
-            JtextFielDescricao.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
-            
+            JtextFielDescricao.setText(tipoPagamento.getDescricao());
+
+            if (tipoPagamento.getAtivado() == 1) {
+
+                jButtonAtivar.setEnabled(false);
+                jButtonDesativar.setEnabled(true);
+            } else {
+                jButtonAtivar.setEnabled(true);
+                jButtonDesativar.setEnabled(false);
+            }
+
             isSelected = true;
         } catch (Exception ex) {
 
@@ -216,7 +230,7 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTableTabelaMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcaoActionPerformed
 
         try {
 
@@ -273,7 +287,7 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonAcaoActionPerformed
 
     private void jComboAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboAcaoActionPerformed
 
@@ -285,12 +299,20 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
 
                 case 0:
 
+                    JtextFielDescricao.setEnabled(false);
+                    jButtonAcao.setEnabled(false);
+                    jTextField2.setEnabled(false);
+                    jTextFieldId.setEnabled(false);
+                    jButtonUsar.setVisible(false);
+                    jButtonAtivar.setEnabled(false);
+                    jButtonDesativar.setEnabled(false);
+
                     break;
 
                 case 1:
 
                     JtextFielDescricao.setEnabled(true);
-                    jButton1.setEnabled(true);
+                    jButtonAcao.setEnabled(true);
                     jTextField2.setEnabled(true);
 
                     break;
@@ -298,7 +320,7 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
                 case 2:
 
                     JtextFielDescricao.setEnabled(true);
-                    jButton1.setEnabled(true);
+                    jButtonAcao.setEnabled(true);
                     jTextField2.setEnabled(true);
 
                     break;
@@ -321,8 +343,9 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
                 telaOrcamentos.setarIDTipoPagamento(tipoPagamento);
                 this.dispose();
 
-            } else
-            throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+            } else {
+                throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+            }
         } catch (Exception ex) {
 
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -330,7 +353,7 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonUsarActionPerformed
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -366,9 +389,9 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JtextFielDescricao;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonAcao;
+    private javax.swing.JButton jButtonAtivar;
+    private javax.swing.JButton jButtonDesativar;
     private javax.swing.JButton jButtonUsar;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;

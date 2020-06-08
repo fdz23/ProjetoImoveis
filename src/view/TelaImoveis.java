@@ -13,29 +13,31 @@ import model.Funcionario;
 import model.Imovel;
 import model.Pessoa;
 import model.TipoImovel;
+import util.OrdenaClickTabela;
 
 public class TelaImoveis extends javax.swing.JFrame {
-    
-    int linhaSelecionada = 0;
-    ImovelController ic = null;
-    Imovel im = null;
-    DefaultTableModel modelo = new DefaultTableModel();
-    TelaEnderecos tela = null;
-    Pessoa pe = null;
-    Endereco end = null;
-    TipoImovel tp = null;
-    Funcionario fun = null;
-    int idFuncionário = 0;
-    TelaOrcamentos telaOrcamentos = null;
+
+    private int linhaSelecionada = 0;
+    private ImovelController ic = null;
+    private Imovel im = null;
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private TelaEnderecos tela = null;
+    private Pessoa pe = null;
+    private Endereco end = null;
+    private TipoImovel tp = null;
+    private Funcionario fun = null;
+    private int idFuncionário = 0;
+    private TelaOrcamentos telaOrcamentos = null;
     private boolean isSelected = false;
-    
+
     public TelaImoveis() throws ClassNotFoundException, Exception {
         CriarJTable();
         initComponents();
         iniciar();
         popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, ic, modelo);
     }
-    
+
     public TelaImoveis(TelaOrcamentos telaOrcamentos) throws ClassNotFoundException, Exception {
         CriarJTable();
         initComponents();
@@ -43,8 +45,9 @@ public class TelaImoveis extends javax.swing.JFrame {
         popularJtable();
         this.telaOrcamentos = telaOrcamentos;
         jButtonUsar.setVisible(true);
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, ic, modelo);
     }
-    
+
     public void CriarJTable() {
         jTableTabela = new JTable(modelo);
         modelo.addColumn("Código");
@@ -60,45 +63,45 @@ public class TelaImoveis extends javax.swing.JFrame {
 
         //Verificar para trazer o endereço concatenado
     }
-    
+
     public void popularJtable() throws ClassNotFoundException, Exception {
-        
+
         jTableTabela.setModel(ic.populaJTable(modelo, 1));
-        
+
     }
-    
+
     public void recebeObjeto(Endereco obj) {
-        
+
         this.end = obj;
-        
+
         jTextFieldEndereco.setText(obj.getCep());
-        
+
     }
-    
+
     public void setarTipoImovel(TipoImovel tipoImovel) {
-        
+
         tp = tipoImovel;
         jTextFieldTipoImovel.setText(tp.getDescricao());
-        
+
     }
-    
+
     public void setarCliente(Pessoa pessoa) {
-        
+
         pe = pessoa;
         jTextFieldTipoImovel.setText(pe.getNome());
-        
+
     }
-    
+
     public void iniciar() throws ClassNotFoundException {
-        
+
         try {
             ic = new ImovelController();
-            
+
             jComboAcao.removeAllItems();
             jComboAcao.addItem("Ações");
             jComboAcao.addItem("Cadastrar");
             jComboAcao.addItem("Alterar");
-            
+
             jFormattedTextFieldDataInclusao.setEnabled(false);
             jTextFieldNome.setEnabled(false);
             jTextFieldEndereco.setEnabled(false);
@@ -116,31 +119,34 @@ public class TelaImoveis extends javax.swing.JFrame {
             jButtonTP.setEnabled(false);
             Date data = new Date(System.currentTimeMillis());
             jFormattedTextFieldDataInclusao.setText(data.toString());
-            Jtextidacao.setText("0");
+            JTextFieldID.setText("0");
             jTextFieldPreco.setText("0.0");
             jTextFieldParcelas.setText("0");
             jTextFieldTamanho.setText("0");
             jTextFieldComissao.setText("0.0");
-            jButtonUsar.setVisible(false);
-            
+            jButtonUsar.setEnabled(false);
+            JTextFieldID.setEnabled(false);
+            jTextFieldParcelas.setEnabled(false);
+            jTextFieldTamanho.setEditable(false);
+
         } catch (Exception ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
-    
+
     public boolean verificarId(int id) throws Exception {
-        
+
         if (id == 0) {
-            
+
             throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
-            
+
         }
-        
+
         return false;
-        
+
     }
-    
+
     public boolean verificarVazio(Imovel obj) throws Exception {
 
         /* if (obj.getDescricao().equals("")) {
@@ -148,33 +154,33 @@ public class TelaImoveis extends javax.swing.JFrame {
 
          }*/
         if (obj.getPreco() <= 0) {
-            
+
             throw new Exception("O campo preço não pode ser 0 ou negativo. Defina um valor");
         } else if (obj.getObservacao().equals("")) {
-            
+
             throw new Exception("O campo observação  não pode estar vazio");
         } else if (obj.getQuantidadeParcelas() == 0) {
             throw new Exception("Defina uma quartidade de parcela s para o imovel");
         } else if (obj.getTamanho() <= 0) {
-            
+
             throw new Exception("O campo Tamanho não pode ser 0 ou negativo. Defina um valor");
         } else if (obj.getValorComissao() < 0) {
-            
+
             throw new Exception("O campo Comissão não pode ser  negativo. Defina um valor");
         } else if (obj.getEndereco().getId() == 0) {
-            
+
             throw new Exception("Esolha um endereço");
         } else if (obj.getIdTipoImovel().getDescricao().equals("")) {
-            
+
             throw new Exception("Escolha um Tipo Imovel");
         } else if (obj.getPessoa().getNome().equals("")) {
-            
+
             throw new Exception("Escolha um proprietário");
         }
         return false;
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -185,7 +191,7 @@ public class TelaImoveis extends javax.swing.JFrame {
         jTextFieldEndereco = new javax.swing.JTextField();
         jButtonEnd = new javax.swing.JButton();
         jTextFieldNome = new javax.swing.JTextField();
-        Jtextidacao = new javax.swing.JTextField();
+        JTextFieldID = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jButtonAtivar = new javax.swing.JButton();
         jButtonDesativar = new javax.swing.JButton();
@@ -247,7 +253,7 @@ public class TelaImoveis extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 560, 130, 30));
         jPanel1.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 250, -1));
-        jPanel1.add(Jtextidacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 710, 40, -1));
+        jPanel1.add(JTextFieldID, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 710, 40, -1));
 
         jLabel12.setText("ID:");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 710, -1, -1));
@@ -371,94 +377,94 @@ public class TelaImoveis extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
-        
+
         try {
-            
+
             im = ic.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
-            
+
             jTextFieldNome.setText(im.getDescricao());
-            jTextFieldComissao.setText(""+im.getValorComissao());
-            jTextFieldPreco.setText(""+im.getPreco());
+            jTextFieldComissao.setText("" + im.getValorComissao());
+            jTextFieldPreco.setText("" + im.getPreco());
             jTextFieldObservacao.setText(im.getObservacao());
-            jTextFieldTamanho.setText(""+im.getTamanho());
+            jTextFieldTamanho.setText("" + im.getTamanho());
             jTextFieldProprietario.setText(im.getPessoa().getNome());
-            jTextFieldParcelas.setText(""+im.getQuantidadeParcelas());
-            jTextFieldEndereco.setText(""+im.getEndereco().getId());
+            jTextFieldParcelas.setText("" + im.getQuantidadeParcelas());
+            jTextFieldEndereco.setText("" + im.getEndereco().getId());
             jTextFieldTipoImovel.setText(im.getIdTipoImovel().getDescricao());
-            jFormattedTextFieldDataInclusao.setText(""+im.getDataInclusao());
-            
-            if(im.getAtivado() == 0){
-                
+            jFormattedTextFieldDataInclusao.setText("" + im.getDataInclusao());
+
+            if (im.getAtivado() == 0) {
+
                 jButtonDesativar.setEnabled(false);
-                
-            }else {
-                
+
+            } else {
+
                 jButtonDesativar.setEnabled(true);
             }
-            
+
             isSelected = true;
-            
+
         } catch (Exception ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
-            
-        }        
+
+        }
     }//GEN-LAST:event_jTableTabelaMouseClicked
 
     private void jButtonEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEndActionPerformed
-        
+
         try {
             tela = new TelaEnderecos(this, 1);
             tela.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(TelaImoveis.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
 
     }//GEN-LAST:event_jButtonEndActionPerformed
 
     private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
         try {
-            int id = Integer.parseInt(Jtextidacao.getText());
-            
+            int id = Integer.parseInt(JTextFieldID.getText());
+
             if (!verificarId(id)) {
-                
+
                 ic.ativarItem(id);
                 popularJtable();
-                
+
                 JOptionPane.showMessageDialog(null, "Imovel ativado com sucesso!");
-                
+
             }
         } catch (Exception ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
-            
+
         }
     }//GEN-LAST:event_jButtonAtivarActionPerformed
 
     private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
         try {
-            int id = Integer.parseInt(Jtextidacao.getText());
-            
+            int id = Integer.parseInt(JTextFieldID.getText());
+
             if (!verificarId(id)) {
-                
+
                 ic.desativarItem(id);
                 popularJtable();
-                
+
                 JOptionPane.showMessageDialog(null, "Imovel desativado com sucesso!");
-                
+
             }
         } catch (Exception ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
-            
+
         }
     }//GEN-LAST:event_jButtonDesativarActionPerformed
 
     private void jButtonActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActionActionPerformed
-        
+
         try {
-            
+
             int action = jComboAcao.getSelectedIndex();
             String nome = jTextFieldNome.getText();
             Date data = new Date(System.currentTimeMillis());
@@ -470,64 +476,91 @@ public class TelaImoveis extends javax.swing.JFrame {
             Double comissao = Double.parseDouble(jTextFieldComissao.getText());
 
             im = new Imovel(0, dataSql, preco, tamanho, observacao, dataSql, "Nenhuma", qtdParcelas, comissao, fun, pe, tp, end, 1, nome);
-            
+
             if (!verificarVazio(im)) {
-                
+
                 switch (action) {
-                    
+
                     case 0:
-                        
+
                         iniciar();
-                        
+
                         break;
-                    
+
                     case 1:
-                        
+
                         ic.inserirItem(im);
-                        
+
                         JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
                         popularJtable();
-                        
+
                         break;
-                    
+
                     case 2:
 
                         im = new Imovel(im.getId(), dataSql, preco, tamanho, observacao, dataSql, "Nenhuma", qtdParcelas, comissao, fun, pe, tp, end, 1, nome);
-                        
+
                         if (!verificarId(im.getId()) && isSelected) {
-                            
+
                             ic.alterarItem(im);
                             popularJtable();
                             JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
                         }
-                        
+
                         break;
-                    
+
                     default:
-                        
+
                         break;
                 }
             }
-            
+
         } catch (Exception ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_jButtonActionActionPerformed
 
     private void jComboAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboAcaoActionPerformed
-        
+
         int indexCombo = jComboAcao.getSelectedIndex();
-        
+
         switch (indexCombo) {
-            
+
             case 0:
-                
+
+                jFormattedTextFieldDataInclusao.setEnabled(false);
+                jTextFieldNome.setEnabled(false);
+                jTextFieldEndereco.setEnabled(false);
+                jFormattedTextFieldDataInclusao.setEnabled(false);
+                jTextFieldComissao.setEnabled(false);
+                jTextFieldTipoImovel.setEnabled(false);
+                jTextFieldPreco.setEnabled(false);
+                jTextFieldObservacao.setEnabled(false);
+                jTextFieldProprietario.setEnabled(false);
+                jButtonEnd.setEnabled(false);
+                jButtonAtivar.setEnabled(false);
+                jButtonDesativar.setEnabled(false);
+                jButtonAction.setEnabled(false);
+                jButtonProp.setEnabled(false);
+                jButtonTP.setEnabled(false);
+                Date data = new Date(System.currentTimeMillis());
+                jFormattedTextFieldDataInclusao.setText(data.toString());
+                JTextFieldID.setText("0");
+                jTextFieldPreco.setText("0.0");
+                jTextFieldParcelas.setText("0");
+                jTextFieldTamanho.setText("0");
+                jTextFieldComissao.setText("0.0");
+                jButtonUsar.setEnabled(false);
+                JTextFieldID.setEnabled(false);
+                jTextFieldParcelas.setEnabled(false);
+                jTextFieldTamanho.setEditable(false);
+
                 break;
-            
+
             case 1:
-                
+
                 jFormattedTextFieldDataInclusao.setEnabled(true);
                 jTextFieldNome.setEnabled(true);
                 jTextFieldEndereco.setEnabled(true);
@@ -538,16 +571,16 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jTextFieldObservacao.setEnabled(true);
                 jTextFieldProprietario.setEnabled(true);
                 jButtonEnd.setEnabled(true);
-                jButtonAtivar.setEnabled(true);
-                jButtonDesativar.setEnabled(true);
                 jButtonAction.setEnabled(true);
                 jButtonProp.setEnabled(true);
                 jButtonTP.setEnabled(true);
-                
+                jTextFieldParcelas.setEnabled(true);
+                jTextFieldTamanho.setEditable(true);
+
                 break;
-            
+
             case 2:
-                
+
                 jFormattedTextFieldDataInclusao.setEnabled(true);
                 jTextFieldNome.setEnabled(true);
                 jTextFieldEndereco.setEnabled(true);
@@ -558,17 +591,18 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jTextFieldObservacao.setEnabled(true);
                 jTextFieldProprietario.setEnabled(true);
                 jButtonEnd.setEnabled(true);
-                jButtonAtivar.setEnabled(true);
-                jButtonDesativar.setEnabled(true);
                 jButtonAction.setEnabled(true);
                 jButtonProp.setEnabled(true);
                 jButtonTP.setEnabled(true);
+                jTextFieldParcelas.setEnabled(true);
+                jTextFieldTamanho.setEditable(true);
+
                 break;
-            
+
             default:
-                
+
                 break;
-            
+
         }
 
     }//GEN-LAST:event_jComboAcaoActionPerformed
@@ -580,8 +614,9 @@ public class TelaImoveis extends javax.swing.JFrame {
                 telaOrcamentos.setarIDImovel(im);
                 this.dispose();
 
-            } else
-            throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+            } else {
+                throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+            }
         } catch (Exception ex) {
 
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -589,25 +624,25 @@ public class TelaImoveis extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonUsarActionPerformed
 
     private void jButtonTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTPActionPerformed
-        
+
         try {
             new TelaTipoImoveis(this).setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(TelaImoveis.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_jButtonTPActionPerformed
 
     private void jButtonPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPropActionPerformed
-        
+
         try {
             new TelaClientes(this).setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(TelaImoveis.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_jButtonPropActionPerformed
-    
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -646,7 +681,7 @@ public class TelaImoveis extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Jtextidacao;
+    private javax.swing.JTextField JTextFieldID;
     private javax.swing.JButton jButtonAction;
     private javax.swing.JButton jButtonAtivar;
     private javax.swing.JButton jButtonDesativar;
