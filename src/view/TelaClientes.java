@@ -30,6 +30,7 @@ public class TelaClientes extends javax.swing.JFrame {
     private Endereco ende = null;
     private TelaOrcamentos telaOrcamentos = null;
     private boolean isSelected = false;
+    private TelaImoveis telaImoveis = null;
     
     public TelaClientes() throws ClassNotFoundException, Exception {
         CriarJTable();
