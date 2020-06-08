@@ -40,8 +40,9 @@ public class FuncionarioController extends Controller<Funcionario> {
                     new Object[]{
                         item.getId(),
                         item.getMatricula(),
-                        //item.getTipoFuncionario().getDescricao(),
-                        //item.getStatus().getDescricao(),
+                        item.getNome(),
+                        item.getTipoFuncionario().getDescricao(),
+                        item.getStatus().getDescricao(),
                         item.getDataRescisao()
                     });
 
