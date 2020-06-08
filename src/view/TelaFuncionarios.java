@@ -24,6 +24,7 @@ import model.Pessoa;
 import model.Status;
 import model.TipoFuncionario;
 import model.Usuario;
+import util.GeradorPasswords;
 import util.OrdenaClickTabela;
 import util.Validacao;
 
@@ -589,6 +590,8 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 String senha = jTextFieldSenha.getText();
                 
                 if(!senha.equals("")){
+                    
+                    senha = GeradorPasswords.generateSecurePassword(senha, "Pacoca");
                     
                     usu = new Usuario(0, senha, fun, 1);
                     usc.inserirItem(usu);
