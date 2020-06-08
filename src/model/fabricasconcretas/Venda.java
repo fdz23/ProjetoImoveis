@@ -29,9 +29,6 @@ public class Venda extends AbstractFactory {
         else if( tipo.equals("ORCAMENTO") ) {
             return new Orcamento(); 
         }
-        else if( tipo.equals("SITUACAO") ) {
-            return new Situacao(); 
-        }
         else if( tipo.equals("STATUS") ) {
             return new Status(); 
         }
