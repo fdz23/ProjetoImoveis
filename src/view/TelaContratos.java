@@ -63,6 +63,7 @@ public class TelaContratos extends javax.swing.JFrame {
         jtextidacao.setEnabled(false);
         jButtonAtivar.setEnabled(false);
         jButtonDesativar.setEnabled(false);
+        jButtonAcao.setEnabled(false);
 
         jtextidacao.setText("0");
 
@@ -141,7 +142,7 @@ public class TelaContratos extends javax.swing.JFrame {
         jButtonOrcamento = new javax.swing.JButton();
         jComboBoxSituacao = new javax.swing.JComboBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -192,7 +193,7 @@ public class TelaContratos extends javax.swing.JFrame {
                 jButtonAcaoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 700, 140, 40));
+        jPanel1.add(jButtonAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 680, 140, 40));
 
         jButtonAtivar.setText("Ativar");
         jButtonAtivar.addActionListener(new java.awt.event.ActionListener() {
@@ -220,13 +221,18 @@ public class TelaContratos extends javax.swing.JFrame {
         jPanel1.add(jButtonOrcamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 130, -1));
 
         jComboBoxSituacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxSituacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSituacaoActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBoxSituacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 260, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,6 +240,7 @@ public class TelaContratos extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
@@ -359,6 +366,7 @@ public class TelaContratos extends javax.swing.JFrame {
 
                 jButtonOrcamento.setEnabled(false);
                 jComboBoxSituacao.setEnabled(false);
+                jButtonAcao.setEnabled(false);
 
                 break;
 
@@ -366,6 +374,7 @@ public class TelaContratos extends javax.swing.JFrame {
 
                 jButtonOrcamento.setEnabled(true);
                 jComboBoxSituacao.setEnabled(true);
+                jButtonAcao.setEnabled(true);
 
                 break;
 
@@ -373,6 +382,7 @@ public class TelaContratos extends javax.swing.JFrame {
 
                 jButtonOrcamento.setEnabled(true);
                 jComboBoxSituacao.setEnabled(true);
+                jButtonAcao.setEnabled(true);
 
                 break;
 
@@ -395,11 +405,13 @@ public class TelaContratos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonOrcamentoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jComboBoxSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSituacaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxSituacaoActionPerformed
+
+    
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -422,7 +434,7 @@ public class TelaContratos extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaContratos().setVisible(true);
