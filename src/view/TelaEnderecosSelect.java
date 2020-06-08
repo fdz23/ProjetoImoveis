@@ -11,12 +11,12 @@ import util.OrdenaClickTabela;
 
 public class TelaEnderecosSelect extends javax.swing.JFrame {
 
-    DefaultTableModel modelo = new DefaultTableModel();
-    Endereco end = null;
-    int linhaSelecionada = 0;
-    EnderecoController ec = null;
-    TelaClientes tc = null;
-    TelaFuncionarios td = null;
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private Endereco end = null;
+    private int linhaSelecionada = 0;
+    private EnderecoController ec = null;
+    private TelaClientes tc = null;
+    private TelaFuncionarios td = null;
 
     public TelaEnderecosSelect() throws Exception {
         CriarJTable();
@@ -73,8 +73,6 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         JtextFielCep.setEnabled(false);
 
         jButton1.setEnabled(true);
-        
-        
 
     }
 
@@ -223,9 +221,9 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
         String complemento = JtextFielComplemento.getText();
         String numero = JtextFielNumero.getText();
         String referencia = JtextFielReferencia.getText();
-        
+
 //Trazer campo ativo, e verificar se ele vai poder ativar um endereço nesta tela de select
-        end = new Endereco(id, ibge, logradouro, bairro, cidade, estado, complemento, numero, referencia, cep,1);
+        end = new Endereco(id, ibge, logradouro, bairro, cidade, estado, complemento, numero, referencia, cep, 1);
 
         if (td != null) {
             td.receberObjeto(end, 0);
@@ -247,16 +245,17 @@ public class TelaEnderecosSelect extends javax.swing.JFrame {
 
         linhaSelecionada = jTableTabela.getSelectedRow();
 
-        jTextFieldID.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
-        jTextFieldIbge.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
-        JtextFielLogradouro.setText(jTableTabela.getValueAt(linhaSelecionada, 2).toString());
-        JtextFielBairro.setText(jTableTabela.getValueAt(linhaSelecionada, 3).toString());
-        JtextFielCidade.setText(jTableTabela.getValueAt(linhaSelecionada, 4).toString());
-        JtextFieldEstado.setText(jTableTabela.getValueAt(linhaSelecionada, 5).toString());
-        JtextFielComplemento.setText(jTableTabela.getValueAt(linhaSelecionada, 6).toString());
-        JtextFielNumero.setText(jTableTabela.getValueAt(linhaSelecionada, 7).toString());
-        JtextFielReferencia.setText(jTableTabela.getValueAt(linhaSelecionada, 8).toString());
-        JtextFielCep.setText(jTableTabela.getValueAt(linhaSelecionada, 9).toString());
+            jTextFieldID.setText("" + end.getId());
+            jTextFieldIbge.setText(end.getCodigoIBGE());
+            JtextFielLogradouro.setText(end.getLogradouro());
+            JtextFielBairro.setText(end.getBairro());
+            JtextFielCidade.setText(end.getCidade());
+            JtextFieldEstado.setText(end.getEstado());
+            JtextFielComplemento.setText(end.getComplemento());
+            JtextFielNumero.setText(end.getNumero());
+            JtextFielReferencia.setText(end.getPontoReferencia());
+            JtextFielCep.setText(end.getCep());
+
 
 
     }//GEN-LAST:event_jTableTabelaMouseClicked
