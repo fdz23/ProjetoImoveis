@@ -21,15 +21,15 @@ import util.OrdenaClickTabela;
  */
 public class TelaOrcamentos extends javax.swing.JFrame {
 
-    int linhaSelecionada = 0;
-    DefaultTableModel modelo = new DefaultTableModel();
-    Orcamento orcamento = null;
-    Pessoa pessoa = null;
-    Funcionario funcionario = Login.funcionario;
-    Imovel imovel = null;
-    TipoPagamento tipoPagamento = null;
-    OrcamentoController orcamentoController = null;
-    TelaContratos telaContratos = null;
+    private int linhaSelecionada = 0;
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private Orcamento orcamento = null;
+    private Pessoa pessoa = null;
+    private Funcionario funcionario = Login.funcionario;
+    private Imovel imovel = null;
+    private TipoPagamento tipoPagamento = null;
+    private OrcamentoController orcamentoController = null;
+    private TelaContratos telaContratos = null;
     private boolean isSelected = false;
 
     public TelaOrcamentos() {
@@ -83,7 +83,8 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         jTextFieldId.setEnabled(false);
         jButtonAtivar.setEnabled(false);
         jButtonDesativar.setEnabled(false);
-        jButtonSelecionar.setVisible(false);
+        jButtonUtilizar.setVisible(false);
+        jButtonAcao.setEnabled(false);
 
         jTextFieldId.setText("0");
 
@@ -200,7 +201,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jTextFieldTipoPagamento = new javax.swing.JTextField();
         jButtonSelecionarTipoPagamento = new javax.swing.JButton();
-        jButtonSelecionar = new javax.swing.JButton();
+        jButtonUtilizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -305,13 +306,13 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonSelecionarTipoPagamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 500, 130, 40));
 
-        jButtonSelecionar.setText("Selecionar");
-        jButtonSelecionar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonUtilizar.setText("Utilizar");
+        jButtonUtilizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSelecionarActionPerformed(evt);
+                jButtonUtilizarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonSelecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 90, 180, 60));
+        jPanel1.add(jButtonUtilizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 90, 180, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -501,6 +502,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
                 jButtonSelecionarCliente.setEnabled(false);
                 jButtonSelecionarImovel.setEnabled(false);
                 jButtonSelecionarTipoPagamento.setEnabled(false);
+                jButtonAcao.setEnabled(false);
 
                 jTextFieldId.setText("0");
 
@@ -512,6 +514,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
                 jButtonSelecionarCliente.setEnabled(true);
                 jButtonSelecionarImovel.setEnabled(true);
                 jButtonSelecionarTipoPagamento.setEnabled(true);
+                jButtonAcao.setEnabled(true);
 
                 break;
 
@@ -521,6 +524,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
                 jButtonSelecionarCliente.setEnabled(true);
                 jButtonSelecionarImovel.setEnabled(true);
                 jButtonSelecionarTipoPagamento.setEnabled(true);
+                jButtonAcao.setEnabled(true);
 
                 break;
 
@@ -531,7 +535,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboAcaoActionPerformed
 
-    private void jButtonSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarActionPerformed
+    private void jButtonUtilizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUtilizarActionPerformed
         try {
             if (isSelected) {
                 
@@ -544,7 +548,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-    }//GEN-LAST:event_jButtonSelecionarActionPerformed
+    }//GEN-LAST:event_jButtonUtilizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -586,10 +590,10 @@ public class TelaOrcamentos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAcao;
     private javax.swing.JButton jButtonAtivar;
     private javax.swing.JButton jButtonDesativar;
-    private javax.swing.JButton jButtonSelecionar;
     private javax.swing.JButton jButtonSelecionarCliente;
     private javax.swing.JButton jButtonSelecionarImovel;
     private javax.swing.JButton jButtonSelecionarTipoPagamento;
+    private javax.swing.JButton jButtonUtilizar;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
