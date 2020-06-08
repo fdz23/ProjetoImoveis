@@ -31,7 +31,6 @@ public class ContratoDao extends Dao<Contrato> {
 
     }
 
-    private SituacaoDao situacaoDao = new SituacaoDao();
     private OrcamentoDao orcamentoDao = new OrcamentoDao();
 
     @Override
