@@ -20,7 +20,7 @@ import util.OrdenaClickTabela;
 import util.Validacao;
 
 public class TelaClientes extends javax.swing.JFrame {
-
+    
     private int linhaSelecionada = 0;
     private DefaultTableModel modelo = new DefaultTableModel();
     private Pessoa pe = null;
@@ -84,13 +84,18 @@ public class TelaClientes extends javax.swing.JFrame {
         jFormattedTextFieldTelefone.setEnabled(false);
         jButton1.setEnabled(false);
         jButtonUsarContrato.setVisible(true);
+        jButtonAtivar.setEnabled(false);
+        jButtonDesativar.setEnabled(false);
+        jButtonAcao.setEnabled(false);
+        jtextidacao.setEnabled(false);
+        
         if (telaOrcamentos != null) {
             jButtonUsarContrato.setEnabled(true);
         } else {
             jButtonUsarContrato.setEnabled(false);
         }
         jButtonUsarImovel.setVisible(false);
-
+        
         jtextidacao.setText("0");
         
     }
@@ -176,9 +181,9 @@ public class TelaClientes extends javax.swing.JFrame {
         jTableTabela = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
         jtextidacao = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtonAcao = new javax.swing.JButton();
+        jButtonAtivar = new javax.swing.JButton();
+        jButtonDesativar = new javax.swing.JButton();
         jButtonUsarContrato = new javax.swing.JButton();
         jButtonUsarImovel = new javax.swing.JButton();
 
@@ -271,29 +276,29 @@ public class TelaClientes extends javax.swing.JFrame {
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 630, -1, -1));
         jPanel1.add(jtextidacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 90, -1));
 
-        jButton2.setText("Ação");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAcao.setText("Ação");
+        jButtonAcao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonAcaoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 700, 140, 40));
+        jPanel1.add(jButtonAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 690, 140, 40));
 
-        jButton3.setText("Ativar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAtivar.setText("Ativar");
+        jButtonAtivar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonAtivarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 620, 80, -1));
+        jPanel1.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 620, 80, -1));
 
-        jButton4.setText("Desativar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDesativar.setText("Desativar");
+        jButtonDesativar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonDesativarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 620, -1, -1));
+        jPanel1.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 620, -1, 30));
 
         jButtonUsarContrato.setText("Usar");
         jButtonUsarContrato.addActionListener(new java.awt.event.ActionListener() {
@@ -347,6 +352,10 @@ public class TelaClientes extends javax.swing.JFrame {
                 jTextFieldNome.setEnabled(false);
                 jFormattedTextFieldTelefone.setEnabled(false);
                 jButton1.setEnabled(false);
+                jButtonUsarContrato.setVisible(true);
+                jButtonAtivar.setEnabled(false);
+                jButtonDesativar.setEnabled(false);
+                jButtonAcao.setEnabled(false);
                 
                 break;
             
@@ -359,7 +368,8 @@ public class TelaClientes extends javax.swing.JFrame {
                 jTextFieldNome.setEnabled(true);
                 jFormattedTextFieldTelefone.setEnabled(true);
                 jButton1.setEnabled(true);
-                jButton2.setEnabled(true);
+                jButtonAcao.setEnabled(true);
+                jButtonAcao.setEnabled(true);
                 
                 break;
             
@@ -372,7 +382,8 @@ public class TelaClientes extends javax.swing.JFrame {
                 jTextFieldNome.setEnabled(true);
                 jFormattedTextFieldTelefone.setEnabled(true);
                 jButton1.setEnabled(true);
-                jButton2.setEnabled(true);
+                jButtonAcao.setEnabled(true);
+                jButtonAcao.setEnabled(true);
                 
                 break;
             
@@ -417,12 +428,12 @@ public class TelaClientes extends javax.swing.JFrame {
             
             if (pe.getAtivado() == 1) {
                 
-                jButton3.setEnabled(false);
+                jButtonAtivar.setEnabled(false);
+                jButtonDesativar.setEnabled(true);
             } else {
-                jButton4.setEnabled(true);
-                jButton3.setEnabled(false);
+                jButtonDesativar.setEnabled(true);
+                jButtonAtivar.setEnabled(false);
             }
-          
             
         } catch (Exception ex) {
             
@@ -431,21 +442,20 @@ public class TelaClientes extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTableTabelaMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcaoActionPerformed
         
         try {
             
             int action = jComboAcao.getSelectedIndex();
             int idacao1 = Integer.parseInt(jtextidacao.getText());
-          
+            
             Locale myLocale = new Locale("pt", "BR");
             DateFormat format = new SimpleDateFormat("dd/MM/yyyy", myLocale);
             format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
-
+            
             java.util.Date date = format.parse(jFormattedTextField1.getText());
             java.sql.Date dataNascimento = new java.sql.Date(date.getTime());
-
-
+            
             if (Validacao.validarCPF(jFormattedTextFieldCPF.getText())) {
                 
                 if (Validacao.validarEmail(jTextFieldEmail.getText())) {
@@ -464,10 +474,9 @@ public class TelaClientes extends javax.swing.JFrame {
                             break;
                         
                         case 1:
-
+                            
                             pe = new Pessoa(idacao1, nome, email, dataNascimento, cpf, telefone, ende, 1, 1);
-
-
+                            
                             pec.inserirItem(pe);
                             
                             JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
@@ -476,11 +485,11 @@ public class TelaClientes extends javax.swing.JFrame {
                             break;
                         
                         case 2:
-
+                            
                             if (!verificarId(idacao1) && isSelected) {
-
+                                
                                 pe = new Pessoa(idacao1, nome, email, dataNascimento, cpf, telefone, ende, 1, 1);
-
+                                
                                 pec.alterarItem(pe);
                                 
                                 popularJtable();
@@ -510,9 +519,9 @@ public class TelaClientes extends javax.swing.JFrame {
         }
         
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonAcaoActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
         
         try {
             int id = Integer.parseInt(jtextidacao.getText());
@@ -531,9 +540,9 @@ public class TelaClientes extends javax.swing.JFrame {
             
         }
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonAtivarActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
         
         try {
             int id = Integer.parseInt(jtextidacao.getText());
@@ -553,7 +562,7 @@ public class TelaClientes extends javax.swing.JFrame {
         }
         
 
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonDesativarActionPerformed
 
     private void jButtonUsarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsarContratoActionPerformed
         try {
@@ -577,16 +586,16 @@ public class TelaClientes extends javax.swing.JFrame {
                 
                 telaImoveis.setarCliente(pe);
                 this.dispose();
-
-            } else
+                
+            } else {
                 throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
+            }
         } catch (Exception ex) {
             
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jButtonUsarImovelActionPerformed
-
-
+    
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -626,9 +635,9 @@ public class TelaClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonAcao;
+    private javax.swing.JButton jButtonAtivar;
+    private javax.swing.JButton jButtonDesativar;
     private javax.swing.JButton jButtonUsarContrato;
     private javax.swing.JButton jButtonUsarImovel;
     private javax.swing.JComboBox jComboAcao;
