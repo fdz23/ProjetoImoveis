@@ -184,7 +184,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
     private int getUltimoId() throws Exception {
 
         if (!getAll().hasNext()) {
-            return 1;
+            return 0;
         } else {
             return getAllOrderBy(8, false).next().getId();
         }

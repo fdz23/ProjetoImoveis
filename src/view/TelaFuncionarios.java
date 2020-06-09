@@ -50,6 +50,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     private int linhaSelecionada = 0;
     private Usuario usu = null;
     private UsuarioController usc = null;
+    private boolean isSelected = false;
 
     public TelaFuncionarios() throws ClassNotFoundException, Exception {
         CriarJTable();
@@ -98,7 +99,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jFormattedTextFieldNascimento.setEnabled(false);
         jTextFieldNome.setEnabled(false);
         jFormattedTextFieldTelefone.setEnabled(false);
-        jCheckBox1.setEnabled(false);
+        jCheckBoxDemissao.setEnabled(false);
         jButtonEndereco.setEnabled(false);
         idacao.setText("0");
         jButtonAtivar.setEnabled(false);
@@ -110,18 +111,6 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jTextFieldSenha.setEnabled(false);
 
         setarMatricula();
-
-    }
-
-    public void receberObjeto(Endereco end, int tela) {
-
-        this.end1 = end;
-
-    }
-
-    public void popularEndereco() {
-
-        jTextFieldEndereco.setText("" + end1.getId());
 
     }
 
@@ -182,18 +171,6 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
     }
 
-    public boolean verificarId(int id) throws Exception {
-
-        if (id == 0) {
-
-            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
-
-        }
-
-        return false;
-
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -212,7 +189,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jTextFieldMatricula = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldCargo = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBoxDemissao = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jTextFieldEndereco = new javax.swing.JTextField();
@@ -232,7 +209,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jButtonDesativar = new javax.swing.JButton();
         jButtonAtivar = new javax.swing.JButton();
         jFormattedTextFieldRescisao = new javax.swing.JFormattedTextField();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBoxLogin = new javax.swing.JCheckBox();
         jLabel13 = new javax.swing.JLabel();
         jTextFieldSenha = new javax.swing.JTextField();
 
@@ -285,13 +262,13 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
         jPanel1.add(jTextFieldCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 190, -1));
 
-        jCheckBox1.setText("Demitir");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxDemissao.setText("Demitir");
+        jCheckBoxDemissao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                jCheckBoxDemissaoActionPerformed(evt);
             }
         });
-        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 90, -1));
+        jPanel1.add(jCheckBoxDemissao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 90, -1));
 
         jLabel8.setText("Data Rescisão");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, -1, -1));
@@ -395,13 +372,13 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         }
         jPanel1.add(jFormattedTextFieldRescisao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 250, 30));
 
-        jCheckBox2.setText("Login");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxLogin.setText("Login");
+        jCheckBoxLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
+                jCheckBoxLoginActionPerformed(evt);
             }
         });
-        jPanel1.add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 70, -1));
+        jPanel1.add(jCheckBoxLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 70, -1));
 
         jLabel13.setText("Senha");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
@@ -445,7 +422,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jTextFieldNome.setEnabled(false);
                 jFormattedTextFieldTelefone.setEnabled(false);
                 jTextFieldStatus.setEnabled(false);
-                jCheckBox1.setEnabled(false);
+                jCheckBoxDemissao.setEnabled(false);
                 jButtonEndereco.setEnabled(false);
                 jButtonAcao.setEnabled(false);
 
@@ -463,7 +440,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jTextFieldNome.setEnabled(true);
                 jFormattedTextFieldTelefone.setEnabled(true);
                 jTextFieldStatus.setEnabled(false);
-                jCheckBox1.setEnabled(false);
+                jCheckBoxDemissao.setEnabled(false);
                 jButtonEndereco.setEnabled(true);
                 jButtonStatus.setEnabled(true);
                 jButtonTipoFuncionario.setEnabled(true);
@@ -483,7 +460,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jTextFieldNome.setEnabled(true);
                 jFormattedTextFieldTelefone.setEnabled(true);
                 jTextFieldStatus.setEnabled(false);
-                jCheckBox1.setEnabled(true);
+                jCheckBoxDemissao.setEnabled(true);
                 jButtonEndereco.setEnabled(true);
                 jButtonStatus.setEnabled(true);
                 jButtonTipoFuncionario.setEnabled(true);
@@ -499,9 +476,9 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jComboAcaoActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void jCheckBoxDemissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxDemissaoActionPerformed
 
-        if (jCheckBox1.isSelected()) {
+        if (jCheckBoxDemissao.isSelected()) {
 
             jFormattedTextFieldRescisao.setEnabled(true);
 
@@ -511,14 +488,13 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         }
 
 
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_jCheckBoxDemissaoActionPerformed
 
     private void jButtonAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcaoActionPerformed
 
         try {
 
             int action = jComboAcao.getSelectedIndex();
-            int idacao1 = Integer.parseInt(idacao.getText());
 
             String nome = jTextFieldNome.getText();
             String email = jTextFieldEmail.getText();
@@ -527,7 +503,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
             setarMatricula();
             String matricula = jTextFieldMatricula.getText();
-            
+
             java.sql.Date dataNascimento = CriaDate.geraSqlDate(jFormattedTextFieldNascimento.getText());
             java.sql.Date dataRescisao = CriaDate.geraSqlDate(jFormattedTextFieldRescisao.getText());
 
@@ -547,11 +523,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
                     fc.inserirItem(func);
 
-                    JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
-                    popularJtable();
-                    setarMatricula();
-
-                    if (jCheckBox2.isSelected()) {
+                    if (jCheckBoxLogin.isSelected()) {
 
                         String senha = jTextFieldSenha.getText();
 
@@ -564,20 +536,17 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
                         }
                     }
+
+                    JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
+                    popularJtable();
+                    setarMatricula();
                     break;
 
                 case 2:
 
-                    if (!jCheckBox1.isSelected()) {
+                    if (isSelected) {
 
-                        fc.alterarItem(fun);
-                        popularJtable();
-                        JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
-
-                    } else {
-
-                        fun = new Funcionario(idacao1, email, pe, tf, status, null, 1);
-                        fc.alterarItem(fun);
+                        fc.alterarItem(new Funcionario(fun.getId(), matricula, pe, tf, status, dataRescisao, 1));
                         popularJtable();
                         JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
 
@@ -631,9 +600,12 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jButtonAtivar.setEnabled(true);
                 jButtonDesativar.setEnabled(false);
             }
+            
+            isSelected = true;
 
         } catch (Exception ex) {
             Logger.getLogger(TelaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
 
 
@@ -669,11 +641,9 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
     private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
         try {
-            int id = Integer.parseInt(idacao.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                fc.ativarItem(id);
+                fc.ativarItem(fun.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Funcionário ativado com sucesso!");
@@ -688,11 +658,9 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
     private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
         try {
-            int id = Integer.parseInt(idacao.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                fc.desativarItem(id);
+                fc.desativarItem(fun.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Funcionáio desativado com sucesso!");
@@ -719,9 +687,9 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonEnderecoActionPerformed
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+    private void jCheckBoxLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxLoginActionPerformed
 
-        if (jCheckBox2.isSelected()) {
+        if (jCheckBoxLogin.isSelected()) {
 
             jTextFieldSenha.setEnabled(true);
 
@@ -732,7 +700,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         }
 
 
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+    }//GEN-LAST:event_jCheckBoxLoginActionPerformed
 
     public static void main(String args[]) {
 
@@ -777,8 +745,8 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEndereco;
     private javax.swing.JButton jButtonStatus;
     private javax.swing.JButton jButtonTipoFuncionario;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBoxDemissao;
+    private javax.swing.JCheckBox jCheckBoxLogin;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPF;
     private javax.swing.JFormattedTextField jFormattedTextFieldNascimento;
