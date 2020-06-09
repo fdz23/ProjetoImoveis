@@ -394,7 +394,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         try {
 
             int action = jComboAcao.getSelectedIndex();
-            Date data = CriaDate.geraSqlDate(new Date(System.currentTimeMillis()).toString());
+            Date data = CriaDate.geraSqlDate(CriaDate.geraDataFormatada(new Date(System.currentTimeMillis())));
             funcionario = Login.funcionario;
 
             String descricao = jTextFieldDescricao.getText();
