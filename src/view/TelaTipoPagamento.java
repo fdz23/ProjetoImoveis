@@ -87,18 +87,6 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
 
     }
 
-    public boolean verificarId(int id) throws Exception {
-
-        if (id == 0) {
-
-            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
-
-        }
-
-        return false;
-
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -261,12 +249,9 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
                         break;
 
                     case 2:
+                        if (isSelected) {
 
-                        int alterarIntem = Integer.parseInt(jTextFieldId.getText());
-
-                        if (!verificarId(alterarIntem)) {
-
-                            tp = new TipoPagamento(alterarIntem, descricao, 1);
+                            tp = new TipoPagamento(tipoPagamento.getId(), descricao, 1);
 
                             tpc.alterarItem(tp);
 

@@ -301,6 +301,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
 
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
         try {
+            linhaSelecionada = jTableTabela.getSelectedRow();
 
             tp = tic.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
             jTextFieldId.setText(tp.getId() + "");
