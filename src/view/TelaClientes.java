@@ -109,18 +109,6 @@ public class TelaClientes extends javax.swing.JFrame {
         
     }
     
-    public boolean verificarId(int id) throws Exception {
-        
-        if (id == 0) {
-            
-            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
-            
-        }
-        
-        return false;
-        
-    }
-    
     public boolean verificarVazio(Pessoa obj) throws Exception {
         
         if (obj.getNome().equals("")) {
@@ -411,6 +399,8 @@ public class TelaClientes extends javax.swing.JFrame {
             linhaSelecionada = jTableTabela.getSelectedRow();
             
             pe = pec.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+            ende = pe.getEndereco();
+            setarIDEnd(ende);
             
             jtextidacao.setText("" + pe.getId());
             jTextFieldNome.setText(pe.getNome());
@@ -441,7 +431,6 @@ public class TelaClientes extends javax.swing.JFrame {
         try {
             
             int action = jComboAcao.getSelectedIndex();
-            int idacao1 = Integer.parseInt(jtextidacao.getText());
             
             Locale myLocale = new Locale("pt", "BR");
             DateFormat format = new SimpleDateFormat("dd/MM/yyyy", myLocale);
@@ -469,7 +458,7 @@ public class TelaClientes extends javax.swing.JFrame {
                         
                         case 1:
                             
-                            pe = new Pessoa(idacao1, nome, email, dataNascimento, cpf, telefone, ende, 1, 1);
+                            pe = new Pessoa(0, nome, email, dataNascimento, cpf, telefone, ende, 1, 1);
                             
                             pec.inserirItem(pe);
                             
@@ -480,9 +469,9 @@ public class TelaClientes extends javax.swing.JFrame {
                         
                         case 2:
                             
-                            if (!verificarId(idacao1) && isSelected) {
+                            if (isSelected) {
                                 
-                                pe = new Pessoa(idacao1, nome, email, dataNascimento, cpf, telefone, ende, 1, 1);
+                                pe = new Pessoa(pe.getId(), nome, email, dataNascimento, cpf, telefone, ende, 1, 1);
                                 
                                 pec.alterarItem(pe);
                                 
@@ -520,7 +509,7 @@ public class TelaClientes extends javax.swing.JFrame {
         try {
             int id = Integer.parseInt(jtextidacao.getText());
             
-            if (!verificarId(id)) {
+            if (isSelected) {
                 
                 pec.ativarItem(id);
                 popularJtable();
@@ -541,7 +530,7 @@ public class TelaClientes extends javax.swing.JFrame {
         try {
             int id = Integer.parseInt(jtextidacao.getText());
             
-            if (!verificarId(id)) {
+            if (isSelected) {
                 
                 pec.desativarItem(id);
                 popularJtable();
