@@ -302,8 +302,6 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
             psPessoa.setInt(1, idPessoa);
 
-        } else {
-            throw new Exception("Erro na pesquisa de um item Funcionario(parte de pesquisa por id funcionario para pegar o id pessoa)");
         }
 
         return psPessoa;
