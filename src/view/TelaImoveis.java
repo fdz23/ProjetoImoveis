@@ -608,7 +608,7 @@ public class TelaImoveis extends javax.swing.JFrame {
         try {
             if (isSelected) {
 
-                telaOrcamentos.setarIDImovel(im);
+                telaOrcamentos.setarImovel(im);
                 this.dispose();
 
             } else {

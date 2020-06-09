@@ -545,7 +545,7 @@ public class TelaClientes extends javax.swing.JFrame {
         try {
             if (isSelected) {
                 
-                telaOrcamentos.setarIDCliente(pe);
+                telaOrcamentos.setarCliente(pe);
                 this.dispose();
                 
             } else {

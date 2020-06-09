@@ -340,7 +340,7 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         try {
             if (isSelected) {
 
-                telaOrcamentos.setarIDTipoPagamento(tipoPagamento);
+                telaOrcamentos.setarTipoPagamento(tipoPagamento);
                 this.dispose();
 
             } else {

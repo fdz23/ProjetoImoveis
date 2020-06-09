@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import util.CriaDate;
 import util.Login;
 import util.OrdenaClickTabela;
 
@@ -91,7 +92,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
 
     }
 
-    public void setarIDCliente(Pessoa cliente) {
+    public void setarCliente(Pessoa cliente) {
 
         try {
 
@@ -106,7 +107,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
 
     }
 
-    public void setarIDImovel(Imovel imovel) {
+    public void setarImovel(Imovel imovel) {
 
         try {
 
@@ -121,7 +122,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
 
     }
 
-    public void setarIDTipoPagamento(TipoPagamento tipoPagamento) {
+    public void setarTipoPagamento(TipoPagamento tipoPagamento) {
 
         try {
 
@@ -133,18 +134,6 @@ public class TelaOrcamentos extends javax.swing.JFrame {
 
             ex.printStackTrace();
         }
-
-    }
-
-    public boolean verificarId(int id) throws Exception {
-
-        if (id == 0) {
-
-            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
-
-        }
-
-        return false;
 
     }
 
@@ -365,11 +354,9 @@ public class TelaOrcamentos extends javax.swing.JFrame {
     private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
 
         try {
-            int id = Integer.parseInt(jTextFieldId.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                orcamentoController.desativarItem(id);
+                orcamentoController.desativarItem(orcamento.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Orçamento desativado com sucesso!");
@@ -386,11 +373,9 @@ public class TelaOrcamentos extends javax.swing.JFrame {
     private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
 
         try {
-            int id = Integer.parseInt(jTextFieldId.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                orcamentoController.ativarItem(id);
+                orcamentoController.ativarItem(orcamento.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Orçamento ativado com sucesso!");
@@ -408,9 +393,8 @@ public class TelaOrcamentos extends javax.swing.JFrame {
 
         try {
 
-            int id = 0;
             int action = jComboAcao.getSelectedIndex();
-            Date data = new Date(System.currentTimeMillis());
+            Date data = CriaDate.geraSqlDate(new Date(System.currentTimeMillis()).toString());
             funcionario = Login.funcionario;
 
             String descricao = jTextFieldDescricao.getText();
@@ -435,12 +419,9 @@ public class TelaOrcamentos extends javax.swing.JFrame {
                     break;
 
                 case 2:
+                    if (isSelected) {
 
-                    id = Integer.parseInt(jTextFieldId.getText());
-
-                    if (!verificarId(id)) {
-
-                        orcamento = new Orcamento(id, data, descricao, funcionario, pessoa, imovel, tipoPagamento, 1);
+                        orcamento = new Orcamento(orcamento.getId(), data, descricao, funcionario, pessoa, imovel, tipoPagamento, 1);
 
                         orcamentoController.alterarItem(orcamento);
 
@@ -471,23 +452,30 @@ public class TelaOrcamentos extends javax.swing.JFrame {
             linhaSelecionada = jTableTabela.getSelectedRow();
 
             orcamento = orcamentoController.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+            setarCliente(orcamento.getPessoa());
+            setarImovel(orcamento.getImovel());
+            setarTipoPagamento(orcamento.getTipoPagamento());
+            funcionario = orcamento.getFuncionario();
 
-            jTextFieldId.setText(Integer.toString(orcamento.getId()));
+            jTextFieldId.setText("" + orcamento.getId());
             jTextFieldDescricao.setText(orcamento.getDescricao());
-            jTextFieldCliente.setText(Integer.toString(orcamento.getPessoa().getId()));
-            jTextFieldImovel.setText(Integer.toString(orcamento.getImovel().getId()));
-            jTextFieldTipoPagamento.setText(Integer.toString(orcamento.getTipoPagamento().getId()));
+            jTextFieldCliente.setText(orcamento.getPessoa().getNome());
+            jTextFieldImovel.setText(orcamento.getImovel().getDescricao());
+            jTextFieldTipoPagamento.setText(orcamento.getTipoPagamento().getDescricao());
 
             if (orcamento.getAtivado() == 1) {
                 jButtonDesativar.setEnabled(true);
+                jButtonAtivar.setEnabled(false);
             } else {
                 jButtonAtivar.setEnabled(true);
+                jButtonDesativar.setEnabled(false);
             }
             
             isSelected = true;
 
         } catch (Exception ex) {
 
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
             ex.printStackTrace();
         }
     }//GEN-LAST:event_jTableTabelaMouseClicked
