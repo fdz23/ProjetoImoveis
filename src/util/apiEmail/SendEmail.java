@@ -7,7 +7,7 @@ import org.apache.commons.mail.SimpleEmail;
 
 public class SendEmail {
 
-    public void sendEmail(String emailCliente, String token) throws EmailException {
+    public void sendEmail(String emailCliente, String token, String nome) throws EmailException {
 
         String meuEmail = "5headenterpriseltda@gmail.com";
         String minhaSenha = "5HeadFernando";
@@ -20,12 +20,12 @@ public class SendEmail {
 
         email.setFrom(meuEmail);
         email.setSubject("Recuperação de Senha");
-        email.setHtmlMsg(gerarHtml(token));
+        email.setHtmlMsg(gerarHtml(token, nome));
         email.addTo(emailCliente);
         email.send();
     }
 
-    private String gerarHtml(String token) {
+    private String gerarHtml(String token, String nome) {
         String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n"
                 + "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
                 + " <head>\n"
@@ -47,7 +47,7 @@ public class SendEmail {
                 + " <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n"
                 + "  <tr>\n"
                 + "   <td style=\"color: #153643; font-size: 20px;\">\n"
-                + "    A seguir o token necessário para a validação:\n"
+                + "    Senhor(a) " + nome + ",segue o token necessário para a validação:\n"
                 + "   </td>\n"
                 + "  </tr>\n"
                 + "  <tr>\n"
