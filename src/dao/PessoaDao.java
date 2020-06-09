@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 import model.Pessoa;
@@ -217,6 +218,42 @@ public class PessoaDao extends Dao<Pessoa> {
 
         return update(pessoa);
         
+    }
+    
+    public Iterator<Pessoa> getAllClienteOrderBy(int campo, boolean ascOuDesc) throws Exception {
+
+        //verifica se o número recebido é menor que 0 ou maior que o número máximo de campos
+        if (campo < 0 || campo > vetorCampos.length) {
+            throw new Exception("Campo para ser ordenado inexistente.");
+        }
+
+        String coluna = "";
+
+        //vetorCampos é um vetor que contém o nome de todos os campos da tabela no banco de dados na ordem
+        if (campo == 0) {
+            coluna = id;
+        } else {
+            coluna = vetorCampos[campo - 1];
+        }
+
+        //estrutura de dados 2 : Lista encadeada
+        List<Pessoa> itens = new LinkedList<Pessoa>();
+
+        //cria um sql que recebe todos os itens ordenados a coluna
+        ps = criaStatement.selectSqlClienteOrder(tabela, coluna, ascOuDesc);
+
+        //faz o pedido de busca conforme o PreparedStatement criado
+        rs = ps.executeQuery();
+
+        while (rs.next()) {
+
+            //adiciona na fila de prioridade todos os itens
+            itens.add(getByID(rs.getInt(id)));
+
+        }
+
+        return itens.iterator();
+
     }
 
 }

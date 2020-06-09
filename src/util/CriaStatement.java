@@ -144,6 +144,23 @@ public class CriaStatement {
         return con.prepareStatement(sql);   
     }
     
+    public PreparedStatement selectSqlClienteOrder(String tabela, String coluna, boolean asc) throws Exception {
+        
+        String colunaAtivado = coluna.split("_")[0] + "_ativado";
+        
+        String ascOuDesc = "DESC";
+        
+        if(asc)
+            ascOuDesc = "ASC";
+        
+        String sql = "SELECT * FROM " + tabela 
+                  + " WHERE " + colunaAtivado + " = 1"
+                  + " AND pes_cliente = 1"
+                  + " ORDER BY " + coluna + " " + ascOuDesc;
+        
+        return con.prepareStatement(sql);   
+    }
+    
     //cria um PreparedStatement de seleção genérica de ordenação
     //recebe o nome da tabela(conforme ao banco)
     //recebe o nome da coluna a ser ordenada em primeiro(conforme ao banco)
