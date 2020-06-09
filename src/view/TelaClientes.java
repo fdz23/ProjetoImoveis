@@ -138,7 +138,6 @@ public class TelaClientes extends javax.swing.JFrame {
         modelo.addColumn("CPF");
         modelo.addColumn("Telefone");
         modelo.addColumn("Endereço");
-        modelo.addColumn("Cliente");
     }
     
     @SuppressWarnings("unchecked")

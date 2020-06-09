@@ -54,8 +54,7 @@ public class PessoaController extends Controller<Pessoa> {
                         item.getDataNascimento(),
                         item.getCpf(),
                         item.getTelefone(),
-                        item.getEndereco().getCep(),
-                        cliente
+                        item.getEndereco().getCep()
                     });
 
         }
