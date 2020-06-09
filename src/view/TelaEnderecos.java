@@ -29,6 +29,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         initComponents();
         iniciar();
         popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, ec, modelo);
 
     }
 
@@ -66,6 +67,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         iniciar();
         popularJtable();
         jButtonUtilizar.setVisible(true);
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, ec, modelo);
 
     }
 
@@ -294,8 +296,8 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
             } else {
                 jButtonAtivado.setEnabled(true);
+                jButtonDesativar.setEnabled(false);
             }
-            jButtonDesativar.setEnabled(false);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
@@ -382,18 +384,6 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jTableTabela.setModel(ec.populaJTable(modelo, 0));
     }
 
-    public boolean verificarId(int id) throws Exception {
-
-        if (id == 0) {
-
-            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
-
-        }
-
-        return false;
-
-    }
-
     public boolean verificarVazio(Endereco obj) throws Exception {
 
         if (obj.getCep().equals("")) {
@@ -470,17 +460,15 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
                     case 2:
 
-                        int alterarIntem = Integer.parseInt(jTextFieldId.getText());
-
-                        if (!verificarId(alterarIntem)) {
-                            end = new Endereco(alterarIntem, ibge, logradouro, bairro, cidade, estado, complemento, numero, referencia, cep, 1);
+                        if (isSelected) {
+                            end = new Endereco(end.getId(), ibge, logradouro, bairro, cidade, estado, complemento, numero, referencia, cep, 1);
                         }
 
                         ec.alterarItem(end);
 
                         popularJtable();
 
-                        JOptionPane.showMessageDialog(null, "Status alterado com sucesso!");
+                        JOptionPane.showMessageDialog(null, "Endereço alterado com sucesso!");
 
                         break;
 
@@ -596,11 +584,9 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
     private void jButtonAtivadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivadoActionPerformed
         try {
-            int id = Integer.parseInt(jTextFieldId.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                ec.ativarItem(id);
+                ec.ativarItem(end.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Endereço ativado com sucesso!");
@@ -615,11 +601,9 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
     private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
         try {
-            int id = Integer.parseInt(jTextFieldId.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                ec.desativarItem(id);
+                ec.desativarItem(end.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Endereço ativado com sucesso!");
@@ -635,7 +619,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
     private void jButtonUtilizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUtilizarActionPerformed
         try {
 
-            if (!verificarVazio(end)) {
+            if (!verificarVazio(end) && isSelected) {
 
                 telaI.recebeObjeto(end);
                 this.dispose();
