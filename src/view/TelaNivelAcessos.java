@@ -92,18 +92,6 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
     }
 
-    public boolean verificarId(int id) throws Exception {
-
-        if (id == 0) {
-
-            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
-
-        }
-
-        return false;
-
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -361,10 +349,9 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
                     case 2:
 
-                        int alterarIntem = Integer.parseInt(jTextFieldId.getText());
-                        if (!verificarId(action)) {
+                        if (isSelected) {
 
-                            na = new NivelAcesso(alterarIntem, descricao, 1, niveisArray);
+                            na = new NivelAcesso(nivelAcesso.getId(), descricao, 1, niveisArray);
 
                             nac.alterarItem(na);
 
@@ -385,6 +372,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         } catch (Exception ex) {
 
             JOptionPane.showMessageDialog(null, ex.getMessage());
+            ex.printStackTrace();
         }
 
 
@@ -491,11 +479,9 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
     private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
         try {
-            int id = Integer.parseInt(jTextFieldId.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                nac.ativarItem(id);
+                nac.ativarItem(nivelAcesso.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Nivel ativado com sucesso!");
@@ -510,11 +496,9 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
     private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
         try {
-            int id = Integer.parseInt(jTextFieldId.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                nac.desativarItem(id);
+                nac.desativarItem(nivelAcesso.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Nivel Desativado com sucesso!");
