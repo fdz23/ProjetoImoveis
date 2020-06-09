@@ -57,18 +57,6 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
 
     }
 
-    public boolean verificarId(int id) throws Exception {
-
-        if (id == 0) {
-
-            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
-
-        }
-
-        return false;
-
-    }
-
     private void popularJtable() throws ClassNotFoundException, Exception {
 
         jTableTabela.setModel(tic.populaJTable(modelo, 1));
@@ -238,12 +226,9 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
                         break;
 
                     case 2:
+                        if (isSelected) {
 
-                        int alterarIntem = Integer.parseInt(jTextFieldId.getText());
-
-                        if (!verificarId(alterarIntem)) {
-
-                            tp = new TipoImovel(alterarIntem, descricao, 1);
+                            tp = new TipoImovel(this.tp.getId(), descricao, 1);
 
                             tic.alterarItem(tp);
 
@@ -316,6 +301,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
 
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
         try {
+            linhaSelecionada = jTableTabela.getSelectedRow();
 
             tp = tic.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
             jTextFieldId.setText(tp.getId() + "");
@@ -344,11 +330,9 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
     private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
 
         try {
-            int id = Integer.parseInt(jTextFieldId.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                tic.ativarItem(id);
+                tic.ativarItem(tp.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Imovel ativado com sucesso!");
@@ -366,11 +350,9 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
     private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
 
         try {
-            int id = Integer.parseInt(jTextFieldId.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                tic.desativarItem(id);
+                tic.desativarItem(tp.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Imovel desativado com sucesso!");

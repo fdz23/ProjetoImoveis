@@ -184,13 +184,13 @@ public class FuncionarioDao extends Dao<Funcionario> {
     private int getUltimoId() throws Exception {
 
         if (!getAll().hasNext()) {
-            return 1;
+            return 0;
         } else {
             return getAllOrderBy(8, false).next().getId();
         }
 
     }
-
+    
     @Override
     protected void verificaExistenteInserir(Funcionario item) throws Exception {
     }
@@ -302,8 +302,6 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
             psPessoa.setInt(1, idPessoa);
 
-        } else {
-            throw new Exception("Erro na pesquisa de um item Funcionario(parte de pesquisa por id funcionario para pegar o id pessoa)");
         }
 
         return psPessoa;

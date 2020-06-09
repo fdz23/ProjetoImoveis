@@ -16,12 +16,10 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
     private TipoFuncionarioController tfc = null;
     private TelaFuncionarios telaFuncionarios = null;
-    private NivelAcessoController nac = null;
     private NivelAcesso na = null;
     private DefaultTableModel modelo = new DefaultTableModel();
     private TipoFuncionario tipoFuncionario = null;
     private int linhaSelecionada = 0;
-    private int login = 1;
     private boolean isSelected = false;
 
     public TelaTipoFuncionario() throws ClassNotFoundException, Exception {
@@ -83,22 +81,9 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
     }
 
-    public boolean verificarId(int id) throws Exception {
-
-        if (id == 0) {
-
-            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
-
-        }
-
-        return false;
-
-    }
-
     public void iniciar() throws ClassNotFoundException, Exception {
 
         tfc = new TipoFuncionarioController();
-        nac = new NivelAcessoController();
 
         jComboAcao.removeAllItems();
         jComboAcao.addItem("Ações");
@@ -362,16 +347,9 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
                         break;
 
                     case 2:
-
-                        int alterarIntem = Integer.parseInt(jTextFieldId.getText());
-
-                        if (!verificarId(alterarIntem)) {
+                        if (isSelected) {
                             
-                            tipoFuncionario.setDescricao(descricao);
-                            tipoFuncionario.setSalario(salario);
-                            tipoFuncionario.setNivelAcesso(na);
-                            
-                            tfc.alterarItem(tipoFuncionario);
+                            tfc.alterarItem(new TipoFuncionario(tipoFuncionario.getId(), descricao, na, salario, 1));
                             popularJtable();
 
                             JOptionPane.showMessageDialog(null, "Tipo Funcionario alterado com sucesso!");
@@ -400,10 +378,11 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
             linhaSelecionada = jTableTabela.getSelectedRow();
 
             tipoFuncionario = tfc.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+            setarNivelAcesso(tipoFuncionario.getNivelAcesso());
 
             jTextFieldId.setText("" + tipoFuncionario.getId());
             JtextFielDescricao.setText(tipoFuncionario.getDescricao());
-            JtextFielDescricaoNivelAcesso.setText(tipoFuncionario.getNivelAcesso().getDescricao());
+            JtextFielDescricaoNivelAcesso.setText(na.getDescricao());
             JtextFielDescricaoSalario.setText("" + tipoFuncionario.getSalario());
 
             isSelected = true;
@@ -428,11 +407,9 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
 
         try {
-            int id = Integer.parseInt(jTextFieldId.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                tfc.ativarItem(id);
+                tfc.ativarItem(tipoFuncionario.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Tipo Funcionário ativado com sucesso!");
@@ -450,11 +427,9 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
 
         try {
-            int id = Integer.parseInt(jTextFieldId.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                tfc.desativarItem(id);
+                tfc.desativarItem(tipoFuncionario.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Tipo Funcionário desativado com sucesso!");

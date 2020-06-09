@@ -17,6 +17,7 @@ public class Usuario implements Tabela {
     private Funcionario funcionario;
     private String senha;
     private int ativado;
+    private String token;
     private String nomeId = "usu_iden";
     private String nomeTabela = "usuarios";
 
@@ -30,11 +31,12 @@ public class Usuario implements Tabela {
     
     public Usuario() {}
     
-    public Usuario(int id, Funcionario funcionario, String senha, int ativado) {
+    public Usuario(int id, Funcionario funcionario, String senha, int ativado, String token) {
         this.id = id;
         this.senha = senha;
         this.funcionario = funcionario;
         this.ativado = ativado;
+        this.token = token;
     }
 
     public Funcionario getFuncionario() {
@@ -69,5 +71,13 @@ public class Usuario implements Tabela {
     @Override
     public String getNomeTabela() {
         return nomeTabela;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

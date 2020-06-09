@@ -24,6 +24,7 @@ public class TelaContratos extends javax.swing.JFrame {
     private Contrato contrato = null;
     private Orcamento orcamento = null;
     private DefaultTableModel modelo = new DefaultTableModel();
+    private boolean isSelected = false;
 
     public TelaContratos() {
         try {
@@ -66,18 +67,6 @@ public class TelaContratos extends javax.swing.JFrame {
         jButtonAcao.setEnabled(false);
 
         jtextidacao.setText("0");
-
-    }
-
-    public boolean verificarId(int id) throws Exception {
-
-        if (id == 0) {
-
-            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
-
-        }
-
-        return false;
 
     }
 
@@ -246,11 +235,9 @@ public class TelaContratos extends javax.swing.JFrame {
     private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
 
         try {
-            int id = Integer.parseInt(jtextidacao.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                contratoController.desativarItem(id);
+                contratoController.desativarItem(contrato.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Contrato desativado com sucesso!");
@@ -266,11 +253,9 @@ public class TelaContratos extends javax.swing.JFrame {
     private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
 
         try {
-            int id = Integer.parseInt(jtextidacao.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                contratoController.ativarItem(id);
+                contratoController.ativarItem(contrato.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Contrato ativado com sucesso!");
@@ -288,7 +273,6 @@ public class TelaContratos extends javax.swing.JFrame {
         try {
 
             int action = jComboAcao.getSelectedIndex();
-            int idacao1 = Integer.parseInt(jtextidacao.getText());
             int pago = jComboBoxSituacao.getSelectedIndex();
 
             Date dataAtual = new Date(System.currentTimeMillis());
@@ -314,9 +298,9 @@ public class TelaContratos extends javax.swing.JFrame {
 
                 case 2:
 
-                    if (!verificarId(idacao1)) {
+                    if (isSelected) {
 
-                        contrato = new Contrato(0, contrato.getData(), dataAtual, pago, orcamento, 1);
+                        contrato = new Contrato(contrato.getId(), contrato.getData(), dataAtual, pago, orcamento, 1);
 
                         contratoController.alterarItem(contrato);
 
@@ -345,10 +329,13 @@ public class TelaContratos extends javax.swing.JFrame {
             int linhaSelecionada = jTableTabela.getSelectedRow();
 
             contrato = contratoController.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+            orcamento = contrato.getOrcamento();
 
             jtextidacao.setText("" + contrato.getId());
             jTextFieldOrcamento.setText(contrato.getOrcamento().getDescricao());
             jComboBoxSituacao.setSelectedIndex(contrato.getPago());
+            
+            isSelected = true;
 
         } catch (Exception ex) {
 

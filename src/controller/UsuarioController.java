@@ -28,4 +28,16 @@ public class UsuarioController extends Controller<Usuario> {
         return null;
         
     }
+    
+    public Usuario getItemComLoginPorEmail(String email) throws Exception {
+        
+        return new UsuarioDao().getUsuarioComLoginPorEmail(email);
+        
+    }
+    
+    public Usuario getItemByToken(String token) throws Exception {
+        
+        return new UsuarioDao().getByToken(token);
+        
+    }
 }

@@ -16,22 +16,25 @@ import model.Pessoa;
  * @author fdz
  */
 public class PessoaController extends Controller<Pessoa> {
+    
+    private PessoaDao daoP;
 
     public PessoaController() throws ClassNotFoundException, SQLException {
 
+        daoP = new PessoaDao();
         dao = new PessoaDao();
 
     }
 
     public Pessoa getPessoaPorCpf(String cpf) throws Exception {
 
-        return new PessoaDao().getByCpf(cpf);
+        return daoP.getByCpf(cpf);
     }
     
     public DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
-        Iterator<Pessoa> lista = getTodosClientes();
+        Iterator<Pessoa> lista = daoP.getAllClienteOrderBy(campo, true);
 
         model.setNumRows(0);
 
@@ -51,8 +54,7 @@ public class PessoaController extends Controller<Pessoa> {
                         item.getDataNascimento(),
                         item.getCpf(),
                         item.getTelefone(),
-                        item.getEndereco().getCep(),
-                        cliente
+                        item.getEndereco().getCep()
                     });
 
         }
@@ -63,13 +65,13 @@ public class PessoaController extends Controller<Pessoa> {
     
     public Iterator<Pessoa> getTodosClientes() throws Exception {
         
-        return new PessoaDao().getAllClientes();
+        return daoP.getAllClientes();
         
     }
     
     public boolean removerCliente(int id) throws Exception {
         
-        return new PessoaDao().removeCliente(id);
+        return daoP.removeCliente(id);
         
     }
     
