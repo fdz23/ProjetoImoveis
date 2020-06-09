@@ -57,17 +57,6 @@ public class TelaStatus extends javax.swing.JFrame {
         
     }
     
-    public boolean verificarId(int id) throws Exception {
-        
-        if (id == 0) {
-            
-            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
-            
-        }
-        
-        return false;
-    }
-    
     private void popularJtable() throws ClassNotFoundException, Exception {
         
         jTableTabela.setModel(sc.populaJTable(modelo, 0));
@@ -284,12 +273,9 @@ public class TelaStatus extends javax.swing.JFrame {
                         break;
                     
                     case 2:
-                        
-                        int alterarIntem = Integer.parseInt(jTextFieldId.getText());
-                        
-                        if (!verificarId(alterarIntem)) {
+                        if (isSelected) {
                             
-                            sa = new Status(alterarIntem, descricao, 1);
+                            sa = new Status(status.getId(), descricao, 1);
                             
                             sc.alterarItem(sa);
                             
@@ -349,16 +335,6 @@ public class TelaStatus extends javax.swing.JFrame {
                 
                 break;
             
-            case 3:
-                
-                JOptionPane.showMessageDialog(null, "Selecione uma linha e clique em 'Ação' para excluir");
-                
-                JtextFielDescricao.setEnabled(false);
-                jButton1.setEnabled(true);
-                jTextField2.setEnabled(true);
-                
-                break;
-            
             default:
 
             // JOptionPane.showMessageDialog(null, "Nenhuma ação foi selecionada.");
@@ -368,11 +344,9 @@ public class TelaStatus extends javax.swing.JFrame {
 
     private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
         try {
-            int id = Integer.parseInt(jTextFieldId.getText());
-            
-            if (!verificarId(id)) {
+            if (isSelected) {
                 
-                sc.ativarItem(id);
+                sc.ativarItem(status.getId());
                 popularJtable();
                 
                 JOptionPane.showMessageDialog(null, "Produto ativado com sucesso!");
@@ -390,11 +364,9 @@ public class TelaStatus extends javax.swing.JFrame {
     private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
         
         try {
-            int id = Integer.parseInt(jTextFieldId.getText());
-            
-            if (!verificarId(id)) {
+            if (isSelected) {
                 
-                sc.desativarItem(id);
+                sc.desativarItem(status.getId());
                 popularJtable();
                 
                 JOptionPane.showMessageDialog(null, "Produto desativado com sucesso!");
