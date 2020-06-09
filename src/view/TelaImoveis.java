@@ -134,7 +134,6 @@ public class TelaImoveis extends javax.swing.JFrame {
             jButtonUsar.setVisible(false);
             JTextFieldID.setEnabled(false);
             jTextFieldParcelas.setEnabled(false);
-            jTextFieldTamanho.setEditable(false);
             jTextFieldTamanho.setEnabled(false);
 
         } catch (Exception ex) {
