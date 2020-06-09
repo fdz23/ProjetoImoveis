@@ -7,6 +7,7 @@ package util;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 /**
  *
@@ -205,6 +206,17 @@ public class CriaStatement {
                      " ORDER BY funcionarios." + coluna1 + " " + ascOuDesc1 + ", pessoas." + coluna2 + " " + ascOuDesc2;
         
         return con.prepareStatement(sql);   
+    }
+    
+    public PreparedStatement selectSqlEmailFuncionarioUsuario() throws SQLException {
+        
+        String sql = "SELECT * FROM funcionarios " +
+                     "INNER JOIN pessoas ON funcionarios.fun_pes_iden = pessoas.pes_iden " +
+                     "INNER JOIN usuarios ON funcionarios.fun_iden = usuarios.usu_fun_iden " +
+                     "WHERE pessoas.pes_email = ?";
+        
+        return con.prepareStatement(sql);
+        
     }
     
     public PreparedStatement selectSqlOrderDuplaPessoaFunc(String coluna1, String coluna2, boolean asc1, boolean asc2) throws Exception {

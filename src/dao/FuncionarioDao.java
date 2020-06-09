@@ -190,7 +190,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
         }
 
     }
-
+    
     @Override
     protected void verificaExistenteInserir(Funcionario item) throws Exception {
     }

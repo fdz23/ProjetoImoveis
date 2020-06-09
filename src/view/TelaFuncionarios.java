@@ -531,7 +531,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
                             senha = GeradorPasswords.generateSecurePassword(senha, "Pacoca");
 
-                            usu = new Usuario(0, fc.getItemByEmail(func.getEmail()), senha, 1);
+                            usu = new Usuario(0, fc.getItemByEmail(func.getEmail()), senha, 1, "");
                             usc.inserirItem(usu);
 
                         }

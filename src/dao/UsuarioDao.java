@@ -28,7 +28,7 @@ public class UsuarioDao extends Dao<Usuario> {
         id = obj.getNomeId();
         tabela = obj.getNomeTabela();
         criaStatement = new CriaStatement(con, tabela, id);
-        campos = "usu_fun_iden,usu_senha,usu_ativado";
+        campos = "usu_fun_iden,usu_senha,usu_ativado,usu_token_redefinicao";
         vetorCampos = campos.split(",");
 
     }
@@ -43,7 +43,7 @@ public class UsuarioDao extends Dao<Usuario> {
         }
 
     }
-    
+
     @Override
     protected void verificaExistenteAlterar(Usuario item) throws Exception {
 
@@ -80,6 +80,7 @@ public class UsuarioDao extends Dao<Usuario> {
         ps.setInt(1, item.getFuncionario().getId());
         ps.setString(2, item.getSenha());
         ps.setInt(3, item.getAtivado());
+        ps.setString(4, item.getToken());
 
         return ps;
 
@@ -93,7 +94,8 @@ public class UsuarioDao extends Dao<Usuario> {
         ps.setInt(1, item.getFuncionario().getId());
         ps.setString(2, item.getSenha());
         ps.setInt(3, item.getAtivado());
-        ps.setInt(4, item.getId());
+        ps.setString(4, item.getToken());
+        ps.setInt(5, item.getId());
 
         return ps;
 
@@ -108,7 +110,8 @@ public class UsuarioDao extends Dao<Usuario> {
                     rs.getInt(id),
                     funcionarioDao.getByID(rs.getInt(vetorCampos[0])),
                     rs.getString(vetorCampos[1]),
-                    rs.getInt(vetorCampos[2])
+                    rs.getInt(vetorCampos[2]),
+                    rs.getString(vetorCampos[3])
             );
 
         }
@@ -118,32 +121,71 @@ public class UsuarioDao extends Dao<Usuario> {
     }
 
     public boolean verificaSenha(Funcionario funcionario, String senha) throws Exception {
-        
+
         Usuario usuario = getByIDFun(funcionario.getId());
-        
-        if (usuario == null)
+
+        if (usuario == null) {
             return false;
-        else {
-            if (GeradorPasswords.verifyUserPassword(senha, usuario.getSenha(), "Pacoca"))
+        } else {
+            if (GeradorPasswords.verifyUserPassword(senha, usuario.getSenha(), "Pacoca")) {
                 return true;
+            }
         }
-        
+
         return false;
     }
-    
+
     public Usuario getByIDFun(int idFuncionario) throws Exception {
-        
+
         String sql = "SELECT * FROM usuarios"
-                   + " WHERE usu_fun_iden = ?";
-        
+                + " WHERE usu_fun_iden = ?";
+
         ps = con.prepareStatement(sql);
-        
+
         ps.setInt(1, idFuncionario);
-        
+
         ResultSet rs = ps.executeQuery();
-        
+
         return criaItem(rs);
+
+    }
+
+    public Usuario getUsuarioComLoginPorEmail(String email) throws SQLException, Exception {
+
+        ps = criaStatement.selectSqlEmailFuncionarioUsuario();
+
+        ps.setString(1, email);
+
+        ResultSet rs = ps.executeQuery();
+
+        Usuario usuario = null;
+
+        if (rs.next()) {
+            usuario = new Usuario(
+                    rs.getInt(id),
+                    funcionarioDao.getByID(rs.getInt(vetorCampos[0])),
+                    rs.getString(vetorCampos[1]),
+                    rs.getInt(vetorCampos[2]),
+                    rs.getString(vetorCampos[3])
+            );
+        }
+
+        return usuario;
+
+    }
+    
+    public Usuario getByToken(String token) throws Exception {
+
+        ps = criaStatement.selectSql(tabela, true, "usu_token_redefinicao");
         
+        ps.setString(1, token);
+
+        ResultSet rs = ps.executeQuery();
+
+        Usuario item = criaItem(rs);
+
+        return item;
+
     }
 
 }

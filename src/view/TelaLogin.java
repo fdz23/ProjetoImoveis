@@ -32,6 +32,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPasswordFieldSenha = new javax.swing.JPasswordField();
         jButtonLogin = new javax.swing.JButton();
+        jButtonEsqueciSenha = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,26 +47,37 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
 
+        jButtonEsqueciSenha.setText("Esqueci minha senha");
+        jButtonEsqueciSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEsqueciSenhaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel1))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextFieldEmail)
-                        .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(107, 107, 107)
                         .addComponent(jButtonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonEsqueciSenha)
+                .addGap(78, 78, 78))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,9 +90,11 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonLogin)
-                .addGap(63, 63, 63))
+                .addGap(35, 35, 35)
+                .addComponent(jButtonEsqueciSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -106,6 +120,10 @@ public class TelaLogin extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButtonLoginActionPerformed
+
+    private void jButtonEsqueciSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEsqueciSenhaActionPerformed
+        new TelaResetarSenha().setVisible(true);
+    }//GEN-LAST:event_jButtonEsqueciSenhaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,6 +161,7 @@ public class TelaLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonEsqueciSenha;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
