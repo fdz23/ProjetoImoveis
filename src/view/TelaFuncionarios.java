@@ -43,7 +43,6 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     private Pessoa pe = null;
     private Funcionario fun = null;
     private Endereco end1 = null;
-    private TelaEnderecosSelect ted = null;
     private TipoFuncionario tf = null;
     private Status status = null;
     private TelaTipoFuncionario ttf = null;

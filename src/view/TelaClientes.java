@@ -27,7 +27,6 @@ public class TelaClientes extends javax.swing.JFrame {
     private Pessoa pe = null;
     private PessoaController pec = null;
     private PessoaDao pdao = null;
-    private TelaEnderecosSelect ted = null;
     private Endereco ende = null;
     private TelaOrcamentos telaOrcamentos = null;
     private boolean isSelected = false;
