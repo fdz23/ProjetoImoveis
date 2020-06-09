@@ -16,6 +16,7 @@ import model.Endereco;
 import model.Imovel;
 import model.Pessoa;
 import model.TipoImovel;
+import util.CriaDate;
 import util.OrdenaClickTabela;
 import util.Validacao;
 
@@ -406,6 +407,7 @@ public class TelaClientes extends javax.swing.JFrame {
             jTextFieldEmail.setText(pe.getEmail());
             jFormattedTextFieldCPF.setText(pe.getCpf());
             jFormattedTextFieldTelefone.setText(pe.getTelefone());
+            jFormattedTextField1.setText(CriaDate.geraDataFormatada(pe.getDataNascimento()));
             
             isSelected = true;
             
@@ -430,13 +432,7 @@ public class TelaClientes extends javax.swing.JFrame {
         try {
             
             int action = jComboAcao.getSelectedIndex();
-            
-            Locale myLocale = new Locale("pt", "BR");
-            DateFormat format = new SimpleDateFormat("dd/MM/yyyy", myLocale);
-            format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
-            
-            java.util.Date date = format.parse(jFormattedTextField1.getText());
-            java.sql.Date dataNascimento = new java.sql.Date(date.getTime());
+            java.sql.Date dataNascimento = CriaDate.geraSqlDate(jFormattedTextField1.getText());
             
             if (Validacao.validarCPF(jFormattedTextFieldCPF.getText())) {
                 

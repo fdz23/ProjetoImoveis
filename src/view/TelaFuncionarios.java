@@ -24,6 +24,7 @@ import model.Pessoa;
 import model.Status;
 import model.TipoFuncionario;
 import model.Usuario;
+import util.CriaDate;
 import util.GeradorPasswords;
 import util.OrdenaClickTabela;
 import util.Validacao;
@@ -527,16 +528,9 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
             setarMatricula();
             String matricula = jTextFieldMatricula.getText();
-
-            Locale myLocale = new Locale("pt", "BR");
-            DateFormat format = new SimpleDateFormat("dd/MM/yyyy", myLocale);
-            format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
-
-            java.util.Date date = format.parse(jFormattedTextFieldNascimento.getText());
-            java.sql.Date dataNascimento = new java.sql.Date(date.getTime());
-
-            date = format.parse(jFormattedTextFieldRescisao.getText());
-            java.sql.Date dataRescisao = new java.sql.Date(date.getTime());
+            
+            java.sql.Date dataNascimento = CriaDate.geraSqlDate(jFormattedTextFieldNascimento.getText());
+            java.sql.Date dataRescisao = CriaDate.geraSqlDate(jFormattedTextFieldRescisao.getText());
 
             switch (action) {
 
@@ -610,7 +604,6 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         try {
 
             linhaSelecionada = jTableTabela.getSelectedRow();
-            SimpleDateFormat formatData = new SimpleDateFormat("dd/MM/yyyy");
 
             fun = fc.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
             end = fun.getEndereco();
@@ -622,8 +615,8 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
             jTextFieldCargo.setText(fun.getTipoFuncionario().getDescricao());
             jTextFieldStatus.setText(fun.getStatus().getDescricao());
-            jFormattedTextFieldRescisao.setText(formatData.format(fun.getDataRescisao()));
-            jFormattedTextFieldNascimento.setText(formatData.format(fun.getDataNascimento()));
+            jFormattedTextFieldRescisao.setText(CriaDate.geraDataFormatada(fun.getDataRescisao()));
+            jFormattedTextFieldNascimento.setText(CriaDate.geraDataFormatada(fun.getDataNascimento()));
             jFormattedTextFieldCPF.setText(fun.getCpf());
             jFormattedTextFieldTelefone.setText(fun.getTelefone());
             jTextFieldEndereco.setText(fun.getEndereco().getCidade());

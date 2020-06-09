@@ -13,6 +13,7 @@ import model.Funcionario;
 import model.Imovel;
 import model.Pessoa;
 import model.TipoImovel;
+import util.CriaDate;
 import util.Login;
 import util.OrdenaClickTabela;
 
@@ -138,18 +139,6 @@ public class TelaImoveis extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-    }
-
-    public boolean verificarId(int id) throws Exception {
-
-        if (id == 0) {
-
-            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
-
-        }
-
-        return false;
-
     }
 
     public boolean verificarVazio(Imovel obj) throws Exception {
@@ -384,27 +373,31 @@ public class TelaImoveis extends javax.swing.JFrame {
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
 
         try {
+            
+            linhaSelecionada = jTableTabela.getSelectedRow();
 
             im = ic.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+            setarCliente(im.getPessoa());
+            setarTipoImovel(im.getTipoImovel());
+            recebeObjeto(im.getEndereco());
 
             jTextFieldNome.setText(im.getDescricao());
             jTextFieldComissao.setText("" + im.getValorComissao());
             jTextFieldPreco.setText("" + im.getPreco());
             jTextFieldObservacao.setText(im.getObservacao());
             jTextFieldTamanho.setText("" + im.getTamanho());
-            jTextFieldProprietario.setText(im.getPessoa().getNome());
             jTextFieldParcelas.setText("" + im.getQuantidadeParcelas());
-            jTextFieldEndereco.setText("" + im.getEndereco().getId());
-            jTextFieldTipoImovel.setText(im.getTipoImovel().getDescricao());
-            jFormattedTextFieldDataInclusao.setText("" + im.getDataInclusao());
+            jFormattedTextFieldDataInclusao.setText(CriaDate.geraDataFormatada(im.getDataInclusao()));
 
             if (im.getAtivado() == 0) {
 
                 jButtonDesativar.setEnabled(false);
+                jButtonAtivar.setEnabled(true);
 
             } else {
 
                 jButtonDesativar.setEnabled(true);
+                jButtonAtivar.setEnabled(false);
             }
 
             isSelected = true;
@@ -412,6 +405,7 @@ public class TelaImoveis extends javax.swing.JFrame {
         } catch (Exception ex) {
 
             JOptionPane.showMessageDialog(null, ex.getMessage());
+            ex.printStackTrace();
 
         }
     }//GEN-LAST:event_jTableTabelaMouseClicked
@@ -430,11 +424,9 @@ public class TelaImoveis extends javax.swing.JFrame {
 
     private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
         try {
-            int id = Integer.parseInt(JTextFieldID.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                ic.ativarItem(id);
+                ic.ativarItem(im.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Imovel ativado com sucesso!");
@@ -449,11 +441,9 @@ public class TelaImoveis extends javax.swing.JFrame {
 
     private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
         try {
-            int id = Integer.parseInt(JTextFieldID.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                ic.desativarItem(id);
+                ic.desativarItem(im.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Imovel desativado com sucesso!");
@@ -506,7 +496,7 @@ public class TelaImoveis extends javax.swing.JFrame {
 
                         im = new Imovel(im.getId(), dataSql, preco, tamanho, observacao, dataSql, "Nenhuma", qtdParcelas, comissao, fun, pe, tp, end, 1, nome);
 
-                        if (!verificarId(im.getId()) && isSelected) {
+                        if (isSelected) {
 
                             ic.alterarItem(im);
                             popularJtable();
