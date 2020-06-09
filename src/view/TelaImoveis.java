@@ -76,7 +76,7 @@ public class TelaImoveis extends javax.swing.JFrame {
 
     }
 
-    public void recebeObjeto(Endereco obj) {
+    public void setarEndereco(Endereco obj) {
 
         this.end = obj;
 
@@ -107,7 +107,10 @@ public class TelaImoveis extends javax.swing.JFrame {
             jComboAcao.addItem("Ações");
             jComboAcao.addItem("Cadastrar");
             jComboAcao.addItem("Alterar");
+            
+            java.sql.Date dataAtual = new java.sql.Date(System.currentTimeMillis());
 
+            jFormattedTextFieldDataInclusao.setText(CriaDate.geraDataFormatada(dataAtual));
             jFormattedTextFieldDataInclusao.setEnabled(false);
             jTextFieldNome.setEnabled(false);
             jTextFieldEndereco.setEnabled(false);
@@ -123,8 +126,6 @@ public class TelaImoveis extends javax.swing.JFrame {
             jButtonAction.setEnabled(false);
             jButtonProp.setEnabled(false);
             jButtonTP.setEnabled(false);
-            Date data = new Date(System.currentTimeMillis());
-            jFormattedTextFieldDataInclusao.setText(data.toString());
             JTextFieldID.setText("0");
             jTextFieldPreco.setText("0.0");
             jTextFieldParcelas.setText("0");
@@ -134,6 +135,7 @@ public class TelaImoveis extends javax.swing.JFrame {
             JTextFieldID.setEnabled(false);
             jTextFieldParcelas.setEnabled(false);
             jTextFieldTamanho.setEditable(false);
+            jTextFieldTamanho.setEnabled(false);
 
         } catch (Exception ex) {
 
@@ -379,7 +381,7 @@ public class TelaImoveis extends javax.swing.JFrame {
             im = ic.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
             setarCliente(im.getPessoa());
             setarTipoImovel(im.getTipoImovel());
-            recebeObjeto(im.getEndereco());
+            setarEndereco(im.getEndereco());
 
             jTextFieldNome.setText(im.getDescricao());
             jTextFieldComissao.setText("" + im.getValorComissao());
@@ -494,7 +496,7 @@ public class TelaImoveis extends javax.swing.JFrame {
 
                     case 2:
 
-                        im = new Imovel(im.getId(), dataSql, preco, tamanho, observacao, dataSql, "Nenhuma", qtdParcelas, comissao, fun, pe, tp, end, 1, nome);
+                        im = new Imovel(im.getId(), im.getDataInclusao(), preco, tamanho, observacao, dataSql, "Nenhuma", qtdParcelas, comissao, fun, pe, tp, end, 1, nome);
 
                         if (isSelected) {
 
@@ -527,6 +529,9 @@ public class TelaImoveis extends javax.swing.JFrame {
 
             case 0:
 
+                java.sql.Date dataAtual = new java.sql.Date(System.currentTimeMillis());
+
+                jFormattedTextFieldDataInclusao.setText(CriaDate.geraDataFormatada(dataAtual));
                 jFormattedTextFieldDataInclusao.setEnabled(false);
                 jTextFieldNome.setEnabled(false);
                 jTextFieldEndereco.setEnabled(false);
@@ -542,8 +547,6 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jButtonAction.setEnabled(false);
                 jButtonProp.setEnabled(false);
                 jButtonTP.setEnabled(false);
-                Date data = new Date(System.currentTimeMillis());
-                jFormattedTextFieldDataInclusao.setText(data.toString());
                 JTextFieldID.setText("0");
                 jTextFieldPreco.setText("0.0");
                 jTextFieldParcelas.setText("0");
@@ -551,16 +554,15 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jTextFieldComissao.setText("0.0");
                 JTextFieldID.setEnabled(false);
                 jTextFieldParcelas.setEnabled(false);
-                jTextFieldTamanho.setEditable(false);
+                jTextFieldTamanho.setEnabled(false);
 
                 break;
 
             case 1:
 
-                jFormattedTextFieldDataInclusao.setEnabled(true);
                 jTextFieldNome.setEnabled(true);
                 jTextFieldEndereco.setEnabled(true);
-                jFormattedTextFieldDataInclusao.setEnabled(true);
+                jFormattedTextFieldDataInclusao.setEnabled(false);
                 jTextFieldComissao.setEnabled(true);
                 jTextFieldTipoImovel.setEnabled(true);
                 jTextFieldPreco.setEnabled(true);
@@ -571,16 +573,15 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jButtonProp.setEnabled(true);
                 jButtonTP.setEnabled(true);
                 jTextFieldParcelas.setEnabled(true);
-                jTextFieldTamanho.setEditable(true);
+                jTextFieldTamanho.setEnabled(true);
 
                 break;
 
             case 2:
 
-                jFormattedTextFieldDataInclusao.setEnabled(true);
                 jTextFieldNome.setEnabled(true);
                 jTextFieldEndereco.setEnabled(true);
-                jFormattedTextFieldDataInclusao.setEnabled(true);
+                jFormattedTextFieldDataInclusao.setEnabled(false);
                 jTextFieldComissao.setEnabled(true);
                 jTextFieldTipoImovel.setEnabled(true);
                 jTextFieldPreco.setEnabled(true);
@@ -591,7 +592,7 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jButtonProp.setEnabled(true);
                 jButtonTP.setEnabled(true);
                 jTextFieldParcelas.setEnabled(true);
-                jTextFieldTamanho.setEditable(true);
+                jTextFieldTamanho.setEnabled(true);
 
                 break;
 

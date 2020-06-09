@@ -621,7 +621,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
             if (!verificarVazio(end) && isSelected) {
 
-                telaI.recebeObjeto(end);
+                telaI.setarEndereco(end);
                 this.dispose();
 
             }
