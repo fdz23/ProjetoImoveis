@@ -6,12 +6,6 @@ import controller.StatusController;
 import controller.TipoFuncionarioController;
 import controller.UsuarioController;
 import dao.FuncionarioDao;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -27,7 +21,6 @@ import model.Usuario;
 import util.CriaDate;
 import util.GeradorPasswords;
 import util.OrdenaClickTabela;
-import util.Validacao;
 
 public class TelaFuncionarios extends javax.swing.JFrame {
 

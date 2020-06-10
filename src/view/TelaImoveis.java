@@ -1,7 +1,6 @@
 package view;
 
 import controller.ImovelController;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +30,7 @@ public class TelaImoveis extends javax.swing.JFrame {
     private int idFuncionário = 0;
     private TelaOrcamentos telaOrcamentos = null;
     private boolean isSelected = false;
+    private final int index = 4;
 
     public TelaImoveis() throws ClassNotFoundException, Exception {
         CriarJTable();
@@ -48,6 +48,7 @@ public class TelaImoveis extends javax.swing.JFrame {
         this.telaOrcamentos = telaOrcamentos;
         jButtonUsar.setVisible(true);
         OrdenaClickTabela.ordenarPorClick(jTableTabela, ic, modelo);
+        jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
     }
 
     public void CriarJTable() {

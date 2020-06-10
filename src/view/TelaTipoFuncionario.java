@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.NivelAcesso;
 import model.TipoFuncionario;
+import util.Login;
 import util.OrdenaClickTabela;
 
 public class TelaTipoFuncionario extends javax.swing.JFrame {
@@ -21,6 +22,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     private TipoFuncionario tipoFuncionario = null;
     private int linhaSelecionada = 0;
     private boolean isSelected = false;
+    private final int index = 9;
 
     public TelaTipoFuncionario() throws ClassNotFoundException, Exception {
 
@@ -41,6 +43,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         OrdenaClickTabela.ordenarPorClick(jTableTabela, tfc, modelo);
         this.telaFuncionarios = tela;
         jButtonUtilizar.setVisible(true);
+        jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
 
     }
 
@@ -59,7 +62,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
     }
 
-    public void setarNivelAcesso(NivelAcesso nivelAcesso) {
+    public void setarNivelAcesso(NivelAcesso nivelAcesso) throws Exception {
 
         this.na = nivelAcesso;
         JtextFielDescricaoNivelAcesso.setText(nivelAcesso.getDescricao());
@@ -348,7 +351,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
                     case 2:
                         if (isSelected) {
-                            
+
                             tfc.alterarItem(new TipoFuncionario(tipoFuncionario.getId(), descricao, na, salario, 1));
                             popularJtable();
 
@@ -447,10 +450,13 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     private void jButtonUtilizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUtilizarActionPerformed
         try {
             if (isSelected) {
+                if (Login.funcionario.getTipoFuncionario().getNivelAcesso().getSomaNiveis() > tipoFuncionario.getNivelAcesso().getSomaNiveis()) {
 
-                telaFuncionarios.setarCargo(tipoFuncionario);
-                this.dispose();
-
+                    telaFuncionarios.setarCargo(tipoFuncionario);
+                    this.dispose();
+                } else {
+                    throw new Exception("Você não tem permissão para atribuir esse cargo à funcionários.");
+                }
             } else {
                 throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
             }

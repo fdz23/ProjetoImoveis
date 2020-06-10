@@ -32,6 +32,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
     private OrcamentoController orcamentoController = null;
     private TelaContratos telaContratos = null;
     private boolean isSelected = false;
+    private final int index = 7;
 
     public TelaOrcamentos() {
         try {
@@ -54,6 +55,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
             OrdenaClickTabela.ordenarPorClick(jTableTabela, orcamentoController, modelo);
             this.telaContratos = telaContratos;
             jButtonUtilizar.setVisible(true);
+            jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }

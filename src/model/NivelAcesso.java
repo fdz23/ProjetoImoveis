@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.Array;
+import java.sql.SQLException;
 import model.interfaces.Tabela;
 
 /**
@@ -20,6 +21,25 @@ public class NivelAcesso implements Tabela {
     private Array nivel;
     private String nomeId = "nac_iden";
     private String nomeTabela = "nivel_acessos";
+    
+    public boolean getNivelByIndex(int index) throws SQLException {
+        
+        Integer[] niveis = (Integer[]) nivel.getArray();
+        
+        return niveis[index] == 1;
+    }
+    
+    public int getSomaNiveis() throws SQLException {
+        
+        Integer[] niveis = (Integer[]) nivel.getArray();
+        int soma = 0;
+        
+        for (int i = 0; i < niveis.length; i++) {
+            soma += niveis[i];
+        }
+        
+        return soma;
+    }
 
     @Override
     public String getNomeId() {

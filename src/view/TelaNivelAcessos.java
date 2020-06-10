@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.NivelAcesso;
+import util.Login;
 import util.OrdenaClickTabela;
 
 public class TelaNivelAcessos extends javax.swing.JFrame {
@@ -18,11 +19,10 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
     private NivelAcessoController nac = null;
     private DefaultTableModel modelo = new DefaultTableModel();
     private TelaTipoFuncionario telaTipoFuncionarios = null;
-    private DefaultComboBoxModel modelo1;
     private NivelAcesso nivelAcesso = null;
     private boolean isSelected = false;
-
-    int linhaSelecionada = 0;
+    private final int index = 6;
+    private int linhaSelecionada = 0;
 
     public TelaNivelAcessos() throws ClassNotFoundException, Exception {
 
@@ -44,6 +44,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         this.telaTipoFuncionarios = tela;
         OrdenaClickTabela.ordenarPorClick(jTableTabela, nac, modelo);
         jButtonSelecionarTipoFunc.setVisible(true);
+        jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
 
     }
 
@@ -255,7 +256,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
                 jButtonSelecionarTipoFuncActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonSelecionarTipoFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 160, 160, 50));
+        jPanel1.add(jButtonSelecionarTipoFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 150, 160, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -280,7 +281,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
             int action = jComboAcao.getSelectedIndex();
             Integer[] niveis = new Integer[12];
-            
+
             for (int i = 0; i < niveis.length; i++) {
                 niveis[i] = 0;
             }
@@ -516,7 +517,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
     private void jButtonSelecionarTipoFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarTipoFuncActionPerformed
         try {
             if (isSelected) {
-
+                
                 telaTipoFuncionarios.setarNivelAcesso(nivelAcesso);
                 this.dispose();
 

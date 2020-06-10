@@ -1,7 +1,6 @@
 package view;
 
 import controller.ImovelItemController;
-import controller.TipoPagamentoController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
