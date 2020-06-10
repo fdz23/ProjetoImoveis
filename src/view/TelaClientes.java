@@ -3,20 +3,15 @@ package view;
 import controller.PessoaController;
 import dao.PessoaDao;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Endereco;
-import model.Imovel;
 import model.Pessoa;
-import model.TipoImovel;
 import util.CriaDate;
+import util.Login;
 import util.OrdenaClickTabela;
 import util.Validacao;
 
@@ -31,6 +26,7 @@ public class TelaClientes extends javax.swing.JFrame {
     private TelaOrcamentos telaOrcamentos = null;
     private boolean isSelected = false;
     private TelaImoveis telaImoveis = null;
+    private final int index = 0;
     
     public TelaClientes() throws ClassNotFoundException, Exception {
         CriarJTable();
@@ -47,6 +43,7 @@ public class TelaClientes extends javax.swing.JFrame {
         iniciar();
         popularJtable();
         OrdenaClickTabela.ordenarPorClick(jTableTabela, pec, modelo);
+        jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
         jButtonUsarContrato.setVisible(true);
     }
     
@@ -57,6 +54,7 @@ public class TelaClientes extends javax.swing.JFrame {
         iniciar();
         popularJtable();
         OrdenaClickTabela.ordenarPorClick(jTableTabela, pec, modelo);
+        jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
         jButtonUsarImovel.setVisible(true);
     }
     

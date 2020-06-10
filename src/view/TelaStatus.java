@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Status;
+import util.Login;
 import util.OrdenaClickTabela;
 
 public class TelaStatus extends javax.swing.JFrame {
@@ -18,6 +19,7 @@ public class TelaStatus extends javax.swing.JFrame {
     private TelaFuncionarios tela = null;
     private boolean isSelected = false;
     private Status status = null;
+    private final int index = 8;
     
     public TelaStatus() throws ClassNotFoundException, Exception {
         CriarJTable();
@@ -36,6 +38,7 @@ public class TelaStatus extends javax.swing.JFrame {
         this.tela = tela;
         OrdenaClickTabela.ordenarPorClick(jTableTabela, sc, modelo);
         jButtonUsar.setVisible(true);
+        jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
         
     }
     

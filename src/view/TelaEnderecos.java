@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Endereco;
+import util.Login;
 import util.OrdenaClickTabela;
 import util.api.ViaCEP;
 import util.api.ViaCEPException;
@@ -23,6 +24,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
     private int telaAtiva = 0;
     private boolean isSelected = false;
     private TelaClientes telaClientes = null;
+    private final int index = 2;
 
     public TelaEnderecos() throws Exception {
         CriarJTable();
@@ -41,6 +43,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         popularJtable();
         this.tf = tf;
         OrdenaClickTabela.ordenarPorClick(jTableTabela, ec, modelo);
+        jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
         jButtonUtilizarFunc.setVisible(true);
 
     }
@@ -53,6 +56,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         popularJtable();
         this.tf = tf;
         OrdenaClickTabela.ordenarPorClick(jTableTabela, ec, modelo);
+        jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
         jButtonUtilizarClientes.setVisible(true);
         this.telaClientes = telaClientes;
 
@@ -68,6 +72,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         popularJtable();
         jButtonUtilizar.setVisible(true);
         OrdenaClickTabela.ordenarPorClick(jTableTabela, ec, modelo);
+        jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
 
     }
 

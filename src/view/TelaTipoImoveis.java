@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.TipoImovel;
+import util.Login;
 import util.OrdenaClickTabela;
 
 public class TelaTipoImoveis extends javax.swing.JFrame {
@@ -17,6 +18,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
     private TipoImovel tp = null;
     private boolean isSelected = false;
     private TelaImoveis telaImoveis = null;
+    private final int index = 10;
 
     public TelaTipoImoveis() throws Exception {
         CriarJTable();
@@ -34,6 +36,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         this.telaImoveis = telaImoveis;
         jButtonUtilizar.setVisible(true);
         OrdenaClickTabela.ordenarPorClick(jTableTabela, tic, modelo);
+        jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
     }
 
     public void iniciar() throws ClassNotFoundException, Exception {
