@@ -517,10 +517,13 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
     private void jButtonSelecionarTipoFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarTipoFuncActionPerformed
         try {
             if (isSelected) {
-                
-                telaTipoFuncionarios.setarNivelAcesso(nivelAcesso);
-                this.dispose();
+                if (Login.funcionario.getTipoFuncionario().getNivelAcesso().getSomaNiveis() > nivelAcesso.getSomaNiveis()) {
 
+                    telaTipoFuncionarios.setarNivelAcesso(nivelAcesso);
+                    this.dispose();
+                } else {
+                    throw new Exception("Você não tem permissão para atribuir esse nível de acesso à um tipo de funcionário.");
+                }
             } else {
                 throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
             }
