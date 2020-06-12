@@ -7,6 +7,7 @@ package model;
 
 import model.interfaces.Tabela;
 import java.sql.Date;
+import java.util.Iterator;
 
 /**
  *
@@ -29,6 +30,7 @@ public class Imovel implements Tabela {
     private Funcionario funcionario;
     private int ativado;
     private String descricao;
+    private Iterator<ImovelItem> itensImovel;
     private String nomeId = "imo_iden";
     private String nomeTabela = "imoveis";
 
@@ -46,7 +48,7 @@ public class Imovel implements Tabela {
     
     public Imovel(int id, Date dataInclusao, double preco, double tamanho, String observacao, Date baixaData, String baixaMotivo, 
             int quantidadeParcelas, double valorComissao, Funcionario funcionario, Pessoa pessoa, TipoImovel tipoImovel, Endereco endereco, 
-            int ativado, String descricao) {
+            int ativado, String descricao, Iterator<ImovelItem> itensImovel) {
         
         this.id = id;
         this.dataInclusao = dataInclusao;
@@ -63,6 +65,7 @@ public class Imovel implements Tabela {
         this.pessoa = pessoa;
         this.ativado = ativado;
         this.descricao = descricao;
+        this.itensImovel = itensImovel;
     }
 
     public int getId() {
@@ -183,5 +186,13 @@ public class Imovel implements Tabela {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Iterator<ImovelItem> getItensImovel() {
+        return itensImovel;
+    }
+
+    public void setItensImovel(Iterator<ImovelItem> itensImovel) {
+        this.itensImovel = itensImovel;
     }
 }

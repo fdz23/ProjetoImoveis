@@ -28,7 +28,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" pref="846" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="918" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -101,7 +101,7 @@
         <Component class="javax.swing.JTextField" name="JTextFieldID">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="40" y="710" width="40" height="-1"/>
+              <AbsoluteConstraints x="40" y="790" width="40" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -111,7 +111,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="20" y="710" width="-1" height="-1"/>
+              <AbsoluteConstraints x="20" y="790" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -124,7 +124,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="110" y="720" width="90" height="40"/>
+              <AbsoluteConstraints x="110" y="800" width="90" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -137,7 +137,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="210" y="720" width="90" height="40"/>
+              <AbsoluteConstraints x="210" y="800" width="90" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -150,7 +150,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="160" y="770" width="160" height="60"/>
+              <AbsoluteConstraints x="160" y="850" width="160" height="60"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -381,6 +381,19 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="630" y="120" width="170" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonSelecionarMoveis">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Selecionar m&#xf3;veis"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSelecionarMoveisActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="20" y="730" width="200" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

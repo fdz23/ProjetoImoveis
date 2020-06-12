@@ -58,7 +58,6 @@
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButtonImoveisItens" max="32767" attributes="0"/>
                           <Component id="jButtonImoveis" alignment="1" max="32767" attributes="0"/>
                           <Component id="jButtonTiposDeImovel" alignment="1" max="32767" attributes="0"/>
                           <Component id="jButtonStatus" alignment="1" max="32767" attributes="0"/>
@@ -92,9 +91,7 @@
               <Component id="jButtonNiveisDeAcesso" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="72" max="32767" attributes="0"/>
               <Component id="jSeparator2" min="-2" pref="8" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-              <Component id="jButtonImoveisItens" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonImoveis" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonOrcamentos" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -227,14 +224,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonContratosActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButtonImoveisItens">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Imoveis itens"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonImoveisItensActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
