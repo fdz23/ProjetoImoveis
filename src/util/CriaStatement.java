@@ -310,4 +310,19 @@ public class CriaStatement {
         
         return con.prepareStatement(sql);
     }
+    
+    public PreparedStatement selectSqlImoveisByCidadePeriodoTipoImovel(String cidade, int mes, int ano, int idTipoImovel) throws SQLException {
+        
+        String sql = "select I.imo_descricao,P.pes_nome as Proprietario,T.tim_nome,E.end_cidade FROM imoveis I\n" +
+                     "JOIN pessoas P ON P.pes_iden = I.imo_pes_iden\n" +
+                     "JOIN enderecos E ON E.end_iden = I.imo_iden\n" +
+                     "JOIN tipo_imoveis T ON T.tim_iden = I.imo_tim_iden\n" +
+                     "where T.tim_iden in (" + idTipoImovel + ")\n" +
+                     "and E.end_cidade in ('" + cidade + "')\n" +
+                     "and I.imo_data_inclusao < CAST('" + ano + "-" + (mes + 1) + "-1 00:00:00' AS DATE)\n" +
+                     "and I.imo_data_inclusao >= CAST('" + ano + "-" + mes + "-1 00:00:00' AS DATE)";
+        
+        return con.prepareStatement(sql);
+        
+    }
 }
