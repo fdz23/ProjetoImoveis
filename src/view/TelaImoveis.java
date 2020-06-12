@@ -165,7 +165,7 @@ public class TelaImoveis extends javax.swing.JFrame {
         if (obj.getPreco() <= 0) {
 
             throw new Exception("O campo preço não pode ser 0 ou negativo. Defina um valor");
-        } else if (obj.getObservacao().equals("")) {
+        } else if (obj.getSituacao().equals("")) {
 
             throw new Exception("O campo observação  não pode estar vazio");
         } else if (obj.getQuantidadeParcelas() == 0) {
@@ -411,7 +411,7 @@ public class TelaImoveis extends javax.swing.JFrame {
             jTextFieldNome.setText(im.getDescricao());
             jTextFieldComissao.setText("" + im.getValorComissao());
             jTextFieldPreco.setText("" + im.getPreco());
-            jComboBoxSituacao.setSelectedItem(im.getObservacao());
+            jComboBoxSituacao.setSelectedItem(im.getSituacao());
             jTextFieldTamanho.setText("" + im.getTamanho());
             jTextFieldParcelas.setText("" + im.getQuantidadeParcelas());
             jFormattedTextFieldDataInclusao.setText(CriaDate.geraDataFormatada(im.getDataInclusao()));
