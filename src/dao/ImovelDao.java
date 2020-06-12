@@ -109,7 +109,7 @@ public class ImovelDao extends Dao<Imovel> {
         ps.setDate(1, item.getDataInclusao());
         ps.setDouble(2, item.getPreco());
         ps.setDouble(3, item.getTamanho());
-        ps.setString(4, item.getObservacao());
+        ps.setString(4, item.getSituacao());
         ps.setDate(5, item.getBaixaData());
         ps.setString(6, item.getBaixaMotivo());
         ps.setInt(7, item.getQuantidadeParcelas());
@@ -133,7 +133,7 @@ public class ImovelDao extends Dao<Imovel> {
         ps.setDate(1, item.getDataInclusao());
         ps.setDouble(2, item.getPreco());
         ps.setDouble(3, item.getTamanho());
-        ps.setString(4, item.getObservacao());
+        ps.setString(4, item.getSituacao());
         ps.setDate(5, item.getBaixaData());
         ps.setString(6, item.getBaixaMotivo());
         ps.setInt(7, item.getQuantidadeParcelas());

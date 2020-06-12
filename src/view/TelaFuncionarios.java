@@ -6,6 +6,7 @@ import controller.StatusController;
 import controller.TipoFuncionarioController;
 import controller.UsuarioController;
 import dao.FuncionarioDao;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -30,9 +31,6 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     private FuncionarioController fc = null;
     private FuncionarioDao fda = null;
     private Endereco end = null;
-    private EnderecoController endc = null;
-    private TipoFuncionarioController tfc = null;
-    private StatusController sta = null;
     private Pessoa pe = null;
     private Funcionario fun = null;
     private Endereco end1 = null;
@@ -73,9 +71,6 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     public void iniciar() throws ClassNotFoundException, Exception {
 
         fc = new FuncionarioController();
-        tfc = new TipoFuncionarioController();
-        sta = new StatusController();
-        endc = new EnderecoController();
         fda = new FuncionarioDao();
         usc = new UsuarioController();
 
@@ -89,7 +84,6 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jFormattedTextFieldRescisao.setEnabled(false);
         jTextFieldEmail.setEnabled(false);
         jTextFieldEndereco.setEnabled(false);
-        jFormattedTextFieldNascimento.setEnabled(false);
         jTextFieldNome.setEnabled(false);
         jFormattedTextFieldTelefone.setEnabled(false);
         jFormattedTextFieldCPF.setEnabled(false);
@@ -147,7 +141,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
         } else if (obj.getPessoa().getTelefone().equals("")) {
 
-            throw new Exception("O campo Data Telefone não pode estar vazio");
+            throw new Exception("O campo Telefone não pode estar vazio");
 
         } else if (obj.getTipoFuncionario().getDescricao().equals("")) {
 
@@ -159,6 +153,11 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         } else if (obj.getEndereco().getId() == 0) {
 
             throw new Exception("O campo Endereço não pode ser 0. Escolha um endereço!");
+        } else {
+            Date data = new Date(System.currentTimeMillis());
+            if (CriaDate.geraSqlDate(jFormattedTextFieldNascimento.getText()).compareTo(data) > 0) {
+                throw new Exception("O campo de data de nascimento não pode ser no futuro.");
+            }
         }
 
         return false;
@@ -412,25 +411,25 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jFormattedTextFieldRescisao.setEnabled(false);
                 jTextFieldEmail.setEnabled(false);
                 jTextFieldEndereco.setEnabled(false);
-                jFormattedTextFieldNascimento.setEnabled(false);
                 jTextFieldNome.setEnabled(false);
                 jFormattedTextFieldTelefone.setEnabled(false);
                 jTextFieldStatus.setEnabled(false);
                 jCheckBoxDemissao.setEnabled(false);
                 jButtonEndereco.setEnabled(false);
                 jButtonAcao.setEnabled(false);
+                jFormattedTextFieldCPF.setEnabled(false);
 
                 break;
 
             case 1:
 
                 jFormattedTextFieldNascimento.setEnabled(true);
+                jFormattedTextFieldCPF.setEnabled(true);
                 jTextFieldMatricula.setEnabled(false);
                 jTextFieldCargo.setEnabled(false);
                 jFormattedTextFieldRescisao.setEnabled(false);
                 jTextFieldEmail.setEnabled(true);
                 jTextFieldEndereco.setEnabled(false);
-                jFormattedTextFieldNascimento.setEnabled(true);
                 jTextFieldNome.setEnabled(true);
                 jFormattedTextFieldTelefone.setEnabled(true);
                 jTextFieldStatus.setEnabled(false);
@@ -445,12 +444,12 @@ public class TelaFuncionarios extends javax.swing.JFrame {
             case 2:
 
                 jFormattedTextFieldNascimento.setEnabled(true);
+                jFormattedTextFieldCPF.setEnabled(true);
                 jTextFieldCargo.setEnabled(false);
                 jFormattedTextFieldRescisao.setEnabled(false);
                 jTextFieldMatricula.setEnabled(false);
                 jTextFieldEmail.setEnabled(true);
                 jTextFieldEndereco.setEnabled(false);
-                jFormattedTextFieldNascimento.setEnabled(true);
                 jTextFieldNome.setEnabled(true);
                 jFormattedTextFieldTelefone.setEnabled(true);
                 jTextFieldStatus.setEnabled(false);
@@ -500,7 +499,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
             java.sql.Date dataNascimento = CriaDate.geraSqlDate(jFormattedTextFieldNascimento.getText());
             java.sql.Date dataRescisao = CriaDate.geraSqlDate("00/00/0000");
-            
+
             if (jCheckBoxDemissao.isSelected()) {
                 dataRescisao = CriaDate.geraSqlDate(jFormattedTextFieldRescisao.getText());
             }
@@ -543,6 +542,12 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 case 2:
 
                     if (isSelected) {
+                        if (jCheckBoxDemissao.isSelected()) {
+                            Date data = new Date(System.currentTimeMillis());
+                            if (CriaDate.geraSqlDate(jFormattedTextFieldRescisao.getText()).compareTo(data) < 0) {
+                                throw new Exception("O campo de data de nascimento não pode ser no passado.");
+                            }
+                        }
 
                         fc.alterarItem(new Funcionario(fun.getId(), matricula, pe, tf, status, dataRescisao, 1));
                         popularJtable();
@@ -598,7 +603,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jButtonAtivar.setEnabled(true);
                 jButtonDesativar.setEnabled(false);
             }
-            
+
             isSelected = true;
 
         } catch (Exception ex) {

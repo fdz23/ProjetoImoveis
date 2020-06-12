@@ -40,7 +40,7 @@ public class ImovelController extends Controller<Imovel> {
                         item.getDataInclusao(),
                         item.getPreco(),
                         item.getTamanho(),
-                        item.getObservacao(),
+                        item.getSituacao(),
                         item.getBaixaData(),
                         item.getBaixaMotivo(),
                         item.getQuantidadeParcelas(),

@@ -279,4 +279,128 @@ public class CriaStatement {
         return con.prepareStatement(sql);   
     }
     
+    public PreparedStatement selectSqlImoveisByFuncionario(int idFuncionario) throws SQLException {
+        
+        String sql = "select P.pes_nome,I.imo_descricao,I.imo_valor_comissao,I.imo_preco from contratos C\n" +
+                     "JOIN orcamentos O ON O.orc_iden = C.con_orc_iden\n" +
+                     "JOIN funcionarios F ON F.fun_iden = O.orc_func_iden\n" +
+                     "JOIN pessoas P On P.pes_iden = F.fun_pes_iden\n" +
+                     "JOIN imoveis I ON i.imo_iden = O.orc_imo_iden\n" +
+                     "where F.fun_iden in " + idFuncionario + "\n" +
+                     "and C.con_pago in (1)\n" +
+                     "order by F.fun_iden asc";
+        
+        return con.prepareStatement(sql);
+    }
+    
+    public PreparedStatement selectSqlImoveisFinanciadosByData(int mes, int ano) throws SQLException {
+        
+        String sql = "SELECT I.imo_descricao,I.imo_preco,I.imo_valor_comissao,PE.pes_nome as funcionario,P.pes_nome as cliente,PES.pes_nome as Proprietário,TP.tpa_descricao,C.con_data \n" +
+                     "FROM contratos C\n" +
+                     "JOIN orcamentos O ON O.orc_iden = C.con_orc_iden\n" +
+                     "JOIN imoveis I ON I.imo_iden = O.orc_imo_iden\n" +
+                     "JOIN pessoas P ON P.pes_iden = O.orc_pes_iden\n" +
+                     "JOIN funcionarios F ON F.fun_iden = O.orc_func_iden\n" +
+                     "JOIN PESSOAS PE ON PE.pes_iden = F.fun_pes_iden\n" +
+                     "JOIN PESSOAS PES ON PES.pes_iden = I.imo_pes_iden\n" +
+                     "JOIN tipo_pagamentos TP ON TP.tpa_iden = O.orc_tpa_iden\n" +
+                     "where C.con_pago in (2)\n" +
+                     "and C.con_data < CAST('" + ano + "-" + (mes + 1) + "-1 00:00:00' AS DATE)\n" +
+                     "and C.con_data >= CAST('" + ano + "-" + mes + "-1 00:00:00' AS DATE)";
+        
+        return con.prepareStatement(sql);
+    }
+    
+    public PreparedStatement selectSqlImoveisByCidadePeriodoTipoImovel(String cidade, int mes, int ano, int idTipoImovel) throws SQLException {
+        
+        String sql = "select I.imo_descricao,P.pes_nome as Proprietario,T.tim_nome,E.end_cidade FROM imoveis I\n" +
+                     "JOIN pessoas P ON P.pes_iden = I.imo_pes_iden\n" +
+                     "JOIN enderecos E ON E.end_iden = I.imo_end_iden\n" +
+                     "JOIN tipo_imoveis T ON T.tim_iden = I.imo_tim_iden\n" +
+                     "where T.tim_iden in (" + idTipoImovel + ")\n" +
+                     "and E.end_cidade in ('" + cidade + "')\n" +
+                     "and I.imo_data_inclusao < CAST('" + ano + "-" + (mes + 1) + "-1 00:00:00' AS DATE)\n" +
+                     "and I.imo_data_inclusao >= CAST('" + ano + "-" + mes + "-1 00:00:00' AS DATE)";
+        
+        return con.prepareStatement(sql);
+        
+    }
+    
+    public PreparedStatement selectSqlImoveisBaixadosByBaixa(String baixa) throws SQLException {
+        
+        String sql = "select I.imo_descricao,I.imo_baixa_data,I.imo_baixa_motivo,I.imo_baixa_data from imoveis I\n" +
+                     "where I.imo_baixa_motivo in ('" + baixa + "')\n" +
+                     "and I.imo_baixa_data is not null";
+        
+        return con.prepareStatement(sql);
+        
+    }
+    
+    public PreparedStatement selectSqlImoveisByCpf(String cpf) throws SQLException {
+        
+        String sql = "select P.pes_nome,I.imo_descricao,I.imo_preco,E.end_cidade FROM imoveis I\n" +
+                     "JOIN enderecos E ON E.end_iden = I.imo_end_iden\n" +
+                     "JOIN pessoas P ON P.pes_iden = I.imo_pes_iden\n" +
+                     "where P.pes_cpf in ('" + cpf + "')";
+        
+        return con.prepareStatement(sql);
+        
+    }
+    
+    public PreparedStatement selectSqlCalculoComissaoPorImovel() throws SQLException {
+        
+        String sql = "select P.pes_nome, SUM(I.imo_valor_comissao) as Valor_Comissao from contratos C\n" +
+                     "join orcamentos O On O.orc_iden = C.con_orc_iden\n" +
+                     "JOIN imoveis I ON I.imo_iden = O.orc_imo_iden\n" +
+                     "JOIN funcionarios F ON F.fun_iden = O.orc_func_iden\n" +
+                     "JOIN pessoas P On P.pes_iden = F.fun_pes_iden\n" +
+                     "GROUP BY P.pes_nome";
+        
+        return con.prepareStatement(sql);
+        
+    }
+    
+    public PreparedStatement selectSqlImoveisDisponiveisPorSituacao(String situacao) throws SQLException {
+        
+        String sql = "select p.pes_nome as Proprietario,I.imo_descricao,I.imo_preco,I.imo_data_inclusao,I.imo_situacao,I.imo_ativado from imoveis I\n" +
+                     "join pessoas P ON P.pes_iden = I.imo_pes_iden\n" +
+                     "where I.imo_ativado = 1\n" +
+                     "and I.imo_situacao in ('" + situacao + "')";
+        
+        return con.prepareStatement(sql);
+        
+    }
+    
+    public PreparedStatement selectSqlImoveisPorVendaAnual(int ano) throws SQLException {
+        
+        String sql = "select I.imo_descricao,I.imo_valor_comissao,I.imo_preco from contratos C\n" +
+                     "join orcamentos O on O.orc_iden = C.con_orc_iden\n" +
+                     "join imoveis I ON I.imo_iden = O.orc_imo_iden\n" +
+                     "where C.con_data < CAST('" + (ano + 1) + "-01-1 00:00:00' AS DATE)\n" +
+                     "and C.con_data >= CAST('" + ano + "-01-1 00:00:00' AS DATE)";
+        
+        return con.prepareStatement(sql);
+        
+    }
+    
+    public PreparedStatement selectSqlImoveisPorVendaMensal(int ano, int mes) throws SQLException {
+        
+        String sql = "select I.imo_descricao,I.imo_valor_comissao,I.imo_preco from contratos C\n" +
+                     "join orcamentos O on O.orc_iden = C.con_orc_iden\n" +
+                     "join imoveis I ON I.imo_iden = O.orc_imo_iden\n" +
+                     "where C.con_data < CAST('" + ano + "-" + (mes + 1) + "-1 00:00:00' AS DATE)\n" +
+                     "and C.con_data >= CAST('" + ano + "-" + mes + "-1 00:00:00' AS DATE)";
+        
+        return con.prepareStatement(sql);
+        
+    }
+    
+    public PreparedStatement selectSqlImoveisCadastrados() throws SQLException {
+        
+        String sql = "select i.imo_descricao,i.imo_tamanho,p.pes_nome,i.imo_preco,i.imo_valor_comissao,i.imo_data_inclusao from imoveis i\n" +
+                     "join pessoas p ON p.pes_iden = i.imo_pes_iden";
+        
+        return con.prepareStatement(sql);
+        
+    }
 }

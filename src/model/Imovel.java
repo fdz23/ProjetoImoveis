@@ -19,7 +19,7 @@ public class Imovel implements Tabela {
     private Date dataInclusao;
     private double preco;
     private double tamanho;
-    private String observacao;
+    private String situacao;
     private Date baixaData;
     private String baixaMotivo;
     private double valorComissao;
@@ -46,7 +46,7 @@ public class Imovel implements Tabela {
     
     public Imovel() {}
     
-    public Imovel(int id, Date dataInclusao, double preco, double tamanho, String observacao, Date baixaData, String baixaMotivo, 
+    public Imovel(int id, Date dataInclusao, double preco, double tamanho, String situacao, Date baixaData, String baixaMotivo, 
             int quantidadeParcelas, double valorComissao, Funcionario funcionario, Pessoa pessoa, TipoImovel tipoImovel, Endereco endereco, 
             int ativado, String descricao, Iterator<ImovelItem> itensImovel) {
         
@@ -54,7 +54,7 @@ public class Imovel implements Tabela {
         this.dataInclusao = dataInclusao;
         this.tamanho = tamanho;
         this.preco = preco;
-        this.observacao = observacao;
+        this.situacao = situacao;
         this.baixaMotivo = baixaMotivo;
         this.valorComissao = valorComissao;
         this.quantidadeParcelas = quantidadeParcelas;
@@ -92,12 +92,12 @@ public class Imovel implements Tabela {
         this.preco = preco;
     }
 
-    public String getObservacao() {
-        return observacao;
+    public String getSituacao() {
+        return situacao;
     }
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
     public Date getBaixaData() {
