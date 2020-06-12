@@ -283,11 +283,11 @@ public class CriaStatement {
         
         String sql = "select P.pes_nome,I.imo_descricao,I.imo_valor_comissao,I.imo_preco from contratos C\n" +
                      "JOIN orcamentos O ON O.orc_iden = C.con_orc_iden\n" +
-                     "JOIN funcionarios F ON F.fun_iden = O.orc_fun_iden\n" +
+                     "JOIN funcionarios F ON F.fun_iden = O.orc_func_iden\n" +
                      "JOIN pessoas P On P.pes_iden = F.fun_pes_iden\n" +
                      "JOIN imoveis I ON i.imo_iden = O.orc_imo_iden\n" +
                      "where F.fun_iden in " + idFuncionario + "\n" +
-                     "and C.con_sit_iden in (1)\n" +
+                     "and C.con_pago in (1)\n" +
                      "order by F.fun_iden asc";
         
         return con.prepareStatement(sql);
