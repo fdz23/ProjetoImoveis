@@ -136,4 +136,29 @@ public class RelatoriosDao {
         return itens.iterator();
         
     }
+    
+    public Iterator<Object[]> getImoveisByCpf(String cpf) throws SQLException {
+        
+        List<Object[]> itens = new ArrayList<Object[]>();
+        
+        ps = criaStatement.selectSqlImoveisByCpf(cpf);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()) {
+            
+            itens.add(
+                    new Object[]{
+                        rs.getString("pes_nome"),
+                        rs.getString("imo_descricao"),
+                        rs.getDouble("imo_preco"),
+                        rs.getString("end_cidade")
+                    }
+            );
+            
+        }
+        
+        return itens.iterator();
+        
+    }
 }
