@@ -232,4 +232,30 @@ public class RelatoriosDao {
         return itens.iterator();
         
     }
+    
+    public Iterator<Object[]> getImoveisDisponiveisPorSituacao(String situacao) throws SQLException {
+        
+        List<Object[]> itens = new ArrayList<Object[]>();
+        
+        ps = criaStatement.selectSqlImoveisDisponiveisPorSituacao(situacao);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()) {
+            
+            itens.add(
+                    new Object[]{
+                        rs.getString("proprietário"),
+                        rs.getString("imo_descricao"),
+                        rs.getDouble("imo_preco"),
+                        CriaDate.geraDataFormatada(rs.getDate("imo_data_inclusao")),
+                        rs.getString("imo_situacao")
+                    }
+            );
+            
+        }
+        
+        return itens.iterator();
+        
+    }
 }
