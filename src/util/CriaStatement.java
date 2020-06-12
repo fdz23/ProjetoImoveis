@@ -335,4 +335,15 @@ public class CriaStatement {
         return con.prepareStatement(sql);
         
     }
+    
+    public PreparedStatement selectSqlImoveisByCpf(String cpf) throws SQLException {
+        
+        String sql = "select P.pes_nome,I.imo_descricao,I.imo_preco,E.end_cidade FROM imoveis I\n" +
+                     "JOIN enderecos E ON E.end_iden = I.imo_end_iden\n" +
+                     "JOIN pessoas P ON P.pes_iden = I.imo_pes_iden\n" +
+                     "where P.pes_cpf in ('" + cpf + "')";
+        
+        return con.prepareStatement(sql);
+        
+    }
 }
