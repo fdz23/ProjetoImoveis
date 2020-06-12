@@ -74,6 +74,12 @@ public class RelatoriosController {
 
     }
     
+    public DefaultTableModel populaImoveisDisponiveisPorSituacao(String situacao) throws Exception {
+
+        return populaJTable(dao.getImoveisDisponiveisPorSituacao(situacao));
+
+    }
+    
     private DefaultTableModel populaJTable(Iterator<Object[]> lista) {
         
         model.setNumRows(0);
