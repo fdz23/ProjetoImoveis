@@ -46,7 +46,7 @@ public class Imovel implements Tabela {
     
     public Imovel() {}
     
-    public Imovel(int id, Date dataInclusao, double preco, double tamanho, String observacao, Date baixaData, String baixaMotivo, 
+    public Imovel(int id, Date dataInclusao, double preco, double tamanho, String situacao, Date baixaData, String baixaMotivo, 
             int quantidadeParcelas, double valorComissao, Funcionario funcionario, Pessoa pessoa, TipoImovel tipoImovel, Endereco endereco, 
             int ativado, String descricao, Iterator<ImovelItem> itensImovel) {
         
@@ -54,7 +54,7 @@ public class Imovel implements Tabela {
         this.dataInclusao = dataInclusao;
         this.tamanho = tamanho;
         this.preco = preco;
-        this.situacao = observacao;
+        this.situacao = situacao;
         this.baixaMotivo = baixaMotivo;
         this.valorComissao = valorComissao;
         this.quantidadeParcelas = quantidadeParcelas;

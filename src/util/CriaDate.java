@@ -19,9 +19,7 @@ public class CriaDate {
 
     public static java.sql.Date geraSqlDate(String data) throws ParseException {
 
-        Locale myLocale = new Locale("pt", "BR");
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy", myLocale);
-        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
         java.util.Date date = format.parse(data);
         java.sql.Date finalData = new java.sql.Date(date.getTime());

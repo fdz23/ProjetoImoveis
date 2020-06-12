@@ -3,6 +3,7 @@ package view;
 import controller.PessoaController;
 import dao.PessoaDao;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -74,11 +75,11 @@ public class TelaClientes extends javax.swing.JFrame {
         jComboAcao.addItem("Cadastrar");
         jComboAcao.addItem("Alterar");
         
-        jFormattedTextField1.setEnabled(false);
+        jFormattedTextFieldDataNascimento.setEnabled(false);
         jButtonUsarContrato.setVisible(false);
         jTextFieldEmail.setEnabled(false);
         jTextFieldEndereco.setEnabled(false);
-        jFormattedTextField1.setEnabled(false);
+        jFormattedTextFieldDataNascimento.setEnabled(false);
         jTextFieldNome.setEnabled(false);
         jFormattedTextFieldTelefone.setEnabled(false);
         jButton1.setEnabled(false);
@@ -121,6 +122,11 @@ public class TelaClientes extends javax.swing.JFrame {
             throw new Exception("O campo data de nascimento não pode estar vazio");
         } else if (obj.getTelefone().equals("")) {
             throw new Exception("O campo telefone  não pode estar vazio");
+        } else {
+            Date data = new Date(System.currentTimeMillis());
+            if (CriaDate.geraSqlDate(jFormattedTextFieldDataNascimento.getText()).compareTo(data) > 0) {
+                throw new Exception("O campo de data de nascimento não pode ser no futuro.");
+            }
         }
         
         return false;
@@ -152,7 +158,7 @@ public class TelaClientes extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldDataNascimento = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         jFormattedTextFieldTelefone = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -205,11 +211,11 @@ public class TelaClientes extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, -1, -1));
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            jFormattedTextFieldDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel1.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 250, 30));
+        jPanel1.add(jFormattedTextFieldDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 250, 30));
 
         jLabel5.setText("TELEFONE");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, -1, -1));
@@ -326,10 +332,10 @@ public class TelaClientes extends javax.swing.JFrame {
             
             case 0:
                 
-                jFormattedTextField1.setEnabled(false);
+                jFormattedTextFieldDataNascimento.setEnabled(false);
                 jTextFieldEmail.setEnabled(false);
                 jTextFieldEndereco.setEnabled(false);
-                jFormattedTextField1.setEnabled(false);
+                jFormattedTextFieldDataNascimento.setEnabled(false);
                 jTextFieldNome.setEnabled(false);
                 jFormattedTextFieldTelefone.setEnabled(false);
                 jButton1.setEnabled(false);
@@ -342,10 +348,10 @@ public class TelaClientes extends javax.swing.JFrame {
             
             case 1:
                 
-                jFormattedTextField1.setEnabled(true);
+                jFormattedTextFieldDataNascimento.setEnabled(true);
                 jTextFieldEmail.setEnabled(true);
                 jTextFieldEndereco.setEnabled(false);
-                jFormattedTextField1.setEnabled(true);
+                jFormattedTextFieldDataNascimento.setEnabled(true);
                 jTextFieldNome.setEnabled(true);
                 jFormattedTextFieldTelefone.setEnabled(true);
                 jButton1.setEnabled(true);
@@ -356,10 +362,10 @@ public class TelaClientes extends javax.swing.JFrame {
             
             case 2:
                 
-                jFormattedTextField1.setEnabled(true);
+                jFormattedTextFieldDataNascimento.setEnabled(true);
                 jTextFieldEmail.setEnabled(true);
                 jTextFieldEndereco.setEnabled(false);
-                jFormattedTextField1.setEnabled(true);
+                jFormattedTextFieldDataNascimento.setEnabled(true);
                 jTextFieldNome.setEnabled(true);
                 jFormattedTextFieldTelefone.setEnabled(true);
                 jButton1.setEnabled(true);
@@ -404,7 +410,7 @@ public class TelaClientes extends javax.swing.JFrame {
             jTextFieldEmail.setText(pe.getEmail());
             jFormattedTextFieldCPF.setText(pe.getCpf());
             jFormattedTextFieldTelefone.setText(pe.getTelefone());
-            jFormattedTextField1.setText(CriaDate.geraDataFormatada(pe.getDataNascimento()));
+            jFormattedTextFieldDataNascimento.setText(CriaDate.geraDataFormatada(pe.getDataNascimento()));
             
             isSelected = true;
             
@@ -429,7 +435,7 @@ public class TelaClientes extends javax.swing.JFrame {
         try {
             
             int action = jComboAcao.getSelectedIndex();
-            java.sql.Date dataNascimento = CriaDate.geraSqlDate(jFormattedTextField1.getText());
+            java.sql.Date dataNascimento = CriaDate.geraSqlDate(jFormattedTextFieldDataNascimento.getText());
             
             if (Validacao.validarCPF(jFormattedTextFieldCPF.getText())) {
                 
@@ -616,8 +622,8 @@ public class TelaClientes extends javax.swing.JFrame {
     private javax.swing.JButton jButtonUsarContrato;
     private javax.swing.JButton jButtonUsarImovel;
     private javax.swing.JComboBox jComboAcao;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPF;
+    private javax.swing.JFormattedTextField jFormattedTextFieldDataNascimento;
     private javax.swing.JFormattedTextField jFormattedTextFieldTelefone;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
