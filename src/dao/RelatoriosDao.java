@@ -161,4 +161,27 @@ public class RelatoriosDao {
         return itens.iterator();
         
     }
+    
+    public Iterator<Object[]> getCalculoComissaoPorImovel() throws SQLException {
+        
+        List<Object[]> itens = new ArrayList<Object[]>();
+        
+        ps = criaStatement.selectSqlCalculoComissaoPorImovel();
+        
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()) {
+            
+            itens.add(
+                    new Object[]{
+                        rs.getString("pes_nome"),
+                        rs.getDouble("valor_comissao")
+                    }
+            );
+            
+        }
+        
+        return itens.iterator();
+        
+    }
 }
