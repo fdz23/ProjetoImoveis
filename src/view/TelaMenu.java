@@ -415,7 +415,7 @@ public class TelaMenu extends javax.swing.JFrame {
 
     private void jButtonImoveisItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImoveisItensActionPerformed
         try {
-            new TelaImoveisItems().setVisible(true);
+            new TelaImoveisItens().setVisible(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
             ex.printStackTrace();
