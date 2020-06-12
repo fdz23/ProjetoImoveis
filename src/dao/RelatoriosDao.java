@@ -208,4 +208,28 @@ public class RelatoriosDao {
         return itens.iterator();
         
     }
+    
+    public Iterator<Object[]> getImoveisPorVendaMensal(int ano, int mes) throws SQLException {
+        
+        List<Object[]> itens = new ArrayList<Object[]>();
+        
+        ps = criaStatement.selectSqlImoveisPorVendaMensal(ano, mes);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()) {
+            
+            itens.add(
+                    new Object[]{
+                        rs.getString("imo_descricao"),
+                        rs.getDouble("imo_valor_comissao"),
+                        rs.getDouble("imo_preco")
+                    }
+            );
+            
+        }
+        
+        return itens.iterator();
+        
+    }
 }
