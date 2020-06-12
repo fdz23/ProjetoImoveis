@@ -34,7 +34,6 @@ public class TelaMenu extends javax.swing.JFrame {
             jButtonEnderecos.setVisible(false);
             jButtonFuncionarios.setVisible(false);
             jButtonImoveis.setVisible(false);
-            jButtonImoveisItens.setVisible(false);
             jButtonNiveisDeAcesso.setVisible(false);
             jButtonOrcamentos.setVisible(false);
             jButtonStatus.setVisible(false);
@@ -69,9 +68,6 @@ public class TelaMenu extends javax.swing.JFrame {
         }
         if (niveis[4] == 1) {
             jButtonImoveis.setVisible(true);
-        }
-        if (niveis[5] == 1) {
-            jButtonImoveisItens.setVisible(true);
         }
         if (niveis[6] == 1) {
             jButtonNiveisDeAcesso.setVisible(true);
@@ -119,7 +115,6 @@ public class TelaMenu extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jButtonLogOff = new javax.swing.JButton();
         jButtonContratos = new javax.swing.JButton();
-        jButtonImoveisItens = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -209,13 +204,6 @@ public class TelaMenu extends javax.swing.JFrame {
             }
         });
 
-        jButtonImoveisItens.setText("Imoveis itens");
-        jButtonImoveisItens.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonImoveisItensActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -247,11 +235,9 @@ public class TelaMenu extends javax.swing.JFrame {
                             .addComponent(jButtonContratos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonImoveisItens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jButtonImoveis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonTiposDeImovel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jButtonImoveis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonTiposDeImovel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(24, 24, 24))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -275,9 +261,7 @@ public class TelaMenu extends javax.swing.JFrame {
                 .addComponent(jButtonNiveisDeAcesso)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(jButtonImoveisItens)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonImoveis)
                     .addComponent(jButtonOrcamentos))
@@ -413,15 +397,6 @@ public class TelaMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonContratosActionPerformed
 
-    private void jButtonImoveisItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImoveisItensActionPerformed
-        try {
-            new TelaImoveisItems().setVisible(true);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
-            ex.printStackTrace();
-        }
-    }//GEN-LAST:event_jButtonImoveisItensActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -463,7 +438,6 @@ public class TelaMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEnderecos;
     private javax.swing.JButton jButtonFuncionarios;
     private javax.swing.JButton jButtonImoveis;
-    private javax.swing.JButton jButtonImoveisItens;
     private javax.swing.JButton jButtonLogOff;
     private javax.swing.JButton jButtonNiveisDeAcesso;
     private javax.swing.JButton jButtonOrcamentos;

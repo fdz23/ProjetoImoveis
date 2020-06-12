@@ -6,26 +6,43 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import model.Imovel;
 import model.ImovelItem;
+import util.Login;
+import util.OrdenaClickTabela;
 
-public class TelaImoveisItems extends javax.swing.JFrame {
+public class TelaImoveisItens extends javax.swing.JFrame {
 
-    DefaultTableModel modelo = new DefaultTableModel();
-    ImovelItemController im = null;
-    int linhaSelecionada = 0;
-    ImovelItem iit = null;
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private ImovelItemController im = null;
+    private int linhaSelecionada = 0;
+    private ImovelItem iit = null;
+    private Imovel imovel = null;
+    private boolean isSelected = false;
+    private final int index = 5;
 
-    public TelaImoveisItems() throws Exception {
+    public TelaImoveisItens() throws Exception {
         CriarJTable();
         initComponents();
         iniciar();
         popularJtable();
+        jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
+    }
+    
+    public TelaImoveisItens(Imovel imovel) throws Exception {
+        this.imovel = imovel;
+        CriarJTable();
+        initComponents();
+        iniciar();
+        popularJtable();
+        jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
     }
 
     private void CriarJTable() {
         jTableTabela = new JTable(modelo);
         modelo.addColumn("Código");
         modelo.addColumn("Descrição");
+        modelo.addColumn("Valor");
 
     }
 
@@ -34,18 +51,8 @@ public class TelaImoveisItems extends javax.swing.JFrame {
         if (obj.getDescricao().equals("") || obj.getDescricao() == null) {
 
             throw new Exception("O campo descrição não pode estar vazio");
-        }
-
-        return false;
-
-    }
-
-    public boolean verificarId(int id) throws Exception {
-
-        if (id == 0) {
-
-            throw new Exception("O ID não pode ser 0 selecione uma linha da tabela que deseja editar.");
-
+        } else if (jTextFieldValor.getText().equals("")) {
+            throw new Exception("O campo valor não pode estar vazio");
         }
 
         return false;
@@ -64,12 +71,16 @@ public class TelaImoveisItems extends javax.swing.JFrame {
 
         jTextFieldDescricao.setEnabled(false);
         jTextFieldValor.setEnabled(false);
+        jButtonDesativar.setEnabled(false);
+        jButtonAtivar.setEnabled(false);
+        jButtonaction.setEnabled(false);
+        jTextFieldImoveis.setEnabled(false);
 
     }
 
     private void popularJtable() throws ClassNotFoundException, Exception {
 
-        jTableTabela.setModel(im.populaJTable(modelo, 1));
+        jTableTabela.setModel(im.populaJTablePorIdImovel(modelo, 1, imovel.getId()));
     }
 
     @SuppressWarnings("unchecked")
@@ -89,12 +100,9 @@ public class TelaImoveisItems extends javax.swing.JFrame {
         jComboAcao = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jTextFieldPesquisa = new javax.swing.JTextField();
         jButtonAtivar = new javax.swing.JButton();
+        jButtonDesativar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -106,7 +114,7 @@ public class TelaImoveisItems extends javax.swing.JFrame {
                 jButtonactionActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonaction, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 670, 130, 50));
+        jPanel1.add(jButtonaction, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 490, 130, 50));
 
         jTableTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,19 +134,19 @@ public class TelaImoveisItems extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableTabela);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, 770, 480));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 770, 480));
 
         jLabel1.setText("ID");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, 20, -1));
-        jPanel1.add(jTextFieldImoveis, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 590, 110, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 20, -1));
+        jPanel1.add(jTextFieldImoveis, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 110, -1));
 
         jLabel2.setText("Descricao");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, -1, -1));
-        jPanel1.add(jTextFieldDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 130, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+        jPanel1.add(jTextFieldDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 130, -1));
 
         jLabel3.setText("Valor :");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 50, -1));
-        jPanel1.add(jTextFieldValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 140, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 50, -1));
+        jPanel1.add(jTextFieldValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 140, -1));
 
         jComboAcao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboAcao.addActionListener(new java.awt.event.ActionListener() {
@@ -146,37 +154,30 @@ public class TelaImoveisItems extends javax.swing.JFrame {
                 jComboAcaoActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 140, -1));
+        jPanel1.add(jComboAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 140, -1));
 
         jLabel4.setText("Escolha sua ação :");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         jLabel5.setText("Pesquisa");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 170, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, -1, -1));
+        jPanel1.add(jTextFieldPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 170, -1));
 
-        jLabel7.setText("Imovel");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 140, -1));
-
-        jButton1.setText("Escolha o imovel");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 150, -1));
-
-        jButton2.setText("Ativar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 590, 90, -1));
-
-        jButtonAtivar.setText("Desativar");
+        jButtonAtivar.setText("Ativar");
         jButtonAtivar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAtivarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 590, 100, 30));
+        jPanel1.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 90, -1));
+
+        jButtonDesativar.setText("Desativar");
+        jButtonDesativar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDesativarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, 100, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,7 +187,7 @@ public class TelaImoveisItems extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -198,14 +199,10 @@ public class TelaImoveisItems extends javax.swing.JFrame {
         try {
 
             int action = jComboAcao.getSelectedIndex();
-
-            int indexCombo = jComboAcao.getSelectedIndex();
-            int id = 0;
             String descricao = jTextFieldDescricao.getText();
             double valor = Double.parseDouble(jTextFieldValor.getText());
-            int status = 1;
 
-            iit = new ImovelItem(id, valor, descricao, null, 1);
+            iit = new ImovelItem(0, valor, descricao, imovel.getId(), 1);
             if (!verificarVazio(iit)) {
 
                 switch (action) {
@@ -227,17 +224,15 @@ public class TelaImoveisItems extends javax.swing.JFrame {
 
                     case 2:
 
-                        int alterarIntem = Integer.parseInt(jTextField1.getText());
+                        if (isSelected && !verificarVazio(iit)) {
 
-                        if (!verificarId(alterarIntem)) {
-
-                            iit = new ImovelItem(alterarIntem, valor, descricao, null, 1);
+                            iit = new ImovelItem(iit.getId(), valor, descricao, imovel.getId(), 1);
 
                             im.alterarItem(iit);
 
                             popularJtable();
 
-                            JOptionPane.showMessageDialog(null, "Status alterado com sucesso!");
+                            JOptionPane.showMessageDialog(null, "ItemImovel alterado com sucesso!");
                         }
 
                         break;
@@ -258,9 +253,10 @@ public class TelaImoveisItems extends javax.swing.JFrame {
         try {
 
             linhaSelecionada = jTableTabela.getSelectedRow();
-            jTextField1.setText(jTableTabela.getValueAt(linhaSelecionada, 0).toString());
-            jTextFieldValor.setText(jTableTabela.getValueAt(linhaSelecionada, 1).toString());
-            jTextFieldDescricao.setText(jTableTabela.getValueAt(linhaSelecionada, 2).toString());
+            iit = im.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+            jTextFieldDescricao.setText(iit.getDescricao());
+            jTextFieldValor.setText("" + iit.getValor());
+            jTextFieldImoveis.setText("" + iit.getId());
 
         } catch (Exception ex) {
 
@@ -305,13 +301,11 @@ public class TelaImoveisItems extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboAcaoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
         try {
-            int id = Integer.parseInt(jTextFieldImoveis.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                im.ativarItem(id);
+                im.ativarItem(iit.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Produto ativado com sucesso!");
@@ -324,16 +318,14 @@ public class TelaImoveisItems extends javax.swing.JFrame {
         }
 
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonAtivarActionPerformed
 
-    private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
+    private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
 
         try {
-            int id = Integer.parseInt(jTextFieldImoveis.getText());
+            if (isSelected) {
 
-            if (!verificarId(id)) {
-
-                im.desativarItem(id);
+                im.desativarItem(iit.getId());
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Produto desativado com sucesso!");
@@ -345,7 +337,7 @@ public class TelaImoveisItems extends javax.swing.JFrame {
 
         }
 
-    }//GEN-LAST:event_jButtonAtivarActionPerformed
+    }//GEN-LAST:event_jButtonDesativarActionPerformed
 
     public static void main(String args[]) {
 
@@ -361,31 +353,31 @@ public class TelaImoveisItems extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaImoveisItems.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaImoveisItens.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaImoveisItems.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaImoveisItens.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaImoveisItems.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaImoveisItens.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaImoveisItems.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaImoveisItens.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new TelaImoveisItems().setVisible(true);
+                    new TelaImoveisItens(null).setVisible(true);
                 } catch (Exception ex) {
-                    Logger.getLogger(TelaImoveisItems.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TelaImoveisItens.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAtivar;
+    private javax.swing.JButton jButtonDesativar;
     private javax.swing.JButton jButtonaction;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;
@@ -393,14 +385,12 @@ public class TelaImoveisItems extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableTabela;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextFieldDescricao;
     private javax.swing.JTextField jTextFieldImoveis;
+    private javax.swing.JTextField jTextFieldPesquisa;
     private javax.swing.JTextField jTextFieldValor;
     // End of variables declaration//GEN-END:variables
 }

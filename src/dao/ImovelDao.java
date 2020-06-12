@@ -23,6 +23,7 @@ public class ImovelDao extends Dao<Imovel> {
     private PessoaDao pessoaDao = new PessoaDao();
     private TipoImovelDao tipoImovelDao = new TipoImovelDao();
     private EnderecoDao enderecoDao = new EnderecoDao();
+    private ImovelItemDao imovelItemDao = new ImovelItemDao();
 
     public ImovelDao() throws ClassNotFoundException, SQLException {
 
@@ -154,8 +155,9 @@ public class ImovelDao extends Dao<Imovel> {
 
         if (rs.next()) {
 
+            int idImovel = rs.getInt(id);
             return new Imovel(
-                    rs.getInt(id),
+                    idImovel,
                     rs.getDate(vetorCampos[0]),
                     rs.getDouble(vetorCampos[1]),
                     rs.getDouble(vetorCampos[2]),
@@ -169,7 +171,8 @@ public class ImovelDao extends Dao<Imovel> {
                     tipoImovelDao.getByID(rs.getInt(vetorCampos[10])),
                     enderecoDao.getByID(rs.getInt(vetorCampos[11])),
                     rs.getInt(vetorCampos[12]),
-                    rs.getString(vetorCampos[13])
+                    rs.getString(vetorCampos[13]),
+                    imovelItemDao.getByIdImovel(idImovel)
             );
 
         }
