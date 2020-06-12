@@ -92,6 +92,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jFormattedTextFieldNascimento.setEnabled(false);
         jTextFieldNome.setEnabled(false);
         jFormattedTextFieldTelefone.setEnabled(false);
+        jFormattedTextFieldCPF.setEnabled(false);
         jCheckBoxDemissao.setEnabled(false);
         jButtonEndereco.setEnabled(false);
         idacao.setText("0");
@@ -426,7 +427,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jFormattedTextFieldNascimento.setEnabled(true);
                 jTextFieldMatricula.setEnabled(false);
                 jTextFieldCargo.setEnabled(false);
-                jFormattedTextFieldRescisao.setEnabled(true);
+                jFormattedTextFieldRescisao.setEnabled(false);
                 jTextFieldEmail.setEnabled(true);
                 jTextFieldEndereco.setEnabled(false);
                 jFormattedTextFieldNascimento.setEnabled(true);
@@ -445,7 +446,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
                 jFormattedTextFieldNascimento.setEnabled(true);
                 jTextFieldCargo.setEnabled(false);
-                jFormattedTextFieldRescisao.setEnabled(true);
+                jFormattedTextFieldRescisao.setEnabled(false);
                 jTextFieldMatricula.setEnabled(false);
                 jTextFieldEmail.setEnabled(true);
                 jTextFieldEndereco.setEnabled(false);
@@ -498,7 +499,11 @@ public class TelaFuncionarios extends javax.swing.JFrame {
             String matricula = jTextFieldMatricula.getText();
 
             java.sql.Date dataNascimento = CriaDate.geraSqlDate(jFormattedTextFieldNascimento.getText());
-            java.sql.Date dataRescisao = CriaDate.geraSqlDate(jFormattedTextFieldRescisao.getText());
+            java.sql.Date dataRescisao = CriaDate.geraSqlDate("00/00/0000");
+            
+            if (jCheckBoxDemissao.isSelected()) {
+                dataRescisao = CriaDate.geraSqlDate(jFormattedTextFieldRescisao.getText());
+            }
 
             switch (action) {
 

@@ -48,7 +48,6 @@
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/UsuarioDao.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaLogin.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/util/apiEmail/SendEmail.java</file>
-            <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/util/CriaDate.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/EnderecoController.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/TipoImovelController.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaStatus.java</file>
@@ -56,6 +55,7 @@
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/ImovelDao.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/NivelAcessoController.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/NivelAcesso.java</file>
+            <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/ImovelItem.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/IController.java</file>
         </group>
     </open-files>
