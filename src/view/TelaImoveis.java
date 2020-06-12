@@ -1,6 +1,7 @@
 package view;
 
 import controller.ImovelController;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -31,6 +32,8 @@ public class TelaImoveis extends javax.swing.JFrame {
     private Funcionario fun = null;
     private Iterator<ImovelItem> imovelItens = null;
     private TelaOrcamentos telaOrcamentos = null;
+    private String baixa;
+    private java.sql.Date dataBaixa;
     private boolean isSelected = false;
     private final int index = 4;
 
@@ -78,11 +81,11 @@ public class TelaImoveis extends javax.swing.JFrame {
         jTableTabela.setModel(ic.populaJTable(modelo, 1));
 
     }
-    
+
     public void setarImovelItens(Iterator<ImovelItem> obj) {
-        
+
         this.imovelItens = obj;
-        
+
     }
 
     public void setarEndereco(Endereco obj) {
@@ -116,11 +119,11 @@ public class TelaImoveis extends javax.swing.JFrame {
             jComboAcao.addItem("Ações");
             jComboAcao.addItem("Cadastrar");
             jComboAcao.addItem("Alterar");
-            
+
             jComboBoxSituacao.removeAllItems();
             jComboBoxSituacao.addItem("Novo");
             jComboBoxSituacao.addItem("Semi-Novo");
-            
+
             java.sql.Date dataAtual = new java.sql.Date(System.currentTimeMillis());
 
             jFormattedTextFieldDataInclusao.setText(CriaDate.geraDataFormatada(dataAtual));
@@ -149,6 +152,8 @@ public class TelaImoveis extends javax.swing.JFrame {
             jTextFieldParcelas.setEnabled(false);
             jTextFieldTamanho.setEnabled(false);
             jButtonSelecionarMoveis.setEnabled(false);
+            jButtonBaixa.setEnabled(false);
+            jCheckBoxBaixa.setEnabled(false);
 
         } catch (Exception ex) {
 
@@ -185,6 +190,8 @@ public class TelaImoveis extends javax.swing.JFrame {
         } else if (obj.getPessoa().getNome().equals("")) {
 
             throw new Exception("Escolha um proprietário");
+        } else if (baixa == null && jCheckBoxBaixa.isSelected()) {
+            throw new Exception("Favor dar baixa e listar o motivo ou desativar a checkbox de baixa.");
         }
         return false;
 
@@ -229,6 +236,8 @@ public class TelaImoveis extends javax.swing.JFrame {
         jButtonUsar = new javax.swing.JButton();
         jButtonSelecionarMoveis = new javax.swing.JButton();
         jComboBoxSituacao = new javax.swing.JComboBox();
+        jButtonBaixa = new javax.swing.JButton();
+        jCheckBoxBaixa = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -263,10 +272,10 @@ public class TelaImoveis extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 560, 130, 30));
         jPanel1.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 250, -1));
-        jPanel1.add(JTextFieldID, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 790, 40, -1));
+        jPanel1.add(JTextFieldID, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 850, 40, -1));
 
         jLabel12.setText("ID:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 790, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 850, -1, -1));
 
         jButtonAtivar.setText("Ativar");
         jButtonAtivar.addActionListener(new java.awt.event.ActionListener() {
@@ -274,7 +283,7 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jButtonAtivarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 800, 90, 40));
+        jPanel1.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 860, 90, 40));
 
         jButtonDesativar.setText("Desativar");
         jButtonDesativar.addActionListener(new java.awt.event.ActionListener() {
@@ -282,7 +291,7 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jButtonDesativarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 800, 90, 40));
+        jPanel1.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 860, 90, 40));
 
         jButtonAction.setText("Ação");
         jButtonAction.addActionListener(new java.awt.event.ActionListener() {
@@ -290,7 +299,7 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jButtonActionActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonAction, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 850, 160, 60));
+        jPanel1.add(jButtonAction, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 910, 160, 60));
 
         jComboAcao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboAcao.addActionListener(new java.awt.event.ActionListener() {
@@ -381,6 +390,22 @@ public class TelaImoveis extends javax.swing.JFrame {
         jComboBoxSituacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(jComboBoxSituacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 260, -1));
 
+        jButtonBaixa.setText("Dar baixa");
+        jButtonBaixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBaixaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonBaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 780, 200, -1));
+
+        jCheckBoxBaixa.setText("Baixa");
+        jCheckBoxBaixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxBaixaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jCheckBoxBaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 790, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -389,7 +414,9 @@ public class TelaImoveis extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1002, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -399,7 +426,7 @@ public class TelaImoveis extends javax.swing.JFrame {
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
 
         try {
-            
+
             linhaSelecionada = jTableTabela.getSelectedRow();
 
             im = ic.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
@@ -497,10 +524,15 @@ public class TelaImoveis extends javax.swing.JFrame {
             int qtdParcelas = Integer.parseInt(jTextFieldParcelas.getText());
             Double comissao = Double.parseDouble(jTextFieldComissao.getText());
             fun = Login.funcionario;
-            
-            im = new Imovel(0, dataSql, preco, tamanho, situacao, dataSql, "Nenhuma", qtdParcelas, comissao, fun, pe, tp, end, 1, nome, imovelItens);
 
             if (!verificarVazio(im)) {
+
+                if (dataBaixa == null) {
+                    dataBaixa = CriaDate.geraSqlDate("00/00/0000");
+                }
+                if (baixa == null) {
+                    baixa = "Nenhuma";
+                }
 
                 switch (action) {
 
@@ -512,6 +544,7 @@ public class TelaImoveis extends javax.swing.JFrame {
 
                     case 1:
 
+                        im = new Imovel(0, dataSql, preco, tamanho, situacao, dataBaixa, baixa, qtdParcelas, comissao, fun, pe, tp, end, 1, nome, imovelItens);
                         ic.inserirItem(im);
 
                         JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
@@ -521,7 +554,7 @@ public class TelaImoveis extends javax.swing.JFrame {
 
                     case 2:
 
-                        im = new Imovel(im.getId(), im.getDataInclusao(), preco, tamanho, situacao, dataSql, "Nenhuma", qtdParcelas, comissao, fun, pe, tp, end, 1, nome, imovelItens);
+                        im = new Imovel(im.getId(), im.getDataInclusao(), preco, tamanho, situacao, dataBaixa, baixa, qtdParcelas, comissao, fun, pe, tp, end, 1, nome, imovelItens);
 
                         if (isSelected) {
 
@@ -560,7 +593,6 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jFormattedTextFieldDataInclusao.setEnabled(false);
                 jTextFieldNome.setEnabled(false);
                 jTextFieldEndereco.setEnabled(false);
-                jFormattedTextFieldDataInclusao.setEnabled(false);
                 jTextFieldComissao.setEnabled(false);
                 jTextFieldTipoImovel.setEnabled(false);
                 jTextFieldPreco.setEnabled(false);
@@ -580,6 +612,7 @@ public class TelaImoveis extends javax.swing.JFrame {
                 JTextFieldID.setEnabled(false);
                 jTextFieldParcelas.setEnabled(false);
                 jTextFieldTamanho.setEnabled(false);
+                jCheckBoxBaixa.setEnabled(false);
 
                 break;
 
@@ -599,6 +632,7 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jButtonTP.setEnabled(true);
                 jTextFieldParcelas.setEnabled(true);
                 jTextFieldTamanho.setEnabled(true);
+                jCheckBoxBaixa.setEnabled(false);
 
                 break;
 
@@ -618,6 +652,7 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jButtonTP.setEnabled(true);
                 jTextFieldParcelas.setEnabled(true);
                 jTextFieldTamanho.setEnabled(true);
+                jCheckBoxBaixa.setEnabled(true);
 
                 break;
 
@@ -673,6 +708,30 @@ public class TelaImoveis extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonSelecionarMoveisActionPerformed
 
+    private void jButtonBaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBaixaActionPerformed
+
+        try {
+            do {
+                baixa = JOptionPane.showInputDialog("Digite o motivo da baixa");
+                if (baixa.equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Por favor digite o motivo da baixa");
+                }
+            } while (!baixa.equals(""));
+            Date data = new Date(System.currentTimeMillis());
+            dataBaixa = CriaDate.geraSqlDate(data.toString());
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonBaixaActionPerformed
+
+    private void jCheckBoxBaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxBaixaActionPerformed
+        if (jCheckBoxBaixa.isSelected()) {
+            jButtonBaixa.setEnabled(true);
+        } else {
+            jButtonBaixa.setEnabled(false);
+        }
+    }//GEN-LAST:event_jCheckBoxBaixaActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -714,12 +773,14 @@ public class TelaImoveis extends javax.swing.JFrame {
     private javax.swing.JTextField JTextFieldID;
     private javax.swing.JButton jButtonAction;
     private javax.swing.JButton jButtonAtivar;
+    private javax.swing.JButton jButtonBaixa;
     private javax.swing.JButton jButtonDesativar;
     private javax.swing.JButton jButtonEnd;
     private javax.swing.JButton jButtonProp;
     private javax.swing.JButton jButtonSelecionarMoveis;
     private javax.swing.JButton jButtonTP;
     private javax.swing.JButton jButtonUsar;
+    private javax.swing.JCheckBox jCheckBoxBaixa;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JComboBox jComboBoxSituacao;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataInclusao;
