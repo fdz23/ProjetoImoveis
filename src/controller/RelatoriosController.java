@@ -50,6 +50,12 @@ public class RelatoriosController {
 
     }
     
+    public DefaultTableModel populaImoveisByCpf(String cpf) throws Exception {
+
+        return populaJTable(dao.getImoveisByCpf(cpf));
+
+    }
+    
     public DefaultTableModel populaJTable(Iterator<Object[]> lista) {
         
         model.setNumRows(0);
