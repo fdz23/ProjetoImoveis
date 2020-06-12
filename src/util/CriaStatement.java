@@ -349,10 +349,10 @@ public class CriaStatement {
     
     public PreparedStatement selectSqlCalculoComissaoPorImovel() throws SQLException {
         
-        String sql = "select P.pes_nome, SUM(I.imo_valor_comissao) as Valor Comissao from contratos C\n" +
+        String sql = "select P.pes_nome, SUM(I.imo_valor_comissao) as Valor_Comissao from contratos C\n" +
                      "join orcamentos O On O.orc_iden = C.con_orc_iden\n" +
                      "JOIN imoveis I ON I.imo_iden = O.orc_imo_iden\n" +
-                     "JOIN funcionarios F ON F.fun_iden = O.orc_fun_iden\n" +
+                     "JOIN funcionarios F ON F.fun_iden = O.orc_func_iden\n" +
                      "JOIN pessoas P On P.pes_iden = F.fun_pes_iden\n" +
                      "GROUP BY P.pes_nome";
         
