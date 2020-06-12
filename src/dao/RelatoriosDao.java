@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import util.ConectaDb;
+import util.CriaDate;
 import util.CriaStatement;
 
 /**
@@ -48,6 +49,35 @@ public class RelatoriosDao {
                         rs.getString("imo_descricao"),
                         rs.getDouble("imo_valor_comissao"),
                         rs.getDouble("imo_preco")
+                    }
+            );
+            
+        }
+        
+        return itens.iterator();
+        
+    }
+    
+    public Iterator<Object[]> getImoveisFinanciadosByData(int mes, int ano) throws SQLException {
+        
+        List<Object[]> itens = new ArrayList<Object[]>();
+        
+        ps = criaStatement.selectSqlImoveisFinanciadosByData(mes, ano);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()) {
+            
+            itens.add(
+                    new Object[]{
+                        rs.getString("imo_descricao"),
+                        rs.getDouble("imo_preco"),
+                        rs.getDouble("imo_valor_comissao"),
+                        rs.getString("funcionario"),
+                        rs.getString("cliente"),
+                        rs.getString("proprietário"),
+                        rs.getString("tpa_descricao"),
+                        CriaDate.geraDataFormatada(rs.getDate("con_data"))
                     }
             );
             
