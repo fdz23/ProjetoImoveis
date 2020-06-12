@@ -376,7 +376,7 @@ public class CriaStatement {
         String sql = "select I.imo_descricao,I.imo_valor_comissao,I.imo_preco from contratos C\n" +
                      "join orcamentos O on O.orc_iden = C.con_orc_iden\n" +
                      "join imoveis I ON I.imo_iden = O.orc_imo_iden\n" +
-                     "where C.con_data < CAST('" + (ano + 1) + "-01-1 00:00:00' AS DATE)" +
+                     "where C.con_data < CAST('" + (ano + 1) + "-01-1 00:00:00' AS DATE)\n" +
                      "and C.con_data >= CAST('" + ano + "-01-1 00:00:00' AS DATE)";
         
         return con.prepareStatement(sql);
@@ -388,8 +388,17 @@ public class CriaStatement {
         String sql = "select I.imo_descricao,I.imo_valor_comissao,I.imo_preco from contratos C\n" +
                      "join orcamentos O on O.orc_iden = C.con_orc_iden\n" +
                      "join imoveis I ON I.imo_iden = O.orc_imo_iden\n" +
-                     "where C.con_data < CAST('" + ano + "-" + (mes + 1) + "-1 00:00:00' AS DATE)" +
+                     "where C.con_data < CAST('" + ano + "-" + (mes + 1) + "-1 00:00:00' AS DATE)\n" +
                      "and C.con_data >= CAST('" + ano + "-" + mes + "-1 00:00:00' AS DATE)";
+        
+        return con.prepareStatement(sql);
+        
+    }
+    
+    public PreparedStatement selectSqlImoveisCadastrados(String situacao) throws SQLException {
+        
+        String sql = "select i.imo_descricao,i.imo_tamanho,p.pes_nome,i.imo_preco,i.imo_valor_comissao,i.imo_data_inclusao from imoveis i\n" +
+                     "join pessoas p ON p.pes_iden = i.imo_pes_iden";
         
         return con.prepareStatement(sql);
         
