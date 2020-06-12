@@ -17,18 +17,23 @@ import javax.swing.table.DefaultTableModel;
 public class RelatoriosController {
     
     private RelatoriosDao dao;
+    private DefaultTableModel model;
     
-    public RelatoriosController() throws SQLException {
+    public RelatoriosController(DefaultTableModel model) throws SQLException {
         
         dao = new RelatoriosDao();
+        this.model = model;
         
     }
     
-    public DefaultTableModel populaImoveisByFuncionario(DefaultTableModel model, int idFuncionario) throws Exception {
+    public DefaultTableModel populaImoveisPorFuncionario(int idFuncionario) throws Exception {
 
-        //Pega o item ordenando por id em ordem crescente
-        Iterator<Object[]> lista = dao.getImoveisByFuncionario(idFuncionario);
+        return populaJTable(dao.getImoveisByFuncionario(idFuncionario));
 
+    }
+    
+    public DefaultTableModel populaJTable(Iterator<Object[]> lista) {
+        
         model.setNumRows(0);
 
         while (lista.hasNext()) {
@@ -38,6 +43,6 @@ public class RelatoriosController {
         }
 
         return model;
-
+        
     }
 }
