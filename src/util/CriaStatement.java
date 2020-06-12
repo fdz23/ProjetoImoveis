@@ -281,7 +281,7 @@ public class CriaStatement {
     
     public PreparedStatement selectSqlImoveisByFuncionario(int idFuncionario) throws SQLException {
         
-        String sql = "select p.pes_nome,i.imo_descricao,i.imo_valor_comissao,i.imo_preco from contratos C\n" +
+        String sql = "select P.pes_nome,I.imo_descricao,I.imo_valor_comissao,I.imo_preco from contratos C\n" +
                      "JOIN orcamentos O ON O.orc_iden = C.con_orc_iden\n" +
                      "JOIN funcionarios F ON F.fun_iden = O.orc_fun_iden\n" +
                      "JOIN pessoas P On P.pes_iden = F.fun_pes_iden\n" +
@@ -321,6 +321,16 @@ public class CriaStatement {
                      "and E.end_cidade in ('" + cidade + "')\n" +
                      "and I.imo_data_inclusao < CAST('" + ano + "-" + (mes + 1) + "-1 00:00:00' AS DATE)\n" +
                      "and I.imo_data_inclusao >= CAST('" + ano + "-" + mes + "-1 00:00:00' AS DATE)";
+        
+        return con.prepareStatement(sql);
+        
+    }
+    
+    public PreparedStatement selectSqlImoveisBaixadosByBaixa(String baixa) throws SQLException {
+        
+        String sql = "select I.imo_descricao,I.imo_baixa_data,I.imo_baixa_motivo,I.imo_baixa_data from imoveis I\n" +
+                     "where I.imo_baixa_motivo in ('" + baixa + "')\n" +
+                     "and I.imo_baixa_data != null";
         
         return con.prepareStatement(sql);
         
