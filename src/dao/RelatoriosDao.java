@@ -112,7 +112,7 @@ public class RelatoriosDao {
         
     }
     
-    public Iterator<Object[]> selectSqlImoveisBaixadosByBaixa(String baixa) throws SQLException {
+    public Iterator<Object[]> getImoveisBaixadosByBaixa(String baixa) throws SQLException {
         
         List<Object[]> itens = new ArrayList<Object[]>();
         
@@ -263,7 +263,7 @@ public class RelatoriosDao {
         
         List<Object[]> itens = new ArrayList<Object[]>();
         
-        ps = criaStatement.selectAllSql("imoveis", true, "imo_iden");
+        ps = criaStatement.selectSqlImoveisCadastrados(situacao);
         
         ResultSet rs = ps.executeQuery();
         
