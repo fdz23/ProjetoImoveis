@@ -117,6 +117,10 @@ public class TelaImoveis extends javax.swing.JFrame {
             jComboAcao.addItem("Cadastrar");
             jComboAcao.addItem("Alterar");
             
+            jComboBoxSituacao.removeAllItems();
+            jComboBoxSituacao.addItem("Novo");
+            jComboBoxSituacao.addItem("Semi-Novo");
+            
             java.sql.Date dataAtual = new java.sql.Date(System.currentTimeMillis());
 
             jFormattedTextFieldDataInclusao.setText(CriaDate.geraDataFormatada(dataAtual));
@@ -127,7 +131,7 @@ public class TelaImoveis extends javax.swing.JFrame {
             jTextFieldComissao.setEnabled(false);
             jTextFieldTipoImovel.setEnabled(false);
             jTextFieldPreco.setEnabled(false);
-            jTextFieldObservacao.setEnabled(false);
+            jComboBoxSituacao.setEnabled(false);
             jTextFieldProprietario.setEnabled(false);
             jButtonEnd.setEnabled(false);
             jButtonAtivar.setEnabled(false);
@@ -209,7 +213,6 @@ public class TelaImoveis extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldPreco = new javax.swing.JTextField();
-        jTextFieldObservacao = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTextFieldParcelas = new javax.swing.JTextField();
@@ -225,6 +228,7 @@ public class TelaImoveis extends javax.swing.JFrame {
         jTextFieldTamanho = new javax.swing.JTextField();
         jButtonUsar = new javax.swing.JButton();
         jButtonSelecionarMoveis = new javax.swing.JButton();
+        jComboBoxSituacao = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -318,9 +322,8 @@ public class TelaImoveis extends javax.swing.JFrame {
         jLabel2.setText("Preço");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
         jPanel1.add(jTextFieldPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 260, -1));
-        jPanel1.add(jTextFieldObservacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 260, 30));
 
-        jLabel3.setText("Observação");
+        jLabel3.setText("Situação");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, 20));
 
         jLabel6.setText("Quartidade de Parcelas :");
@@ -375,6 +378,9 @@ public class TelaImoveis extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonSelecionarMoveis, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 730, 200, -1));
 
+        jComboBoxSituacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(jComboBoxSituacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 260, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -405,7 +411,7 @@ public class TelaImoveis extends javax.swing.JFrame {
             jTextFieldNome.setText(im.getDescricao());
             jTextFieldComissao.setText("" + im.getValorComissao());
             jTextFieldPreco.setText("" + im.getPreco());
-            jTextFieldObservacao.setText(im.getObservacao());
+            jComboBoxSituacao.setSelectedItem(im.getObservacao());
             jTextFieldTamanho.setText("" + im.getTamanho());
             jTextFieldParcelas.setText("" + im.getQuantidadeParcelas());
             jFormattedTextFieldDataInclusao.setText(CriaDate.geraDataFormatada(im.getDataInclusao()));
@@ -487,12 +493,12 @@ public class TelaImoveis extends javax.swing.JFrame {
             java.sql.Date dataSql = new java.sql.Date(data.getTime());
             double preco = Double.parseDouble(jTextFieldPreco.getText());
             double tamanho = Double.parseDouble(jTextFieldTamanho.getText());
-            String observacao = jTextFieldObservacao.getText();
+            String situacao = jComboBoxSituacao.getSelectedItem().toString();
             int qtdParcelas = Integer.parseInt(jTextFieldParcelas.getText());
             Double comissao = Double.parseDouble(jTextFieldComissao.getText());
             fun = Login.funcionario;
             
-            im = new Imovel(0, dataSql, preco, tamanho, observacao, dataSql, "Nenhuma", qtdParcelas, comissao, fun, pe, tp, end, 1, nome, imovelItens);
+            im = new Imovel(0, dataSql, preco, tamanho, situacao, dataSql, "Nenhuma", qtdParcelas, comissao, fun, pe, tp, end, 1, nome, imovelItens);
 
             if (!verificarVazio(im)) {
 
@@ -515,7 +521,7 @@ public class TelaImoveis extends javax.swing.JFrame {
 
                     case 2:
 
-                        im = new Imovel(im.getId(), im.getDataInclusao(), preco, tamanho, observacao, dataSql, "Nenhuma", qtdParcelas, comissao, fun, pe, tp, end, 1, nome, imovelItens);
+                        im = new Imovel(im.getId(), im.getDataInclusao(), preco, tamanho, situacao, dataSql, "Nenhuma", qtdParcelas, comissao, fun, pe, tp, end, 1, nome, imovelItens);
 
                         if (isSelected) {
 
@@ -558,7 +564,7 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jTextFieldComissao.setEnabled(false);
                 jTextFieldTipoImovel.setEnabled(false);
                 jTextFieldPreco.setEnabled(false);
-                jTextFieldObservacao.setEnabled(false);
+                jComboBoxSituacao.setEnabled(false);
                 jTextFieldProprietario.setEnabled(false);
                 jButtonEnd.setEnabled(false);
                 jButtonAtivar.setEnabled(false);
@@ -585,7 +591,7 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jTextFieldComissao.setEnabled(true);
                 jTextFieldTipoImovel.setEnabled(true);
                 jTextFieldPreco.setEnabled(true);
-                jTextFieldObservacao.setEnabled(true);
+                jComboBoxSituacao.setEnabled(true);
                 jTextFieldProprietario.setEnabled(true);
                 jButtonEnd.setEnabled(true);
                 jButtonAction.setEnabled(true);
@@ -604,7 +610,7 @@ public class TelaImoveis extends javax.swing.JFrame {
                 jTextFieldComissao.setEnabled(true);
                 jTextFieldTipoImovel.setEnabled(true);
                 jTextFieldPreco.setEnabled(true);
-                jTextFieldObservacao.setEnabled(true);
+                jComboBoxSituacao.setEnabled(true);
                 jTextFieldProprietario.setEnabled(true);
                 jButtonEnd.setEnabled(true);
                 jButtonAction.setEnabled(true);
@@ -715,6 +721,7 @@ public class TelaImoveis extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTP;
     private javax.swing.JButton jButtonUsar;
     private javax.swing.JComboBox jComboAcao;
+    private javax.swing.JComboBox jComboBoxSituacao;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataInclusao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -734,7 +741,6 @@ public class TelaImoveis extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldComissao;
     private javax.swing.JTextField jTextFieldEndereco;
     private javax.swing.JTextField jTextFieldNome;
-    private javax.swing.JTextField jTextFieldObservacao;
     private javax.swing.JTextField jTextFieldParcelas;
     private javax.swing.JTextField jTextFieldPreco;
     private javax.swing.JTextField jTextFieldProprietario;
