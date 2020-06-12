@@ -111,4 +111,29 @@ public class RelatoriosDao {
         return itens.iterator();
         
     }
+    
+    public Iterator<Object[]> selectSqlImoveisBaixadosByBaixa(String baixa) throws SQLException {
+        
+        List<Object[]> itens = new ArrayList<Object[]>();
+        
+        ps = criaStatement.selectSqlImoveisBaixadosByBaixa(baixa);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()) {
+            
+            itens.add(
+                    new Object[]{
+                        rs.getString("imo_descricao"),
+                        CriaDate.geraDataFormatada(rs.getDate("imo_baixa_data")),
+                        rs.getString("imo_baixa_motivo"),
+                        CriaDate.geraDataFormatada(rs.getDate("imo_baixa_data"))
+                    }
+            );
+            
+        }
+        
+        return itens.iterator();
+        
+    }
 }
