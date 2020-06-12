@@ -330,7 +330,7 @@ public class CriaStatement {
         
         String sql = "select I.imo_descricao,I.imo_baixa_data,I.imo_baixa_motivo,I.imo_baixa_data from imoveis I\n" +
                      "where I.imo_baixa_motivo in ('" + baixa + "')\n" +
-                     "and I.imo_baixa_data != null";
+                     "and I.imo_baixa_data is not null";
         
         return con.prepareStatement(sql);
         
