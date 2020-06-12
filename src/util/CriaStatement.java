@@ -300,11 +300,11 @@ public class CriaStatement {
                      "JOIN orcamentos O ON O.orc_iden = C.con_orc_iden\n" +
                      "JOIN imoveis I ON I.imo_iden = O.orc_imo_iden\n" +
                      "JOIN pessoas P ON P.pes_iden = O.orc_pes_iden\n" +
-                     "JOIN funcionarios F ON F.fun_iden = O.orc_fun_iden\n" +
+                     "JOIN funcionarios F ON F.fun_iden = O.orc_func_iden\n" +
                      "JOIN PESSOAS PE ON PE.pes_iden = F.fun_pes_iden\n" +
                      "JOIN PESSOAS PES ON PES.pes_iden = I.imo_pes_iden\n" +
                      "JOIN tipo_pagamentos TP ON TP.tpa_iden = O.orc_tpa_iden\n" +
-                     "where TP.tpa_descricao in ('Financiado')\n" +
+                     "where C.con_pago in (2)\n" +
                      "and C.con_data < CAST('" + ano + "-" + (mes + 1) + "-1 00:00:00' AS DATE)\n" +
                      "and C.con_data >= CAST('" + ano + "-" + mes + "-1 00:00:00' AS DATE)";
         
