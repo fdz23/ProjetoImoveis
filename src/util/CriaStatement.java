@@ -370,4 +370,16 @@ public class CriaStatement {
         return con.prepareStatement(sql);
         
     }
+    
+    public PreparedStatement selectSqlImoveisPorVendaAnual(int ano) throws SQLException {
+        
+        String sql = "select I.imo_descricao,I.imo_valor_comissao,I.imo_preco from contratos C\n" +
+                     "join orcamentos O on O.orc_iden = C.con_orc_iden\n" +
+                     "join imoveis I ON I.imo_iden = O.orc_imo_iden\n" +
+                     "where C.con_data < CAST('" + (ano + 1) + "-01-1 00:00:00' AS DATE)" +
+                     "and C.con_data >= CAST('" + ano + "-01-1 00:00:00' AS DATE)";
+        
+        return con.prepareStatement(sql);
+        
+    }
 }
