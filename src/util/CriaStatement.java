@@ -315,7 +315,7 @@ public class CriaStatement {
         
         String sql = "select I.imo_descricao,P.pes_nome as Proprietario,T.tim_nome,E.end_cidade FROM imoveis I\n" +
                      "JOIN pessoas P ON P.pes_iden = I.imo_pes_iden\n" +
-                     "JOIN enderecos E ON E.end_iden = I.imo_iden\n" +
+                     "JOIN enderecos E ON E.end_iden = I.imo_end_iden\n" +
                      "JOIN tipo_imoveis T ON T.tim_iden = I.imo_tim_iden\n" +
                      "where T.tim_iden in (" + idTipoImovel + ")\n" +
                      "and E.end_cidade in ('" + cidade + "')\n" +
