@@ -86,4 +86,29 @@ public class RelatoriosDao {
         return itens.iterator();
         
     }
+    
+    public Iterator<Object[]> getImoveisByCidadePeriodoTipoImovel(String cidade, int mes, int ano, int idTipoImovel) throws SQLException {
+        
+        List<Object[]> itens = new ArrayList<Object[]>();
+        
+        ps = criaStatement.selectSqlImoveisByCidadePeriodoTipoImovel(cidade, mes, ano, idTipoImovel);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()) {
+            
+            itens.add(
+                    new Object[]{
+                        rs.getString("imo_descricao"),
+                        rs.getString("proprietário"),
+                        rs.getString("tim_nome"),
+                        rs.getString("end_cidade")
+                    }
+            );
+            
+        }
+        
+        return itens.iterator();
+        
+    }
 }
