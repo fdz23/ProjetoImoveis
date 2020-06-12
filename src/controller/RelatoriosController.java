@@ -80,6 +80,12 @@ public class RelatoriosController {
 
     }
     
+    public DefaultTableModel populaImoveisCadastrados() throws Exception {
+
+        return populaJTable(dao.getImoveisCadastrados());
+
+    }
+    
     private DefaultTableModel populaJTable(Iterator<Object[]> lista) {
         
         model.setNumRows(0);

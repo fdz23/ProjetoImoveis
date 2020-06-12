@@ -259,11 +259,11 @@ public class RelatoriosDao {
         
     }
     
-    public Iterator<Object[]> getImoveisCadastrados(String situacao) throws SQLException, Exception {
+    public Iterator<Object[]> getImoveisCadastrados() throws SQLException, Exception {
         
         List<Object[]> itens = new ArrayList<Object[]>();
         
-        ps = criaStatement.selectSqlImoveisCadastrados(situacao);
+        ps = criaStatement.selectSqlImoveisCadastrados();
         
         ResultSet rs = ps.executeQuery();
         

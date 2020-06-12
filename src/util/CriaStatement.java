@@ -395,7 +395,7 @@ public class CriaStatement {
         
     }
     
-    public PreparedStatement selectSqlImoveisCadastrados(String situacao) throws SQLException {
+    public PreparedStatement selectSqlImoveisCadastrados() throws SQLException {
         
         String sql = "select i.imo_descricao,i.imo_tamanho,p.pes_nome,i.imo_preco,i.imo_valor_comissao,i.imo_data_inclusao from imoveis i\n" +
                      "join pessoas p ON p.pes_iden = i.imo_pes_iden";
