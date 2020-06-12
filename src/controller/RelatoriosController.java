@@ -32,15 +32,21 @@ public class RelatoriosController {
 
     }
     
-    public DefaultTableModel populaImoveisFinanciadosByData(int mes, int ano) throws Exception {
+    public DefaultTableModel populaImoveisFinanciadosPorData(int mes, int ano) throws Exception {
 
         return populaJTable(dao.getImoveisFinanciadosByData(mes, ano));
 
     }
     
-    public DefaultTableModel populaImoveisByCidadePeriodoTipoImovel(String cidade, int mes, int ano, int idTipoImovel) throws Exception {
+    public DefaultTableModel populaImoveisPorCidadePeriodoTipoImovel(String cidade, int mes, int ano, int idTipoImovel) throws Exception {
 
         return populaJTable(dao.getImoveisByCidadePeriodoTipoImovel(cidade, mes, ano, idTipoImovel));
+
+    }
+    
+    public DefaultTableModel populaImoveisBaixadosPorBaixa(String baixa) throws Exception {
+
+        return populaJTable(dao.getImoveisBaixadosByBaixa(baixa));
 
     }
     
