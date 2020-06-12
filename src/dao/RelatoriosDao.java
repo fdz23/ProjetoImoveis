@@ -258,4 +258,31 @@ public class RelatoriosDao {
         return itens.iterator();
         
     }
+    
+    public Iterator<Object[]> getImoveisCadastrados(String situacao) throws SQLException, Exception {
+        
+        List<Object[]> itens = new ArrayList<Object[]>();
+        
+        ps = criaStatement.selectAllSql("imoveis", true, "imo_iden");
+        
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()) {
+            
+            itens.add(
+                    new Object[]{
+                        rs.getString("imo_descricao"),
+                        rs.getDouble("imo_tamanho"),
+                        rs.getString("pes_nome"),
+                        rs.getDate("imo_preco"),
+                        rs.getDouble("imo_valor_comissao"),
+                        CriaDate.geraDataFormatada(rs.getDate("imo_data_inclusao"))
+                    }
+            );
+            
+        }
+        
+        return itens.iterator();
+        
+    }
 }
