@@ -32,6 +32,12 @@ public class RelatoriosController {
 
     }
     
+    public DefaultTableModel populaImoveisFinanciadosByData(int mes, int ano) throws Exception {
+
+        return populaJTable(dao.getImoveisFinanciadosByData(mes, ano));
+
+    }
+    
     public DefaultTableModel populaJTable(Iterator<Object[]> lista) {
         
         model.setNumRows(0);
