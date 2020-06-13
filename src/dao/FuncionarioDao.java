@@ -206,6 +206,52 @@ public class FuncionarioDao extends Dao<Funcionario> {
         return itens.iterator();
 
     }
+    
+    public Iterator<Funcionario> getAllAllOrderBy(int campo, boolean ascOuDesc) throws Exception {
+
+        ResultSet rs;
+
+        //verifica se o número recebido é menor que 0 ou maior que o número máximo de campos
+        if (campo < 0 || campo > vetorCampos.length + vetorCamposPessoa.length) {
+            throw new Exception("Campo para ser ordenado inexistente.");
+        }
+
+        //estrutura de dados 2 : Lista encadeada
+        List<Funcionario> itens = new LinkedList<Funcionario>();
+
+        //vetorCampos é um vetor que contém o nome de todos os campos da tabela no banco de dados na ordem
+        if (isPessoaCampo(campo)) {
+
+            //cria um sql que recebe todos os itens ordenados a coluna
+            ps = criaStatement.selectSqlAllOrder("pessoas", colunaPessoa(campo), ascOuDesc);
+
+            //faz o pedido de busca conforme o PreparedStatement criado
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                //adiciona na fila de prioridade todos os itens
+                if (checarPessoaFuncionario(rs.getInt("pes_iden"))) {
+                    itens.add(getByIDPessoa(rs.getInt("pes_iden")));
+                }
+            }
+        } else {
+
+            //cria um sql que recebe todos os itens ordenados a coluna
+            ps = criaStatement.selectSqlAllOrder(tabela, colunaFuncionario(campo), ascOuDesc);
+
+            //faz o pedido de busca conforme o PreparedStatement criado
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                //adiciona na fila de prioridade todos os itens
+                itens.add(getByID(rs.getInt(id)));
+            }
+        }
+
+        return itens.iterator();
+
+    }
 
     private boolean checarPessoaFuncionario(int idPessoa) throws Exception {
 
@@ -230,10 +276,11 @@ public class FuncionarioDao extends Dao<Funcionario> {
 
     private int getUltimoId() throws Exception {
 
-        if (!getAll().hasNext()) {
+        if (!getAllAllOrderBy(9, false).hasNext()) {
             return 0;
         } else {
-            return getAllOrderBy(8, false).next().getId();
+            Iterator<Funcionario> iterator = getAllAllOrderBy(9, false);
+            return iterator.next().getId();
         }
 
     }
