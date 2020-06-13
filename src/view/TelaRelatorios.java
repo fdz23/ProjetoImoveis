@@ -447,11 +447,10 @@ public class TelaRelatorios extends javax.swing.JFrame {
             modelo.addColumn("Valor Imovel");
             modelo.addColumn("Data Inclusão");
             modelo.addColumn("Situação");
-            modelo.addColumn("Ativo");
             jTableTabela.setModel(modelo);
 
             rl = new RelatoriosController(modelo);
-            jTableTabela.setModel(rl.populaImoveisDisponiveisPorSituacao(null));
+            jTableTabela.setModel(rl.populaImoveisDisponiveisPorSituacao(situacao));
 
         } catch (Exception ex) {
 
