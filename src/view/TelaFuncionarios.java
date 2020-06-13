@@ -42,13 +42,26 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     private Usuario usu = null;
     private UsuarioController usc = null;
     private boolean isSelected = false;
+    private TelaRelatorios tl = null;
 
+    
+    
     public TelaFuncionarios() throws ClassNotFoundException, Exception {
         CriarJTable();
         initComponents();
         iniciar();
         popularJtable();
         OrdenaClickTabela.ordenarPorClick(jTableTabela, fc, modelo);
+
+    }
+      public TelaFuncionarios(TelaRelatorios tl) throws ClassNotFoundException, Exception {
+        CriarJTable();
+        initComponents();
+        this.tl = tl;
+        iniciar();
+        popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, fc, modelo);
+        
 
     }
 
@@ -103,6 +116,12 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jButtonTipoFuncionario.setEnabled(false);
         idacao.setEnabled(false);
         jTextFieldSenha.setEnabled(false);
+        jButtonUtilizar.setEnabled(false);
+        
+        if(tl != null){
+            
+            jButtonUtilizar.setEnabled(true);
+        }
 
         setarMatricula();
 
@@ -213,6 +232,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jTextFieldSenha = new javax.swing.JTextField();
         jButtonAtivos = new javax.swing.JButton();
         jButtonInativos = new javax.swing.JButton();
+        jButtonUtilizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -400,6 +420,14 @@ public class TelaFuncionarios extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 930, 170, -1));
+
+        jButtonUtilizar.setText("Utilizar");
+        jButtonUtilizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUtilizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonUtilizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 150, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -744,6 +772,26 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonInativosActionPerformed
 
+    private void jButtonUtilizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUtilizarActionPerformed
+       
+        
+        
+        try{
+            
+            if(isSelected){
+                
+                tl.setObjetoFuncionario(fun);
+                this.dispose();
+                
+            }
+            
+        }catch(Exception ex){
+            
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            
+        }
+    }//GEN-LAST:event_jButtonUtilizarActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -789,6 +837,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JButton jButtonInativos;
     private javax.swing.JButton jButtonStatus;
     private javax.swing.JButton jButtonTipoFuncionario;
+    private javax.swing.JButton jButtonUtilizar;
     private javax.swing.JCheckBox jCheckBoxDemissao;
     private javax.swing.JCheckBox jCheckBoxLogin;
     private javax.swing.JComboBox jComboAcao;

@@ -17,7 +17,7 @@ import util.OrdenaClickTabela;
 import util.Validacao;
 
 public class TelaClientes extends javax.swing.JFrame {
-    
+
     private int linhaSelecionada = 0;
     private DefaultTableModel modelo = new DefaultTableModel();
     private Pessoa pe = null;
@@ -28,7 +28,8 @@ public class TelaClientes extends javax.swing.JFrame {
     private boolean isSelected = false;
     private TelaImoveis telaImoveis = null;
     private final int index = 0;
-    
+    private TelaRelatorios telaRelatorios = null;
+
     public TelaClientes() throws ClassNotFoundException, Exception {
         CriarJTable();
         initComponents();
@@ -36,7 +37,7 @@ public class TelaClientes extends javax.swing.JFrame {
         popularJtable();
         OrdenaClickTabela.ordenarPorClick(jTableTabela, pec, modelo);
     }
-    
+
     public TelaClientes(TelaOrcamentos telaOrcamentos) throws ClassNotFoundException, Exception {
         this.telaOrcamentos = telaOrcamentos;
         CriarJTable();
@@ -47,7 +48,7 @@ public class TelaClientes extends javax.swing.JFrame {
         jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
         jButtonUsarContrato.setVisible(true);
     }
-    
+
     public TelaClientes(TelaImoveis telaImoveis) throws ClassNotFoundException, Exception {
         this.telaImoveis = telaImoveis;
         CriarJTable();
@@ -58,29 +59,38 @@ public class TelaClientes extends javax.swing.JFrame {
         jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
         jButtonUsarImovel.setVisible(true);
     }
-    
+
+    public TelaClientes(TelaRelatorios telaRelatorios) throws ClassNotFoundException, Exception {
+        this.telaRelatorios = telaRelatorios;
+        CriarJTable();
+        initComponents();
+        iniciar();
+        popularJtable();
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, pec, modelo);
+    }
+
     public void popularJtable() throws ClassNotFoundException, Exception {
-        
+
         jTableTabela.setModel(pec.populaJTable(modelo, 0));
-        
+
     }
-    
+
     public void popularJtableDesativados() throws ClassNotFoundException, Exception {
-        
+
         jTableTabela.setModel(pec.populaJTableDesativados(modelo, 0));
-        
+
     }
-    
+
     public void iniciar() throws ClassNotFoundException, SQLException {
-        
+
         pe = new Pessoa();
         pec = new PessoaController();
-        
+
         jComboAcao.removeAllItems();
         jComboAcao.addItem("Ações");
         jComboAcao.addItem("Cadastrar");
         jComboAcao.addItem("Alterar");
-        
+
         jFormattedTextFieldDataNascimento.setEnabled(false);
         jButtonUsarContrato.setVisible(false);
         jTextFieldEmail.setEnabled(false);
@@ -94,35 +104,35 @@ public class TelaClientes extends javax.swing.JFrame {
         jButtonAcao.setEnabled(false);
         jtextidacao.setEnabled(false);
         jButtonUsarImovel.setVisible(false);
-        
+
         jtextidacao.setText("0");
-        
+
     }
-    
+
     public void setarIDEnd(Endereco end) {
-        
+
         try {
-            
+
             jTextFieldEndereco.setText("" + end.getId());
-            
+
             this.ende = end;
-            
+
         } catch (Exception ex) {
-            
+
             ex.printStackTrace();
         }
-        
+
     }
-    
+
     public boolean verificarVazio(Pessoa obj) throws Exception {
-        
+
         if (obj.getNome().equals("")) {
             throw new Exception("O campo nome  não pode estar vazio");
         } else if (obj.getCpf().equals("")) {
             throw new Exception("O campo CPF não pode estar vazio");
-            
+
         } else if (obj.getEmail().equals("")) {
-            
+
             throw new Exception("O campo E-Mail não pode estar vazio");
         } else if (obj.getDataNascimento() == null) {
             throw new Exception("O campo data de nascimento não pode estar vazio");
@@ -134,11 +144,11 @@ public class TelaClientes extends javax.swing.JFrame {
                 throw new Exception("O campo de data de nascimento não pode ser no futuro.");
             }
         }
-        
+
         return false;
-        
+
     }
-    
+
     public void CriarJTable() {
         jTableTabela = new JTable(modelo);
         modelo.addColumn("Código");
@@ -149,7 +159,7 @@ public class TelaClientes extends javax.swing.JFrame {
         modelo.addColumn("Telefone");
         modelo.addColumn("Endereço");
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -349,13 +359,13 @@ public class TelaClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboAcaoActionPerformed
-        
+
         int indexCombo = jComboAcao.getSelectedIndex();
-        
+
         switch (indexCombo) {
-            
+
             case 0:
-                
+
                 jFormattedTextFieldDataNascimento.setEnabled(false);
                 jTextFieldEmail.setEnabled(false);
                 jTextFieldEndereco.setEnabled(false);
@@ -367,11 +377,11 @@ public class TelaClientes extends javax.swing.JFrame {
                 jButtonAtivar.setEnabled(false);
                 jButtonDesativar.setEnabled(false);
                 jButtonAcao.setEnabled(false);
-                
+
                 break;
-            
+
             case 1:
-                
+
                 jFormattedTextFieldDataNascimento.setEnabled(true);
                 jTextFieldEmail.setEnabled(true);
                 jTextFieldEndereco.setEnabled(false);
@@ -381,11 +391,11 @@ public class TelaClientes extends javax.swing.JFrame {
                 jButton1.setEnabled(true);
                 jButtonAcao.setEnabled(true);
                 jButtonAcao.setEnabled(true);
-                
+
                 break;
-            
+
             case 2:
-                
+
                 jFormattedTextFieldDataNascimento.setEnabled(true);
                 jTextFieldEmail.setEnabled(true);
                 jTextFieldEndereco.setEnabled(false);
@@ -395,9 +405,9 @@ public class TelaClientes extends javax.swing.JFrame {
                 jButton1.setEnabled(true);
                 jButtonAcao.setEnabled(true);
                 jButtonAcao.setEnabled(true);
-                
+
                 break;
-            
+
             default:
 
                 // JOptionPane.showMessageDialog(null, "Nenhuma ação foi selecionada.");
@@ -407,180 +417,190 @@ public class TelaClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboAcaoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         try {
-            
+
             new TelaEnderecos(this).setVisible(true);
-            
+
         } catch (Exception ex) {
-            
+
             System.out.println(ex.getMessage());
-            
+
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTableTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTabelaMouseClicked
-        
+
         try {
             linhaSelecionada = jTableTabela.getSelectedRow();
-            
+
             pe = pec.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
             ende = pe.getEndereco();
             setarIDEnd(ende);
-            
+
             jtextidacao.setText("" + pe.getId());
             jTextFieldNome.setText(pe.getNome());
             jTextFieldEmail.setText(pe.getEmail());
             jFormattedTextFieldCPF.setText(pe.getCpf());
             jFormattedTextFieldTelefone.setText(pe.getTelefone());
             jFormattedTextFieldDataNascimento.setText(CriaDate.geraDataFormatada(pe.getDataNascimento()));
-            
+
             isSelected = true;
-            
+
             if (pe.getAtivado() == 1) {
-                
+
                 jButtonAtivar.setEnabled(false);
                 jButtonDesativar.setEnabled(true);
             } else {
                 jButtonDesativar.setEnabled(true);
                 jButtonAtivar.setEnabled(false);
             }
-            
+
         } catch (Exception ex) {
-            
+
             ex.printStackTrace();
         }
 
     }//GEN-LAST:event_jTableTabelaMouseClicked
 
     private void jButtonAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcaoActionPerformed
-        
+
         try {
-            
+
             int action = jComboAcao.getSelectedIndex();
             java.sql.Date dataNascimento = CriaDate.geraSqlDate(jFormattedTextFieldDataNascimento.getText());
-            
+
             if (Validacao.validarCPF(jFormattedTextFieldCPF.getText())) {
-                
+
                 if (Validacao.validarEmail(jTextFieldEmail.getText())) {
-                    
+
                     String nome = jTextFieldNome.getText();
                     String email = jTextFieldEmail.getText();
                     String telefone = jFormattedTextFieldTelefone.getText();
                     String cpf = jFormattedTextFieldCPF.getText();
-                    
+
                     switch (action) {
-                        
+
                         case 0:
-                            
+
                             iniciar();
-                            
+
                             break;
-                        
+
                         case 1:
-                            
+
                             pe = new Pessoa(0, nome, email, dataNascimento, cpf, telefone, ende, 1, 1);
-                            
+
                             pec.inserirItem(pe);
-                            
+
                             JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
                             popularJtable();
-                            
+
                             break;
-                        
+
                         case 2:
-                            
+
                             if (isSelected) {
-                                
+
                                 pe = new Pessoa(pe.getId(), nome, email, dataNascimento, cpf, telefone, ende, 1, 1);
-                                
+
                                 pec.alterarItem(pe);
-                                
+
                                 popularJtable();
                                 JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso!");
                             } else {
-                                
+
                                 JOptionPane.showMessageDialog(null, "Selecione uma linha da tabela!");
                             }
                             break;
-                        
+
                         default:
-                            
+
                             break;
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Digite um E-mail Válido");
                 }
             } else {
-                
+
                 JOptionPane.showMessageDialog(null, "Digite um CPF Válido");
-                
+
             }
-            
+
         } catch (Exception ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-        
+
 
     }//GEN-LAST:event_jButtonAcaoActionPerformed
 
     private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
-        
+
         try {
             int id = Integer.parseInt(jtextidacao.getText());
-            
+
             if (isSelected) {
-                
+
                 pec.ativarItem(id);
                 popularJtable();
-                
+
                 JOptionPane.showMessageDialog(null, "Produto ativado com sucesso!");
-                
+
             }
         } catch (Exception ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
-            
+
         }
 
     }//GEN-LAST:event_jButtonAtivarActionPerformed
 
     private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
-        
+
         try {
             int id = Integer.parseInt(jtextidacao.getText());
-            
+
             if (isSelected) {
-                
+
                 pec.desativarItem(id);
                 popularJtable();
-                
+
                 JOptionPane.showMessageDialog(null, "Produto desativado com sucesso!");
-                
+
             }
         } catch (Exception ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
-            
+
         }
-        
+
 
     }//GEN-LAST:event_jButtonDesativarActionPerformed
 
     private void jButtonUsarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsarContratoActionPerformed
+
         try {
             if (isSelected) {
-                
-                telaOrcamentos.setarCliente(pe);
-                this.dispose();
-                
+
+                if (telaOrcamentos != null) {
+
+                    telaOrcamentos.setarCliente(pe);
+                    this.dispose();
+
+                }
+                if (telaRelatorios != null) {
+
+                    telaRelatorios.setObjetoCliente(pe);
+                    this.dispose();
+
+                }
             } else {
                 throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
             }
         } catch (Exception ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jButtonUsarContratoActionPerformed
@@ -588,15 +608,15 @@ public class TelaClientes extends javax.swing.JFrame {
     private void jButtonUsarImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsarImovelActionPerformed
         try {
             if (isSelected) {
-                
+
                 telaImoveis.setarCliente(pe);
                 this.dispose();
-                
+
             } else {
                 throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
             }
         } catch (Exception ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jButtonUsarImovelActionPerformed
@@ -616,7 +636,7 @@ public class TelaClientes extends javax.swing.JFrame {
             Logger.getLogger(TelaClientes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonDesativadosActionPerformed
-    
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

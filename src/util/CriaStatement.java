@@ -336,7 +336,7 @@ public class CriaStatement {
                      "JOIN funcionarios F ON F.fun_iden = O.orc_func_iden\n" +
                      "JOIN pessoas P On P.pes_iden = F.fun_pes_iden\n" +
                      "JOIN imoveis I ON i.imo_iden = O.orc_imo_iden\n" +
-                     "where F.fun_iden in " + idFuncionario + "\n" +
+                     "where F.fun_iden in (" + idFuncionario + ")\n" +
                      "and C.con_pago in (1)\n" +
                      "order by F.fun_iden asc";
         
