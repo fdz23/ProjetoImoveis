@@ -77,13 +77,13 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
     public void popularJtable() throws ClassNotFoundException, Exception {
 
-        jTableTabela.setModel(fc.populaJTable(modelo, 8));
+        jTableTabela.setModel(fc.populaJTable(modelo, 9));
 
     }
 
     public void popularJtableDesativados() throws ClassNotFoundException, Exception {
 
-        jTableTabela.setModel(fc.populaJTableDesativados(modelo, 8));
+        jTableTabela.setModel(fc.populaJTableDesativados(modelo, 9));
 
     }
 

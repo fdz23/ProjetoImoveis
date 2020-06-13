@@ -162,6 +162,19 @@ public class CriaStatement {
         return con.prepareStatement(sql);   
     }
     
+    public PreparedStatement selectSqlAllOrder(String tabela, String coluna, boolean asc) throws Exception {
+        
+        String ascOuDesc = "DESC";
+        
+        if(asc)
+            ascOuDesc = "ASC";
+        
+        String sql = "SELECT * FROM " + tabela
+                  + " ORDER BY " + coluna + " " + ascOuDesc;
+        
+        return con.prepareStatement(sql);   
+    }
+    
     public PreparedStatement selectSqlDeativatedOrder(String tabela, String coluna, boolean asc) throws Exception {
         
         String colunaAtivado = coluna.split("_")[0] + "_ativado";

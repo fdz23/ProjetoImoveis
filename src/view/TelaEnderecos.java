@@ -83,7 +83,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTabela = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButtonAcao = new javax.swing.JButton();
         jTextFieldIbge = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         JtextFielCep = new javax.swing.JTextField();
@@ -141,13 +141,13 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 290, 740, 530));
 
-        jButton1.setText("Ação ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAcao.setText("Ação ");
+        jButtonAcao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAcaoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 740, 140, 50));
+        jPanel1.add(jButtonAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 740, 140, 50));
         jPanel1.add(jTextFieldIbge, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 180, -1));
 
         jLabel4.setText("Cod. IBGE :");
@@ -356,7 +356,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
             JtextFielReferencia.setEnabled(false);
             JtextFielCep.setEnabled(false);
             jButtonBuscarCep.setEnabled(false);
-            jButton1.setEnabled(false);
+            jButtonAcao.setEnabled(false);
             jButtonAtivado.setEnabled(false);
             jButtonDesativar.setEnabled(false);
 
@@ -382,7 +382,9 @@ public class TelaEnderecos extends javax.swing.JFrame {
             JtextFielReferencia.setEnabled(false);
             JtextFielCep.setEnabled(false);
             jButtonBuscarCep.setEnabled(false);
-            jButton1.setEnabled(false);
+            jButtonAcao.setEnabled(false);
+            jButtonAtivado.setEnabled(false);
+            jButtonDesativar.setEnabled(false);
 
         }
     }
@@ -448,7 +450,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
     }
 
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcaoActionPerformed
 
         try {
 
@@ -511,7 +513,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonAcaoActionPerformed
 
     private void jComboAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboAcaoActionPerformed
 
@@ -532,7 +534,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
                 JtextFielReferencia.setEnabled(false);
                 JtextFielCep.setEnabled(false);
                 jButtonBuscarCep.setEnabled(false);
-                jButton1.setEnabled(false);
+                jButtonAcao.setEnabled(false);
 
                 break;
 
@@ -549,7 +551,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
                 JtextFielReferencia.setEnabled(true);
                 JtextFielCep.setEnabled(true);
                 jButtonBuscarCep.setEnabled(true);
-                jButton1.setEnabled(true);
+                jButtonAcao.setEnabled(true);
 
                 break;
 
@@ -566,7 +568,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
                 JtextFielReferencia.setEnabled(true);
                 JtextFielCep.setEnabled(true);
                 jButtonBuscarCep.setEnabled(true);
-                jButton1.setEnabled(true);
+                jButtonAcao.setEnabled(true);
 
                 break;
 
@@ -755,7 +757,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
     private javax.swing.JTextField JtextFielNumero;
     private javax.swing.JTextField JtextFielReferencia;
     private javax.swing.JTextField JtextFieldEstado;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonAcao;
     private javax.swing.JButton jButtonAtivado;
     private javax.swing.JButton jButtonAtivos;
     private javax.swing.JButton jButtonBuscarCep;

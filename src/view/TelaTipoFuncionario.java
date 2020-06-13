@@ -472,7 +472,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     private void jButtonUtilizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUtilizarActionPerformed
         try {
             if (isSelected) {
-                if (Login.funcionario.getTipoFuncionario().getNivelAcesso().getSomaNiveis() > tipoFuncionario.getNivelAcesso().getSomaNiveis()) {
+                if (Login.funcionario.getTipoFuncionario().getNivelAcesso().getSomaNiveis() >= tipoFuncionario.getNivelAcesso().getSomaNiveis()) {
 
                     telaFuncionarios.setarCargo(tipoFuncionario);
                     this.dispose();
