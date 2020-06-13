@@ -16,15 +16,24 @@ public abstract class Controller<T> implements IController<T> {
     
     protected Dao<T> dao;
     
+    @Override
     public Iterator<T> getTodosItensOrdenadosDuplamentePor(int campo1, int campo2, boolean ascOuDesc1, boolean ascOuDesc2) throws Exception {
         
         return dao.getAllDoubleOrderBy(campo1, campo2, ascOuDesc1, ascOuDesc2);
         
     }
     
+    @Override
     public Iterator<T> getTodosItensOrdenadosPor(int campo, boolean ascOuDesc) throws Exception {
         
         return dao.getAllOrderBy(campo, ascOuDesc);
+        
+    }
+    
+    @Override
+    public Iterator<T> getTodosDesativadosOrdenadosPor(int campo, boolean ascOuDesc) throws Exception {
+        
+        return dao.getAllDeactivatedOrderBy(campo, ascOuDesc);
         
     }
     
