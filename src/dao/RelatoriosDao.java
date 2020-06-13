@@ -245,7 +245,7 @@ public class RelatoriosDao {
             
             itens.add(
                     new Object[]{
-                        rs.getString("proprietário"),
+                        rs.getString("Proprietario"),
                         rs.getString("imo_descricao"),
                         rs.getDouble("imo_preco"),
                         CriaDate.geraDataFormatadaSql(rs.getDate("imo_data_inclusao")),
