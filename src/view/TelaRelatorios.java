@@ -12,11 +12,14 @@ import model.Pessoa;
 
 public class TelaRelatorios extends javax.swing.JFrame {
 
-    private DefaultTableModel modelo = new DefaultTableModel();
     private RelatoriosController rl = null;
 
     public TelaRelatorios() throws SQLException {
         initComponents();
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Teste");
+        modelo.addColumn("Teste2");
+        jTableTabela.setModel(modelo);
 
     }
 
@@ -209,11 +212,12 @@ public class TelaRelatorios extends javax.swing.JFrame {
 
         try {
 
-            jTableTabela = new JTable(modelo);
+            DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Corretor");
             modelo.addColumn("Nome Imovel");
             modelo.addColumn("Valor Comissao");
             modelo.addColumn("Preço Imovel");
+            jTableTabela.setModel(modelo);
 
             rl = new RelatoriosController(modelo);
 
@@ -231,12 +235,14 @@ public class TelaRelatorios extends javax.swing.JFrame {
     private void jButtonImoveisCadastradosNoSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImoveisCadastradosNoSistemaActionPerformed
 
         try {
-            jTableTabela = new JTable(modelo);
+            
+            DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Descricao Imovel");
             modelo.addColumn("Tamanho");
             modelo.addColumn("Proprietário");
             modelo.addColumn("Valor Comissão");
             modelo.addColumn("Data Inclusão");
+            jTableTabela.setModel(modelo);
 
             rl = new RelatoriosController(modelo);
             
@@ -254,11 +260,12 @@ public class TelaRelatorios extends javax.swing.JFrame {
 
         try {
 
-            jTableTabela = new JTable(modelo);
+            DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Proprietário");
             modelo.addColumn("Descrição Imovell");
             modelo.addColumn("Valor Imovel");
             modelo.addColumn("Cidade");
+            jTableTabela.setModel(modelo);
 
             rl = new RelatoriosController(modelo);
 
@@ -278,7 +285,7 @@ public class TelaRelatorios extends javax.swing.JFrame {
 
         try {
 
-            jTableTabela = new JTable(modelo);
+            DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Descrição Imovel");
             modelo.addColumn("Valor Imovel");
             modelo.addColumn("Valor Comissão");
@@ -287,6 +294,7 @@ public class TelaRelatorios extends javax.swing.JFrame {
             modelo.addColumn("Proprietário");
             modelo.addColumn("Tipo Pagamento");
             modelo.addColumn("Data financiada");
+            jTableTabela.setModel(modelo);
 
             rl = new RelatoriosController(modelo);
             jTableTabela.setModel(rl.populaImoveisFinanciadosPorData(mes, ano));
@@ -302,11 +310,12 @@ public class TelaRelatorios extends javax.swing.JFrame {
     private void jButtonCidadePeriodoETipoImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCidadePeriodoETipoImovelActionPerformed
 
         try {
-            jTableTabela = new JTable(modelo);
+            DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Descrição Imovel");
             modelo.addColumn("Proprietário");
             modelo.addColumn("Tipo Imovel");
             modelo.addColumn("Cidade");
+            jTableTabela.setModel(modelo);
 
             rl = new RelatoriosController(modelo);
 
@@ -322,10 +331,11 @@ public class TelaRelatorios extends javax.swing.JFrame {
 
             String baixa = JOptionPane.showInputDialog(null, "Entre com o motivo da baixa");
 
-            jTableTabela = new JTable(modelo);
+            DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Descrição Imovel");
             modelo.addColumn("Data da Baixa");
             modelo.addColumn("Motivo da Baixa");
+            jTableTabela.setModel(modelo);
 
             rl = new RelatoriosController(modelo);
 
@@ -346,10 +356,11 @@ public class TelaRelatorios extends javax.swing.JFrame {
 
         try {
 
-            jTableTabela = new JTable(modelo);
+            DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Descrição Imovel");
             modelo.addColumn("Valor Imovel");
             modelo.addColumn("Valor Comissão");
+            jTableTabela.setModel(modelo);
 
             rl = new RelatoriosController(modelo);
 
@@ -368,10 +379,11 @@ public class TelaRelatorios extends javax.swing.JFrame {
 
         try {
 
-            jTableTabela = new JTable(modelo);
+            DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Descrição Imovel");
             modelo.addColumn("Valor Imovel");
             modelo.addColumn("Valor Comissão");
+            jTableTabela.setModel(modelo);
 
             rl = new RelatoriosController(modelo);
             jTableTabela.setModel(rl.populaImoveisPorVendaAnual(ano));
@@ -388,9 +400,10 @@ public class TelaRelatorios extends javax.swing.JFrame {
 
         try {
 
-            jTableTabela = new JTable(modelo);
+            DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Corretor");
             modelo.addColumn("Valor Comissão");
+            jTableTabela.setModel(modelo);
 
             rl = new RelatoriosController(modelo);
 
@@ -410,13 +423,14 @@ public class TelaRelatorios extends javax.swing.JFrame {
 
             String situacao = JOptionPane.showInputDialog(null, "Digite uma situação");
 
-            jTableTabela = new JTable(modelo);
+            DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Proprietário");
             modelo.addColumn("Descrição Imovel");
             modelo.addColumn("Valor Imovel");
             modelo.addColumn("Data Inclusão");
             modelo.addColumn("Situação");
             modelo.addColumn("Ativo");
+            jTableTabela.setModel(modelo);
 
             rl = new RelatoriosController(modelo);
             jTableTabela.setModel(rl.populaImoveisDisponiveisPorSituacao(null));
