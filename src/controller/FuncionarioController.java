@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.Funcionario;
+import util.CriaDate;
 import util.Login;
 
 /**
@@ -43,7 +44,7 @@ public class FuncionarioController extends Controller<Funcionario> {
                         item.getNome(),
                         item.getTipoFuncionario().getDescricao(),
                         item.getStatus().getDescricao(),
-                        item.getDataRescisao()
+                        CriaDate.geraDataFormatadaSql(item.getDataRescisao())
                     });
 
         }
@@ -70,7 +71,7 @@ public class FuncionarioController extends Controller<Funcionario> {
                         item.getNome(),
                         item.getTipoFuncionario().getDescricao(),
                         item.getStatus().getDescricao(),
-                        item.getDataRescisao()
+                        CriaDate.geraDataFormatadaSql(item.getDataRescisao())
                     });
 
         }

@@ -34,5 +34,12 @@ public class CriaDate {
         return formatData.format(data);
         
     }
+    
+    public static String geraDataFormatadaSql(java.sql.Date data) {
+        
+        java.util.Date data2 = data;
+        return geraDataFormatada(data2);
+        
+    }
 
 }

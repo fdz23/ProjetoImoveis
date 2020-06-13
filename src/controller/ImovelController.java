@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.Imovel;
+import util.CriaDate;
 
 /**
  *
@@ -41,7 +42,7 @@ public class ImovelController extends Controller<Imovel> {
                         item.getPreco(),
                         item.getTamanho(),
                         item.getSituacao(),
-                        item.getBaixaData(),
+                        CriaDate.geraDataFormatadaSql(item.getBaixaData()),
                         item.getBaixaMotivo(),
                         item.getQuantidadeParcelas(),
                         item.getValorComissao(),
@@ -76,7 +77,7 @@ public class ImovelController extends Controller<Imovel> {
                         item.getPreco(),
                         item.getTamanho(),
                         item.getSituacao(),
-                        item.getBaixaData(),
+                        CriaDate.geraDataFormatadaSql(item.getBaixaData()),
                         item.getBaixaMotivo(),
                         item.getQuantidadeParcelas(),
                         item.getValorComissao(),
