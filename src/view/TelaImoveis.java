@@ -481,6 +481,9 @@ public class TelaImoveis extends javax.swing.JFrame {
             if (isSelected) {
 
                 ic.ativarItem(im.getId());
+                im = ic.getItem(im.getId());
+                im.setBaixaData(CriaDate.geraSqlDate("00/00/0000"));
+                im.setBaixaMotivo("Nenhuma");
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Imovel ativado com sucesso!");
@@ -553,8 +556,12 @@ public class TelaImoveis extends javax.swing.JFrame {
                         break;
 
                     case 2:
+                        
+                        int ativado = 1;
+                        if (jCheckBoxBaixa.isSelected())
+                            ativado = 0;
 
-                        im = new Imovel(im.getId(), im.getDataInclusao(), preco, tamanho, situacao, dataBaixa, baixa, qtdParcelas, comissao, fun, pe, tp, end, 1, nome, imovelItens);
+                        im = new Imovel(im.getId(), im.getDataInclusao(), preco, tamanho, situacao, dataBaixa, baixa, qtdParcelas, comissao, fun, pe, tp, end, ativado, nome, imovelItens);
 
                         if (isSelected) {
 
