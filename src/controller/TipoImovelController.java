@@ -44,5 +44,26 @@ public class TipoImovelController extends Controller<TipoImovel> {
         return model;
 
     }
+
+    public DefaultTableModel populaJTableDesativados(DefaultTableModel model, int campo) throws Exception {
+
+        Iterator<TipoImovel> lista = dao.getAllDeactivatedOrderBy(campo, true);
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+
+            TipoImovel item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getDescricao(),});
+
+        }
+        
+        return model;
+
+    }
     
 }

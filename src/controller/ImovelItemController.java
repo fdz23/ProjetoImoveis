@@ -47,6 +47,29 @@ public class ImovelItemController extends Controller<ImovelItem> {
         
     }
     
+    public DefaultTableModel populaJTableDesativados(DefaultTableModel model, int campo) throws Exception {
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<ImovelItem> lista = dao.getAllDeactivatedOrderBy(campo, true);
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+            
+            ImovelItem item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getDescricao(),
+                        item.getValor()
+                    });
+
+        }
+
+        return model;
+        
+    }
+    
     public DefaultTableModel populaJTablePorIdImovel(DefaultTableModel model, int campo, int idImovel) throws ClassNotFoundException, SQLException, Exception {
         
         

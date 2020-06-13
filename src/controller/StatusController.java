@@ -44,20 +44,22 @@ public class StatusController extends Controller<Status> {
 
     }
 
-    public DefaultComboBoxModel popularCombox(DefaultComboBoxModel model) throws Exception {
+    public DefaultTableModel populaJTableDesativados(DefaultTableModel model, int campo) throws Exception {
 
-        Iterator<Status> lista = dao.getAll();
+        Iterator<Status> lista = dao.getAllDeactivatedOrderBy(campo, true);
 
-        model.removeAllElements();
+        model.setNumRows(0);
 
         while (lista.hasNext()) {
 
             Status item = lista.next();
 
-            model.addElement(item.getId() + "-" + item.getDescricao());
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getDescricao(),});
 
         }
-
         return model;
 
     }

@@ -52,6 +52,33 @@ public class FuncionarioController extends Controller<Funcionario> {
 
     }
     
+    public DefaultTableModel populaJTableDesativados(DefaultTableModel model, int campo) throws Exception {
+
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<Funcionario> lista = dao.getAllDeactivatedOrderBy(campo, true);
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+            
+            Funcionario item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getMatricula(),
+                        item.getNome(),
+                        item.getTipoFuncionario().getDescricao(),
+                        item.getStatus().getDescricao(),
+                        item.getDataRescisao()
+                    });
+
+        }
+
+        return model;
+
+    }
+    
     public Funcionario login(String email, String senha) throws Exception {
         
         Funcionario funcionario = new FuncionarioDao().verificaEmail(email);

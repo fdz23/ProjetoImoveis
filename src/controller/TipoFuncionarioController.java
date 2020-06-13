@@ -46,20 +46,27 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
         return model;
 
     }
-    
-        public DefaultComboBoxModel popularCombox(DefaultComboBoxModel model) throws Exception {
 
-        Iterator<TipoFuncionario> lista = dao.getAll();
+    public DefaultTableModel populaJTableDesativados(DefaultTableModel model, int campo) throws Exception {
 
-        model.removeAllElements();
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<TipoFuncionario> lista = dao.getAllDeactivatedOrderBy(campo, true);
+
+        model.setNumRows(0);
 
         while (lista.hasNext()) {
 
             TipoFuncionario item = lista.next();
 
-            model.addElement(item.getId() + "-" + item.getDescricao());
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getDescricao(),
+                        item.getNivelAcesso().getDescricao(),
+                        item.getSalario()
+                    });
 
-        }  
+        }
 
         return model;
 

@@ -48,6 +48,29 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
         return model;
 
     }
+
+    public DefaultTableModel populaJTableDesativados(DefaultTableModel model, int campo) throws Exception {
+
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<NivelAcesso> lista = dao.getAllDeactivatedOrderBy(campo, true);
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+
+            NivelAcesso item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getDescricao()
+                    });
+
+        }
+
+        return model;
+
+    }
     
     public Array getArrayInt(Integer[] array) throws SQLException, ClassNotFoundException {
         return new NivelAcessoDao().getArrayFromInt(array);
