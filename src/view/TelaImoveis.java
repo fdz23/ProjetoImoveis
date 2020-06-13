@@ -191,7 +191,7 @@ public class TelaImoveis extends javax.swing.JFrame {
 
             throw new Exception("Escolha um proprietário");
         } else if (baixa == null && jCheckBoxBaixa.isSelected()) {
-            throw new Exception("Favor dar baixa e listar o motivo ou desativar a checkbox de baixa.");
+            throw new Exception("Favor listar o motivo da baixa ou desativar a checkbox.");
         }
         return false;
 
@@ -560,7 +560,7 @@ public class TelaImoveis extends javax.swing.JFrame {
 
                             ic.alterarItem(im);
                             popularJtable();
-                            JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
+                            JOptionPane.showMessageDialog(null, "Imovel alterado com sucesso!");
                         }
 
                         break;
