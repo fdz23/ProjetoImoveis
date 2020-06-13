@@ -83,6 +83,11 @@ public class TelaImoveisItens extends javax.swing.JFrame {
         jTableTabela.setModel(im.populaJTablePorIdImovel(modelo, 1, imovel.getId()));
     }
 
+    private void popularJtableDesativados() throws ClassNotFoundException, Exception {
+
+        jTableTabela.setModel(im.populaJTablePorIdImovelDesativado(modelo, 1, imovel.getId()));
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -103,6 +108,8 @@ public class TelaImoveisItens extends javax.swing.JFrame {
         jTextFieldPesquisa = new javax.swing.JTextField();
         jButtonAtivar = new javax.swing.JButton();
         jButtonDesativar = new javax.swing.JButton();
+        jButtonAtivos = new javax.swing.JButton();
+        jButtonInativos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -179,6 +186,22 @@ public class TelaImoveisItens extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, 100, 30));
 
+        jButtonAtivos.setText("Mostrar ativos");
+        jButtonAtivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtivosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonAtivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 630, 170, -1));
+
+        jButtonInativos.setText("Mostrar inativos");
+        jButtonInativos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInativosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 630, 170, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,7 +210,7 @@ public class TelaImoveisItens extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -339,6 +362,22 @@ public class TelaImoveisItens extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonDesativarActionPerformed
 
+    private void jButtonAtivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivosActionPerformed
+        try {
+            popularJtable();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaContratos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonAtivosActionPerformed
+
+    private void jButtonInativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInativosActionPerformed
+        try {
+            popularJtableDesativados();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaContratos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonInativosActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -377,7 +416,9 @@ public class TelaImoveisItens extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAtivar;
+    private javax.swing.JButton jButtonAtivos;
     private javax.swing.JButton jButtonDesativar;
+    private javax.swing.JButton jButtonInativos;
     private javax.swing.JButton jButtonaction;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;

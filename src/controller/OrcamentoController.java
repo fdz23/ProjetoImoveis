@@ -51,4 +51,32 @@ public class OrcamentoController extends Controller<Orcamento> {
 
     }
     
+    public DefaultTableModel populaJTableDesativados(DefaultTableModel model, int campo) throws Exception {
+
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<Orcamento> lista = dao.getAllDeactivatedOrderBy(campo, true);
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+            
+            Orcamento item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getData(),
+                        item.getDescricao(),
+                        item.getFuncionario().getNome(),
+                        item.getPessoa().getNome(),
+                        item.getImovel().getDescricao(),
+                        item.getTipoPagamento().getDescricao()
+                    });
+
+        }
+
+        return model;
+
+    }
+    
 }

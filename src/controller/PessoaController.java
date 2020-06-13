@@ -34,17 +34,41 @@ public class PessoaController extends Controller<Pessoa> {
     public DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
-        Iterator<Pessoa> lista = daoP.getAllClienteOrderBy(campo, true);
+        Iterator<Pessoa> lista = daoP.getAllClientesOrderBy(campo, true);
 
         model.setNumRows(0);
 
         while (lista.hasNext()) {
             
             Pessoa item = lista.next();
+                
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getNome(),
+                        item.getEmail(),
+                        item.getDataNascimento(),
+                        item.getCpf(),
+                        item.getTelefone(),
+                        item.getEndereco().getCep()
+                    });
+
+        }
+
+        return model;
+
+    }
+    
+    public DefaultTableModel populaJTableDesativados(DefaultTableModel model, int campo) throws Exception {
+
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<Pessoa> lista = daoP.getAllClientesDesativadosOrderBy(campo, true);
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
             
-            String cliente = "Sim";
-            if (item.getCliente() == 0)
-                cliente = "Não";
+            Pessoa item = lista.next();
                 
             model.addRow(
                     new Object[]{

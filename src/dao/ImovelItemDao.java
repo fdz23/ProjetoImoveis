@@ -52,6 +52,33 @@ public class ImovelItemDao extends Dao<ImovelItem> {
 
     }
 
+    public Iterator<ImovelItem> getByIdImovelDesativado(int idImovel) throws Exception {
+
+        List<ImovelItem> itens = new ArrayList<ImovelItem>();
+        
+        ps = statementByIdImovel(idImovel);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+
+            itens.add(getByID(rs.getInt(id)));
+
+        }
+
+        return itens.iterator();
+
+    }
+
+    protected PreparedStatement statementByIdImovelDesativado(int idImovel) throws Exception {
+
+        ps = criaStatement.selectSqlDesativado(tabela, true, "iit_imo_iden");
+
+        ps.setInt(1, idImovel);
+
+        return ps;
+    }
+
     protected PreparedStatement statementByIdImovel(int idImovel) throws Exception {
 
         ps = criaStatement.selectSql(tabela, true, "iit_imo_iden");

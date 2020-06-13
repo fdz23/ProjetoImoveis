@@ -57,4 +57,39 @@ public class ImovelController extends Controller<Imovel> {
         return model;
 
     }
+    
+    public DefaultTableModel populaJTableDesativados(DefaultTableModel model, int campo) throws Exception {
+
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<Imovel> lista = dao.getAllDeactivatedOrderBy(campo, true);
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+            
+            Imovel item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getDataInclusao(),
+                        item.getPreco(),
+                        item.getTamanho(),
+                        item.getSituacao(),
+                        item.getBaixaData(),
+                        item.getBaixaMotivo(),
+                        item.getQuantidadeParcelas(),
+                        item.getValorComissao(),
+                        item.getFuncionario().getNome(),
+                        item.getPessoa().getNome(),
+                        item.getTipoImovel().getDescricao(),
+                        item.getEndereco().getCep(),
+                        item.getDescricao()
+                    });
+
+        }
+
+        return model;
+
+    }
 }

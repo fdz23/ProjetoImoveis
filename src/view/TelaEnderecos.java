@@ -114,6 +114,8 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jButtonUtilizar = new javax.swing.JButton();
         jButtonUtilizarFunc = new javax.swing.JButton();
         jButtonUtilizarClientes = new javax.swing.JButton();
+        jButtonInativos = new javax.swing.JButton();
+        jButtonAtivos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -256,6 +258,22 @@ public class TelaEnderecos extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonUtilizarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 140, 180, 70));
 
+        jButtonInativos.setText("Mostrar inativos");
+        jButtonInativos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInativosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 840, 170, -1));
+
+        jButtonAtivos.setText("Mostrar ativos");
+        jButtonAtivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtivosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonAtivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 840, 170, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -266,7 +284,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 831, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
         );
 
         pack();
@@ -387,6 +405,11 @@ public class TelaEnderecos extends javax.swing.JFrame {
     private void popularJtable() throws ClassNotFoundException, Exception {
 
         jTableTabela.setModel(ec.populaJTable(modelo, 0));
+    }
+
+    private void popularJtableDesativados() throws ClassNotFoundException, Exception {
+
+        jTableTabela.setModel(ec.populaJTableDesativados(modelo, 0));
     }
 
     public boolean verificarVazio(Endereco obj) throws Exception {
@@ -672,6 +695,22 @@ public class TelaEnderecos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonUtilizarClientesActionPerformed
 
+    private void jButtonAtivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivosActionPerformed
+        try {
+            popularJtable();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaContratos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonAtivosActionPerformed
+
+    private void jButtonInativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInativosActionPerformed
+        try {
+            popularJtableDesativados();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaContratos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonInativosActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -718,8 +757,10 @@ public class TelaEnderecos extends javax.swing.JFrame {
     private javax.swing.JTextField JtextFieldEstado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAtivado;
+    private javax.swing.JButton jButtonAtivos;
     private javax.swing.JButton jButtonBuscarCep;
     private javax.swing.JButton jButtonDesativar;
+    private javax.swing.JButton jButtonInativos;
     private javax.swing.JButton jButtonUtilizar;
     private javax.swing.JButton jButtonUtilizarClientes;
     private javax.swing.JButton jButtonUtilizarFunc;

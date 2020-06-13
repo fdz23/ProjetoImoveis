@@ -66,6 +66,23 @@ public class CriaStatement {
         return con.prepareStatement(sql);
     }
     
+    public PreparedStatement selectSqlDesativado(String tabela, boolean especificacao, String coluna) throws Exception {
+        
+        String colunaAtivado = "";
+        if(tabela.equals("pessoas"))
+            colunaAtivado = tabela.substring(0, 3) + "_ativado";
+        else
+            colunaAtivado = id.split("_")[0] + "_ativado";
+            
+        String sql = "SELECT * FROM " + tabela + " WHERE " + colunaAtivado + " = 0";
+        
+        if(especificacao) {
+            sql += " AND " + coluna + " = ?";
+        }
+        
+        return con.prepareStatement(sql);
+    }
+    
     public PreparedStatement selectSqlPessoaClienteEmail() throws Exception {
         
         String sql = "SELECT * FROM pessoas"
@@ -145,6 +162,22 @@ public class CriaStatement {
         return con.prepareStatement(sql);   
     }
     
+    public PreparedStatement selectSqlDeativatedOrder(String tabela, String coluna, boolean asc) throws Exception {
+        
+        String colunaAtivado = coluna.split("_")[0] + "_ativado";
+        
+        String ascOuDesc = "DESC";
+        
+        if(asc)
+            ascOuDesc = "ASC";
+        
+        String sql = "SELECT * FROM " + tabela 
+                  + " WHERE " + colunaAtivado + " = 0"
+                  + " ORDER BY " + coluna + " " + ascOuDesc;
+        
+        return con.prepareStatement(sql);   
+    }
+    
     public PreparedStatement selectSqlClienteOrder(String tabela, String coluna, boolean asc) throws Exception {
         
         String colunaAtivado = coluna.split("_")[0] + "_ativado";
@@ -156,6 +189,23 @@ public class CriaStatement {
         
         String sql = "SELECT * FROM " + tabela 
                   + " WHERE " + colunaAtivado + " = 1"
+                  + " AND pes_cliente = 1"
+                  + " ORDER BY " + coluna + " " + ascOuDesc;
+        
+        return con.prepareStatement(sql);   
+    }
+    
+    public PreparedStatement selectSqlClienteDesativadoOrder(String tabela, String coluna, boolean asc) throws Exception {
+        
+        String colunaAtivado = coluna.split("_")[0] + "_ativado";
+        
+        String ascOuDesc = "DESC";
+        
+        if(asc)
+            ascOuDesc = "ASC";
+        
+        String sql = "SELECT * FROM " + tabela 
+                  + " WHERE " + colunaAtivado + " = 0"
                   + " AND pes_cliente = 1"
                   + " ORDER BY " + coluna + " " + ascOuDesc;
         

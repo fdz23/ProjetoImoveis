@@ -10,6 +10,8 @@ import model.*;
 import controller.*;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import util.CriaDate;
@@ -64,6 +66,12 @@ public class TelaOrcamentos extends javax.swing.JFrame {
     public void popularJtable() throws ClassNotFoundException, Exception {
 
         jTableTabela.setModel(orcamentoController.populaJTable(modelo, 0));
+
+    }
+
+    public void popularJtableDesativados() throws ClassNotFoundException, Exception {
+
+        jTableTabela.setModel(orcamentoController.populaJTableDesativados(modelo, 0));
 
     }
 
@@ -193,6 +201,8 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         jTextFieldTipoPagamento = new javax.swing.JTextField();
         jButtonSelecionarTipoPagamento = new javax.swing.JButton();
         jButtonUtilizar = new javax.swing.JButton();
+        jButtonAtivos = new javax.swing.JButton();
+        jButtonInativos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -305,6 +315,22 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonUtilizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 90, 180, 60));
 
+        jButtonAtivos.setText("Mostrar ativos");
+        jButtonAtivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtivosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonAtivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 770, 170, -1));
+
+        jButtonInativos.setText("Mostrar inativos");
+        jButtonInativos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInativosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 770, 170, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -318,8 +344,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(34, 34, 34))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE))
         );
 
         pack();
@@ -542,6 +567,22 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonUtilizarActionPerformed
 
+    private void jButtonAtivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivosActionPerformed
+        try {
+            popularJtable();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaContratos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonAtivosActionPerformed
+
+    private void jButtonInativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInativosActionPerformed
+        try {
+            popularJtableDesativados();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaContratos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonInativosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -581,7 +622,9 @@ public class TelaOrcamentos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAcao;
     private javax.swing.JButton jButtonAtivar;
+    private javax.swing.JButton jButtonAtivos;
     private javax.swing.JButton jButtonDesativar;
+    private javax.swing.JButton jButtonInativos;
     private javax.swing.JButton jButtonSelecionarCliente;
     private javax.swing.JButton jButtonSelecionarImovel;
     private javax.swing.JButton jButtonSelecionarTipoPagamento;

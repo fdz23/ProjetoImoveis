@@ -58,4 +58,39 @@ public class ContratoController extends Controller<Contrato> {
         return model;
 
     }
+    
+    public DefaultTableModel populaJTableDesativados(DefaultTableModel model, int campo) throws Exception {
+
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<Contrato> lista = dao.getAllDeactivatedOrderBy(campo, true);
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+            
+            Contrato item = lista.next();
+            
+            String pago = "";
+            
+            if(item.getPago() == 0)
+                pago = "Aguardando pagamento";
+            else if(item.getPago() == 1)
+                pago = "Pago";
+            else
+                pago = "Financiado";
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getData(),
+                        item.getDataAlteracao(),
+                        pago,
+                        item.getOrcamento().getDescricao()
+                    });
+
+        }
+
+        return model;
+
+    }
 }
