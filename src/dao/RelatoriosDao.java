@@ -77,7 +77,7 @@ public class RelatoriosDao {
                         rs.getString("cliente"),
                         rs.getString("proprietário"),
                         rs.getString("tpa_descricao"),
-                        CriaDate.geraDataFormatada(rs.getDate("con_data"))
+                        CriaDate.geraDataFormatadaSql(rs.getDate("con_data"))
                     }
             );
             
@@ -125,9 +125,9 @@ public class RelatoriosDao {
             itens.add(
                     new Object[]{
                         rs.getString("imo_descricao"),
-                        CriaDate.geraDataFormatada(rs.getDate("imo_baixa_data")),
+                        CriaDate.geraDataFormatadaSql(rs.getDate("imo_baixa_data")),
                         rs.getString("imo_baixa_motivo"),
-                        CriaDate.geraDataFormatada(rs.getDate("imo_baixa_data"))
+                        CriaDate.geraDataFormatadaSql(rs.getDate("imo_baixa_data"))
                     }
             );
             
@@ -248,7 +248,7 @@ public class RelatoriosDao {
                         rs.getString("proprietário"),
                         rs.getString("imo_descricao"),
                         rs.getDouble("imo_preco"),
-                        CriaDate.geraDataFormatada(rs.getDate("imo_data_inclusao")),
+                        CriaDate.geraDataFormatadaSql(rs.getDate("imo_data_inclusao")),
                         rs.getString("imo_situacao")
                     }
             );
@@ -274,9 +274,9 @@ public class RelatoriosDao {
                         rs.getString("imo_descricao"),
                         rs.getDouble("imo_tamanho"),
                         rs.getString("pes_nome"),
-                        rs.getDate("imo_preco"),
+                        rs.getDouble("imo_preco"),
                         rs.getDouble("imo_valor_comissao"),
-                        CriaDate.geraDataFormatada(rs.getDate("imo_data_inclusao"))
+                        CriaDate.geraDataFormatadaSql(rs.getDate("imo_data_inclusao"))
                     }
             );
             
