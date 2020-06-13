@@ -65,6 +65,12 @@ public class TelaClientes extends javax.swing.JFrame {
         
     }
     
+    public void popularJtableDesativados() throws ClassNotFoundException, Exception {
+        
+        jTableTabela.setModel(pec.populaJTableDesativados(modelo, 0));
+        
+    }
+    
     public void iniciar() throws ClassNotFoundException, SQLException {
         
         pe = new Pessoa();
@@ -173,6 +179,8 @@ public class TelaClientes extends javax.swing.JFrame {
         jButtonDesativar = new javax.swing.JButton();
         jButtonUsarContrato = new javax.swing.JButton();
         jButtonUsarImovel = new javax.swing.JButton();
+        jButtonAtivados = new javax.swing.JButton();
+        jButtonDesativados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -303,6 +311,22 @@ public class TelaClientes extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonUsarImovel, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 130, 170, 40));
 
+        jButtonAtivados.setText("Mostrar ativos");
+        jButtonAtivados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtivadosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonAtivados, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 770, 150, -1));
+
+        jButtonDesativados.setText("Mostrar inativos");
+        jButtonDesativados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDesativadosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonDesativados, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 770, 150, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -316,8 +340,8 @@ public class TelaClientes extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(35, 35, 35))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 833, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -576,6 +600,22 @@ public class TelaClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jButtonUsarImovelActionPerformed
+
+    private void jButtonAtivadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivadosActionPerformed
+        try {
+            popularJtable();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonAtivadosActionPerformed
+
+    private void jButtonDesativadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativadosActionPerformed
+        try {
+            popularJtableDesativados();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonDesativadosActionPerformed
     
     public static void main(String args[]) {
 
@@ -617,7 +657,9 @@ public class TelaClientes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAcao;
+    private javax.swing.JButton jButtonAtivados;
     private javax.swing.JButton jButtonAtivar;
+    private javax.swing.JButton jButtonDesativados;
     private javax.swing.JButton jButtonDesativar;
     private javax.swing.JButton jButtonUsarContrato;
     private javax.swing.JButton jButtonUsarImovel;

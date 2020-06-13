@@ -82,6 +82,12 @@ public class TelaImoveis extends javax.swing.JFrame {
 
     }
 
+    public void popularJtableDesativados() throws ClassNotFoundException, Exception {
+
+        jTableTabela.setModel(ic.populaJTableDesativados(modelo, 1));
+
+    }
+
     public void setarImovelItens(Iterator<ImovelItem> obj) {
 
         this.imovelItens = obj;
@@ -238,7 +244,8 @@ public class TelaImoveis extends javax.swing.JFrame {
         jComboBoxSituacao = new javax.swing.JComboBox();
         jButtonBaixa = new javax.swing.JButton();
         jCheckBoxBaixa = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        jButtonAtivos = new javax.swing.JButton();
+        jButtonInativos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -407,13 +414,21 @@ public class TelaImoveis extends javax.swing.JFrame {
         });
         jPanel1.add(jCheckBoxBaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 790, -1, -1));
 
-        jButton1.setText("Mostrar desativados");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAtivos.setText("Mostrar ativos");
+        jButtonAtivos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAtivosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 800, 170, 50));
+        jPanel1.add(jButtonAtivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 800, 170, -1));
+
+        jButtonInativos.setText("Mostrar inativos");
+        jButtonInativos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInativosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 800, 170, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -748,9 +763,21 @@ public class TelaImoveis extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCheckBoxBaixaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonAtivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivosActionPerformed
+        try {
+            popularJtable();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaContratos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonAtivosActionPerformed
+
+    private void jButtonInativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInativosActionPerformed
+        try {
+            popularJtableDesativados();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaContratos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonInativosActionPerformed
 
     public static void main(String args[]) {
 
@@ -791,12 +818,13 @@ public class TelaImoveis extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JTextFieldID;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAction;
     private javax.swing.JButton jButtonAtivar;
+    private javax.swing.JButton jButtonAtivos;
     private javax.swing.JButton jButtonBaixa;
     private javax.swing.JButton jButtonDesativar;
     private javax.swing.JButton jButtonEnd;
+    private javax.swing.JButton jButtonInativos;
     private javax.swing.JButton jButtonProp;
     private javax.swing.JButton jButtonSelecionarMoveis;
     private javax.swing.JButton jButtonTP;

@@ -66,6 +66,12 @@ public class TelaStatus extends javax.swing.JFrame {
         
     }
     
+    private void popularJtableDesativados() throws ClassNotFoundException, Exception {
+        
+        jTableTabela.setModel(sc.populaJTableDesativados(modelo, 0));
+        
+    }
+    
     public void iniciar() throws ClassNotFoundException, Exception {
         
         sc = new StatusController();
@@ -107,6 +113,8 @@ public class TelaStatus extends javax.swing.JFrame {
         jButtonAtivar = new javax.swing.JButton();
         jButtonDesativar = new javax.swing.JButton();
         jButtonUsar = new javax.swing.JButton();
+        jButtonAtivos = new javax.swing.JButton();
+        jButtonInativos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -200,6 +208,22 @@ public class TelaStatus extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonUsar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 110, 150, 50));
 
+        jButtonAtivos.setText("Mostrar ativos");
+        jButtonAtivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtivosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonAtivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 670, 170, -1));
+
+        jButtonInativos.setText("Mostrar inativos");
+        jButtonInativos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInativosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 670, 170, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -211,7 +235,7 @@ public class TelaStatus extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -399,6 +423,22 @@ public class TelaStatus extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jButtonUsarActionPerformed
+
+    private void jButtonAtivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivosActionPerformed
+        try {
+            popularJtable();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaContratos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonAtivosActionPerformed
+
+    private void jButtonInativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInativosActionPerformed
+        try {
+            popularJtableDesativados();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaContratos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonInativosActionPerformed
     
     public static void main(String args[]) {
 
@@ -439,7 +479,9 @@ public class TelaStatus extends javax.swing.JFrame {
     private javax.swing.JTextField JtextFielDescricao;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAtivar;
+    private javax.swing.JButton jButtonAtivos;
     private javax.swing.JButton jButtonDesativar;
+    private javax.swing.JButton jButtonInativos;
     private javax.swing.JButton jButtonUsar;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;

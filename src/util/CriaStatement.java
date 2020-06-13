@@ -66,6 +66,23 @@ public class CriaStatement {
         return con.prepareStatement(sql);
     }
     
+    public PreparedStatement selectSqlDesativado(String tabela, boolean especificacao, String coluna) throws Exception {
+        
+        String colunaAtivado = "";
+        if(tabela.equals("pessoas"))
+            colunaAtivado = tabela.substring(0, 3) + "_ativado";
+        else
+            colunaAtivado = id.split("_")[0] + "_ativado";
+            
+        String sql = "SELECT * FROM " + tabela + " WHERE " + colunaAtivado + " = 0";
+        
+        if(especificacao) {
+            sql += " AND " + coluna + " = ?";
+        }
+        
+        return con.prepareStatement(sql);
+    }
+    
     public PreparedStatement selectSqlPessoaClienteEmail() throws Exception {
         
         String sql = "SELECT * FROM pessoas"

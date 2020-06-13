@@ -79,6 +79,12 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
 
     }
 
+    private void popularJtableDesativados() throws ClassNotFoundException, Exception {
+
+        jTableTabela.setModel(tpc.populaJTableDesativados(modelo, 0));
+
+    }
+
     public boolean verificarVazio(TipoPagamento tp) throws Exception {
 
         if (tp.getDescricao().equals("")) {
@@ -109,6 +115,8 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         jButtonAtivar = new javax.swing.JButton();
         jButtonDesativar = new javax.swing.JButton();
         jButtonUsar = new javax.swing.JButton();
+        jButtonAtivos = new javax.swing.JButton();
+        jButtonInativos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -179,6 +187,22 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonUsar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 170, 40));
 
+        jButtonAtivos.setText("Mostrar ativos");
+        jButtonAtivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtivosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonAtivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 730, 170, -1));
+
+        jButtonInativos.setText("Mostrar inativos");
+        jButtonInativos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInativosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 730, 170, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,7 +211,7 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
         );
 
         pack();
@@ -340,6 +364,22 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonUsarActionPerformed
 
+    private void jButtonAtivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivosActionPerformed
+        try {
+            popularJtable();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaContratos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonAtivosActionPerformed
+
+    private void jButtonInativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInativosActionPerformed
+        try {
+            popularJtableDesativados();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaContratos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonInativosActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -379,7 +419,9 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
     private javax.swing.JTextField JtextFielDescricao;
     private javax.swing.JButton jButtonAcao;
     private javax.swing.JButton jButtonAtivar;
+    private javax.swing.JButton jButtonAtivos;
     private javax.swing.JButton jButtonDesativar;
+    private javax.swing.JButton jButtonInativos;
     private javax.swing.JButton jButtonUsar;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;
