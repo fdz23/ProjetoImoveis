@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.Contrato;
+import util.CriaDate;
 
 /**
  *
@@ -47,8 +48,8 @@ public class ContratoController extends Controller<Contrato> {
             model.addRow(
                     new Object[]{
                         item.getId(),
-                        item.getData(),
-                        item.getDataAlteracao(),
+                        CriaDate.geraDataFormatadaSql(item.getData()),
+                        CriaDate.geraDataFormatadaSql(item.getDataAlteracao()),
                         pago,
                         item.getOrcamento().getDescricao()
                     });
@@ -82,8 +83,8 @@ public class ContratoController extends Controller<Contrato> {
             model.addRow(
                     new Object[]{
                         item.getId(),
-                        item.getData(),
-                        item.getDataAlteracao(),
+                        CriaDate.geraDataFormatadaSql(item.getData()),
+                        CriaDate.geraDataFormatadaSql(item.getDataAlteracao()),
                         pago,
                         item.getOrcamento().getDescricao()
                     });

@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.Pessoa;
+import util.CriaDate;
 
 /**
  *
@@ -47,7 +48,7 @@ public class PessoaController extends Controller<Pessoa> {
                         item.getId(),
                         item.getNome(),
                         item.getEmail(),
-                        item.getDataNascimento(),
+                        CriaDate.geraDataFormatadaSql(item.getDataNascimento()),
                         item.getCpf(),
                         item.getTelefone(),
                         item.getEndereco().getCep()
@@ -75,7 +76,7 @@ public class PessoaController extends Controller<Pessoa> {
                         item.getId(),
                         item.getNome(),
                         item.getEmail(),
-                        item.getDataNascimento(),
+                        CriaDate.geraDataFormatadaSql(item.getDataNascimento()),
                         item.getCpf(),
                         item.getTelefone(),
                         item.getEndereco().getCep()

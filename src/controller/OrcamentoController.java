@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import model.Orcamento;
+import util.CriaDate;
 
 /**
  *
@@ -37,7 +38,7 @@ public class OrcamentoController extends Controller<Orcamento> {
             model.addRow(
                     new Object[]{
                         item.getId(),
-                        item.getData(),
+                        CriaDate.geraDataFormatadaSql(item.getData()),
                         item.getDescricao(),
                         item.getFuncionario().getNome(),
                         item.getPessoa().getNome(),
@@ -65,7 +66,7 @@ public class OrcamentoController extends Controller<Orcamento> {
             model.addRow(
                     new Object[]{
                         item.getId(),
-                        item.getData(),
+                        CriaDate.geraDataFormatadaSql(item.getData()),
                         item.getDescricao(),
                         item.getFuncionario().getNome(),
                         item.getPessoa().getNome(),
