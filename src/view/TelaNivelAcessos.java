@@ -134,6 +134,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         jButtonSelecionarTipoFunc = new javax.swing.JButton();
         jButtonAtivos = new javax.swing.JButton();
         jButtonInativos = new javax.swing.JButton();
+        jCheckBoxRelatorios = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -282,6 +283,9 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 700, 170, -1));
 
+        jCheckBoxRelatorios.setText("Tela Relatórios");
+        jPanel1.add(jCheckBoxRelatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 570, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -302,7 +306,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         try {
 
             int action = jComboAcao.getSelectedIndex();
-            Integer[] niveis = new Integer[12];
+            Integer[] niveis = new Integer[13];
 
             for (int i = 0; i < niveis.length; i++) {
                 niveis[i] = 0;
@@ -343,6 +347,9 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
             }
             if (jCheckBoxTiposPagamento.isSelected()) {
                 niveis[11] = 1;
+            }
+            if (jCheckBoxRelatorios.isSelected()) {
+                niveis[12] = 1;
             }
 
             String descricao = JtextFielDescricao.getText();
@@ -490,6 +497,9 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
             if (niveis[11] == 1) {
                 jCheckBoxTiposPagamento.setSelected(true);
             }
+            if (niveis[12] == 1) {
+                jCheckBoxRelatorios.setSelected(true);
+            }
 
             isSelected = true;
 
@@ -585,6 +595,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         jCheckBoxTiposFuncionario.setSelected(false);
         jCheckBoxTiposImovel.setSelected(false);
         jCheckBoxTiposPagamento.setSelected(false);
+        jCheckBoxRelatorios.setSelected(false);
 
     }
 
@@ -646,6 +657,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxImoveisItens;
     private javax.swing.JCheckBox jCheckBoxNivelAcesso;
     private javax.swing.JCheckBox jCheckBoxOrcamentos;
+    private javax.swing.JCheckBox jCheckBoxRelatorios;
     private javax.swing.JCheckBox jCheckBoxStatus;
     private javax.swing.JCheckBox jCheckBoxTiposFuncionario;
     private javax.swing.JCheckBox jCheckBoxTiposImovel;

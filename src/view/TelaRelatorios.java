@@ -9,10 +9,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Funcionario;
 import model.Pessoa;
+import util.Login;
 
 public class TelaRelatorios extends javax.swing.JFrame {
 
     private RelatoriosController rl = null;
+    private final int index = 12;
 
     public TelaRelatorios() throws SQLException {
         initComponents();
@@ -20,7 +22,23 @@ public class TelaRelatorios extends javax.swing.JFrame {
         modelo.addColumn("Teste");
         modelo.addColumn("Teste2");
         jTableTabela.setModel(modelo);
+        setarBotoes(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
 
+    }
+    
+    private void setarBotoes(boolean condicao) {
+        
+        jButtonBaixado.setEnabled(condicao);
+        jButtonCidadePeriodoETipoImovel.setEnabled(condicao);
+        jButtonComissaoPorCorretor.setEnabled(condicao);
+        jButtonDisponiveisParaVenda.setEnabled(condicao);
+        jButtonFinanciadoPorPeriodo.setEnabled(condicao);
+        jButtonImoveisCadastradosNoSistema.setEnabled(condicao);
+        jButtonImoveisCadastradosPorCpf.setEnabled(condicao);
+        jButtonImoveisCorretor.setEnabled(condicao);
+        jButtonVendaAnual.setEnabled(condicao);
+        jButtonVendaMensal.setEnabled(condicao);
+        
     }
 
     public void setObjetoFuncionario(Funcionario obj) throws Exception {
