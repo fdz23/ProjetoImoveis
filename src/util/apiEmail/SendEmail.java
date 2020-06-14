@@ -9,7 +9,6 @@ public class SendEmail {
     private String minhaSenha = "5HeadFernando";
     private HtmlEmail email;
     private String emailCliente;
-    private String nome;
     private String stringNome;
     private String conteudo;
     private String stringFinal;
@@ -17,7 +16,6 @@ public class SendEmail {
     public SendEmail(String emailCliente, String nome) throws EmailException {
         
         this.emailCliente = emailCliente;
-        this.nome = nome;
         stringNome = "Senhor(a) " + nome + ",segue o token necessário para a validação:\n";
         
         HtmlEmail email = new HtmlEmail();
