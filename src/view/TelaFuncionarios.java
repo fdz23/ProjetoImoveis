@@ -20,8 +20,10 @@ import model.Status;
 import model.TipoFuncionario;
 import model.Usuario;
 import util.CriaDate;
+import util.GeraSenha;
 import util.GeradorPasswords;
 import util.OrdenaClickTabela;
+import util.apiEmail.SendEmail;
 
 public class TelaFuncionarios extends javax.swing.JFrame {
 
@@ -44,8 +46,6 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     private boolean isSelected = false;
     private TelaRelatorios tl = null;
 
-    
-    
     public TelaFuncionarios() throws ClassNotFoundException, Exception {
         CriarJTable();
         initComponents();
@@ -54,14 +54,15 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         OrdenaClickTabela.ordenarPorClick(jTableTabela, fc, modelo);
 
     }
-      public TelaFuncionarios(TelaRelatorios tl) throws ClassNotFoundException, Exception {
+
+    public TelaFuncionarios(TelaRelatorios tl) throws ClassNotFoundException, Exception {
         CriarJTable();
         initComponents();
         this.tl = tl;
         iniciar();
         popularJtable();
         OrdenaClickTabela.ordenarPorClick(jTableTabela, fc, modelo);
-        
+        jButtonUtilizar.setVisible(true);
 
     }
 
@@ -115,13 +116,8 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jButtonStatus.setEnabled(false);
         jButtonTipoFuncionario.setEnabled(false);
         idacao.setEnabled(false);
-        jTextFieldSenha.setEnabled(false);
-        jButtonUtilizar.setEnabled(false);
-        
-        if(tl != null){
-            
-            jButtonUtilizar.setEnabled(true);
-        }
+        jButtonUtilizar.setVisible(false);
+        jCheckBoxLogin.setEnabled(false);
 
         setarMatricula();
 
@@ -228,8 +224,6 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jButtonAtivar = new javax.swing.JButton();
         jFormattedTextFieldRescisao = new javax.swing.JFormattedTextField();
         jCheckBoxLogin = new javax.swing.JCheckBox();
-        jLabel13 = new javax.swing.JLabel();
-        jTextFieldSenha = new javax.swing.JTextField();
         jButtonAtivos = new javax.swing.JButton();
         jButtonInativos = new javax.swing.JButton();
         jButtonUtilizar = new javax.swing.JButton();
@@ -292,11 +286,11 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jPanel1.add(jCheckBoxDemissao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 90, -1));
 
         jLabel8.setText("Data Rescisão");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
 
         jLabel9.setText("Endereço");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, -1, -1));
-        jPanel1.add(jTextFieldEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 700, 190, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 630, -1, -1));
+        jPanel1.add(jTextFieldEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, 190, -1));
 
         jButtonEndereco.setText("Selecionar");
         jButtonEndereco.addActionListener(new java.awt.event.ActionListener() {
@@ -304,7 +298,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jButtonEnderecoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 700, 110, -1));
+        jPanel1.add(jButtonEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 660, 110, -1));
 
         jButtonAcao.setText("Ação");
         jButtonAcao.addActionListener(new java.awt.event.ActionListener() {
@@ -312,7 +306,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jButtonAcaoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 840, 160, 50));
+        jPanel1.add(jButtonAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 800, 160, 50));
 
         jLabel10.setText("Escolha sua ação : ");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 120, -1));
@@ -326,12 +320,12 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jPanel1.add(jComboAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 130, -1));
 
         jLabel11.setText("Status");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, -1, -1));
-        jPanel1.add(jTextFieldStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 630, 190, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, -1, -1));
+        jPanel1.add(jTextFieldStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 190, -1));
 
         jLabel12.setText("ID:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 760, -1, -1));
-        jPanel1.add(idacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 760, 90, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 720, -1, -1));
+        jPanel1.add(idacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 720, 90, -1));
 
         try {
             jFormattedTextFieldNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -368,7 +362,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jButtonStatusActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 630, 110, 30));
+        jPanel1.add(jButtonStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 590, 110, 30));
 
         jButtonDesativar.setText("Desativar");
         jButtonDesativar.addActionListener(new java.awt.event.ActionListener() {
@@ -376,7 +370,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jButtonDesativarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 760, 90, 40));
+        jPanel1.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 720, 90, 40));
 
         jButtonAtivar.setText("Ativar");
         jButtonAtivar.addActionListener(new java.awt.event.ActionListener() {
@@ -384,14 +378,14 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jButtonAtivarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 760, 90, 40));
+        jPanel1.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 720, 90, 40));
 
         try {
             jFormattedTextFieldRescisao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel1.add(jFormattedTextFieldRescisao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 250, 30));
+        jPanel1.add(jFormattedTextFieldRescisao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 250, 30));
 
         jCheckBoxLogin.setText("Login");
         jCheckBoxLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -400,10 +394,6 @@ public class TelaFuncionarios extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jCheckBoxLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 70, -1));
-
-        jLabel13.setText("Senha");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
-        jPanel1.add(jTextFieldSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, 200, -1));
 
         jButtonAtivos.setText("Mostrar ativos");
         jButtonAtivos.addActionListener(new java.awt.event.ActionListener() {
@@ -469,6 +459,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jButtonEndereco.setEnabled(false);
                 jButtonAcao.setEnabled(false);
                 jFormattedTextFieldCPF.setEnabled(false);
+                jCheckBoxLogin.setEnabled(false);
 
                 break;
 
@@ -489,6 +480,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jButtonStatus.setEnabled(true);
                 jButtonTipoFuncionario.setEnabled(true);
                 jButtonAcao.setEnabled(true);
+                jCheckBoxLogin.setEnabled(true);
 
                 break;
 
@@ -509,6 +501,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jButtonStatus.setEnabled(true);
                 jButtonTipoFuncionario.setEnabled(true);
                 jButtonAcao.setEnabled(true);
+                jCheckBoxLogin.setEnabled(false);
 
                 break;
 
@@ -573,16 +566,14 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
                     if (jCheckBoxLogin.isSelected()) {
 
-                        String senha = jTextFieldSenha.getText();
+                        String senha = GeraSenha.gerar();
+                        
+                        new SendEmail().sendEmailSenha(email, senha, nome);
 
-                        if (!senha.equals("")) {
+                        senha = GeradorPasswords.generateSecurePassword(senha, "Pacoca");
 
-                            senha = GeradorPasswords.generateSecurePassword(senha, "Pacoca");
-
-                            usu = new Usuario(0, fc.getItemByEmail(func.getEmail()), senha, 1, "");
-                            usc.inserirItem(usu);
-
-                        }
+                        usu = new Usuario(0, fc.getItemByEmail(func.getEmail()), senha, 1, "");
+                        usc.inserirItem(usu);
                     }
 
                     JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
@@ -743,17 +734,6 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
     private void jCheckBoxLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxLoginActionPerformed
 
-        if (jCheckBoxLogin.isSelected()) {
-
-            jTextFieldSenha.setEnabled(true);
-
-        } else {
-
-            jTextFieldSenha.setEnabled(false);
-
-        }
-
-
     }//GEN-LAST:event_jCheckBoxLoginActionPerformed
 
     private void jButtonAtivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivosActionPerformed
@@ -773,22 +753,20 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonInativosActionPerformed
 
     private void jButtonUtilizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUtilizarActionPerformed
-       
-        
-        
-        try{
-            
-            if(isSelected){
-                
+
+        try {
+
+            if (isSelected) {
+
                 tl.setObjetoFuncionario(fun);
                 this.dispose();
-                
+
             }
-            
-        }catch(Exception ex){
-            
+
+        } catch (Exception ex) {
+
             JOptionPane.showMessageDialog(null, ex.getMessage());
-            
+
         }
     }//GEN-LAST:event_jButtonUtilizarActionPerformed
 
@@ -849,7 +827,6 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -866,7 +843,6 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldEndereco;
     private javax.swing.JTextField jTextFieldMatricula;
     private javax.swing.JTextField jTextFieldNome;
-    private javax.swing.JTextField jTextFieldSenha;
     private javax.swing.JTextField jTextFieldStatus;
     // End of variables declaration//GEN-END:variables
 

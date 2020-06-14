@@ -136,7 +136,7 @@ public class TelaResetarSenha extends javax.swing.JFrame {
 
                     String token = GeradorPasswords.generateSecurePassword(email, "Verificacao");
 
-                    new SendEmail().sendEmail(email, token, user.getFuncionario().getNome());
+                    new SendEmail().sendEmailToken(email, token, user.getFuncionario().getNome());
                     user.setToken(token);
                     new UsuarioController().alterarItem(user);
 
