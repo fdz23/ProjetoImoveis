@@ -568,7 +568,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
                         String senha = GeraSenha.gerar();
                         
-                        new SendEmail().sendEmailSenha(email, senha, nome);
+                        new SendEmail(email, nome).sendEmailSenha(senha);
 
                         senha = GeradorPasswords.generateSecurePassword(senha, "Pacoca");
 
