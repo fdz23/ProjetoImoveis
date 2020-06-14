@@ -7,6 +7,7 @@
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/fabricasconcretas/Venda.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/TipoFuncionarioDao.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaClientes.java</file>
+            <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaRelatorios.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaEnderecos.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaResetarSenha.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaTipoPagamento.java</file>
@@ -31,6 +32,7 @@
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/Contrato.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaTipoFuncionario.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaContratos.java</file>
+            <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/Pessoa.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaImoveis.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/util/CriaStatement.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/util/GeradorPasswords.java</file>
@@ -51,6 +53,7 @@
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/UsuarioDao.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaLogin.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/util/apiEmail/SendEmail.java</file>
+            <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/Funcionario.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/util/CriaDate.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/EnderecoController.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/TipoImovelController.java</file>
