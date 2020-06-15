@@ -24,6 +24,26 @@ public class StatusController extends Controller<Status> {
 
     }
 
+    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
+
+        Iterator<Status> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+
+            Status item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getDescricao(),});
+
+        }
+        return model;
+
+    }
+
     public DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception {
 
         Iterator<Status> lista = dao.getAllOrderBy(campo, true);
