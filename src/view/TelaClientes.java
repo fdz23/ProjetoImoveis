@@ -29,6 +29,7 @@ public class TelaClientes extends javax.swing.JFrame {
     private TelaImoveis telaImoveis = null;
     private final int index = 0;
     private TelaRelatorios telaRelatorios = null;
+    public String[] colunas = {"Código","Nome","Email","Nascimento","CPF","Telefone","Endereço"};
 
     public TelaClientes() throws ClassNotFoundException, Exception {
         CriarJTable();
@@ -72,6 +73,12 @@ public class TelaClientes extends javax.swing.JFrame {
     public void popularJtable() throws ClassNotFoundException, Exception {
 
         jTableTabela.setModel(pec.populaJTable(modelo, 0));
+
+    }
+
+    public void popularJtableDupla(int campo1, int campo2) throws ClassNotFoundException, Exception {
+
+        jTableTabela.setModel(pec.populaJTableDupla(modelo, campo1, campo2));
 
     }
 
@@ -151,13 +158,10 @@ public class TelaClientes extends javax.swing.JFrame {
 
     public void CriarJTable() {
         jTableTabela = new JTable(modelo);
-        modelo.addColumn("Código");
-        modelo.addColumn("Nome");
-        modelo.addColumn("Email");
-        modelo.addColumn("Nascimento");
-        modelo.addColumn("CPF");
-        modelo.addColumn("Telefone");
-        modelo.addColumn("Endereço");
+        
+        for (int i = 0; i < colunas.length; i++) {
+            modelo.addColumn(colunas[i]);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -191,6 +195,7 @@ public class TelaClientes extends javax.swing.JFrame {
         jButtonUsarImovel = new javax.swing.JButton();
         jButtonAtivados = new javax.swing.JButton();
         jButtonDesativados = new javax.swing.JButton();
+        jButtonOrdenacaoDupla = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -337,21 +342,23 @@ public class TelaClientes extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonDesativados, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 770, 150, -1));
 
+        jButtonOrdenacaoDupla.setText("Ordenação dupla");
+        jButtonOrdenacaoDupla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrdenacaoDuplaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonOrdenacaoDupla, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 132, 160, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 833, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE)
         );
 
         pack();
@@ -637,6 +644,15 @@ public class TelaClientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonDesativadosActionPerformed
 
+    private void jButtonOrdenacaoDuplaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenacaoDuplaActionPerformed
+        try {
+            new TelaSelecaoDupla(this).setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButtonOrdenacaoDuplaActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -681,6 +697,7 @@ public class TelaClientes extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAtivar;
     private javax.swing.JButton jButtonDesativados;
     private javax.swing.JButton jButtonDesativar;
+    private javax.swing.JButton jButtonOrdenacaoDupla;
     private javax.swing.JButton jButtonUsarContrato;
     private javax.swing.JButton jButtonUsarImovel;
     private javax.swing.JComboBox jComboAcao;

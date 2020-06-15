@@ -5,6 +5,7 @@
         <group>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/Imovel.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/fabricasconcretas/Venda.java</file>
+            <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/interfaces/Tabela.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/TipoFuncionarioDao.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaClientes.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaRelatorios.java</file>
@@ -12,6 +13,7 @@
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaResetarSenha.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaTipoPagamento.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/OrcamentoDao.java</file>
+            <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/TipoImovel.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaImoveisItens.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/Dao.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/NivelAcessoDao.java</file>
@@ -43,12 +45,15 @@
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/FuncionarioController.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/TipoFuncionarioController.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/PessoaController.java</file>
+            <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/Status.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaNivelAcessos.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/ImovelItemController.java</file>
+            <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/Endereco.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/IDao.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/OrcamentoController.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/ContratoDao.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/TipoFuncionario.java</file>
+            <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/Orcamento.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/ContratoController.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/UsuarioDao.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaLogin.java</file>
@@ -58,6 +63,7 @@
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/EnderecoController.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/TipoImovelController.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaStatus.java</file>
+            <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/TipoPagamento.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/Usuario.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/ImovelDao.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/NivelAcessoController.java</file>

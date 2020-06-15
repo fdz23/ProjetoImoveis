@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import util.CriaStatement;
 import util.ConectaDb;
 
@@ -63,12 +65,25 @@ public abstract class Dao<T> implements IDao<T> {
             throw new Exception("Campo2 para ser ordenado inexistente.");
         }
 
+        String coluna1 = "";
+        String coluna2 = "";
+
         //vetorCampos é um vetor que contém o nome de todos os campos da tabela no banco de dados na ordem
-        String coluna1 = vetorCampos[campo1];
-        String coluna2 = vetorCampos[campo2];
+        if (campo1 == 0) {
+            coluna1 = id;
+        } else {
+            coluna1 = vetorCampos[campo1 - 1];
+        }
+
+        //vetorCampos é um vetor que contém o nome de todos os campos da tabela no banco de dados na ordem
+        if (campo2 == 0) {
+            coluna2 = id;
+        } else {
+            coluna2 = vetorCampos[campo2 - 1];
+        }
 
         //estrutura de dados 1 : Fila de prioridade
-        Queue<T> itens = new PriorityQueue<T>();
+        Queue<T> itens = new ConcurrentLinkedQueue<T>();
 
         //cria um sql que recebe todos os itens ordenados conforme duas colunas
         ps = criaStatement.selectSqlOrderDupla(tabela, coluna1, coluna2, ascOuDesc1, ascOuDesc2);
