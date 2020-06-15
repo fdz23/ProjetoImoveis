@@ -23,6 +23,37 @@ public class EnderecoController extends Controller<Endereco> {
 
     }
     
+    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
+
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<Endereco> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+            
+            Endereco item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getCodigoIBGE(),
+                        item.getLogradouro(),
+                        item.getBairro(),
+                        item.getCidade(),
+                        item.getEstado(),
+                        item.getComplemento(),
+                        item.getNumero(),
+                        item.getPontoReferencia(),
+                        item.getCep()
+                    });
+
+        }
+
+        return model;
+
+    }
+    
     public DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente
