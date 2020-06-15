@@ -32,7 +32,7 @@ public class ImovelDao extends Dao<Imovel> {
         this.id = obj.getNomeId();
         this.tabela = obj.getNomeTabela();
         this.criaStatement = new CriaStatement(con, tabela, id);
-        campos = "imo_data_inclusao,imo_preco,imo_tamanho,imo_observacao,imo_baixa_data,imo_baixa_motivo,"
+        campos = "imo_data_inclusao,imo_preco,imo_tamanho,imo_situacao,imo_baixa_data,imo_baixa_motivo,"
                 + "imo_quantidade_parcelas,imo_valor_comissao,imo_fun_iden,imo_pes_iden,imo_tim_iden,imo_end_iden,"
                 + "imo_ativado,imo_descricao";
         vetorCampos = campos.split(",");

@@ -27,6 +27,7 @@ public class TelaContratos extends javax.swing.JFrame {
     private Orcamento orcamento = null;
     private DefaultTableModel modelo = new DefaultTableModel();
     private boolean isSelected = false;
+    public String[] colunas = {"Código","Data de criação","Data de alteração","Situação","Orçamento"};
 
     public TelaContratos() {
         try {
@@ -39,6 +40,12 @@ public class TelaContratos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public void popularJtableDupla(int campo1, int campo2) throws ClassNotFoundException, Exception {
+
+        jTableTabela.setModel(contratoController.populaJTableDupla(modelo, campo1, campo2));
+
     }
 
     public void popularJtable() throws ClassNotFoundException, Exception {
@@ -107,11 +114,9 @@ public class TelaContratos extends javax.swing.JFrame {
 
     public void criarJTable() {
         jTableTabela = new JTable(modelo);
-        modelo.addColumn("Código");
-        modelo.addColumn("Data de criação");
-        modelo.addColumn("Data de alteração");
-        modelo.addColumn("Situação");
-        modelo.addColumn("Orçamento");
+        for (int i = 0; i < colunas.length; i++) {
+            modelo.addColumn(colunas[i]);
+        }
     }
 
     /**
@@ -140,6 +145,7 @@ public class TelaContratos extends javax.swing.JFrame {
         jComboBoxSituacao = new javax.swing.JComboBox();
         jButtonAtivos = new javax.swing.JButton();
         jButtonInativos = new javax.swing.JButton();
+        jButtonOrdenacaoDupla = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -242,6 +248,14 @@ public class TelaContratos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 770, 170, -1));
+
+        jButtonOrdenacaoDupla.setText("Ordenação dupla");
+        jButtonOrdenacaoDupla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrdenacaoDuplaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonOrdenacaoDupla, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 120, 160, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -438,6 +452,15 @@ public class TelaContratos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonInativosActionPerformed
 
+    private void jButtonOrdenacaoDuplaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenacaoDuplaActionPerformed
+        try {
+            new TelaSelecaoDupla(this).setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButtonOrdenacaoDuplaActionPerformed
+
     
     public static void main(String args[]) {
         
@@ -478,6 +501,7 @@ public class TelaContratos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonDesativar;
     private javax.swing.JButton jButtonInativos;
     private javax.swing.JButton jButtonOrcamento;
+    private javax.swing.JButton jButtonOrdenacaoDupla;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JComboBox jComboBoxSituacao;
     private javax.swing.JLabel jLabel10;
