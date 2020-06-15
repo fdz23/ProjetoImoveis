@@ -35,6 +35,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
     private TelaContratos telaContratos = null;
     private boolean isSelected = false;
     private final int index = 7;
+    public String[] colunas = {"Código","Data","Descrição","Funcionário","Cliente","Imovel","Tipo de pagamento"};
 
     public TelaOrcamentos() {
         try {
@@ -61,6 +62,12 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
+    }
+
+    public void popularJtableDupla(int campo1, int campo2) throws ClassNotFoundException, Exception {
+
+        jTableTabela.setModel(orcamentoController.populaJTableDupla(modelo, campo1, campo2));
+
     }
 
     public void popularJtable() throws ClassNotFoundException, Exception {
@@ -160,13 +167,9 @@ public class TelaOrcamentos extends javax.swing.JFrame {
     public void criarJTable() {
 
         jTableTabela = new JTable(modelo);
-        modelo.addColumn("Código");
-        modelo.addColumn("Data");
-        modelo.addColumn("Descrição");
-        modelo.addColumn("Funcionário");
-        modelo.addColumn("Cliente");
-        modelo.addColumn("Imovel");
-        modelo.addColumn("Tipo de pagamento");
+        for (int i = 0; i < colunas.length; i++) {
+            modelo.addColumn(colunas[i]);
+        }
 
     }
 
@@ -203,6 +206,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         jButtonUtilizar = new javax.swing.JButton();
         jButtonAtivos = new javax.swing.JButton();
         jButtonInativos = new javax.swing.JButton();
+        jButtonOrdenacaoDupla = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -330,6 +334,14 @@ public class TelaOrcamentos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 770, 170, -1));
+
+        jButtonOrdenacaoDupla.setText("Ordenação dupla");
+        jButtonOrdenacaoDupla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrdenacaoDuplaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonOrdenacaoDupla, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 90, 160, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -583,6 +595,15 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonInativosActionPerformed
 
+    private void jButtonOrdenacaoDuplaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenacaoDuplaActionPerformed
+        try {
+            new TelaSelecaoDupla(this).setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButtonOrdenacaoDuplaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -625,6 +646,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAtivos;
     private javax.swing.JButton jButtonDesativar;
     private javax.swing.JButton jButtonInativos;
+    private javax.swing.JButton jButtonOrdenacaoDupla;
     private javax.swing.JButton jButtonSelecionarCliente;
     private javax.swing.JButton jButtonSelecionarImovel;
     private javax.swing.JButton jButtonSelecionarTipoPagamento;
