@@ -26,6 +26,29 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
 
     }
 
+    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
+
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<NivelAcesso> lista = dao.getAllOrderBy(campo1, campo2, true, true);
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+
+            NivelAcesso item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getDescricao()
+                    });
+
+        }
+
+        return model;
+
+    }
+
     public DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception {
 
         //Pega o item ordenando por id em ordem crescente

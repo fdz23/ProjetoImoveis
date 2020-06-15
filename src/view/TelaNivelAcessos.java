@@ -23,6 +23,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
     private boolean isSelected = false;
     private final int index = 6;
     private int linhaSelecionada = 0;
+    public String[] colunas = {"Código","Descrição"};
 
     public TelaNivelAcessos() throws ClassNotFoundException, Exception {
 
@@ -50,8 +51,15 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
     private void CriarJTable() {
         jTableTabela = new JTable(modelo);
-        modelo.addColumn("Código");
-        modelo.addColumn("Descrição");
+        for (int i = 0; i < colunas.length; i++) {
+            modelo.addColumn(colunas[i]);
+        }
+
+    }
+
+    public void popularJtableDupla(int campo1, int campo2) throws ClassNotFoundException, Exception {
+
+        jTableTabela.setModel(nac.populaJTableDupla(modelo, campo1, campo2));
 
     }
 
@@ -135,6 +143,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         jButtonAtivos = new javax.swing.JButton();
         jButtonInativos = new javax.swing.JButton();
         jCheckBoxRelatorios = new javax.swing.JCheckBox();
+        jButtonOrdenacaoDupla = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -285,6 +294,14 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
 
         jCheckBoxRelatorios.setText("Tela Relatórios");
         jPanel1.add(jCheckBoxRelatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 570, -1, -1));
+
+        jButtonOrdenacaoDupla.setText("Ordenação dupla");
+        jButtonOrdenacaoDupla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrdenacaoDuplaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonOrdenacaoDupla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 150, 160, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -581,6 +598,15 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonInativosActionPerformed
 
+    private void jButtonOrdenacaoDuplaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenacaoDuplaActionPerformed
+        try {
+            new TelaSelecaoDupla(this).setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButtonOrdenacaoDuplaActionPerformed
+
     private void setCheckBoxFalse() {
 
         jCheckBoxClientes.setSelected(false);
@@ -648,6 +674,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAtivos;
     private javax.swing.JButton jButtonDesativar;
     private javax.swing.JButton jButtonInativos;
+    private javax.swing.JButton jButtonOrdenacaoDupla;
     private javax.swing.JButton jButtonSelecionarTipoFunc;
     private javax.swing.JCheckBox jCheckBoxClientes;
     private javax.swing.JCheckBox jCheckBoxContratos;
