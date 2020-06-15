@@ -22,6 +22,26 @@ public class TipoImovelController extends Controller<TipoImovel> {
         dao = new TipoImovelDao();
 
     }
+    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
+
+        Iterator<TipoImovel> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+
+            TipoImovel item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getDescricao(),});
+
+        }
+        
+        return model;
+
+    }
 
     @Override
     public DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception {

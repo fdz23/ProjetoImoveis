@@ -94,6 +94,12 @@ public class TelaSelecaoDupla extends javax.swing.JFrame {
         popularComboBoxes(telaTipoFuncionario.colunas);
     }
 
+    public TelaSelecaoDupla(TelaTipoImoveis telaTipoImoveis) {
+        initComponents();
+        this.telaTipoImoveis = telaTipoImoveis;
+        popularComboBoxes(telaTipoImoveis.colunas);
+    }
+
     private void popularComboBoxes(String[] colunas) {
 
         jComboBox1.removeAllItems();
@@ -211,6 +217,9 @@ public class TelaSelecaoDupla extends javax.swing.JFrame {
             }
             if (telaTipoFuncionario != null) {
                 telaTipoFuncionario.popularJtableDupla(campo1, campo2);
+            }
+            if (telaTipoImoveis != null) {
+                telaTipoImoveis.popularJtableDupla(campo1, campo2);
             }
             
             dispose();

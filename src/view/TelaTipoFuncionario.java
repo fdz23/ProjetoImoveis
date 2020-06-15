@@ -50,6 +50,9 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
     private void CriarJTable() {
         jTableTabela = new JTable(modelo);
+        for (int i = 0; i < colunas.length; i++) {
+            modelo.addColumn(colunas[i]);
+        }
 
     }
 
