@@ -24,11 +24,8 @@ public class ImovelController extends Controller<Imovel> {
 
     }
     
-    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
-
-        //Pega o item ordenando por id em ordem crescente
-        Iterator<Imovel> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
-
+    private DefaultTableModel setModel(DefaultTableModel model, Iterator<Imovel> lista) {
+        
         model.setNumRows(0);
 
         while (lista.hasNext()) {
@@ -54,6 +51,17 @@ public class ImovelController extends Controller<Imovel> {
                     });
 
         }
+        
+        return model;
+        
+    }
+    
+    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
+
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<Imovel> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
+
+        setModel(model, lista);
 
         return model;
 
@@ -64,31 +72,7 @@ public class ImovelController extends Controller<Imovel> {
         //Pega o item ordenando por id em ordem crescente
         Iterator<Imovel> lista = dao.getAllOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-            
-            Imovel item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getDataInclusao(),
-                        item.getPreco(),
-                        item.getTamanho(),
-                        item.getSituacao(),
-                        CriaDate.geraDataFormatadaSql(item.getBaixaData()),
-                        item.getBaixaMotivo(),
-                        item.getQuantidadeParcelas(),
-                        item.getValorComissao(),
-                        item.getFuncionario().getNome(),
-                        item.getPessoa().getNome(),
-                        item.getTipoImovel().getDescricao(),
-                        item.getEndereco().getCep(),
-                        item.getDescricao()
-                    });
-
-        }
+        setModel(model, lista);
 
         return model;
 
@@ -99,31 +83,7 @@ public class ImovelController extends Controller<Imovel> {
         //Pega o item ordenando por id em ordem crescente
         Iterator<Imovel> lista = dao.getAllDeactivatedOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-            
-            Imovel item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getDataInclusao(),
-                        item.getPreco(),
-                        item.getTamanho(),
-                        item.getSituacao(),
-                        CriaDate.geraDataFormatadaSql(item.getBaixaData()),
-                        item.getBaixaMotivo(),
-                        item.getQuantidadeParcelas(),
-                        item.getValorComissao(),
-                        item.getFuncionario().getNome(),
-                        item.getPessoa().getNome(),
-                        item.getTipoImovel().getDescricao(),
-                        item.getEndereco().getCep(),
-                        item.getDescricao()
-                    });
-
-        }
+        setModel(model, lista);
 
         return model;
 

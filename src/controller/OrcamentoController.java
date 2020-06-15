@@ -24,11 +24,8 @@ public class OrcamentoController extends Controller<Orcamento> {
 
     }
     
-    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
-
-        //Pega o item ordenando por id em ordem crescente
-        Iterator<Orcamento> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
-
+    private DefaultTableModel setModel(DefaultTableModel model, Iterator<Orcamento> lista) {
+        
         model.setNumRows(0);
 
         while (lista.hasNext()) {
@@ -47,6 +44,17 @@ public class OrcamentoController extends Controller<Orcamento> {
                     });
 
         }
+        
+        return model;
+        
+    }
+    
+    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
+
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<Orcamento> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
+
+        setModel(model, lista);
 
         return model;
 
@@ -57,24 +65,7 @@ public class OrcamentoController extends Controller<Orcamento> {
         //Pega o item ordenando por id em ordem crescente
         Iterator<Orcamento> lista = dao.getAllOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-            
-            Orcamento item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        CriaDate.geraDataFormatadaSql(item.getData()),
-                        item.getDescricao(),
-                        item.getFuncionario().getNome(),
-                        item.getPessoa().getNome(),
-                        item.getImovel().getDescricao(),
-                        item.getTipoPagamento().getDescricao()
-                    });
-
-        }
+        setModel(model, lista);
 
         return model;
 
@@ -85,24 +76,7 @@ public class OrcamentoController extends Controller<Orcamento> {
         //Pega o item ordenando por id em ordem crescente
         Iterator<Orcamento> lista = dao.getAllDeactivatedOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-            
-            Orcamento item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        CriaDate.geraDataFormatadaSql(item.getData()),
-                        item.getDescricao(),
-                        item.getFuncionario().getNome(),
-                        item.getPessoa().getNome(),
-                        item.getImovel().getDescricao(),
-                        item.getTipoPagamento().getDescricao()
-                    });
-
-        }
+        setModel(model, lista);
 
         return model;
 

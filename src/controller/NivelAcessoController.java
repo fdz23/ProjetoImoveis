@@ -25,13 +25,10 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
         dao = new NivelAcessoDao();
 
     }
-
-    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
-
-        //Pega o item ordenando por id em ordem crescente
-        Iterator<NivelAcesso> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
-
-        model.setNumRows(0);
+    
+    private DefaultTableModel setModel(DefaultTableModel model, Iterator<NivelAcesso> lista) {
+        
+         model.setNumRows(0);
 
         while (lista.hasNext()) {
 
@@ -44,6 +41,17 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
                     });
 
         }
+        
+        return model;
+        
+    }
+
+    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
+
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<NivelAcesso> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
+
+        setModel(model, lista);
 
         return model;
 
@@ -54,19 +62,7 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
         //Pega o item ordenando por id em ordem crescente
         Iterator<NivelAcesso> lista = dao.getAllOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-
-            NivelAcesso item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getDescricao()
-                    });
-
-        }
+        setModel(model, lista);
 
         return model;
 
@@ -77,19 +73,7 @@ public class NivelAcessoController extends Controller<NivelAcesso> {
         //Pega o item ordenando por id em ordem crescente
         Iterator<NivelAcesso> lista = dao.getAllDeactivatedOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-
-            NivelAcesso item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getDescricao()
-                    });
-
-        }
+        setModel(model, lista);
 
         return model;
 

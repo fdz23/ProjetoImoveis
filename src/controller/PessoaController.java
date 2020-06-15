@@ -32,11 +32,8 @@ public class PessoaController extends Controller<Pessoa> {
         return daoP.getByCpf(cpf);
     }
     
-    public DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception {
-
-        //Pega o item ordenando por id em ordem crescente
-        Iterator<Pessoa> lista = daoP.getAllClientesOrderBy(campo, true);
-
+    private DefaultTableModel setModel(DefaultTableModel model, Iterator<Pessoa> lista) {
+        
         model.setNumRows(0);
 
         while (lista.hasNext()) {
@@ -55,6 +52,17 @@ public class PessoaController extends Controller<Pessoa> {
                     });
 
         }
+        
+        return model;
+        
+    }
+    
+    public DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception {
+
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<Pessoa> lista = daoP.getAllClientesOrderBy(campo, true);
+
+        setModel(model, lista);
 
         return model;
 
@@ -65,24 +73,7 @@ public class PessoaController extends Controller<Pessoa> {
         //Pega o item ordenando por id em ordem crescente
         Iterator<Pessoa> lista = daoP.getAllDoubleOrderBy(campo1, campo2, true, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-            
-            Pessoa item = lista.next();
-                
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getNome(),
-                        item.getEmail(),
-                        CriaDate.geraDataFormatadaSql(item.getDataNascimento()),
-                        item.getCpf(),
-                        item.getTelefone(),
-                        item.getEndereco().getCep()
-                    });
-
-        }
+        setModel(model, lista);
 
         return model;
 
@@ -93,24 +84,7 @@ public class PessoaController extends Controller<Pessoa> {
         //Pega o item ordenando por id em ordem crescente
         Iterator<Pessoa> lista = daoP.getAllClientesDesativadosOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-            
-            Pessoa item = lista.next();
-                
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getNome(),
-                        item.getEmail(),
-                        CriaDate.geraDataFormatadaSql(item.getDataNascimento()),
-                        item.getCpf(),
-                        item.getTelefone(),
-                        item.getEndereco().getCep()
-                    });
-
-        }
+        setModel(model, lista);
 
         return model;
 

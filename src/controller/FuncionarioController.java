@@ -26,11 +26,8 @@ public class FuncionarioController extends Controller<Funcionario> {
 
     }
     
-    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
-
-        //Pega o item ordenando por id em ordem crescente
-        Iterator<Funcionario> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
-
+    private DefaultTableModel setModel(DefaultTableModel model, Iterator<Funcionario> lista) {
+        
         model.setNumRows(0);
 
         while (lista.hasNext()) {
@@ -48,6 +45,17 @@ public class FuncionarioController extends Controller<Funcionario> {
                     });
 
         }
+        
+        return model;
+        
+    }
+    
+    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
+
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<Funcionario> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
+
+        setModel(model, lista);
 
         return model;
 
@@ -58,23 +66,7 @@ public class FuncionarioController extends Controller<Funcionario> {
         //Pega o item ordenando por id em ordem crescente
         Iterator<Funcionario> lista = dao.getAllOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-            
-            Funcionario item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getMatricula(),
-                        item.getNome(),
-                        item.getTipoFuncionario().getDescricao(),
-                        item.getStatus().getDescricao(),
-                        CriaDate.geraDataFormatadaSql(item.getDataRescisao())
-                    });
-
-        }
+        setModel(model, lista);
 
         return model;
 
@@ -85,23 +77,7 @@ public class FuncionarioController extends Controller<Funcionario> {
         //Pega o item ordenando por id em ordem crescente
         Iterator<Funcionario> lista = dao.getAllDeactivatedOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-            
-            Funcionario item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getMatricula(),
-                        item.getNome(),
-                        item.getTipoFuncionario().getDescricao(),
-                        item.getStatus().getDescricao(),
-                        CriaDate.geraDataFormatadaSql(item.getDataRescisao())
-                    });
-
-        }
+        setModel(model, lista);
 
         return model;
 

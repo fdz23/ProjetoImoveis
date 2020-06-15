@@ -21,12 +21,9 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
         dao = new TipoFuncionarioDao();
 
     }
-
-    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
-
-        //Pega o item ordenando por id em ordem crescente
-        Iterator<TipoFuncionario> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
-
+    
+    private DefaultTableModel setModel(DefaultTableModel model, Iterator<TipoFuncionario> lista) {
+        
         model.setNumRows(0);
 
         while (lista.hasNext()) {
@@ -42,6 +39,17 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
                     });
 
         }
+        
+        return model;
+        
+    }
+
+    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
+
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<TipoFuncionario> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
+
+        setModel(model, lista);
 
         return model;
 
@@ -52,21 +60,7 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
         //Pega o item ordenando por id em ordem crescente
         Iterator<TipoFuncionario> lista = dao.getAllOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-
-            TipoFuncionario item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getDescricao(),
-                        item.getNivelAcesso().getDescricao(),
-                        item.getSalario()
-                    });
-
-        }
+        setModel(model, lista);
 
         return model;
 
@@ -77,21 +71,7 @@ public class TipoFuncionarioController extends Controller<TipoFuncionario> {
         //Pega o item ordenando por id em ordem crescente
         Iterator<TipoFuncionario> lista = dao.getAllDeactivatedOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-
-            TipoFuncionario item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getDescricao(),
-                        item.getNivelAcesso().getDescricao(),
-                        item.getSalario()
-                    });
-
-        }
+        setModel(model, lista);
 
         return model;
 

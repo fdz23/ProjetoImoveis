@@ -23,11 +23,9 @@ public class StatusController extends Controller<Status> {
         dao = new StatusDao();
 
     }
-
-    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
-
-        Iterator<Status> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
-
+    
+    private DefaultTableModel setModel(DefaultTableModel model, Iterator<Status> lista) {
+        
         model.setNumRows(0);
 
         while (lista.hasNext()) {
@@ -40,6 +38,17 @@ public class StatusController extends Controller<Status> {
                         item.getDescricao(),});
 
         }
+        
+        return model;
+        
+    }
+
+    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
+
+        Iterator<Status> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
+
+        setModel(model, lista);
+        
         return model;
 
     }
@@ -48,18 +57,8 @@ public class StatusController extends Controller<Status> {
 
         Iterator<Status> lista = dao.getAllOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-
-            Status item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getDescricao(),});
-
-        }
+        setModel(model, lista);
+        
         return model;
 
     }
@@ -68,18 +67,8 @@ public class StatusController extends Controller<Status> {
 
         Iterator<Status> lista = dao.getAllDeactivatedOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-
-            Status item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getDescricao(),});
-
-        }
+        setModel(model, lista);
+        
         return model;
 
     }

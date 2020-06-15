@@ -22,10 +22,9 @@ public class TipoImovelController extends Controller<TipoImovel> {
         dao = new TipoImovelDao();
 
     }
-    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
-
-        Iterator<TipoImovel> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
-
+    
+    private DefaultTableModel setModel(DefaultTableModel model, Iterator<TipoImovel> lista) {
+        
         model.setNumRows(0);
 
         while (lista.hasNext()) {
@@ -38,6 +37,16 @@ public class TipoImovelController extends Controller<TipoImovel> {
                         item.getDescricao(),});
 
         }
+        
+        return model;
+        
+    }
+    
+    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
+
+        Iterator<TipoImovel> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
+
+        setModel(model, lista);
         
         return model;
 
@@ -48,18 +57,7 @@ public class TipoImovelController extends Controller<TipoImovel> {
 
         Iterator<TipoImovel> lista = dao.getAllOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-
-            TipoImovel item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getDescricao(),});
-
-        }
+        setModel(model, lista);
         
         return model;
 
@@ -69,18 +67,7 @@ public class TipoImovelController extends Controller<TipoImovel> {
 
         Iterator<TipoImovel> lista = dao.getAllDeactivatedOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-
-            TipoImovel item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getDescricao(),});
-
-        }
+        setModel(model, lista);
         
         return model;
 

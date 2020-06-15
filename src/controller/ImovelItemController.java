@@ -22,10 +22,9 @@ public class ImovelItemController extends Controller<ImovelItem> {
         dao = new ImovelItemDao();
 
     }
-    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
-        //Pega o item ordenando por id em ordem crescente
-        Iterator<ImovelItem> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
-
+    
+    private DefaultTableModel setModel(DefaultTableModel model, Iterator<ImovelItem> lista) {
+        
         model.setNumRows(0);
 
         while (lista.hasNext()) {
@@ -40,6 +39,17 @@ public class ImovelItemController extends Controller<ImovelItem> {
                     });
 
         }
+        
+        return model;
+        
+    }
+    
+    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
+        
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<ImovelItem> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
+
+        setModel(model, lista);
 
         return model;
         
@@ -47,46 +57,22 @@ public class ImovelItemController extends Controller<ImovelItem> {
     
     @Override
     public DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception {
+        
         //Pega o item ordenando por id em ordem crescente
         Iterator<ImovelItem> lista = dao.getAllOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-            
-            ImovelItem item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getDescricao(),
-                        item.getValor()
-                    });
-
-        }
+        setModel(model, lista);
 
         return model;
         
     }
     
     public DefaultTableModel populaJTableDesativados(DefaultTableModel model, int campo) throws Exception {
+        
         //Pega o item ordenando por id em ordem crescente
         Iterator<ImovelItem> lista = dao.getAllDeactivatedOrderBy(campo, true);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-            
-            ImovelItem item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getDescricao(),
-                        item.getValor()
-                    });
-
-        }
+        setModel(model, lista);
 
         return model;
         
@@ -94,25 +80,10 @@ public class ImovelItemController extends Controller<ImovelItem> {
     
     public DefaultTableModel populaJTablePorIdImovel(DefaultTableModel model, int campo, int idImovel) throws ClassNotFoundException, SQLException, Exception {
         
-        
-        
         //Pega o item ordenando por id em ordem crescente
         Iterator<ImovelItem> lista = new ImovelItemDao().getByIdImovel(idImovel);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-            
-            ImovelItem item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getDescricao(),
-                        item.getValor()
-                    });
-
-        }
+        setModel(model, lista);
 
         return model;
         
@@ -120,25 +91,10 @@ public class ImovelItemController extends Controller<ImovelItem> {
     
     public DefaultTableModel populaJTablePorIdImovelDesativado(DefaultTableModel model, int campo, int idImovel) throws ClassNotFoundException, SQLException, Exception {
         
-        
-        
         //Pega o item ordenando por id em ordem crescente
         Iterator<ImovelItem> lista = new ImovelItemDao().getByIdImovelDesativado(idImovel);
 
-        model.setNumRows(0);
-
-        while (lista.hasNext()) {
-            
-            ImovelItem item = lista.next();
-
-            model.addRow(
-                    new Object[]{
-                        item.getId(),
-                        item.getDescricao(),
-                        item.getValor()
-                    });
-
-        }
+        setModel(model, lista);
 
         return model;
         
