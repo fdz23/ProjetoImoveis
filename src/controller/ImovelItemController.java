@@ -22,6 +22,28 @@ public class ImovelItemController extends Controller<ImovelItem> {
         dao = new ImovelItemDao();
 
     }
+    public DefaultTableModel populaJTableDupla(DefaultTableModel model, int campo1, int campo2) throws Exception {
+        //Pega o item ordenando por id em ordem crescente
+        Iterator<ImovelItem> lista = dao.getAllDoubleOrderBy(campo1, campo2, true, true);
+
+        model.setNumRows(0);
+
+        while (lista.hasNext()) {
+            
+            ImovelItem item = lista.next();
+
+            model.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getDescricao(),
+                        item.getValor()
+                    });
+
+        }
+
+        return model;
+        
+    }
     
     @Override
     public DefaultTableModel populaJTable(DefaultTableModel model, int campo) throws Exception {
