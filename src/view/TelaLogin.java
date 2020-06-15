@@ -6,6 +6,7 @@
 package view;
 
 import controller.FuncionarioController;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,76 +28,98 @@ public class TelaLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jPasswordFieldSenha = new javax.swing.JPasswordField();
-        jButtonLogin = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jButtonEsqueciSenha = new javax.swing.JButton();
+        jButtonLogin = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabelEmail = new javax.swing.JLabel();
+        jLabelSenha = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Login");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("E-mail :");
+        jTextFieldEmail.setBackground(new java.awt.Color(189, 209, 219));
+        jTextFieldEmail.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTextFieldEmail.setForeground(new java.awt.Color(102, 102, 102));
+        jTextFieldEmail.setText("E-mail");
+        jTextFieldEmail.setBorder(null);
+        getContentPane().add(jTextFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 260, 40));
 
-        jLabel2.setText("Senha :");
+        jPasswordFieldSenha.setBackground(new java.awt.Color(189, 209, 219));
+        jPasswordFieldSenha.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jPasswordFieldSenha.setForeground(new java.awt.Color(102, 102, 102));
+        jPasswordFieldSenha.setText("Password");
+        jPasswordFieldSenha.setBorder(null);
+        getContentPane().add(jPasswordFieldSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 260, 40));
 
-        jButtonLogin.setText("Entrar");
-        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLoginActionPerformed(evt);
+        jPanel1.setBackground(new java.awt.Color(189, 209, 219));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonEsqueciSenha.setBackground(new java.awt.Color(204, 143, 51));
+        jButtonEsqueciSenha.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonEsqueciSenha.setForeground(new java.awt.Color(102, 102, 102));
+        jButtonEsqueciSenha.setText("Esqueci minha senha");
+        jButtonEsqueciSenha.setBorder(null);
+        jButtonEsqueciSenha.setBorderPainted(false);
+        jButtonEsqueciSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonEsqueciSenha.setFocusPainted(false);
+        jButtonEsqueciSenha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonEsqueciSenhaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonEsqueciSenhaMouseExited(evt);
             }
         });
-
-        jButtonEsqueciSenha.setText("Esqueci minha senha");
         jButtonEsqueciSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEsqueciSenhaActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonEsqueciSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 320, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(jButtonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonEsqueciSenha)
-                .addGap(78, 78, 78))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(84, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonLogin)
-                .addGap(35, 35, 35)
-                .addComponent(jButtonEsqueciSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
-        );
+        jButtonLogin.setBackground(new java.awt.Color(51, 204, 112));
+        jButtonLogin.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonLogin.setForeground(new java.awt.Color(102, 102, 102));
+        jButtonLogin.setText("Entrar");
+        jButtonLogin.setBorder(null);
+        jButtonLogin.setBorderPainted(false);
+        jButtonLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonLogin.setFocusPainted(false);
+        jButtonLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonLoginMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonLoginMouseExited(evt);
+            }
+        });
+        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLoginActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 320, 50));
+
+        jSeparator1.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 260, 20));
+
+        jSeparator2.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 260, 20));
+
+        jLabelEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icons8_mail_account_50px_1.png"))); // NOI18N
+        jPanel1.add(jLabelEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, 50));
+
+        jLabelSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icons8_lock_50px_2.png"))); // NOI18N
+        jPanel1.add(jLabelSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, 50));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 420));
 
         pack();
         setLocationRelativeTo(null);
@@ -126,6 +149,26 @@ public class TelaLogin extends javax.swing.JFrame {
         new TelaResetarSenha().setVisible(true);
     }//GEN-LAST:event_jButtonEsqueciSenhaActionPerformed
 
+    private void jButtonLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLoginMouseEntered
+        jButtonLogin.setBackground(new Color(0,154,62));
+        jButtonLogin.setForeground(Color.white);
+    }//GEN-LAST:event_jButtonLoginMouseEntered
+
+    private void jButtonLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLoginMouseExited
+        jButtonLogin.setBackground(new Color(51,204,112));
+        jButtonLogin.setForeground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonLoginMouseExited
+
+    private void jButtonEsqueciSenhaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEsqueciSenhaMouseEntered
+        jButtonEsqueciSenha.setBackground(new Color(154,93,1));
+        jButtonEsqueciSenha.setForeground(Color.white);
+    }//GEN-LAST:event_jButtonEsqueciSenhaMouseEntered
+
+    private void jButtonEsqueciSenhaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEsqueciSenhaMouseExited
+        jButtonEsqueciSenha.setBackground(new Color(204,143,51));
+        jButtonEsqueciSenha.setForeground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonEsqueciSenhaMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -137,7 +180,7 @@ public class TelaLogin extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -164,9 +207,12 @@ public class TelaLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEsqueciSenha;
     private javax.swing.JButton jButtonLogin;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelEmail;
+    private javax.swing.JLabel jLabelSenha;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordFieldSenha;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextFieldEmail;
     // End of variables declaration//GEN-END:variables
 }
