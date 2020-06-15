@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import model.Funcionario;
 import model.Pessoa;
 import util.CriaStatement;
@@ -53,7 +54,7 @@ public class FuncionarioDao extends Dao<Funcionario> {
         ResultSet rs;
 
         //estrutura de dados 1 : Fila de prioridade
-        Queue<Funcionario> itens = new PriorityQueue<Funcionario>();
+        Queue<Funcionario> itens = new ConcurrentLinkedQueue<Funcionario>();
 
         //verifica se o número recebido é menor que 0 ou maior que o número máximo de campos
         if (campo1 < 0 || campo1 > vetorCampos.length + vetorCamposPessoa.length) {

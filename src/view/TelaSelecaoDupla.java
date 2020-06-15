@@ -20,6 +20,7 @@ public class TelaSelecaoDupla extends javax.swing.JFrame {
     private TelaClientes telaClientes = null;
     private TelaContratos telaContratos = null;
     private TelaEnderecos telaEnderecos = null;
+    private TelaFuncionarios telaFuncionarios = null;
 
     public TelaSelecaoDupla() {
         initComponents();
@@ -41,6 +42,12 @@ public class TelaSelecaoDupla extends javax.swing.JFrame {
         initComponents();
         this.telaEnderecos = telaEnderecos;
         popularComboBoxes(telaEnderecos.colunas);
+    }
+
+    public TelaSelecaoDupla(TelaFuncionarios telaFuncionarios) {
+        initComponents();
+        this.telaFuncionarios = telaFuncionarios;
+        popularComboBoxes(telaFuncionarios.colunas);
     }
 
     private void popularComboBoxes(String[] colunas) {
@@ -139,6 +146,9 @@ public class TelaSelecaoDupla extends javax.swing.JFrame {
             }
             if (telaEnderecos != null) {
                 telaEnderecos.popularJtableDupla(campo1, campo2);
+            }
+            if (telaFuncionarios != null) {
+                telaFuncionarios.popularJtableDupla(campo1, campo2);
             }
             
             dispose();

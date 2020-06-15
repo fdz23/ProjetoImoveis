@@ -45,6 +45,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     private UsuarioController usc = null;
     private boolean isSelected = false;
     private TelaRelatorios tl = null;
+    public String[] colunas = {"Código","Matrícula","Nome","Cargo","Status","Data Rescisão"};
 
     public TelaFuncionarios() throws ClassNotFoundException, Exception {
         CriarJTable();
@@ -68,12 +69,15 @@ public class TelaFuncionarios extends javax.swing.JFrame {
 
     public void CriarJTable() {
         jTableTabela = new JTable(modelo);
-        modelo.addColumn("Código");
-        modelo.addColumn("Matrícula");
-        modelo.addColumn("Nome");
-        modelo.addColumn("Cargo");
-        modelo.addColumn("Status");
-        modelo.addColumn("Data Rescisão");
+        for (int i = 0; i < colunas.length; i++) {
+            modelo.addColumn(colunas[i]);
+        }
+    }
+
+    public void popularJtableDupla(int campo1, int campo2) throws ClassNotFoundException, Exception {
+
+        jTableTabela.setModel(fc.populaJTableDupla(modelo, campo1, campo2));
+
     }
 
     public void popularJtable() throws ClassNotFoundException, Exception {
@@ -227,6 +231,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jButtonAtivos = new javax.swing.JButton();
         jButtonInativos = new javax.swing.JButton();
         jButtonUtilizar = new javax.swing.JButton();
+        jButtonOrdenacaoDupla = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -418,6 +423,14 @@ public class TelaFuncionarios extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonUtilizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 150, 150, -1));
+
+        jButtonOrdenacaoDupla.setText("Ordenação dupla");
+        jButtonOrdenacaoDupla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrdenacaoDuplaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonOrdenacaoDupla, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 150, 160, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -770,6 +783,15 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonUtilizarActionPerformed
 
+    private void jButtonOrdenacaoDuplaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenacaoDuplaActionPerformed
+        try {
+            new TelaSelecaoDupla(this).setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButtonOrdenacaoDuplaActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -813,6 +835,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JButton jButtonDesativar;
     private javax.swing.JButton jButtonEndereco;
     private javax.swing.JButton jButtonInativos;
+    private javax.swing.JButton jButtonOrdenacaoDupla;
     private javax.swing.JButton jButtonStatus;
     private javax.swing.JButton jButtonTipoFuncionario;
     private javax.swing.JButton jButtonUtilizar;
