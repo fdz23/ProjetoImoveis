@@ -23,6 +23,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     private int linhaSelecionada = 0;
     private boolean isSelected = false;
     private final int index = 9;
+    public String[] colunas = {"Código","Descricao","Nivel acesso","Salario"};
 
     public TelaTipoFuncionario() throws ClassNotFoundException, Exception {
 
@@ -49,10 +50,12 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
     private void CriarJTable() {
         jTableTabela = new JTable(modelo);
-        modelo.addColumn("Código");
-        modelo.addColumn("Descricao");
-        modelo.addColumn("Nivel acesso");
-        modelo.addColumn("Salario");
+
+    }
+
+    public void popularJtableDupla(int campo1, int campo2) throws ClassNotFoundException, Exception {
+
+        jTableTabela.setModel(tfc.populaJTableDupla(modelo, campo1, campo2));
 
     }
 
@@ -147,6 +150,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         jButtonUtilizar = new javax.swing.JButton();
         jButtonAtivos = new javax.swing.JButton();
         jButtonInativos = new javax.swing.JButton();
+        jButtonOrdenacaoDupla = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -271,6 +275,14 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 790, 170, -1));
+
+        jButtonOrdenacaoDupla.setText("Ordenação dupla");
+        jButtonOrdenacaoDupla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrdenacaoDuplaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonOrdenacaoDupla, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 150, 160, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -504,6 +516,15 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonInativosActionPerformed
 
+    private void jButtonOrdenacaoDuplaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenacaoDuplaActionPerformed
+        try {
+            new TelaSelecaoDupla(this).setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButtonOrdenacaoDuplaActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -549,6 +570,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton jButtonDesativar;
     private javax.swing.JButton jButtonInativos;
     private javax.swing.JButton jButtonNivelAcesso;
+    private javax.swing.JButton jButtonOrdenacaoDupla;
     private javax.swing.JButton jButtonUtilizar;
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;
