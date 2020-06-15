@@ -122,6 +122,7 @@ public class TelaMenu extends javax.swing.JFrame {
         jButtonRelatorios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela Menu");
 
         jLabel1.setText("Bem-vindo ");
 

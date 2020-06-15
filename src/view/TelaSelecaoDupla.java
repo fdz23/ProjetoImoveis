@@ -133,7 +133,8 @@ public class TelaSelecaoDupla extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox();
         jButtonSelecionar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela Selecao Dupla");
 
         jLabel1.setText("Primeiro critério de ordenação");
 

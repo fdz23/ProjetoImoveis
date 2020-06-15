@@ -47,7 +47,8 @@ public class TelaResetarSenha extends javax.swing.JFrame {
         jButtonResetar = new javax.swing.JButton();
         jButtonToken = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela Resetar Senha");
 
         jLabel1.setText("Digite seu e-mail");
 
