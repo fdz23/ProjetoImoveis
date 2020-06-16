@@ -164,12 +164,14 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jTextFieldIbge.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jTextFieldIbge.setForeground(new java.awt.Color(102, 102, 102));
         jTextFieldIbge.setBorder(null);
+        jTextFieldIbge.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(jTextFieldIbge, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 250, 25));
 
         JtextFielCep.setBackground(new java.awt.Color(189, 209, 219));
         JtextFielCep.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         JtextFielCep.setForeground(new java.awt.Color(102, 102, 102));
         JtextFielCep.setBorder(null);
+        JtextFielCep.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         JtextFielCep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 JtextFielCepKeyReleased(evt);
@@ -187,6 +189,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jTextField2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(102, 102, 102));
         jTextField2.setBorder(null);
+        jTextField2.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 250, 250, 25));
 
         jLabel3.setBackground(new java.awt.Color(189, 209, 219));
@@ -199,6 +202,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         JtextFielLogradouro.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         JtextFielLogradouro.setForeground(new java.awt.Color(102, 102, 102));
         JtextFielLogradouro.setBorder(null);
+        JtextFielLogradouro.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(JtextFielLogradouro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 250, 25));
 
         jLabel5.setBackground(new java.awt.Color(189, 209, 219));
@@ -211,6 +215,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         JtextFielBairro.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         JtextFielBairro.setForeground(new java.awt.Color(102, 102, 102));
         JtextFielBairro.setBorder(null);
+        JtextFielBairro.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(JtextFielBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 250, 25));
 
         jLabel6.setBackground(new java.awt.Color(189, 209, 219));
@@ -223,6 +228,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         JtextFielCidade.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         JtextFielCidade.setForeground(new java.awt.Color(102, 102, 102));
         JtextFielCidade.setBorder(null);
+        JtextFielCidade.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(JtextFielCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 25));
 
         jLabel7.setBackground(new java.awt.Color(189, 209, 219));
@@ -235,6 +241,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         JtextFieldEstado.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         JtextFieldEstado.setForeground(new java.awt.Color(102, 102, 102));
         JtextFieldEstado.setBorder(null);
+        JtextFieldEstado.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(JtextFieldEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 250, 25));
 
         jLabel8.setBackground(new java.awt.Color(189, 209, 219));
@@ -247,6 +254,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         JtextFielNumero.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         JtextFielNumero.setForeground(new java.awt.Color(102, 102, 102));
         JtextFielNumero.setBorder(null);
+        JtextFielNumero.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(JtextFielNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 250, 25));
 
         jLabel9.setBackground(new java.awt.Color(189, 209, 219));
@@ -259,6 +267,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         JtextFielComplemento.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         JtextFielComplemento.setForeground(new java.awt.Color(102, 102, 102));
         JtextFielComplemento.setBorder(null);
+        JtextFielComplemento.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(JtextFielComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 590, 250, 25));
 
         jLabel10.setBackground(new java.awt.Color(189, 209, 219));
@@ -271,6 +280,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         JtextFielReferencia.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         JtextFielReferencia.setForeground(new java.awt.Color(102, 102, 102));
         JtextFielReferencia.setBorder(null);
+        JtextFielReferencia.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(JtextFielReferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 25));
 
         jLabel11.setBackground(new java.awt.Color(189, 209, 219));
@@ -289,6 +299,7 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jTextFieldId.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jTextFieldId.setForeground(new java.awt.Color(102, 102, 102));
         jTextFieldId.setBorder(null);
+        jTextFieldId.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 700, 60, 25));
 
         jButtonUtilizar.setBackground(new java.awt.Color(102, 102, 102));

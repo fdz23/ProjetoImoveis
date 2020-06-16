@@ -212,6 +212,7 @@ public class TelaContratos extends javax.swing.JFrame {
         jtextidacao.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 12)); // NOI18N
         jtextidacao.setForeground(new java.awt.Color(102, 102, 102));
         jtextidacao.setBorder(null);
+        jtextidacao.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(jtextidacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 90, 30));
 
         jButtonAcao.setBackground(new java.awt.Color(102, 102, 102));
@@ -287,6 +288,7 @@ public class TelaContratos extends javax.swing.JFrame {
         jTextFieldOrcamento.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 12)); // NOI18N
         jTextFieldOrcamento.setForeground(new java.awt.Color(102, 102, 102));
         jTextFieldOrcamento.setBorder(null);
+        jTextFieldOrcamento.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(jTextFieldOrcamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 130, 25));
 
         jButtonOrcamento.setBackground(new java.awt.Color(102, 102, 102));

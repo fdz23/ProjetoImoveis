@@ -1,6 +1,7 @@
 package view;
 
 import controller.ImovelController;
+import java.awt.Color;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Iterator;
@@ -206,47 +207,60 @@ public class TelaImoveis extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTabela = new javax.swing.JTable();
-        jTextFieldEndereco = new javax.swing.JTextField();
         jButtonEnd = new javax.swing.JButton();
-        jTextFieldNome = new javax.swing.JTextField();
-        JTextFieldID = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jButtonAtivar = new javax.swing.JButton();
-        jButtonDesativar = new javax.swing.JButton();
-        jButtonAction = new javax.swing.JButton();
         jComboAcao = new javax.swing.JComboBox();
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jFormattedTextFieldDataInclusao = new javax.swing.JFormattedTextField();
-        jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldPreco = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextFieldParcelas = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextFieldComissao = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jButtonTP = new javax.swing.JButton();
-        jTextFieldTipoImovel = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextFieldProprietario = new javax.swing.JTextField();
         jButtonProp = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextFieldTamanho = new javax.swing.JTextField();
         jButtonUsar = new javax.swing.JButton();
-        jButtonSelecionarMoveis = new javax.swing.JButton();
         jComboBoxSituacao = new javax.swing.JComboBox();
-        jButtonBaixa = new javax.swing.JButton();
-        jCheckBoxBaixa = new javax.swing.JCheckBox();
         jButtonAtivos = new javax.swing.JButton();
         jButtonInativos = new javax.swing.JButton();
         jButtonOrdenacaoDupla = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jButtonBaixa = new javax.swing.JButton();
+        jCheckBoxBaixa = new javax.swing.JCheckBox();
+        jButtonSelecionarMoveis = new javax.swing.JButton();
+        jButtonDesativar = new javax.swing.JButton();
+        jButtonAtivar = new javax.swing.JButton();
+        jButtonAction = new javax.swing.JButton();
+        JTextFieldID = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldPreco = new javax.swing.JTextField();
+        jTextFieldNome = new javax.swing.JTextField();
+        jTextFieldTamanho = new javax.swing.JTextField();
+        jTextFieldParcelas = new javax.swing.JTextField();
+        jTextFieldComissao = new javax.swing.JTextField();
+        jTextFieldEndereco = new javax.swing.JTextField();
+        jTextFieldTipoImovel = new javax.swing.JTextField();
+        jTextFieldProprietario = new javax.swing.JTextField();
+        jSeparator14 = new javax.swing.JSeparator();
+        jSeparator15 = new javax.swing.JSeparator();
+        jSeparator16 = new javax.swing.JSeparator();
+        jSeparator17 = new javax.swing.JSeparator();
+        jSeparator18 = new javax.swing.JSeparator();
+        jSeparator19 = new javax.swing.JSeparator();
+        jSeparator20 = new javax.swing.JSeparator();
+        jSeparator21 = new javax.swing.JSeparator();
+        jSeparator22 = new javax.swing.JSeparator();
+        jSeparator23 = new javax.swing.JSeparator();
+        jSeparator24 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Imoveis");
 
+        jPanel1.setBackground(new java.awt.Color(205, 221, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTableTabela.setModel(new javax.swing.table.DefaultTableModel(
@@ -268,173 +282,505 @@ public class TelaImoveis extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableTabela);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 810, 580));
-        jPanel1.add(jTextFieldEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 200, -1));
 
+        jButtonEnd.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonEnd.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonEnd.setForeground(new java.awt.Color(204, 204, 204));
         jButtonEnd.setText("Selecionar");
+        jButtonEnd.setBorder(null);
+        jButtonEnd.setBorderPainted(false);
+        jButtonEnd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonEnd.setFocusPainted(false);
+        jButtonEnd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonEndMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonEndMouseExited(evt);
+            }
+        });
         jButtonEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEndActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 560, 130, 30));
-        jPanel1.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 250, -1));
-        jPanel1.add(JTextFieldID, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 850, 40, -1));
+        jPanel1.add(jButtonEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 560, 170, 35));
 
-        jLabel12.setText("ID:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 850, -1, -1));
-
-        jButtonAtivar.setText("Ativar");
-        jButtonAtivar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAtivarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 860, 90, 40));
-
-        jButtonDesativar.setText("Desativar");
-        jButtonDesativar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDesativarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 860, 90, 40));
-
-        jButtonAction.setText("Ação");
-        jButtonAction.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonActionActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonAction, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 910, 160, 60));
-
+        jComboAcao.setBackground(new java.awt.Color(102, 102, 102));
+        jComboAcao.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jComboAcao.setForeground(new java.awt.Color(204, 204, 204));
         jComboAcao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboAcao.setBorder(null);
+        jComboAcao.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboAcao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboAcaoActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 130, -1));
+        jPanel1.add(jComboAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 170, 35));
 
+        jLabel10.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
         jLabel10.setText("Escolha sua ação : ");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 120, -1));
 
+        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Nome");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 40, -1));
 
+        jLabel9.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setText("Endereço");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, -1, -1));
 
+        jFormattedTextFieldDataInclusao.setBackground(new java.awt.Color(189, 209, 219));
+        jFormattedTextFieldDataInclusao.setBorder(null);
+        jFormattedTextFieldDataInclusao.setForeground(new java.awt.Color(102, 102, 102));
         try {
             jFormattedTextFieldDataInclusao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel1.add(jFormattedTextFieldDataInclusao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 250, 30));
+        jFormattedTextFieldDataInclusao.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel1.add(jFormattedTextFieldDataInclusao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 250, 25));
 
-        jLabel4.setText("Data de inclusão");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
-
+        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Preço");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
-        jPanel1.add(jTextFieldPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 260, -1));
 
+        jLabel3.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Situação");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, 20));
 
+        jLabel6.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("Quartidade de Parcelas :");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
-        jPanel1.add(jTextFieldParcelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 260, -1));
 
+        jLabel7.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("Comissão :");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
-        jPanel1.add(jTextFieldComissao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 260, -1));
 
+        jLabel8.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Tipo Imovel");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 70, -1));
 
+        jButtonTP.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonTP.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonTP.setForeground(new java.awt.Color(204, 204, 204));
         jButtonTP.setText("Selecionar");
+        jButtonTP.setBorder(null);
+        jButtonTP.setBorderPainted(false);
+        jButtonTP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonTP.setFocusPainted(false);
+        jButtonTP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonTPMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonTPMouseExited(evt);
+            }
+        });
         jButtonTP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonTPActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonTP, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 620, 130, -1));
-        jPanel1.add(jTextFieldTipoImovel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, 200, -1));
+        jPanel1.add(jButtonTP, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 620, 170, 35));
 
+        jLabel11.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("Proprietário");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 650, 80, -1));
-        jPanel1.add(jTextFieldProprietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 680, 200, -1));
 
+        jButtonProp.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonProp.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonProp.setForeground(new java.awt.Color(204, 204, 204));
         jButtonProp.setText("Selecionar");
+        jButtonProp.setBorder(null);
+        jButtonProp.setBorderPainted(false);
+        jButtonProp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonProp.setFocusPainted(false);
+        jButtonProp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonPropMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonPropMouseExited(evt);
+            }
+        });
         jButtonProp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPropActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonProp, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 680, 130, -1));
+        jPanel1.add(jButtonProp, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 680, 170, 35));
 
+        jLabel5.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Tamanho");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
-        jPanel1.add(jTextFieldTamanho, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 260, -1));
 
+        jButtonUsar.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonUsar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonUsar.setForeground(new java.awt.Color(204, 204, 204));
         jButtonUsar.setText("Usar");
+        jButtonUsar.setBorder(null);
+        jButtonUsar.setBorderPainted(false);
+        jButtonUsar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonUsar.setFocusPainted(false);
+        jButtonUsar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonUsarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonUsarMouseExited(evt);
+            }
+        });
         jButtonUsar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonUsarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonUsar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 170, 40));
+        jPanel1.add(jButtonUsar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 170, 35));
 
-        jButtonSelecionarMoveis.setText("Selecionar móveis");
-        jButtonSelecionarMoveis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSelecionarMoveisActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonSelecionarMoveis, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 730, 200, -1));
-
+        jComboBoxSituacao.setBackground(new java.awt.Color(102, 102, 102));
+        jComboBoxSituacao.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jComboBoxSituacao.setForeground(new java.awt.Color(204, 204, 204));
         jComboBoxSituacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBoxSituacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 260, -1));
+        jComboBoxSituacao.setBorder(null);
+        jComboBoxSituacao.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(jComboBoxSituacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 170, 35));
 
-        jButtonBaixa.setText("Dar baixa");
-        jButtonBaixa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBaixaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonBaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 780, 200, -1));
-
-        jCheckBoxBaixa.setText("Baixa");
-        jCheckBoxBaixa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxBaixaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jCheckBoxBaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 790, -1, -1));
-
+        jButtonAtivos.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonAtivos.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonAtivos.setForeground(new java.awt.Color(204, 204, 204));
         jButtonAtivos.setText("Mostrar ativos");
+        jButtonAtivos.setBorder(null);
+        jButtonAtivos.setBorderPainted(false);
+        jButtonAtivos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonAtivos.setFocusPainted(false);
+        jButtonAtivos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonAtivosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonAtivosMouseExited(evt);
+            }
+        });
         jButtonAtivos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAtivosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonAtivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 800, 170, -1));
+        jPanel1.add(jButtonAtivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 800, 170, 35));
 
+        jButtonInativos.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonInativos.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonInativos.setForeground(new java.awt.Color(204, 204, 204));
         jButtonInativos.setText("Mostrar inativos");
+        jButtonInativos.setBorder(null);
+        jButtonInativos.setBorderPainted(false);
+        jButtonInativos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonInativos.setFocusPainted(false);
+        jButtonInativos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonInativosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonInativosMouseExited(evt);
+            }
+        });
         jButtonInativos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonInativosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 800, 170, -1));
+        jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 800, 170, 35));
 
+        jButtonOrdenacaoDupla.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonOrdenacaoDupla.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonOrdenacaoDupla.setForeground(new java.awt.Color(204, 204, 204));
         jButtonOrdenacaoDupla.setText("Ordenação dupla");
+        jButtonOrdenacaoDupla.setBorder(null);
+        jButtonOrdenacaoDupla.setBorderPainted(false);
+        jButtonOrdenacaoDupla.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonOrdenacaoDupla.setFocusPainted(false);
+        jButtonOrdenacaoDupla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonOrdenacaoDuplaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonOrdenacaoDuplaMouseExited(evt);
+            }
+        });
         jButtonOrdenacaoDupla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonOrdenacaoDuplaActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonOrdenacaoDupla, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 120, 160, 40));
+        jPanel1.add(jButtonOrdenacaoDupla, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 120, 170, 35));
+
+        jPanel2.setBackground(new java.awt.Color(189, 209, 219));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonBaixa.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonBaixa.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonBaixa.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonBaixa.setText("Dar baixa");
+        jButtonBaixa.setBorder(null);
+        jButtonBaixa.setBorderPainted(false);
+        jButtonBaixa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonBaixa.setFocusPainted(false);
+        jButtonBaixa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonBaixaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonBaixaMouseExited(evt);
+            }
+        });
+        jButtonBaixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBaixaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonBaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 800, 170, 35));
+
+        jCheckBoxBaixa.setBackground(new java.awt.Color(189, 209, 219));
+        jCheckBoxBaixa.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jCheckBoxBaixa.setForeground(new java.awt.Color(102, 102, 102));
+        jCheckBoxBaixa.setText("Baixa");
+        jCheckBoxBaixa.setBorder(null);
+        jCheckBoxBaixa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jCheckBoxBaixa.setFocusPainted(false);
+        jCheckBoxBaixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxBaixaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jCheckBoxBaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 790, -1, -1));
+
+        jButtonSelecionarMoveis.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonSelecionarMoveis.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonSelecionarMoveis.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonSelecionarMoveis.setText("Selecionar móveis");
+        jButtonSelecionarMoveis.setBorder(null);
+        jButtonSelecionarMoveis.setBorderPainted(false);
+        jButtonSelecionarMoveis.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonSelecionarMoveis.setFocusPainted(false);
+        jButtonSelecionarMoveis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonSelecionarMoveisMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonSelecionarMoveisMouseExited(evt);
+            }
+        });
+        jButtonSelecionarMoveis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelecionarMoveisActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonSelecionarMoveis, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 740, 170, 35));
+
+        jButtonDesativar.setBackground(new java.awt.Color(204, 143, 51));
+        jButtonDesativar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonDesativar.setForeground(new java.awt.Color(102, 102, 102));
+        jButtonDesativar.setText("Desativar");
+        jButtonDesativar.setBorder(null);
+        jButtonDesativar.setBorderPainted(false);
+        jButtonDesativar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonDesativar.setFocusPainted(false);
+        jButtonDesativar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonDesativarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonDesativarMouseExited(evt);
+            }
+        });
+        jButtonDesativar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDesativarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 860, 90, 35));
+
+        jButtonAtivar.setBackground(new java.awt.Color(51, 204, 112));
+        jButtonAtivar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonAtivar.setForeground(new java.awt.Color(102, 102, 102));
+        jButtonAtivar.setText("Ativar");
+        jButtonAtivar.setBorder(null);
+        jButtonAtivar.setBorderPainted(false);
+        jButtonAtivar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonAtivar.setFocusPainted(false);
+        jButtonAtivar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonAtivarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonAtivarMouseExited(evt);
+            }
+        });
+        jButtonAtivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtivarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 860, 70, 35));
+
+        jButtonAction.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonAction.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonAction.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonAction.setText("Ação");
+        jButtonAction.setBorder(null);
+        jButtonAction.setBorderPainted(false);
+        jButtonAction.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonAction.setFocusPainted(false);
+        jButtonAction.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonActionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonActionMouseExited(evt);
+            }
+        });
+        jButtonAction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActionActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonAction, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 910, 170, 35));
+
+        JTextFieldID.setBackground(new java.awt.Color(189, 209, 219));
+        JTextFieldID.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        JTextFieldID.setForeground(new java.awt.Color(102, 102, 102));
+        JTextFieldID.setBorder(null);
+        JTextFieldID.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel2.add(JTextFieldID, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 860, 70, 25));
+
+        jLabel12.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel12.setText("ID:");
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 860, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel4.setText("Data de inclusão");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+
+        jTextFieldPreco.setBackground(new java.awt.Color(189, 209, 219));
+        jTextFieldPreco.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTextFieldPreco.setForeground(new java.awt.Color(102, 102, 102));
+        jTextFieldPreco.setBorder(null);
+        jTextFieldPreco.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jTextFieldPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 250, 25));
+
+        jTextFieldNome.setBackground(new java.awt.Color(189, 209, 219));
+        jTextFieldNome.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTextFieldNome.setForeground(new java.awt.Color(102, 102, 102));
+        jTextFieldNome.setBorder(null);
+        jTextFieldNome.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 250, 25));
+
+        jTextFieldTamanho.setBackground(new java.awt.Color(189, 209, 219));
+        jTextFieldTamanho.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTextFieldTamanho.setForeground(new java.awt.Color(102, 102, 102));
+        jTextFieldTamanho.setBorder(null);
+        jTextFieldTamanho.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jTextFieldTamanho, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 250, 25));
+
+        jTextFieldParcelas.setBackground(new java.awt.Color(189, 209, 219));
+        jTextFieldParcelas.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTextFieldParcelas.setForeground(new java.awt.Color(102, 102, 102));
+        jTextFieldParcelas.setBorder(null);
+        jTextFieldParcelas.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jTextFieldParcelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 250, 25));
+
+        jTextFieldComissao.setBackground(new java.awt.Color(189, 209, 219));
+        jTextFieldComissao.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTextFieldComissao.setForeground(new java.awt.Color(102, 102, 102));
+        jTextFieldComissao.setBorder(null);
+        jTextFieldComissao.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jTextFieldComissao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 250, 25));
+
+        jTextFieldEndereco.setBackground(new java.awt.Color(189, 209, 219));
+        jTextFieldEndereco.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTextFieldEndereco.setForeground(new java.awt.Color(102, 102, 102));
+        jTextFieldEndereco.setBorder(null);
+        jTextFieldEndereco.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jTextFieldEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 200, 25));
+
+        jTextFieldTipoImovel.setBackground(new java.awt.Color(189, 209, 219));
+        jTextFieldTipoImovel.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTextFieldTipoImovel.setForeground(new java.awt.Color(102, 102, 102));
+        jTextFieldTipoImovel.setBorder(null);
+        jTextFieldTipoImovel.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jTextFieldTipoImovel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, 200, 25));
+
+        jTextFieldProprietario.setBackground(new java.awt.Color(189, 209, 219));
+        jTextFieldProprietario.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTextFieldProprietario.setForeground(new java.awt.Color(102, 102, 102));
+        jTextFieldProprietario.setBorder(null);
+        jTextFieldProprietario.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jTextFieldProprietario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldProprietarioActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jTextFieldProprietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, 200, 25));
+
+        jSeparator14.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator14.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 250, 10));
+
+        jSeparator15.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator15.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 250, 10));
+
+        jSeparator16.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator16.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 250, 10));
+
+        jSeparator17.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator17.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 250, 10));
+
+        jSeparator18.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator18.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 250, 10));
+
+        jSeparator19.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator19.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 250, 10));
+
+        jSeparator20.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator20.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 250, 10));
+
+        jSeparator21.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator21.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 890, 70, 10));
+
+        jSeparator22.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator22.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 200, 10));
+
+        jSeparator23.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator23.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 640, 200, 10));
+
+        jSeparator24.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator24.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 700, 200, 10));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 1000));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -446,7 +792,7 @@ public class TelaImoveis extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 953, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -550,8 +896,7 @@ public class TelaImoveis extends javax.swing.JFrame {
 
             int action = jComboAcao.getSelectedIndex();
             String nome = jTextFieldNome.getText();
-            Date data = new Date(System.currentTimeMillis());
-            java.sql.Date dataSql = new java.sql.Date(data.getTime());
+            java.sql.Date dataSql = new java.sql.Date(System.currentTimeMillis());
             double preco = Double.parseDouble(jTextFieldPreco.getText());
             double tamanho = Double.parseDouble(jTextFieldTamanho.getText());
             String situacao = jComboBoxSituacao.getSelectedItem().toString();
@@ -754,10 +1099,9 @@ public class TelaImoveis extends javax.swing.JFrame {
                 if (baixa.equals("")) {
                     JOptionPane.showMessageDialog(rootPane, "Por favor digite o motivo da baixa");
                 }
-            } while (!baixa.equals(""));
-            Date data = new Date(System.currentTimeMillis());
-            dataBaixa = CriaDate.geraSqlDate(data.toString());
-        } catch (ParseException ex) {
+            } while (baixa.equals(""));
+            dataBaixa = new java.sql.Date(System.currentTimeMillis());
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
     }//GEN-LAST:event_jButtonBaixaActionPerformed
@@ -795,6 +1139,138 @@ public class TelaImoveis extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonOrdenacaoDuplaActionPerformed
 
+    private void jTextFieldProprietarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProprietarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldProprietarioActionPerformed
+
+    private void jButtonAtivarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtivarMouseEntered
+        if (jButtonAtivar.isEnabled()) {
+            jButtonAtivar.setBackground(new Color(0,154,62));
+            jButtonAtivar.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_jButtonAtivarMouseEntered
+
+    private void jButtonAtivarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtivarMouseExited
+        if (jButtonAtivar.isEnabled()) {
+            jButtonAtivar.setBackground(new Color(51,204,112));
+            jButtonAtivar.setForeground(new Color(102,102,102));
+        }
+    }//GEN-LAST:event_jButtonAtivarMouseExited
+
+    private void jButtonDesativarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDesativarMouseEntered
+        if (jButtonDesativar.isEnabled()) {
+            jButtonDesativar.setBackground(new Color(154,93,1));
+            jButtonDesativar.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_jButtonDesativarMouseEntered
+
+    private void jButtonDesativarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDesativarMouseExited
+        if (jButtonDesativar.isEnabled()) {
+            jButtonDesativar.setBackground(new Color(204,143,51));
+            jButtonDesativar.setForeground(new Color(102,102,102));
+        }
+    }//GEN-LAST:event_jButtonDesativarMouseExited
+
+    private void jButtonEndMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEndMouseEntered
+        if (jButtonEnd.isEnabled())
+            jButtonEnd.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonEndMouseEntered
+
+    private void jButtonEndMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEndMouseExited
+        if (jButtonEnd.isEnabled())
+            jButtonEnd.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonEndMouseExited
+
+    private void jButtonTPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTPMouseEntered
+        if (jButtonTP.isEnabled())
+            jButtonTP.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonTPMouseEntered
+
+    private void jButtonTPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTPMouseExited
+        if (jButtonTP.isEnabled())
+            jButtonTP.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonTPMouseExited
+
+    private void jButtonPropMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonPropMouseEntered
+        if (jButtonProp.isEnabled())
+            jButtonProp.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonPropMouseEntered
+
+    private void jButtonPropMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonPropMouseExited
+        if (jButtonProp.isEnabled())
+            jButtonProp.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonPropMouseExited
+
+    private void jButtonSelecionarMoveisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSelecionarMoveisMouseEntered
+        if (jButtonSelecionarMoveis.isEnabled())
+            jButtonSelecionarMoveis.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonSelecionarMoveisMouseEntered
+
+    private void jButtonSelecionarMoveisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSelecionarMoveisMouseExited
+        if (jButtonSelecionarMoveis.isEnabled())
+            jButtonSelecionarMoveis.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonSelecionarMoveisMouseExited
+
+    private void jButtonBaixaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonBaixaMouseEntered
+        if (jButtonBaixa.isEnabled())
+            jButtonBaixa.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonBaixaMouseEntered
+
+    private void jButtonBaixaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonBaixaMouseExited
+        if (jButtonBaixa.isEnabled())
+            jButtonBaixa.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonBaixaMouseExited
+
+    private void jButtonActionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonActionMouseEntered
+        if (jButtonAction.isEnabled())
+            jButtonAction.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonActionMouseEntered
+
+    private void jButtonActionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonActionMouseExited
+        if (jButtonAction.isEnabled())
+            jButtonAction.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonActionMouseExited
+
+    private void jButtonAtivosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtivosMouseEntered
+        if (jButtonAtivos.isEnabled())
+            jButtonAtivos.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonAtivosMouseEntered
+
+    private void jButtonAtivosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtivosMouseExited
+        if (jButtonAtivos.isEnabled())
+            jButtonAtivos.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonAtivosMouseExited
+
+    private void jButtonInativosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonInativosMouseEntered
+        if (jButtonInativos.isEnabled())
+            jButtonInativos.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonInativosMouseEntered
+
+    private void jButtonInativosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonInativosMouseExited
+        if (jButtonInativos.isEnabled())
+            jButtonInativos.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonInativosMouseExited
+
+    private void jButtonUsarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUsarMouseEntered
+        if (jButtonUsar.isEnabled())
+            jButtonUsar.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonUsarMouseEntered
+
+    private void jButtonUsarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUsarMouseExited
+        if (jButtonUsar.isEnabled())
+            jButtonUsar.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonUsarMouseExited
+
+    private void jButtonOrdenacaoDuplaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOrdenacaoDuplaMouseEntered
+        if (jButtonOrdenacaoDupla.isEnabled())
+            jButtonOrdenacaoDupla.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonOrdenacaoDuplaMouseEntered
+
+    private void jButtonOrdenacaoDuplaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOrdenacaoDuplaMouseExited
+        if (jButtonOrdenacaoDupla.isEnabled())
+            jButtonOrdenacaoDupla.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonOrdenacaoDuplaMouseExited
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -803,7 +1279,7 @@ public class TelaImoveis extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -863,7 +1339,19 @@ public class TelaImoveis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator14;
+    private javax.swing.JSeparator jSeparator15;
+    private javax.swing.JSeparator jSeparator16;
+    private javax.swing.JSeparator jSeparator17;
+    private javax.swing.JSeparator jSeparator18;
+    private javax.swing.JSeparator jSeparator19;
+    private javax.swing.JSeparator jSeparator20;
+    private javax.swing.JSeparator jSeparator21;
+    private javax.swing.JSeparator jSeparator22;
+    private javax.swing.JSeparator jSeparator23;
+    private javax.swing.JSeparator jSeparator24;
     private javax.swing.JTable jTableTabela;
     private javax.swing.JTextField jTextFieldComissao;
     private javax.swing.JTextField jTextFieldEndereco;

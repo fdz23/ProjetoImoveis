@@ -297,6 +297,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jTextFieldEmail.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jTextFieldEmail.setForeground(new java.awt.Color(102, 102, 102));
         jTextFieldEmail.setBorder(null);
+        jTextFieldEmail.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(jTextFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 250, 25));
 
         jLabel4.setBackground(new java.awt.Color(189, 209, 219));
@@ -321,6 +322,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jTextFieldMatricula.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jTextFieldMatricula.setForeground(new java.awt.Color(102, 102, 102));
         jTextFieldMatricula.setBorder(null);
+        jTextFieldMatricula.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(jTextFieldMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 250, 25));
 
         jLabel7.setBackground(new java.awt.Color(189, 209, 219));
@@ -333,6 +335,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jTextFieldCargo.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jTextFieldCargo.setForeground(new java.awt.Color(102, 102, 102));
         jTextFieldCargo.setBorder(null);
+        jTextFieldCargo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(jTextFieldCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 250, 25));
 
         jLabel12.setBackground(new java.awt.Color(189, 209, 219));
@@ -345,6 +348,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         idacao.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         idacao.setForeground(new java.awt.Color(102, 102, 102));
         idacao.setBorder(null);
+        idacao.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(idacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 720, 90, 25));
 
         jFormattedTextFieldNascimento.setBackground(new java.awt.Color(189, 209, 219));
@@ -356,6 +360,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jFormattedTextFieldNascimento.setText("");
+        jFormattedTextFieldNascimento.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(jFormattedTextFieldNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 250, 25));
 
         jFormattedTextFieldTelefone.setBackground(new java.awt.Color(189, 209, 219));
@@ -367,6 +372,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jFormattedTextFieldTelefone.setText("");
+        jFormattedTextFieldTelefone.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(jFormattedTextFieldTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 250, 25));
 
         jFormattedTextFieldCPF.setBackground(new java.awt.Color(189, 209, 219));
@@ -378,6 +384,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jFormattedTextFieldCPF.setText("");
+        jFormattedTextFieldCPF.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(jFormattedTextFieldCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 250, 25));
 
         jButtonAtivos.setBackground(new java.awt.Color(102, 102, 102));
@@ -701,6 +708,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jFormattedTextFieldRescisao.setText("");
+        jFormattedTextFieldRescisao.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel2.add(jFormattedTextFieldRescisao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 250, 25));
 
         jLabel11.setBackground(new java.awt.Color(189, 209, 219));
@@ -713,6 +721,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jTextFieldStatus.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jTextFieldStatus.setForeground(new java.awt.Color(102, 102, 102));
         jTextFieldStatus.setBorder(null);
+        jTextFieldStatus.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel2.add(jTextFieldStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, 250, 25));
 
         jLabel9.setBackground(new java.awt.Color(189, 209, 219));
@@ -725,6 +734,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jTextFieldEndereco.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jTextFieldEndereco.setForeground(new java.awt.Color(102, 102, 102));
         jTextFieldEndereco.setBorder(null);
+        jTextFieldEndereco.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel2.add(jTextFieldEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, 250, 25));
 
         jSeparator18.setBackground(new java.awt.Color(102, 102, 102));
@@ -755,6 +765,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jTextFieldNome.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jTextFieldNome.setForeground(new java.awt.Color(102, 102, 102));
         jTextFieldNome.setBorder(null);
+        jTextFieldNome.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel2.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 250, 25));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 1000));
