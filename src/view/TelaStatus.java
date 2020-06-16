@@ -131,7 +131,9 @@ public class TelaStatus extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(205, 221, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTableTabela.setBackground(new java.awt.Color(102, 102, 102));
         jTableTabela.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTableTabela.setForeground(new java.awt.Color(204, 204, 204));
         jTableTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
