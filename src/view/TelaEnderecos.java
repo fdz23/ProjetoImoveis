@@ -86,7 +86,6 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTabela = new javax.swing.JTable();
         jTextFieldIbge = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         JtextFielCep = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -120,6 +119,17 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jButtonAcao = new javax.swing.JButton();
         jComboAcao = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel4 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator8 = new javax.swing.JSeparator();
+        jSeparator9 = new javax.swing.JSeparator();
+        jSeparator10 = new javax.swing.JSeparator();
+        jSeparator11 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Enderecos");
@@ -155,12 +165,6 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jTextFieldIbge.setForeground(new java.awt.Color(102, 102, 102));
         jTextFieldIbge.setBorder(null);
         jPanel1.add(jTextFieldIbge, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 250, 25));
-
-        jLabel4.setBackground(new java.awt.Color(189, 209, 219));
-        jLabel4.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel4.setText("Cod. IBGE :");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 250, 25));
 
         JtextFielCep.setBackground(new java.awt.Color(189, 209, 219));
         JtextFielCep.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
@@ -538,6 +542,52 @@ public class TelaEnderecos extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Escolha sua ação :");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 250, 25));
+
+        jSeparator2.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 240, 10));
+
+        jSeparator3.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator3.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 240, 10));
+
+        jLabel4.setBackground(new java.awt.Color(189, 209, 219));
+        jLabel4.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel4.setText("Cod. IBGE :");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 250, 25));
+
+        jSeparator4.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator4.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 240, 10));
+
+        jSeparator5.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator5.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 240, 10));
+
+        jSeparator6.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator6.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 240, 10));
+
+        jSeparator7.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator7.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 240, 10));
+
+        jSeparator8.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator8.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 730, 60, 10));
+
+        jSeparator9.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator9.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 240, 10));
+
+        jSeparator10.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator10.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 240, 10));
+
+        jSeparator11.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator11.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 680, 240, 10));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 920));
 
@@ -1166,6 +1216,16 @@ public class TelaEnderecos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator11;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTable jTableTabela;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextFieldIbge;
