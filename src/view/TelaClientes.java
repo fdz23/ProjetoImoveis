@@ -338,6 +338,7 @@ public class TelaClientes extends javax.swing.JFrame {
         jPanel1.add(jButtonSelecionarEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 570, 170, 35));
 
         jTableTabela.setBackground(new java.awt.Color(102, 102, 102));
+        jTableTabela.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jTableTabela.setForeground(new java.awt.Color(204, 204, 204));
         jTableTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
