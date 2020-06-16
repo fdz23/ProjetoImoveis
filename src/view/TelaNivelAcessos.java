@@ -116,13 +116,11 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTabela = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        JtextFielDescricao = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jComboAcao = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldId = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jCheckBoxClientes = new javax.swing.JCheckBox();
         jCheckBoxTiposPagamento = new javax.swing.JCheckBox();
@@ -145,6 +143,12 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         jButtonDesativar = new javax.swing.JButton();
         jButtonAtivar = new javax.swing.JButton();
         jButtonAcao = new javax.swing.JButton();
+        JtextFielDescricao = new javax.swing.JTextField();
+        jSeparator18 = new javax.swing.JSeparator();
+        jTextFieldId = new javax.swing.JTextField();
+        jSeparator19 = new javax.swing.JSeparator();
+        jSeparator20 = new javax.swing.JSeparator();
+        jSeparator21 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Nivel Acessos");
@@ -180,13 +184,6 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Descrição :");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
-
-        JtextFielDescricao.setBackground(new java.awt.Color(189, 209, 219));
-        JtextFielDescricao.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
-        JtextFielDescricao.setForeground(new java.awt.Color(102, 102, 102));
-        JtextFielDescricao.setBorder(null);
-        JtextFielDescricao.setDisabledTextColor(new java.awt.Color(102, 102, 102));
-        jPanel1.add(JtextFielDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 250, 25));
 
         jLabel2.setBackground(new java.awt.Color(189, 209, 219));
         jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
@@ -225,13 +222,6 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("ID");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
-
-        jTextFieldId.setBackground(new java.awt.Color(189, 209, 219));
-        jTextFieldId.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
-        jTextFieldId.setForeground(new java.awt.Color(102, 102, 102));
-        jTextFieldId.setBorder(null);
-        jTextFieldId.setDisabledTextColor(new java.awt.Color(102, 102, 102));
-        jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 250, 25));
 
         jLabel5.setBackground(new java.awt.Color(189, 209, 219));
         jLabel5.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
@@ -506,6 +496,36 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButtonAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 610, 170, 35));
+
+        JtextFielDescricao.setBackground(new java.awt.Color(189, 209, 219));
+        JtextFielDescricao.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        JtextFielDescricao.setForeground(new java.awt.Color(102, 102, 102));
+        JtextFielDescricao.setBorder(null);
+        JtextFielDescricao.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel2.add(JtextFielDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 250, 25));
+
+        jSeparator18.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator18.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 250, 10));
+
+        jTextFieldId.setBackground(new java.awt.Color(189, 209, 219));
+        jTextFieldId.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTextFieldId.setForeground(new java.awt.Color(102, 102, 102));
+        jTextFieldId.setBorder(null);
+        jTextFieldId.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 250, 25));
+
+        jSeparator19.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator19.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 250, 10));
+
+        jSeparator20.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator20.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 250, 10));
+
+        jSeparator21.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator21.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 250, 10));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 760));
 
@@ -984,6 +1004,10 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator18;
+    private javax.swing.JSeparator jSeparator19;
+    private javax.swing.JSeparator jSeparator20;
+    private javax.swing.JSeparator jSeparator21;
     private javax.swing.JTable jTableTabela;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextFieldId;
