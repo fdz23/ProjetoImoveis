@@ -2,6 +2,7 @@ package view;
 
 import controller.NivelAcessoController;
 import controller.StatusController;
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -90,13 +91,12 @@ public class TelaStatus extends javax.swing.JFrame {
         jComboAcao.addItem("Alterar");
         
         JtextFielDescricao.setEnabled(false);
-        jButton1.setEnabled(false);
-        jTextField2.setEnabled(false);
+        jButtonAcao.setEnabled(false);
         jTextFieldId.setEnabled(false);
         jTextFieldId.setText("0");
         jButtonAtivar.setEnabled(false);
         jButtonDesativar.setEnabled(false);
-        jButton1.setEnabled(false);
+        jButtonAcao.setEnabled(false);
         jButtonUsar.setVisible(false);
         
     }
@@ -108,9 +108,6 @@ public class TelaStatus extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTabela = new javax.swing.JTable();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jTextFieldId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         JtextFielDescricao = new javax.swing.JTextField();
@@ -118,6 +115,9 @@ public class TelaStatus extends javax.swing.JFrame {
         jComboAcao = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jButtonAcao = new javax.swing.JButton();
+        jSeparator20 = new javax.swing.JSeparator();
+        jSeparator21 = new javax.swing.JSeparator();
         jButtonAtivar = new javax.swing.JButton();
         jButtonDesativar = new javax.swing.JButton();
         jButtonUsar = new javax.swing.JButton();
@@ -128,8 +128,10 @@ public class TelaStatus extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Status");
 
+        jPanel1.setBackground(new java.awt.Color(205, 221, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTableTabela.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jTableTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -149,50 +151,77 @@ public class TelaStatus extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableTabela);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 680, 460));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, 120, -1));
 
-        jLabel3.setText("Pesquisa : ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, -1, -1));
+        jTextFieldId.setBackground(new java.awt.Color(189, 209, 219));
+        jTextFieldId.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTextFieldId.setForeground(new java.awt.Color(102, 102, 102));
+        jTextFieldId.setBorder(null);
+        jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 250, 25));
 
-        jButton1.setText("Ação ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 120, 50));
-        jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 150, -1));
-
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("ID");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
-        jPanel1.add(JtextFielDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 150, -1));
 
+        JtextFielDescricao.setBackground(new java.awt.Color(189, 209, 219));
+        JtextFielDescricao.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        JtextFielDescricao.setForeground(new java.awt.Color(102, 102, 102));
+        JtextFielDescricao.setBorder(null);
+        jPanel1.add(JtextFielDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 250, 25));
+
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Descrição :");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
+        jComboAcao.setBackground(new java.awt.Color(102, 102, 102));
+        jComboAcao.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jComboAcao.setForeground(new java.awt.Color(204, 204, 204));
         jComboAcao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboAcao.setBorder(null);
+        jComboAcao.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboAcao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboAcaoActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 140, -1));
+        jPanel1.add(jComboAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 170, 35));
 
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Escolha sua ação :");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        jPanel2.setBackground(new java.awt.Color(189, 209, 219));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 860, 90));
+        jButtonAcao.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonAcao.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonAcao.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonAcao.setText("Ação ");
+        jButtonAcao.setBorder(null);
+        jButtonAcao.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonAcao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonAcaoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonAcaoMouseExited(evt);
+            }
+        });
+        jButtonAcao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAcaoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 670, 170, 35));
+
+        jSeparator20.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator20.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 250, 10));
+
+        jSeparator21.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator21.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 250, 10));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 770));
 
         jButtonAtivar.setText("Ativar");
         jButtonAtivar.addActionListener(new java.awt.event.ActionListener() {
@@ -210,53 +239,99 @@ public class TelaStatus extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 342, -1, 40));
 
+        jButtonUsar.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonUsar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonUsar.setForeground(new java.awt.Color(204, 204, 204));
         jButtonUsar.setText("Utilizar");
+        jButtonUsar.setBorder(null);
+        jButtonUsar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonUsar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonUsarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonUsarMouseExited(evt);
+            }
+        });
         jButtonUsar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonUsarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonUsar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 110, 150, 50));
+        jPanel1.add(jButtonUsar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 110, 170, 35));
 
+        jButtonAtivos.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonAtivos.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonAtivos.setForeground(new java.awt.Color(204, 204, 204));
         jButtonAtivos.setText("Mostrar ativos");
+        jButtonAtivos.setBorder(null);
+        jButtonAtivos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonAtivos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonAtivosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonAtivosMouseExited(evt);
+            }
+        });
         jButtonAtivos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAtivosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonAtivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 670, 170, -1));
+        jPanel1.add(jButtonAtivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 670, 170, 35));
 
+        jButtonInativos.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonInativos.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonInativos.setForeground(new java.awt.Color(204, 204, 204));
         jButtonInativos.setText("Mostrar inativos");
+        jButtonInativos.setBorder(null);
+        jButtonInativos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonInativos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonInativosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonInativosMouseExited(evt);
+            }
+        });
         jButtonInativos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonInativosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 670, 170, -1));
+        jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 670, 170, 35));
 
+        jButtonOrdenacaoDupla.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonOrdenacaoDupla.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonOrdenacaoDupla.setForeground(new java.awt.Color(204, 204, 204));
         jButtonOrdenacaoDupla.setText("Ordenação dupla");
+        jButtonOrdenacaoDupla.setBorder(null);
+        jButtonOrdenacaoDupla.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonOrdenacaoDupla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonOrdenacaoDuplaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonOrdenacaoDuplaMouseExited(evt);
+            }
+        });
         jButtonOrdenacaoDupla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonOrdenacaoDuplaActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonOrdenacaoDupla, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 110, 160, 50));
+        jPanel1.add(jButtonOrdenacaoDupla, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 110, 170, 35));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1131, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1143, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -291,7 +366,7 @@ public class TelaStatus extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTableTabelaMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcaoActionPerformed
         
         try {
             
@@ -346,7 +421,7 @@ public class TelaStatus extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonAcaoActionPerformed
 
     private void jComboAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboAcaoActionPerformed
         
@@ -357,29 +432,26 @@ public class TelaStatus extends javax.swing.JFrame {
             case 0:
                 
                 JtextFielDescricao.setEnabled(false);
-                jButton1.setEnabled(false);
-                jTextField2.setEnabled(false);
+                jButtonAcao.setEnabled(false);
                 jTextFieldId.setEnabled(false);
                 jTextFieldId.setText("0");
                 jButtonAtivar.setEnabled(false);
                 jButtonDesativar.setEnabled(false);
-                jButton1.setEnabled(false);
+                jButtonAcao.setEnabled(false);
                 
                 break;
             
             case 1:
                 
                 JtextFielDescricao.setEnabled(true);
-                jButton1.setEnabled(true);
-                jTextField2.setEnabled(true);
+                jButtonAcao.setEnabled(true);
                 
                 break;
             
             case 2:
                 
                 JtextFielDescricao.setEnabled(true);
-                jButton1.setEnabled(true);
-                jTextField2.setEnabled(true);
+                jButtonAcao.setEnabled(true);
                 
                 break;
             
@@ -469,6 +541,56 @@ public class TelaStatus extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButtonOrdenacaoDuplaActionPerformed
+
+    private void jButtonAtivosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtivosMouseEntered
+        if (jButtonAtivos.isEnabled())
+            jButtonAtivos.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonAtivosMouseEntered
+
+    private void jButtonAtivosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtivosMouseExited
+        if (jButtonAtivos.isEnabled())
+            jButtonAtivos.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonAtivosMouseExited
+
+    private void jButtonInativosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonInativosMouseEntered
+        if (jButtonInativos.isEnabled())
+            jButtonInativos.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonInativosMouseEntered
+
+    private void jButtonInativosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonInativosMouseExited
+        if (jButtonInativos.isEnabled())
+            jButtonInativos.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonInativosMouseExited
+
+    private void jButtonUsarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUsarMouseEntered
+        if (jButtonUsar.isEnabled())
+            jButtonUsar.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonUsarMouseEntered
+
+    private void jButtonUsarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUsarMouseExited
+        if (jButtonUsar.isEnabled())
+            jButtonUsar.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonUsarMouseExited
+
+    private void jButtonOrdenacaoDuplaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOrdenacaoDuplaMouseEntered
+        if (jButtonOrdenacaoDupla.isEnabled())
+            jButtonOrdenacaoDupla.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonOrdenacaoDuplaMouseEntered
+
+    private void jButtonOrdenacaoDuplaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOrdenacaoDuplaMouseExited
+        if (jButtonOrdenacaoDupla.isEnabled())
+            jButtonOrdenacaoDupla.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonOrdenacaoDuplaMouseExited
+
+    private void jButtonAcaoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAcaoMouseEntered
+        if (jButtonAcao.isEnabled())
+            jButtonAcao.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonAcaoMouseEntered
+
+    private void jButtonAcaoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAcaoMouseExited
+        if (jButtonAcao.isEnabled())
+            jButtonAcao.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonAcaoMouseExited
     
     public static void main(String args[]) {
 
@@ -507,7 +629,7 @@ public class TelaStatus extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JtextFielDescricao;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonAcao;
     private javax.swing.JButton jButtonAtivar;
     private javax.swing.JButton jButtonAtivos;
     private javax.swing.JButton jButtonDesativar;
@@ -517,13 +639,13 @@ public class TelaStatus extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator20;
+    private javax.swing.JSeparator jSeparator21;
     private javax.swing.JTable jTableTabela;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextFieldId;
     // End of variables declaration//GEN-END:variables
 }
