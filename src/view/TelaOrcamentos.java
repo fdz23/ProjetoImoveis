@@ -239,7 +239,9 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         jTextFieldDescricao.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jPanel1.add(jTextFieldDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 250, 25));
 
+        jTableTabela.setBackground(new java.awt.Color(102, 102, 102));
         jTableTabela.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTableTabela.setForeground(new java.awt.Color(204, 204, 204));
         jTableTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

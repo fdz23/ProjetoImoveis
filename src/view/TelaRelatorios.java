@@ -1,6 +1,7 @@
 package view;
 
 import controller.RelatoriosController;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,10 +63,8 @@ public class TelaRelatorios extends javax.swing.JFrame {
         jButtonImoveisCadastradosNoSistema = new javax.swing.JButton();
         jButtonFinanciadoPorPeriodo = new javax.swing.JButton();
         jButtonCidadePeriodoETipoImovel = new javax.swing.JButton();
-        jButtonBaixado = new javax.swing.JButton();
         jButtonImoveisCadastradosPorCpf = new javax.swing.JButton();
         jButtonComissaoPorCorretor = new javax.swing.JButton();
-        jButtonDisponiveisParaVenda = new javax.swing.JButton();
         jButtonVendaMensal = new javax.swing.JButton();
         jButtonVendaAnual = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -73,130 +72,251 @@ public class TelaRelatorios extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableTabela = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jButtonDisponiveisParaVenda = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jButtonBaixado = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Relatorios");
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(205, 221, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButtonImoveisCorretor.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonImoveisCorretor.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonImoveisCorretor.setForeground(new java.awt.Color(204, 204, 204));
         jButtonImoveisCorretor.setText("Relatório");
+        jButtonImoveisCorretor.setBorder(null);
+        jButtonImoveisCorretor.setBorderPainted(false);
+        jButtonImoveisCorretor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonImoveisCorretor.setFocusPainted(false);
+        jButtonImoveisCorretor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonImoveisCorretorMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonImoveisCorretorMouseExited(evt);
+            }
+        });
         jButtonImoveisCorretor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonImoveisCorretorActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonImoveisCorretor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 180, -1));
+        jPanel1.add(jButtonImoveisCorretor, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 170, 35));
 
+        jButtonImoveisCadastradosNoSistema.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonImoveisCadastradosNoSistema.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonImoveisCadastradosNoSistema.setForeground(new java.awt.Color(204, 204, 204));
         jButtonImoveisCadastradosNoSistema.setText("Relatório");
+        jButtonImoveisCadastradosNoSistema.setBorder(null);
+        jButtonImoveisCadastradosNoSistema.setBorderPainted(false);
+        jButtonImoveisCadastradosNoSistema.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonImoveisCadastradosNoSistema.setFocusPainted(false);
+        jButtonImoveisCadastradosNoSistema.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonImoveisCadastradosNoSistemaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonImoveisCadastradosNoSistemaMouseExited(evt);
+            }
+        });
         jButtonImoveisCadastradosNoSistema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonImoveisCadastradosNoSistemaActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonImoveisCadastradosNoSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 200, -1));
+        jPanel1.add(jButtonImoveisCadastradosNoSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 170, 35));
 
+        jButtonFinanciadoPorPeriodo.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonFinanciadoPorPeriodo.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonFinanciadoPorPeriodo.setForeground(new java.awt.Color(204, 204, 204));
         jButtonFinanciadoPorPeriodo.setText("Relatório");
+        jButtonFinanciadoPorPeriodo.setBorder(null);
+        jButtonFinanciadoPorPeriodo.setBorderPainted(false);
+        jButtonFinanciadoPorPeriodo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonFinanciadoPorPeriodo.setFocusPainted(false);
+        jButtonFinanciadoPorPeriodo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonFinanciadoPorPeriodoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonFinanciadoPorPeriodoMouseExited(evt);
+            }
+        });
         jButtonFinanciadoPorPeriodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFinanciadoPorPeriodoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonFinanciadoPorPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 210, -1));
+        jPanel1.add(jButtonFinanciadoPorPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 170, 35));
 
+        jButtonCidadePeriodoETipoImovel.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonCidadePeriodoETipoImovel.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonCidadePeriodoETipoImovel.setForeground(new java.awt.Color(204, 204, 204));
         jButtonCidadePeriodoETipoImovel.setText("Relatório");
+        jButtonCidadePeriodoETipoImovel.setBorder(null);
+        jButtonCidadePeriodoETipoImovel.setBorderPainted(false);
+        jButtonCidadePeriodoETipoImovel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonCidadePeriodoETipoImovel.setFocusPainted(false);
+        jButtonCidadePeriodoETipoImovel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonCidadePeriodoETipoImovelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonCidadePeriodoETipoImovelMouseExited(evt);
+            }
+        });
         jButtonCidadePeriodoETipoImovel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCidadePeriodoETipoImovelActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonCidadePeriodoETipoImovel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 220, -1));
+        jPanel1.add(jButtonCidadePeriodoETipoImovel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 170, 35));
 
-        jButtonBaixado.setText("Relatório");
-        jButtonBaixado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBaixadoActionPerformed(evt);
+        jButtonImoveisCadastradosPorCpf.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonImoveisCadastradosPorCpf.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonImoveisCadastradosPorCpf.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonImoveisCadastradosPorCpf.setText("Relatório");
+        jButtonImoveisCadastradosPorCpf.setBorder(null);
+        jButtonImoveisCadastradosPorCpf.setBorderPainted(false);
+        jButtonImoveisCadastradosPorCpf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonImoveisCadastradosPorCpf.setFocusPainted(false);
+        jButtonImoveisCadastradosPorCpf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonImoveisCadastradosPorCpfMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonImoveisCadastradosPorCpfMouseExited(evt);
             }
         });
-        jPanel1.add(jButtonBaixado, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 220, -1));
-
-        jButtonImoveisCadastradosPorCpf.setText("Relatório");
         jButtonImoveisCadastradosPorCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonImoveisCadastradosPorCpfActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonImoveisCadastradosPorCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 190, -1));
+        jPanel1.add(jButtonImoveisCadastradosPorCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 170, 35));
 
+        jButtonComissaoPorCorretor.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonComissaoPorCorretor.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonComissaoPorCorretor.setForeground(new java.awt.Color(204, 204, 204));
         jButtonComissaoPorCorretor.setText("Relatório");
+        jButtonComissaoPorCorretor.setBorder(null);
+        jButtonComissaoPorCorretor.setBorderPainted(false);
+        jButtonComissaoPorCorretor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonComissaoPorCorretor.setFocusPainted(false);
+        jButtonComissaoPorCorretor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonComissaoPorCorretorMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonComissaoPorCorretorMouseExited(evt);
+            }
+        });
         jButtonComissaoPorCorretor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonComissaoPorCorretorActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonComissaoPorCorretor, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 200, -1));
+        jPanel1.add(jButtonComissaoPorCorretor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, 170, 35));
 
-        jButtonDisponiveisParaVenda.setText("Relatório");
-        jButtonDisponiveisParaVenda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDisponiveisParaVendaActionPerformed(evt);
+        jButtonVendaMensal.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonVendaMensal.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonVendaMensal.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonVendaMensal.setText("Relatório");
+        jButtonVendaMensal.setBorder(null);
+        jButtonVendaMensal.setBorderPainted(false);
+        jButtonVendaMensal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonVendaMensal.setFocusPainted(false);
+        jButtonVendaMensal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonVendaMensalMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonVendaMensalMouseExited(evt);
             }
         });
-        jPanel1.add(jButtonDisponiveisParaVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 200, -1));
-
-        jButtonVendaMensal.setText("Relatório");
         jButtonVendaMensal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVendaMensalActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonVendaMensal, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 180, -1));
+        jPanel1.add(jButtonVendaMensal, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 50, 170, 35));
 
+        jButtonVendaAnual.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonVendaAnual.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonVendaAnual.setForeground(new java.awt.Color(204, 204, 204));
         jButtonVendaAnual.setText("Relatório");
+        jButtonVendaAnual.setBorder(null);
+        jButtonVendaAnual.setBorderPainted(false);
+        jButtonVendaAnual.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonVendaAnual.setFocusPainted(false);
+        jButtonVendaAnual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonVendaAnualMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonVendaAnualMouseExited(evt);
+            }
+        });
         jButtonVendaAnual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVendaAnualActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonVendaAnual, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, 150, -1));
+        jPanel1.add(jButtonVendaAnual, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, 170, 35));
 
+        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Relatorio de venda Anual");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 20, 170, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, 170, 35));
 
+        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Imoveis por Corretor");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 130, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 170, 35));
 
+        jLabel3.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Imoveis cadastrado no Sistema");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 180, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 190, 35));
 
+        jLabel4.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Financiado por periodo");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 140, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 170, 35));
 
+        jLabel5.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Imoveis por cidade,periodo e tipo imovel");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 240, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 250, 35));
 
-        jLabel6.setText("Imoveis baixados");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 110, -1));
-
+        jLabel7.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("Imoveis cadastros por CPF");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 206, 170, 20));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 170, 35));
 
+        jLabel8.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Calculo de comissao por corretor");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 200, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 110, 200, 35));
 
-        jLabel9.setText("Disponiveis para venda");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 210, 140, -1));
-
+        jLabel10.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
         jLabel10.setText("Relatoria de venda Mensal");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 180, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 170, 35));
 
+        jTableTabela.setBackground(new java.awt.Color(102, 102, 102));
+        jTableTabela.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTableTabela.setForeground(new java.awt.Color(204, 204, 204));
         jTableTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -210,7 +330,68 @@ public class TelaRelatorios extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableTabela);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 1000, 440));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 1000, 440));
+
+        jPanel2.setBackground(new java.awt.Color(189, 209, 219));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel9.setText("Disponiveis para venda");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 100, 170, 35));
+
+        jButtonDisponiveisParaVenda.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonDisponiveisParaVenda.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonDisponiveisParaVenda.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonDisponiveisParaVenda.setText("Relatório");
+        jButtonDisponiveisParaVenda.setBorder(null);
+        jButtonDisponiveisParaVenda.setBorderPainted(false);
+        jButtonDisponiveisParaVenda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonDisponiveisParaVenda.setFocusPainted(false);
+        jButtonDisponiveisParaVenda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonDisponiveisParaVendaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonDisponiveisParaVendaMouseExited(evt);
+            }
+        });
+        jButtonDisponiveisParaVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDisponiveisParaVendaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonDisponiveisParaVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 130, 170, 35));
+
+        jLabel6.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel6.setText("Imoveis baixados");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 190, 170, 35));
+
+        jButtonBaixado.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonBaixado.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonBaixado.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonBaixado.setText("Relatório");
+        jButtonBaixado.setBorder(null);
+        jButtonBaixado.setBorderPainted(false);
+        jButtonBaixado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonBaixado.setFocusPainted(false);
+        jButtonBaixado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonBaixadoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonBaixadoMouseExited(evt);
+            }
+        });
+        jButtonBaixado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBaixadoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonBaixado, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 220, 170, 35));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 300));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -220,9 +401,7 @@ public class TelaRelatorios extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 20, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 794, Short.MAX_VALUE)
         );
 
         pack();
@@ -463,6 +642,106 @@ public class TelaRelatorios extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonDisponiveisParaVendaActionPerformed
 
+    private void jButtonImoveisCorretorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImoveisCorretorMouseEntered
+        if (jButtonImoveisCorretor.isEnabled())
+            jButtonImoveisCorretor.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonImoveisCorretorMouseEntered
+
+    private void jButtonImoveisCorretorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImoveisCorretorMouseExited
+        if (jButtonImoveisCorretor.isEnabled())
+            jButtonImoveisCorretor.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonImoveisCorretorMouseExited
+
+    private void jButtonImoveisCadastradosNoSistemaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImoveisCadastradosNoSistemaMouseEntered
+        if (jButtonImoveisCadastradosNoSistema.isEnabled())
+            jButtonImoveisCadastradosNoSistema.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonImoveisCadastradosNoSistemaMouseEntered
+
+    private void jButtonImoveisCadastradosNoSistemaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImoveisCadastradosNoSistemaMouseExited
+        if (jButtonImoveisCadastradosNoSistema.isEnabled())
+            jButtonImoveisCadastradosNoSistema.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonImoveisCadastradosNoSistemaMouseExited
+
+    private void jButtonImoveisCadastradosPorCpfMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImoveisCadastradosPorCpfMouseEntered
+        if (jButtonImoveisCadastradosPorCpf.isEnabled())
+            jButtonImoveisCadastradosPorCpf.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonImoveisCadastradosPorCpfMouseEntered
+
+    private void jButtonImoveisCadastradosPorCpfMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImoveisCadastradosPorCpfMouseExited
+        if (jButtonImoveisCadastradosPorCpf.isEnabled())
+            jButtonImoveisCadastradosPorCpf.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonImoveisCadastradosPorCpfMouseExited
+
+    private void jButtonFinanciadoPorPeriodoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFinanciadoPorPeriodoMouseEntered
+        if (jButtonFinanciadoPorPeriodo.isEnabled())
+            jButtonFinanciadoPorPeriodo.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonFinanciadoPorPeriodoMouseEntered
+
+    private void jButtonFinanciadoPorPeriodoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFinanciadoPorPeriodoMouseExited
+        if (jButtonFinanciadoPorPeriodo.isEnabled())
+            jButtonFinanciadoPorPeriodo.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonFinanciadoPorPeriodoMouseExited
+
+    private void jButtonVendaMensalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVendaMensalMouseEntered
+        if (jButtonVendaMensal.isEnabled())
+            jButtonVendaMensal.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonVendaMensalMouseEntered
+
+    private void jButtonVendaMensalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVendaMensalMouseExited
+        if (jButtonVendaMensal.isEnabled())
+            jButtonVendaMensal.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonVendaMensalMouseExited
+
+    private void jButtonComissaoPorCorretorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonComissaoPorCorretorMouseEntered
+        if (jButtonComissaoPorCorretor.isEnabled())
+            jButtonComissaoPorCorretor.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonComissaoPorCorretorMouseEntered
+
+    private void jButtonComissaoPorCorretorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonComissaoPorCorretorMouseExited
+        if (jButtonComissaoPorCorretor.isEnabled())
+            jButtonComissaoPorCorretor.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonComissaoPorCorretorMouseExited
+
+    private void jButtonVendaAnualMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVendaAnualMouseEntered
+        if (jButtonVendaAnual.isEnabled())
+            jButtonVendaAnual.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonVendaAnualMouseEntered
+
+    private void jButtonVendaAnualMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVendaAnualMouseExited
+        if (jButtonVendaAnual.isEnabled())
+            jButtonVendaAnual.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonVendaAnualMouseExited
+
+    private void jButtonDisponiveisParaVendaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDisponiveisParaVendaMouseEntered
+        if (jButtonDisponiveisParaVenda.isEnabled())
+            jButtonDisponiveisParaVenda.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonDisponiveisParaVendaMouseEntered
+
+    private void jButtonDisponiveisParaVendaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDisponiveisParaVendaMouseExited
+        if (jButtonDisponiveisParaVenda.isEnabled())
+            jButtonDisponiveisParaVenda.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonDisponiveisParaVendaMouseExited
+
+    private void jButtonBaixadoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonBaixadoMouseEntered
+        if (jButtonBaixado.isEnabled())
+            jButtonBaixado.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonBaixadoMouseEntered
+
+    private void jButtonBaixadoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonBaixadoMouseExited
+        if (jButtonBaixado.isEnabled())
+            jButtonBaixado.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonBaixadoMouseExited
+
+    private void jButtonCidadePeriodoETipoImovelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCidadePeriodoETipoImovelMouseEntered
+        if (jButtonCidadePeriodoETipoImovel.isEnabled())
+            jButtonCidadePeriodoETipoImovel.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonCidadePeriodoETipoImovelMouseEntered
+
+    private void jButtonCidadePeriodoETipoImovelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCidadePeriodoETipoImovelMouseExited
+        if (jButtonCidadePeriodoETipoImovel.isEnabled())
+            jButtonCidadePeriodoETipoImovel.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonCidadePeriodoETipoImovelMouseExited
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -521,6 +800,7 @@ public class TelaRelatorios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableTabela;
     // End of variables declaration//GEN-END:variables
