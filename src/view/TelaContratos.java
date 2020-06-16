@@ -287,7 +287,7 @@ public class TelaContratos extends javax.swing.JFrame {
         jTextFieldOrcamento.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 12)); // NOI18N
         jTextFieldOrcamento.setForeground(new java.awt.Color(102, 102, 102));
         jTextFieldOrcamento.setBorder(null);
-        jPanel1.add(jTextFieldOrcamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 130, 35));
+        jPanel1.add(jTextFieldOrcamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 130, 25));
 
         jButtonOrcamento.setBackground(new java.awt.Color(102, 102, 102));
         jButtonOrcamento.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
@@ -394,7 +394,7 @@ public class TelaContratos extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonOrdenacaoDupla, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 130, 160, 35));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 660, 90, 20));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 130, 20));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 130, 20));
 
         jPanel2.setBackground(new java.awt.Color(205, 221, 228));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
