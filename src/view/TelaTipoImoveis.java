@@ -1,6 +1,7 @@
 package view;
 
 import controller.TipoImovelController;
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -50,8 +51,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         jComboAcao.addItem("Alterar");
 
         JtextFielDescricao.setEnabled(false);
-        jButton1.setEnabled(false);
-        jTextField2.setEnabled(false);
+        jButtonAcao.setEnabled(false);
         jTextFieldId.setEnabled(false);
         jButtonUtilizar.setVisible(false);
         jButtonAtivar.setEnabled(false);
@@ -103,60 +103,69 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jComboAcao = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
-        JtextFielDescricao = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextFieldId = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTabela = new javax.swing.JTable();
-        jButtonAtivar = new javax.swing.JButton();
-        jButtonDesativar = new javax.swing.JButton();
         jButtonUtilizar = new javax.swing.JButton();
         jButtonAtivos = new javax.swing.JButton();
         jButtonInativos = new javax.swing.JButton();
         jButtonOrdenacaoDupla = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jButtonAcao = new javax.swing.JButton();
+        jButtonAtivar = new javax.swing.JButton();
+        jButtonDesativar = new javax.swing.JButton();
+        JtextFielDescricao = new javax.swing.JTextField();
+        jSeparator21 = new javax.swing.JSeparator();
+        jSeparator22 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Tipo Imoveis");
 
+        jPanel1.setBackground(new java.awt.Color(205, 221, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, 120, -1));
 
-        jLabel3.setText("Pesquisa : ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, -1, -1));
-
+        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Escolha sua ação :");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
+        jComboAcao.setBackground(new java.awt.Color(102, 102, 102));
+        jComboAcao.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jComboAcao.setForeground(new java.awt.Color(204, 204, 204));
         jComboAcao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboAcao.setBorder(null);
+        jComboAcao.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboAcao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboAcaoActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 140, -1));
+        jPanel1.add(jComboAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 170, 35));
 
+        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Descrição :");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
-        jPanel1.add(JtextFielDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 150, -1));
 
+        jLabel4.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("ID");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
-        jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 150, -1));
 
-        jButton1.setText("Ação ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 120, 50));
+        jTextFieldId.setBackground(new java.awt.Color(189, 209, 219));
+        jTextFieldId.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTextFieldId.setForeground(new java.awt.Color(102, 102, 102));
+        jTextFieldId.setBorder(null);
+        jTextFieldId.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel1.add(jTextFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 250, 25));
 
+        jTableTabela.setBackground(new java.awt.Color(102, 102, 102));
+        jTableTabela.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTableTabela.setForeground(new java.awt.Color(204, 204, 204));
         jTableTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -175,74 +184,209 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableTabela);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, 610, 440));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, 610, 440));
 
-        jButtonAtivar.setText("Ativar");
-        jButtonAtivar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAtivarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 100, 40));
-
-        jButtonDesativar.setText("Desativar");
-        jButtonDesativar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDesativarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, 100, 40));
-
+        jButtonUtilizar.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonUtilizar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonUtilizar.setForeground(new java.awt.Color(204, 204, 204));
         jButtonUtilizar.setText("Utilizar");
+        jButtonUtilizar.setBorder(null);
+        jButtonUtilizar.setBorderPainted(false);
+        jButtonUtilizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonUtilizar.setFocusPainted(false);
+        jButtonUtilizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonUtilizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonUtilizarMouseExited(evt);
+            }
+        });
         jButtonUtilizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonUtilizarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonUtilizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 180, 140, 60));
+        jPanel1.add(jButtonUtilizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 200, 170, 35));
 
+        jButtonAtivos.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonAtivos.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonAtivos.setForeground(new java.awt.Color(204, 204, 204));
         jButtonAtivos.setText("Mostrar ativos");
+        jButtonAtivos.setBorder(null);
+        jButtonAtivos.setBorderPainted(false);
+        jButtonAtivos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonAtivos.setFocusPainted(false);
+        jButtonAtivos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonAtivosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonAtivosMouseExited(evt);
+            }
+        });
         jButtonAtivos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAtivosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonAtivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 740, 170, -1));
+        jPanel1.add(jButtonAtivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 740, 170, 35));
 
+        jButtonInativos.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonInativos.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonInativos.setForeground(new java.awt.Color(204, 204, 204));
         jButtonInativos.setText("Mostrar inativos");
+        jButtonInativos.setBorder(null);
+        jButtonInativos.setBorderPainted(false);
+        jButtonInativos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonInativos.setFocusPainted(false);
+        jButtonInativos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonInativosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonInativosMouseExited(evt);
+            }
+        });
         jButtonInativos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonInativosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 740, 170, -1));
+        jPanel1.add(jButtonInativos, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 740, 170, 35));
 
+        jButtonOrdenacaoDupla.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonOrdenacaoDupla.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonOrdenacaoDupla.setForeground(new java.awt.Color(204, 204, 204));
         jButtonOrdenacaoDupla.setText("Ordenação dupla");
+        jButtonOrdenacaoDupla.setBorder(null);
+        jButtonOrdenacaoDupla.setBorderPainted(false);
+        jButtonOrdenacaoDupla.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonOrdenacaoDupla.setFocusPainted(false);
+        jButtonOrdenacaoDupla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonOrdenacaoDuplaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonOrdenacaoDuplaMouseExited(evt);
+            }
+        });
         jButtonOrdenacaoDupla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonOrdenacaoDuplaActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonOrdenacaoDupla, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 180, 160, 60));
+        jPanel1.add(jButtonOrdenacaoDupla, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 200, 170, 35));
+
+        jPanel2.setBackground(new java.awt.Color(189, 209, 219));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonAcao.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonAcao.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonAcao.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonAcao.setText("Ação ");
+        jButtonAcao.setBorder(null);
+        jButtonAcao.setBorderPainted(false);
+        jButtonAcao.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonAcao.setFocusPainted(false);
+        jButtonAcao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonAcaoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonAcaoMouseExited(evt);
+            }
+        });
+        jButtonAcao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAcaoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 610, 170, 35));
+
+        jButtonAtivar.setBackground(new java.awt.Color(51, 204, 112));
+        jButtonAtivar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonAtivar.setForeground(new java.awt.Color(102, 102, 102));
+        jButtonAtivar.setText("Ativar");
+        jButtonAtivar.setBorder(null);
+        jButtonAtivar.setBorderPainted(false);
+        jButtonAtivar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonAtivar.setFocusPainted(false);
+        jButtonAtivar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonAtivarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonAtivarMouseExited(evt);
+            }
+        });
+        jButtonAtivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtivarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 70, 35));
+
+        jButtonDesativar.setBackground(new java.awt.Color(204, 143, 51));
+        jButtonDesativar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonDesativar.setForeground(new java.awt.Color(102, 102, 102));
+        jButtonDesativar.setText("Desativar");
+        jButtonDesativar.setBorder(null);
+        jButtonDesativar.setBorderPainted(false);
+        jButtonDesativar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonDesativar.setFocusPainted(false);
+        jButtonDesativar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonDesativarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonDesativarMouseExited(evt);
+            }
+        });
+        jButtonDesativar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDesativarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, 90, 35));
+
+        JtextFielDescricao.setBackground(new java.awt.Color(189, 209, 219));
+        JtextFielDescricao.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        JtextFielDescricao.setForeground(new java.awt.Color(102, 102, 102));
+        JtextFielDescricao.setBorder(null);
+        JtextFielDescricao.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel2.add(JtextFielDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 250, 25));
+
+        jSeparator21.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator21.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 250, 10));
+
+        jSeparator22.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator22.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 250, 10));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 810));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1068, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 6, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 806, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcaoActionPerformed
 
         try {
 
@@ -297,7 +441,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonAcaoActionPerformed
 
     private void jComboAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboAcaoActionPerformed
 
@@ -310,8 +454,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
                 case 0:
 
                     JtextFielDescricao.setEnabled(false);
-                    jButton1.setEnabled(false);
-                    jTextField2.setEnabled(false);
+                    jButtonAcao.setEnabled(false);
                     jTextFieldId.setEnabled(false);
                     jButtonUtilizar.setVisible(false);
 
@@ -322,16 +465,14 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
                 case 1:
 
                     JtextFielDescricao.setEnabled(true);
-                    jButton1.setEnabled(true);
-                    jTextField2.setEnabled(true);
+                    jButtonAcao.setEnabled(true);
 
                     break;
 
                 case 2:
 
                     JtextFielDescricao.setEnabled(true);
-                    jButton1.setEnabled(true);
-                    jTextField2.setEnabled(true);
+                    jButtonAcao.setEnabled(true);
 
                     break;
 
@@ -455,6 +596,84 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonOrdenacaoDuplaActionPerformed
 
+    private void jButtonAtivarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtivarMouseEntered
+        if (jButtonAtivar.isEnabled()) {
+            jButtonAtivar.setBackground(new Color(0,154,62));
+            jButtonAtivar.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_jButtonAtivarMouseEntered
+
+    private void jButtonAtivarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtivarMouseExited
+        if (jButtonAtivar.isEnabled()) {
+            jButtonAtivar.setBackground(new Color(51,204,112));
+            jButtonAtivar.setForeground(new Color(102,102,102));
+        }
+    }//GEN-LAST:event_jButtonAtivarMouseExited
+
+    private void jButtonDesativarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDesativarMouseEntered
+        if (jButtonDesativar.isEnabled()) {
+            jButtonDesativar.setBackground(new Color(154,93,1));
+            jButtonDesativar.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_jButtonDesativarMouseEntered
+
+    private void jButtonDesativarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDesativarMouseExited
+        if (jButtonDesativar.isEnabled()) {
+            jButtonDesativar.setBackground(new Color(204,143,51));
+            jButtonDesativar.setForeground(new Color(102,102,102));
+        }
+    }//GEN-LAST:event_jButtonDesativarMouseExited
+
+    private void jButtonAcaoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAcaoMouseEntered
+        if (jButtonAcao.isEnabled())
+            jButtonAcao.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonAcaoMouseEntered
+
+    private void jButtonAcaoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAcaoMouseExited
+        if (jButtonAcao.isEnabled())
+            jButtonAcao.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonAcaoMouseExited
+
+    private void jButtonAtivosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtivosMouseEntered
+        if (jButtonAtivos.isEnabled())
+            jButtonAtivos.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonAtivosMouseEntered
+
+    private void jButtonAtivosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtivosMouseExited
+        if (jButtonAtivos.isEnabled())
+            jButtonAtivos.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonAtivosMouseExited
+
+    private void jButtonInativosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonInativosMouseEntered
+        if (jButtonInativos.isEnabled())
+            jButtonInativos.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonInativosMouseEntered
+
+    private void jButtonInativosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonInativosMouseExited
+        if (jButtonInativos.isEnabled())
+            jButtonInativos.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonInativosMouseExited
+
+    private void jButtonUtilizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUtilizarMouseEntered
+        if (jButtonUtilizar.isEnabled())
+            jButtonUtilizar.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonUtilizarMouseEntered
+
+    private void jButtonUtilizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUtilizarMouseExited
+        if (jButtonUtilizar.isEnabled())
+            jButtonUtilizar.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonUtilizarMouseExited
+
+    private void jButtonOrdenacaoDuplaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOrdenacaoDuplaMouseEntered
+        if (jButtonOrdenacaoDupla.isEnabled())
+            jButtonOrdenacaoDupla.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonOrdenacaoDuplaMouseEntered
+
+    private void jButtonOrdenacaoDuplaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOrdenacaoDuplaMouseExited
+        if (jButtonOrdenacaoDupla.isEnabled())
+            jButtonOrdenacaoDupla.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonOrdenacaoDuplaMouseExited
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -463,7 +682,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -493,7 +712,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JtextFielDescricao;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonAcao;
     private javax.swing.JButton jButtonAtivar;
     private javax.swing.JButton jButtonAtivos;
     private javax.swing.JButton jButtonDesativar;
@@ -503,12 +722,13 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboAcao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator21;
+    private javax.swing.JSeparator jSeparator22;
     private javax.swing.JTable jTableTabela;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextFieldId;
     // End of variables declaration//GEN-END:variables
 }
