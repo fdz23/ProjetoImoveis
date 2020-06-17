@@ -125,7 +125,7 @@ public class TelaImoveisItens extends javax.swing.JFrame {
         jSeparator19 = new javax.swing.JSeparator();
         jSeparator16 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela Imoveis Itens");
 
         jPanel1.setBackground(new java.awt.Color(205, 221, 228));
@@ -458,6 +458,14 @@ public class TelaImoveisItens extends javax.swing.JFrame {
             jTextFieldDescricao.setText(iit.getDescricao());
             jTextFieldValor.setText("" + iit.getValor());
             jTextFieldImoveis.setText("" + iit.getId());
+            
+            if (iit.getAtivado() == 1) {
+                jButtonAtivar.setEnabled(false);
+                jButtonDesativar.setEnabled(true);
+            } else {
+                jButtonAtivar.setEnabled(true);
+                jButtonDesativar.setEnabled(false);
+            }
 
         } catch (Exception ex) {
 

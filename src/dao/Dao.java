@@ -220,6 +220,17 @@ public abstract class Dao<T> implements IDao<T> {
 
     }
 
+    protected PreparedStatement statementGetItemDesativado(int id) throws Exception {
+
+        //cria um sql para seleciona o item que possue esse id
+        ps = criaStatement.selectSqlDesativado(tabela, true, this.id);
+
+        ps.setInt(1, id);
+
+        return ps;
+
+    }
+
     //comenta!
     @Override
     public boolean insert(T item) throws Exception {

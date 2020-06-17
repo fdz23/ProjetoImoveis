@@ -207,7 +207,7 @@ public class TelaClientes extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela de Clientes");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -690,6 +690,7 @@ public class TelaClientes extends javax.swing.JFrame {
             linhaSelecionada = jTableTabela.getSelectedRow();
 
             pe = pec.getItem(Integer.parseInt(jTableTabela.getValueAt(linhaSelecionada, 0).toString()));
+            
             ende = pe.getEndereco();
             setarIDEnd(ende);
 
@@ -707,8 +708,8 @@ public class TelaClientes extends javax.swing.JFrame {
                 jButtonAtivar.setEnabled(false);
                 jButtonDesativar.setEnabled(true);
             } else {
-                jButtonDesativar.setEnabled(true);
-                jButtonAtivar.setEnabled(false);
+                jButtonDesativar.setEnabled(false);
+                jButtonAtivar.setEnabled(true);
             }
 
         } catch (Exception ex) {

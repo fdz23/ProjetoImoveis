@@ -51,6 +51,18 @@ public class CriaStatement {
     //Para mais de uma coluna/valores utilize "," entre cada um deles(sem espaço)
     public PreparedStatement selectSql(String tabela, boolean especificacao, String coluna) throws Exception {
         
+            
+        String sql = "SELECT * FROM " + tabela;
+        
+        if(especificacao) {
+            sql += " WHERE " + coluna + " = ?";
+        }
+        
+        return con.prepareStatement(sql);
+    }
+    
+    public PreparedStatement selectSqlAtivado(String tabela, boolean especificacao, String coluna) throws Exception {
+        
         String colunaAtivado = "";
         if(tabela.equals("pessoas"))
             colunaAtivado = tabela.substring(0, 3) + "_ativado";

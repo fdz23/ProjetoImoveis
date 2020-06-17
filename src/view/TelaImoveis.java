@@ -257,7 +257,7 @@ public class TelaImoveis extends javax.swing.JFrame {
         jSeparator23 = new javax.swing.JSeparator();
         jSeparator24 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela Imoveis");
 
         jPanel1.setBackground(new java.awt.Color(205, 221, 228));
@@ -864,6 +864,7 @@ public class TelaImoveis extends javax.swing.JFrame {
                 im = ic.getItem(im.getId());
                 im.setBaixaData(CriaDate.geraSqlDate("00/00/0000"));
                 im.setBaixaMotivo("Nenhuma");
+                ic.alterarItem(im);
                 popularJtable();
 
                 JOptionPane.showMessageDialog(null, "Imovel ativado com sucesso!");

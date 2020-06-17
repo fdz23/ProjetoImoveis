@@ -747,6 +747,14 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
             }
 
             isSelected = true;
+            
+            if (nivelAcesso.getAtivado() == 1) {
+                jButtonAtivar.setEnabled(false);
+                jButtonDesativar.setEnabled(true);
+            } else {
+                jButtonAtivar.setEnabled(true);
+                jButtonDesativar.setEnabled(false);
+            }
 
         } catch (Exception ex) {
             Logger.getLogger(TelaNivelAcessos.class.getName()).log(Level.SEVERE, null, ex);

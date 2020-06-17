@@ -216,7 +216,7 @@ public class TelaOrcamentos extends javax.swing.JFrame {
         jSeparator23 = new javax.swing.JSeparator();
         jSeparator21 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela Orçamentos");
 
         jPanel1.setBackground(new java.awt.Color(205, 221, 228));

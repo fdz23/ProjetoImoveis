@@ -151,7 +151,7 @@ public class TelaContratos extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela Contratos");
 
         jPanel1.setBackground(new java.awt.Color(189, 209, 219));
@@ -532,8 +532,8 @@ public class TelaContratos extends javax.swing.JFrame {
                 jButtonAtivar.setEnabled(false);
                 jButtonDesativar.setEnabled(true);
             } else {
-                jButtonDesativar.setEnabled(true);
-                jButtonAtivar.setEnabled(false);
+                jButtonDesativar.setEnabled(false);
+                jButtonAtivar.setEnabled(true);
             }
 
         } catch (Exception ex) {

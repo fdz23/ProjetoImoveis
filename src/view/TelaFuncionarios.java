@@ -248,7 +248,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         jSeparator23 = new javax.swing.JSeparator();
         jTextFieldNome = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela Funcionarios");
 
         jPanel1.setBackground(new java.awt.Color(205, 221, 228));

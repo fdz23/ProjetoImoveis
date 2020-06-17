@@ -333,6 +333,11 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
                 jButtonAtivarMouseExited(evt);
             }
         });
+        jButtonAtivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtivarActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, 70, 35));
 
         jButtonDesativar.setBackground(new java.awt.Color(204, 143, 51));
@@ -349,6 +354,11 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jButtonDesativarMouseExited(evt);
+            }
+        });
+        jButtonDesativar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDesativarActionPerformed(evt);
             }
         });
         jPanel2.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 470, 90, 35));
@@ -623,6 +633,44 @@ public class TelaTipoPagamento extends javax.swing.JFrame {
         if (jButtonOrdenacaoDupla.isEnabled())
             jButtonOrdenacaoDupla.setBackground(new Color(102,102,102));
     }//GEN-LAST:event_jButtonOrdenacaoDuplaMouseExited
+
+    private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
+        
+        try {
+            if (isSelected) {
+
+                tpc.ativarItem(tipoPagamento.getId());
+                popularJtable();
+
+                JOptionPane.showMessageDialog(null, "Tipo de pagamento ativado com sucesso!");
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+        
+    }//GEN-LAST:event_jButtonAtivarActionPerformed
+
+    private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
+        
+        try {
+            if (isSelected) {
+
+                tpc.desativarItem(tipoPagamento.getId());
+                popularJtable();
+
+                JOptionPane.showMessageDialog(null, "Tipo de pagamento desativado com sucesso!");
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+
+        }
+        
+    }//GEN-LAST:event_jButtonDesativarActionPerformed
 
     public static void main(String args[]) {
 

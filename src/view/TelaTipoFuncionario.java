@@ -2,6 +2,7 @@ package view;
 
 import controller.NivelAcessoController;
 import controller.TipoFuncionarioController;
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -141,13 +142,15 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         jButtonAcao = new javax.swing.JButton();
         jSeparator21 = new javax.swing.JSeparator();
         jSeparator22 = new javax.swing.JSeparator();
+        jButtonAtivar = new javax.swing.JButton();
+        jButtonDesativar = new javax.swing.JButton();
         JtextFielDescricaoSalario = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         JtextFielDescricaoNivelAcesso = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        jSeparator23 = new javax.swing.JSeparator();
+        jSeparator24 = new javax.swing.JSeparator();
         jButtonNivelAcesso = new javax.swing.JButton();
-        jButtonAtivar = new javax.swing.JButton();
-        jButtonDesativar = new javax.swing.JButton();
         jButtonUtilizar = new javax.swing.JButton();
         jButtonAtivos = new javax.swing.JButton();
         jButtonInativos = new javax.swing.JButton();
@@ -248,7 +251,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
                 jButtonAcaoActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 550, 170, 35));
+        jPanel2.add(jButtonAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 710, 170, 35));
 
         jSeparator21.setBackground(new java.awt.Color(102, 102, 102));
         jSeparator21.setForeground(new java.awt.Color(102, 102, 102));
@@ -256,17 +259,87 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
 
         jSeparator22.setBackground(new java.awt.Color(102, 102, 102));
         jSeparator22.setForeground(new java.awt.Color(102, 102, 102));
-        jPanel2.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 250, 10));
+        jPanel2.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 250, 10));
+
+        jButtonAtivar.setBackground(new java.awt.Color(51, 204, 112));
+        jButtonAtivar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonAtivar.setForeground(new java.awt.Color(102, 102, 102));
+        jButtonAtivar.setText("Ativar");
+        jButtonAtivar.setBorder(null);
+        jButtonAtivar.setBorderPainted(false);
+        jButtonAtivar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonAtivar.setFocusPainted(false);
+        jButtonAtivar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonAtivarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonAtivarMouseExited(evt);
+            }
+        });
+        jButtonAtivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtivarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 640, 70, 35));
+
+        jButtonDesativar.setBackground(new java.awt.Color(204, 143, 51));
+        jButtonDesativar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonDesativar.setForeground(new java.awt.Color(102, 102, 102));
+        jButtonDesativar.setText("Desativar");
+        jButtonDesativar.setBorder(null);
+        jButtonDesativar.setBorderPainted(false);
+        jButtonDesativar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonDesativar.setFocusPainted(false);
+        jButtonDesativar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonDesativarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonDesativarMouseExited(evt);
+            }
+        });
+        jButtonDesativar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDesativarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 640, 90, 35));
+
+        JtextFielDescricaoSalario.setBackground(new java.awt.Color(189, 209, 219));
+        JtextFielDescricaoSalario.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        JtextFielDescricaoSalario.setForeground(new java.awt.Color(102, 102, 102));
+        JtextFielDescricaoSalario.setBorder(null);
+        JtextFielDescricaoSalario.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel2.add(JtextFielDescricaoSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 250, 25));
+
+        jLabel5.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel5.setText("Salario :");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 90, -1));
+
+        JtextFielDescricaoNivelAcesso.setBackground(new java.awt.Color(189, 209, 219));
+        JtextFielDescricaoNivelAcesso.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        JtextFielDescricaoNivelAcesso.setForeground(new java.awt.Color(102, 102, 102));
+        JtextFielDescricaoNivelAcesso.setBorder(null);
+        JtextFielDescricaoNivelAcesso.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel2.add(JtextFielDescricaoNivelAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 250, 25));
+
+        jLabel6.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel6.setText("Nivel Acesso : ");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 90, -1));
+
+        jSeparator23.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator23.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 250, 10));
+
+        jSeparator24.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator24.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 250, 10));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 870));
-        jPanel1.add(JtextFielDescricaoSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 140, -1));
-
-        jLabel5.setText("Salario :");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 90, -1));
-        jPanel1.add(JtextFielDescricaoNivelAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 140, -1));
-
-        jLabel6.setText("Nivel Acesso : ");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 90, -1));
 
         jButtonNivelAcesso.setText("Selecionar");
         jButtonNivelAcesso.addActionListener(new java.awt.event.ActionListener() {
@@ -275,22 +348,6 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonNivelAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 130, -1));
-
-        jButtonAtivar.setText("Ativar");
-        jButtonAtivar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAtivarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonAtivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, 80, 40));
-
-        jButtonDesativar.setText("Desativar");
-        jButtonDesativar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDesativarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 480, 90, 40));
 
         jButtonUtilizar.setBackground(new java.awt.Color(102, 102, 102));
         jButtonUtilizar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
@@ -514,6 +571,15 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
             JtextFielDescricaoSalario.setText("" + tipoFuncionario.getSalario());
 
             isSelected = true;
+            
+            if (tipoFuncionario.getAtivado() == 1) {
+                jButtonAtivar.setEnabled(false);
+                jButtonDesativar.setEnabled(true);
+            } else {
+                jButtonAtivar.setEnabled(true);
+                jButtonDesativar.setEnabled(false);
+            }
+            
         } catch (Exception ex) {
             Logger.getLogger(TelaTipoFuncionario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -531,46 +597,6 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButtonNivelAcessoActionPerformed
-
-    private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
-
-        try {
-            if (isSelected) {
-
-                tfc.ativarItem(tipoFuncionario.getId());
-                popularJtable();
-
-                JOptionPane.showMessageDialog(null, "Tipo Funcionário ativado com sucesso!");
-
-            }
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-
-
-    }//GEN-LAST:event_jButtonAtivarActionPerformed
-
-    private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
-
-        try {
-            if (isSelected) {
-
-                tfc.desativarItem(tipoFuncionario.getId());
-                popularJtable();
-
-                JOptionPane.showMessageDialog(null, "Tipo Funcionário desativado com sucesso!");
-
-            }
-        } catch (Exception ex) {
-
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-
-        }
-
-
-    }//GEN-LAST:event_jButtonDesativarActionPerformed
 
     private void jButtonUtilizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUtilizarActionPerformed
         try {
@@ -656,6 +682,72 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonOrdenacaoDuplaMouseExited
 
+    private void jButtonAtivarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtivarMouseEntered
+        if (jButtonAtivar.isEnabled()) {
+            jButtonAtivar.setBackground(new Color(0,154,62));
+            jButtonAtivar.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_jButtonAtivarMouseEntered
+
+    private void jButtonAtivarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtivarMouseExited
+        if (jButtonAtivar.isEnabled()) {
+            jButtonAtivar.setBackground(new Color(51,204,112));
+            jButtonAtivar.setForeground(new Color(102,102,102));
+        }
+    }//GEN-LAST:event_jButtonAtivarMouseExited
+
+    private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
+
+        try {
+            if (isSelected) {
+
+                tfc.ativarItem(tipoFuncionario.getId());
+                popularJtable();
+
+                JOptionPane.showMessageDialog(null, "Cargo ativado com sucesso!");
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            ex.printStackTrace();
+
+        }
+    }//GEN-LAST:event_jButtonAtivarActionPerformed
+
+    private void jButtonDesativarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDesativarMouseEntered
+        if (jButtonDesativar.isEnabled()) {
+            jButtonDesativar.setBackground(new Color(154,93,1));
+            jButtonDesativar.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_jButtonDesativarMouseEntered
+
+    private void jButtonDesativarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDesativarMouseExited
+        if (jButtonDesativar.isEnabled()) {
+            jButtonDesativar.setBackground(new Color(204,143,51));
+            jButtonDesativar.setForeground(new Color(102,102,102));
+        }
+    }//GEN-LAST:event_jButtonDesativarMouseExited
+
+    private void jButtonDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesativarActionPerformed
+
+        try {
+            if (isSelected) {
+
+                tfc.desativarItem(tipoFuncionario.getId());
+                popularJtable();
+
+                JOptionPane.showMessageDialog(null, "Cargo desativado com sucesso!");
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            ex.printStackTrace();
+
+        }
+    }//GEN-LAST:event_jButtonDesativarActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -714,6 +806,8 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator21;
     private javax.swing.JSeparator jSeparator22;
+    private javax.swing.JSeparator jSeparator23;
+    private javax.swing.JSeparator jSeparator24;
     private javax.swing.JTable jTableTabela;
     private javax.swing.JTextField jTextFieldId;
     // End of variables declaration//GEN-END:variables

@@ -52,7 +52,7 @@ public class TelaResetarSenha extends javax.swing.JFrame {
         jButtonToken = new javax.swing.JButton();
         jSeparator20 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela Resetar Senha");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
