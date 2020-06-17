@@ -156,7 +156,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         jButtonInativos = new javax.swing.JButton();
         jButtonOrdenacaoDupla = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela Tipo Funcionarios");
 
         jPanel1.setBackground(new java.awt.Color(205, 221, 228));

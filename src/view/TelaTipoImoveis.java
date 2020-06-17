@@ -122,7 +122,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         jSeparator21 = new javax.swing.JSeparator();
         jSeparator22 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela Tipo Imoveis");
 
         jPanel1.setBackground(new java.awt.Color(205, 221, 228));
