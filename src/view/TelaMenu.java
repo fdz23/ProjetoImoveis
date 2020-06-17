@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.UsuarioController;
 import java.awt.Color;
 import java.sql.Array;
 import java.sql.SQLException;
@@ -12,6 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Funcionario;
+import model.Usuario;
+import util.GeradorPasswords;
 import util.Login;
 
 /**
@@ -121,6 +124,7 @@ public class TelaMenu extends javax.swing.JFrame {
         jButtonLogOff = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabelFuncionarioAtual = new javax.swing.JLabel();
+        jButtonTrocaDeSenha = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jButtonTiposDePagamento = new javax.swing.JButton();
         jButtonOrcamentos = new javax.swing.JButton();
@@ -378,7 +382,7 @@ public class TelaMenu extends javax.swing.JFrame {
                 jButtonLogOffActionPerformed(evt);
             }
         });
-        jPanel3.add(jButtonLogOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, 170, 50));
+        jPanel3.add(jButtonLogOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 40, 170, 50));
 
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
@@ -388,6 +392,29 @@ public class TelaMenu extends javax.swing.JFrame {
         jLabelFuncionarioAtual.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jLabelFuncionarioAtual.setForeground(new java.awt.Color(51, 51, 51));
         jPanel3.add(jLabelFuncionarioAtual, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 262, 26));
+
+        jButtonTrocaDeSenha.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonTrocaDeSenha.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonTrocaDeSenha.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonTrocaDeSenha.setText("Trocar Senha");
+        jButtonTrocaDeSenha.setBorder(null);
+        jButtonTrocaDeSenha.setBorderPainted(false);
+        jButtonTrocaDeSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonTrocaDeSenha.setFocusPainted(false);
+        jButtonTrocaDeSenha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonTrocaDeSenhaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonTrocaDeSenhaMouseExited(evt);
+            }
+        });
+        jButtonTrocaDeSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTrocaDeSenhaActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButtonTrocaDeSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, 170, 50));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 130));
 
@@ -593,108 +620,141 @@ public class TelaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRelatoriosActionPerformed
 
     private void jButtonFuncionariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFuncionariosMouseEntered
-        jButtonFuncionarios.setBackground(new Color(52,52,52));
+        jButtonFuncionarios.setBackground(new Color(52, 52, 52));
     }//GEN-LAST:event_jButtonFuncionariosMouseEntered
 
     private void jButtonFuncionariosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFuncionariosMouseExited
-        jButtonFuncionarios.setBackground(new Color(102,102,102));
+        jButtonFuncionarios.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_jButtonFuncionariosMouseExited
 
     private void jButtonClientesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonClientesMouseEntered
-        jButtonClientes.setBackground(new Color(52,52,52));
+        jButtonClientes.setBackground(new Color(52, 52, 52));
     }//GEN-LAST:event_jButtonClientesMouseEntered
 
     private void jButtonClientesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonClientesMouseExited
-        jButtonClientes.setBackground(new Color(102,102,102));
+        jButtonClientes.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_jButtonClientesMouseExited
 
     private void jButtonEnderecosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEnderecosMouseEntered
-        jButtonEnderecos.setBackground(new Color(52,52,52));
+        jButtonEnderecos.setBackground(new Color(52, 52, 52));
     }//GEN-LAST:event_jButtonEnderecosMouseEntered
 
     private void jButtonEnderecosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEnderecosMouseExited
-        jButtonEnderecos.setBackground(new Color(102,102,102));
+        jButtonEnderecos.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_jButtonEnderecosMouseExited
 
     private void jButtonTiposDeFuncionariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTiposDeFuncionariosMouseEntered
-        jButtonTiposDeFuncionarios.setBackground(new Color(52,52,52));
+        jButtonTiposDeFuncionarios.setBackground(new Color(52, 52, 52));
     }//GEN-LAST:event_jButtonTiposDeFuncionariosMouseEntered
 
     private void jButtonTiposDeFuncionariosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTiposDeFuncionariosMouseExited
-        jButtonTiposDeFuncionarios.setBackground(new Color(102,102,102));
+        jButtonTiposDeFuncionarios.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_jButtonTiposDeFuncionariosMouseExited
 
     private void jButtonNiveisDeAcessoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonNiveisDeAcessoMouseEntered
-        jButtonNiveisDeAcesso.setBackground(new Color(52,52,52));
+        jButtonNiveisDeAcesso.setBackground(new Color(52, 52, 52));
     }//GEN-LAST:event_jButtonNiveisDeAcessoMouseEntered
 
     private void jButtonNiveisDeAcessoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonNiveisDeAcessoMouseExited
-        jButtonNiveisDeAcesso.setBackground(new Color(102,102,102));
+        jButtonNiveisDeAcesso.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_jButtonNiveisDeAcessoMouseExited
 
     private void jButtonOrcamentosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOrcamentosMouseEntered
-        jButtonOrcamentos.setBackground(new Color(52,52,52));
+        jButtonOrcamentos.setBackground(new Color(52, 52, 52));
     }//GEN-LAST:event_jButtonOrcamentosMouseEntered
 
     private void jButtonOrcamentosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOrcamentosMouseExited
-        jButtonOrcamentos.setBackground(new Color(102,102,102));
+        jButtonOrcamentos.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_jButtonOrcamentosMouseExited
 
     private void jButtonTiposDePagamentoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTiposDePagamentoMouseEntered
-        jButtonTiposDePagamento.setBackground(new Color(52,52,52));
+        jButtonTiposDePagamento.setBackground(new Color(52, 52, 52));
     }//GEN-LAST:event_jButtonTiposDePagamentoMouseEntered
 
     private void jButtonTiposDePagamentoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTiposDePagamentoMouseExited
-        jButtonTiposDePagamento.setBackground(new Color(102,102,102));
+        jButtonTiposDePagamento.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_jButtonTiposDePagamentoMouseExited
 
     private void jButtonContratosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonContratosMouseEntered
-        jButtonContratos.setBackground(new Color(52,52,52));
+        jButtonContratos.setBackground(new Color(52, 52, 52));
     }//GEN-LAST:event_jButtonContratosMouseEntered
 
     private void jButtonContratosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonContratosMouseExited
-        jButtonContratos.setBackground(new Color(102,102,102));
+        jButtonContratos.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_jButtonContratosMouseExited
 
     private void jButtonLogOffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLogOffMouseEntered
-        jButtonLogOff.setBackground(new Color(52,52,52));
+        jButtonLogOff.setBackground(new Color(52, 52, 52));
     }//GEN-LAST:event_jButtonLogOffMouseEntered
 
     private void jButtonLogOffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLogOffMouseExited
-        jButtonLogOff.setBackground(new Color(102,102,102));
+        jButtonLogOff.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_jButtonLogOffMouseExited
 
     private void jButtonRelatoriosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRelatoriosMouseEntered
-        jButtonRelatorios.setBackground(new Color(52,52,52));
+        jButtonRelatorios.setBackground(new Color(52, 52, 52));
     }//GEN-LAST:event_jButtonRelatoriosMouseEntered
 
     private void jButtonRelatoriosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRelatoriosMouseExited
-        jButtonRelatorios.setBackground(new Color(102,102,102));
+        jButtonRelatorios.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_jButtonRelatoriosMouseExited
 
     private void jButtonImoveisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImoveisMouseEntered
-        jButtonImoveis.setBackground(new Color(52,52,52));
+        jButtonImoveis.setBackground(new Color(52, 52, 52));
     }//GEN-LAST:event_jButtonImoveisMouseEntered
 
     private void jButtonImoveisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImoveisMouseExited
-        jButtonImoveis.setBackground(new Color(102,102,102));
+        jButtonImoveis.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_jButtonImoveisMouseExited
 
     private void jButtonTiposDeImovelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTiposDeImovelMouseEntered
-        jButtonTiposDeImovel.setBackground(new Color(52,52,52));
+        jButtonTiposDeImovel.setBackground(new Color(52, 52, 52));
     }//GEN-LAST:event_jButtonTiposDeImovelMouseEntered
 
     private void jButtonTiposDeImovelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTiposDeImovelMouseExited
-        jButtonTiposDeImovel.setBackground(new Color(102,102,102));
+        jButtonTiposDeImovel.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_jButtonTiposDeImovelMouseExited
 
     private void jButtonStatusMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonStatusMouseEntered
-        jButtonStatus.setBackground(new Color(52,52,52));
+        jButtonStatus.setBackground(new Color(52, 52, 52));
     }//GEN-LAST:event_jButtonStatusMouseEntered
 
     private void jButtonStatusMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonStatusMouseExited
-        jButtonStatus.setBackground(new Color(102,102,102));
+        jButtonStatus.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_jButtonStatusMouseExited
+
+    private void jButtonTrocaDeSenhaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTrocaDeSenhaMouseEntered
+        jButtonTrocaDeSenha.setBackground(new Color(52, 52, 52));
+    }//GEN-LAST:event_jButtonTrocaDeSenhaMouseEntered
+
+    private void jButtonTrocaDeSenhaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTrocaDeSenhaMouseExited
+        jButtonTrocaDeSenha.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_jButtonTrocaDeSenhaMouseExited
+
+    private void jButtonTrocaDeSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTrocaDeSenhaActionPerformed
+
+        try {
+            UsuarioController usuCon = new UsuarioController();
+
+            Usuario user = usuCon.getItemComLoginPorEmail(Login.funcionario.getEmail());
+            String novaSenha = "";
+
+            while (novaSenha.equals("")) {
+                novaSenha = JOptionPane.showInputDialog("Digite a nova senha");
+                if (novaSenha.equals("")) {
+                    JOptionPane.showMessageDialog(this, "Por favor digite algo no campo de senha");
+                }
+            }
+
+            user.setSenha(GeradorPasswords.generateSecurePassword(novaSenha, "Pacoca"));
+            new UsuarioController().alterarItem(user);
+
+            JOptionPane.showMessageDialog(this, "Senha alterada com sucesso");
+
+        } catch (Exception ex) {
+            Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonTrocaDeSenhaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -745,6 +805,7 @@ public class TelaMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTiposDeFuncionarios;
     private javax.swing.JButton jButtonTiposDeImovel;
     private javax.swing.JButton jButtonTiposDePagamento;
+    private javax.swing.JButton jButtonTrocaDeSenha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
