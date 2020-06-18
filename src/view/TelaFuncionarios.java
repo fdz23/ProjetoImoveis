@@ -1059,6 +1059,8 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         try {
             if (isSelected) {
 
+                fun.setDataRescisao(CriaDate.geraSqlDate("00/00/0000"));
+                fc.alterarItem(fun);
                 fc.ativarItem(fun.getId());
                 popularJtable();
 
