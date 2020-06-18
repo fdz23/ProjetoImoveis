@@ -15,7 +15,7 @@ import util.CriaStatement;
 
 /**
  *
- * @author fdz
+ * @author rapha
  */
 public class ContratoDao extends Dao<Contrato> {
 

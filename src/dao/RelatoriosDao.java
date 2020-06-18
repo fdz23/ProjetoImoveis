@@ -100,7 +100,7 @@ public class RelatoriosDao {
             itens.add(
                     new Object[]{
                         rs.getString("imo_descricao"),
-                        rs.getString("proprietário"),
+                        rs.getString("proprietario"),
                         rs.getString("tim_nome"),
                         rs.getString("end_cidade")
                     }

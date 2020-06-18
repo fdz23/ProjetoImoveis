@@ -22,7 +22,7 @@ import util.ConectaDb;
 
 /**
  *
- * @author fdz
+ * @author rapha
  */
 public abstract class Dao<T> implements IDao<T> {
 

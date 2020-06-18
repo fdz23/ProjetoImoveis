@@ -17,7 +17,7 @@ import util.GeradorPasswords;
 
 /**
  *
- * @author fdz
+ * @author rapha
  */
 public class UsuarioDao extends Dao<Usuario> {
 

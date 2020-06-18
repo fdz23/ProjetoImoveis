@@ -6,11 +6,7 @@
 package dao;
 
 import java.util.Iterator;
-
-/**
- *
- * @author fdz
- */
+ 
 public interface IDao<T> {
 
     public boolean insert(T item) throws Exception;
