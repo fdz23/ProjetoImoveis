@@ -21,7 +21,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
     private boolean isSelected = false;
     private TelaImoveis telaImoveis = null;
     private final int index = 10;
-    public String[] colunas = {"Código","Descrição"};
+    public String[] colunas = {"Código", "Descrição"};
 
     public TelaTipoImoveis() throws Exception {
         CriarJTable();
@@ -41,9 +41,9 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         OrdenaClickTabela.ordenarPorClick(jTableTabela, tic, modelo);
         jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
     }
-    
-      public TelaTipoImoveis(TelaRelatoriosCidadeTipoPagamentoTempo ttc ) throws Exception {
-        this.ttc = ttc; 
+
+    public TelaTipoImoveis(TelaRelatoriosCidadeTipoPagamentoTempo ttc) throws Exception {
+        this.ttc = ttc;
         CriarJTable();
         initComponents();
         iniciar();
@@ -572,16 +572,17 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         try {
             if (isSelected) {
 
-                if(telaImoveis != null)
-                
-                telaImoveis.setarTipoImovel(tp);
+                if (telaImoveis != null) {
+                    telaImoveis.setarTipoImovel(tp);
+                }
                 this.dispose();
-                
-            }if(ttc != null){
-            
-            
-            ttc.setarTipoImovel(tp);
 
+                if (ttc != null) {
+
+                    ttc.setarTipoImovel(tp);
+                    this.dispose();
+
+                }
             } else {
                 throw new Exception("É necessário clicar numa tabela para utilizar este botão.");
             }
@@ -618,80 +619,90 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
 
     private void jButtonAtivarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtivarMouseEntered
         if (jButtonAtivar.isEnabled()) {
-            jButtonAtivar.setBackground(new Color(0,154,62));
+            jButtonAtivar.setBackground(new Color(0, 154, 62));
             jButtonAtivar.setForeground(Color.white);
         }
     }//GEN-LAST:event_jButtonAtivarMouseEntered
 
     private void jButtonAtivarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtivarMouseExited
         if (jButtonAtivar.isEnabled()) {
-            jButtonAtivar.setBackground(new Color(51,204,112));
-            jButtonAtivar.setForeground(new Color(102,102,102));
+            jButtonAtivar.setBackground(new Color(51, 204, 112));
+            jButtonAtivar.setForeground(new Color(102, 102, 102));
         }
     }//GEN-LAST:event_jButtonAtivarMouseExited
 
     private void jButtonDesativarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDesativarMouseEntered
         if (jButtonDesativar.isEnabled()) {
-            jButtonDesativar.setBackground(new Color(154,93,1));
+            jButtonDesativar.setBackground(new Color(154, 93, 1));
             jButtonDesativar.setForeground(Color.white);
         }
     }//GEN-LAST:event_jButtonDesativarMouseEntered
 
     private void jButtonDesativarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDesativarMouseExited
         if (jButtonDesativar.isEnabled()) {
-            jButtonDesativar.setBackground(new Color(204,143,51));
-            jButtonDesativar.setForeground(new Color(102,102,102));
+            jButtonDesativar.setBackground(new Color(204, 143, 51));
+            jButtonDesativar.setForeground(new Color(102, 102, 102));
         }
     }//GEN-LAST:event_jButtonDesativarMouseExited
 
     private void jButtonAcaoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAcaoMouseEntered
-        if (jButtonAcao.isEnabled())
-            jButtonAcao.setBackground(new Color(52,52,52));
+        if (jButtonAcao.isEnabled()) {
+            jButtonAcao.setBackground(new Color(52, 52, 52));
+        }
     }//GEN-LAST:event_jButtonAcaoMouseEntered
 
     private void jButtonAcaoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAcaoMouseExited
-        if (jButtonAcao.isEnabled())
-            jButtonAcao.setBackground(new Color(102,102,102));
+        if (jButtonAcao.isEnabled()) {
+            jButtonAcao.setBackground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_jButtonAcaoMouseExited
 
     private void jButtonAtivosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtivosMouseEntered
-        if (jButtonAtivos.isEnabled())
-            jButtonAtivos.setBackground(new Color(52,52,52));
+        if (jButtonAtivos.isEnabled()) {
+            jButtonAtivos.setBackground(new Color(52, 52, 52));
+        }
     }//GEN-LAST:event_jButtonAtivosMouseEntered
 
     private void jButtonAtivosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtivosMouseExited
-        if (jButtonAtivos.isEnabled())
-            jButtonAtivos.setBackground(new Color(102,102,102));
+        if (jButtonAtivos.isEnabled()) {
+            jButtonAtivos.setBackground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_jButtonAtivosMouseExited
 
     private void jButtonInativosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonInativosMouseEntered
-        if (jButtonInativos.isEnabled())
-            jButtonInativos.setBackground(new Color(52,52,52));
+        if (jButtonInativos.isEnabled()) {
+            jButtonInativos.setBackground(new Color(52, 52, 52));
+        }
     }//GEN-LAST:event_jButtonInativosMouseEntered
 
     private void jButtonInativosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonInativosMouseExited
-        if (jButtonInativos.isEnabled())
-            jButtonInativos.setBackground(new Color(102,102,102));
+        if (jButtonInativos.isEnabled()) {
+            jButtonInativos.setBackground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_jButtonInativosMouseExited
 
     private void jButtonUtilizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUtilizarMouseEntered
-        if (jButtonUtilizar.isEnabled())
-            jButtonUtilizar.setBackground(new Color(52,52,52));
+        if (jButtonUtilizar.isEnabled()) {
+            jButtonUtilizar.setBackground(new Color(52, 52, 52));
+        }
     }//GEN-LAST:event_jButtonUtilizarMouseEntered
 
     private void jButtonUtilizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUtilizarMouseExited
-        if (jButtonUtilizar.isEnabled())
-            jButtonUtilizar.setBackground(new Color(102,102,102));
+        if (jButtonUtilizar.isEnabled()) {
+            jButtonUtilizar.setBackground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_jButtonUtilizarMouseExited
 
     private void jButtonOrdenacaoDuplaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOrdenacaoDuplaMouseEntered
-        if (jButtonOrdenacaoDupla.isEnabled())
-            jButtonOrdenacaoDupla.setBackground(new Color(52,52,52));
+        if (jButtonOrdenacaoDupla.isEnabled()) {
+            jButtonOrdenacaoDupla.setBackground(new Color(52, 52, 52));
+        }
     }//GEN-LAST:event_jButtonOrdenacaoDuplaMouseEntered
 
     private void jButtonOrdenacaoDuplaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOrdenacaoDuplaMouseExited
-        if (jButtonOrdenacaoDupla.isEnabled())
-            jButtonOrdenacaoDupla.setBackground(new Color(102,102,102));
+        if (jButtonOrdenacaoDupla.isEnabled()) {
+            jButtonOrdenacaoDupla.setBackground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_jButtonOrdenacaoDuplaMouseExited
 
     public static void main(String args[]) {
