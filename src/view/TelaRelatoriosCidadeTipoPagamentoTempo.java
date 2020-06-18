@@ -91,6 +91,9 @@ public class TelaRelatoriosCidadeTipoPagamentoTempo extends javax.swing.JFrame {
         jTextFieldTipoImovel = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jFormattedAno = new javax.swing.JFormattedTextField();
+        jSeparator20 = new javax.swing.JSeparator();
+        jSeparator21 = new javax.swing.JSeparator();
+        jSeparator22 = new javax.swing.JSeparator();
 
         jTextField1.setText("jTextField1");
 
@@ -98,28 +101,48 @@ public class TelaRelatoriosCidadeTipoPagamentoTempo extends javax.swing.JFrame {
         setTitle("Tela Relatorio Cidade,Periodo e Tipo Imovel");
 
         jPanel1.setBackground(new java.awt.Color(189, 209, 219));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jFormattedTextFieldMes.setBackground(new java.awt.Color(189, 209, 219));
+        jFormattedTextFieldMes.setBorder(null);
+        jFormattedTextFieldMes.setForeground(new java.awt.Color(102, 102, 102));
         try {
             jFormattedTextFieldMes.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFormattedTextFieldMes.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jFormattedTextFieldMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldMesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jFormattedTextFieldMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 250, 25));
 
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Ano");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 101, -1, -1));
 
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Cidades");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Tipo Imovel");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 108, -1));
 
+        jComboBoxCidades.setBackground(new java.awt.Color(102, 102, 102));
+        jComboBoxCidades.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jComboBoxCidades.setForeground(new java.awt.Color(204, 204, 204));
         jComboBoxCidades.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxCidades.setBorder(null);
+        jComboBoxCidades.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboBoxCidades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxCidadesActionPerformed(evt);
             }
         });
+        jPanel1.add(jComboBoxCidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 250, 35));
 
         jButtonAcao.setBackground(new java.awt.Color(102, 102, 102));
         jButtonAcao.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
@@ -140,6 +163,7 @@ public class TelaRelatoriosCidadeTipoPagamentoTempo extends javax.swing.JFrame {
                 jButtonAcaoActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonAcao, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 170, 35));
 
         jButtonUsar.setBackground(new java.awt.Color(102, 102, 102));
         jButtonUsar.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
@@ -160,76 +184,51 @@ public class TelaRelatoriosCidadeTipoPagamentoTempo extends javax.swing.JFrame {
                 jButtonUsarActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonUsar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 170, 35));
 
+        jTextFieldTipoImovel.setBackground(new java.awt.Color(189, 209, 219));
         jTextFieldTipoImovel.setFont(new java.awt.Font("Microsoft JhengHei", 1, 12)); // NOI18N
+        jTextFieldTipoImovel.setForeground(new java.awt.Color(102, 102, 102));
+        jTextFieldTipoImovel.setBorder(null);
+        jTextFieldTipoImovel.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel1.add(jTextFieldTipoImovel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 160, 25));
 
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Mes");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 63, -1, -1));
 
+        jFormattedAno.setBackground(new java.awt.Color(189, 209, 219));
+        jFormattedAno.setBorder(null);
+        jFormattedAno.setForeground(new java.awt.Color(102, 102, 102));
         try {
             jFormattedAno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFormattedAno.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jPanel1.add(jFormattedAno, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 250, 25));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonAcao, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextFieldTipoImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButtonUsar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jFormattedTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jFormattedAno, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBoxCidades, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(107, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jFormattedTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jFormattedAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxCidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButtonUsar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldTipoImovel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68)
-                .addComponent(jButtonAcao, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(149, Short.MAX_VALUE))
-        );
+        jSeparator20.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator20.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel1.add(jSeparator20, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 250, 10));
+
+        jSeparator21.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator21.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel1.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 160, 10));
+
+        jSeparator22.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator22.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel1.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 250, 10));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
         );
 
         pack();
@@ -301,6 +300,10 @@ public class TelaRelatoriosCidadeTipoPagamentoTempo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonUsarMouseExited
 
+    private void jFormattedTextFieldMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldMesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldMesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -364,6 +367,9 @@ public class TelaRelatoriosCidadeTipoPagamentoTempo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator20;
+    private javax.swing.JSeparator jSeparator21;
+    private javax.swing.JSeparator jSeparator22;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldTipoImovel;
     // End of variables declaration//GEN-END:variables

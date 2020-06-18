@@ -13,11 +13,12 @@ public class SendEmail {
     private String stringNome;
     private String conteudo;
     private String stringFinal;
+    private String nome;
     
     public SendEmail(String emailCliente, String nome) throws EmailException {
         
         this.emailCliente = emailCliente;
-        stringNome = "Senhor(a) " + nome + ",segue o token necessário para a validação:\n";
+        this.nome = nome;
         
         email = new HtmlEmail();
         email.setHostName("smtp.gmail.com");
@@ -33,6 +34,7 @@ public class SendEmail {
         
         this.conteudo = token;
         stringFinal = "Copie e cole na área de texto!\n";
+        stringNome = "Senhor(a) " + nome + ",segue o token necessário para a validação:\n";
 
         email.setSubject("Recuperação de Senha");
         email.setHtmlMsg(gerarHtml());
@@ -44,6 +46,7 @@ public class SendEmail {
         
         this.conteudo = senha;
         stringFinal = "Utilize ao logar no sistema!\n";
+        stringNome = "Senhor(a) " + nome + ",segue a senha para login:\n";
 
         email.setSubject("Envio de Senha");
         email.setHtmlMsg(gerarHtml());
