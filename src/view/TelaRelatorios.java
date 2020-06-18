@@ -2,6 +2,7 @@ package view;
 
 import controller.RelatoriosController;
 import java.awt.Color;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,12 +11,17 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Funcionario;
 import model.Pessoa;
+import model.TipoImovel;
+import model.TipoPagamento;
 import util.Login;
 
 public class TelaRelatorios extends javax.swing.JFrame {
 
     private RelatoriosController rl = null;
     private final int index = 12;
+
+    private String data = null;
+    String cidade = "";
 
     public TelaRelatorios() throws SQLException {
         initComponents();
@@ -26,9 +32,15 @@ public class TelaRelatorios extends javax.swing.JFrame {
         setarBotoes(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
 
     }
-    
+
+    public void setarDados(String cidade, int mes, int ano, int tp) throws Exception {
+
+        jTableTabela.setModel(rl.populaImoveisPorCidadePeriodoTipoImovel(cidade, mes, ano, tp));
+
+    }
+
     private void setarBotoes(boolean condicao) {
-        
+
         jButtonBaixado.setEnabled(condicao);
         jButtonCidadePeriodoETipoImovel.setEnabled(condicao);
         jButtonComissaoPorCorretor.setEnabled(condicao);
@@ -39,7 +51,7 @@ public class TelaRelatorios extends javax.swing.JFrame {
         jButtonImoveisCorretor.setEnabled(condicao);
         jButtonVendaAnual.setEnabled(condicao);
         jButtonVendaMensal.setEnabled(condicao);
-        
+
     }
 
     public void setObjetoFuncionario(Funcionario obj) throws Exception {
@@ -435,7 +447,7 @@ public class TelaRelatorios extends javax.swing.JFrame {
     private void jButtonImoveisCadastradosNoSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImoveisCadastradosNoSistemaActionPerformed
 
         try {
-            
+
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Descricao Imovel");
             modelo.addColumn("Tamanho");
@@ -445,7 +457,7 @@ public class TelaRelatorios extends javax.swing.JFrame {
             jTableTabela.setModel(modelo);
 
             rl = new RelatoriosController(modelo);
-            
+
             jTableTabela.setModel(rl.populaImoveisCadastrados());
 
         } catch (Exception ex) {
@@ -510,6 +522,9 @@ public class TelaRelatorios extends javax.swing.JFrame {
     private void jButtonCidadePeriodoETipoImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCidadePeriodoETipoImovelActionPerformed
 
         try {
+
+            
+
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Descrição Imovel");
             modelo.addColumn("Proprietário");
@@ -518,6 +533,8 @@ public class TelaRelatorios extends javax.swing.JFrame {
             jTableTabela.setModel(modelo);
 
             rl = new RelatoriosController(modelo);
+            
+            new TelaRelatoriosCidadeTipoPagamentoTempo(this).setVisible(true);
 
         } catch (Exception ex) {
             Logger.getLogger(TelaRelatorios.class.getName()).log(Level.SEVERE, null, ex);
@@ -643,103 +660,123 @@ public class TelaRelatorios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDisponiveisParaVendaActionPerformed
 
     private void jButtonImoveisCorretorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImoveisCorretorMouseEntered
-        if (jButtonImoveisCorretor.isEnabled())
-            jButtonImoveisCorretor.setBackground(new Color(52,52,52));
+        if (jButtonImoveisCorretor.isEnabled()) {
+            jButtonImoveisCorretor.setBackground(new Color(52, 52, 52));
+        }
     }//GEN-LAST:event_jButtonImoveisCorretorMouseEntered
 
     private void jButtonImoveisCorretorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImoveisCorretorMouseExited
-        if (jButtonImoveisCorretor.isEnabled())
-            jButtonImoveisCorretor.setBackground(new Color(102,102,102));
+        if (jButtonImoveisCorretor.isEnabled()) {
+            jButtonImoveisCorretor.setBackground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_jButtonImoveisCorretorMouseExited
 
     private void jButtonImoveisCadastradosNoSistemaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImoveisCadastradosNoSistemaMouseEntered
-        if (jButtonImoveisCadastradosNoSistema.isEnabled())
-            jButtonImoveisCadastradosNoSistema.setBackground(new Color(52,52,52));
+        if (jButtonImoveisCadastradosNoSistema.isEnabled()) {
+            jButtonImoveisCadastradosNoSistema.setBackground(new Color(52, 52, 52));
+        }
     }//GEN-LAST:event_jButtonImoveisCadastradosNoSistemaMouseEntered
 
     private void jButtonImoveisCadastradosNoSistemaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImoveisCadastradosNoSistemaMouseExited
-        if (jButtonImoveisCadastradosNoSistema.isEnabled())
-            jButtonImoveisCadastradosNoSistema.setBackground(new Color(102,102,102));
+        if (jButtonImoveisCadastradosNoSistema.isEnabled()) {
+            jButtonImoveisCadastradosNoSistema.setBackground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_jButtonImoveisCadastradosNoSistemaMouseExited
 
     private void jButtonImoveisCadastradosPorCpfMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImoveisCadastradosPorCpfMouseEntered
-        if (jButtonImoveisCadastradosPorCpf.isEnabled())
-            jButtonImoveisCadastradosPorCpf.setBackground(new Color(52,52,52));
+        if (jButtonImoveisCadastradosPorCpf.isEnabled()) {
+            jButtonImoveisCadastradosPorCpf.setBackground(new Color(52, 52, 52));
+        }
     }//GEN-LAST:event_jButtonImoveisCadastradosPorCpfMouseEntered
 
     private void jButtonImoveisCadastradosPorCpfMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImoveisCadastradosPorCpfMouseExited
-        if (jButtonImoveisCadastradosPorCpf.isEnabled())
-            jButtonImoveisCadastradosPorCpf.setBackground(new Color(102,102,102));
+        if (jButtonImoveisCadastradosPorCpf.isEnabled()) {
+            jButtonImoveisCadastradosPorCpf.setBackground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_jButtonImoveisCadastradosPorCpfMouseExited
 
     private void jButtonFinanciadoPorPeriodoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFinanciadoPorPeriodoMouseEntered
-        if (jButtonFinanciadoPorPeriodo.isEnabled())
-            jButtonFinanciadoPorPeriodo.setBackground(new Color(52,52,52));
+        if (jButtonFinanciadoPorPeriodo.isEnabled()) {
+            jButtonFinanciadoPorPeriodo.setBackground(new Color(52, 52, 52));
+        }
     }//GEN-LAST:event_jButtonFinanciadoPorPeriodoMouseEntered
 
     private void jButtonFinanciadoPorPeriodoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFinanciadoPorPeriodoMouseExited
-        if (jButtonFinanciadoPorPeriodo.isEnabled())
-            jButtonFinanciadoPorPeriodo.setBackground(new Color(102,102,102));
+        if (jButtonFinanciadoPorPeriodo.isEnabled()) {
+            jButtonFinanciadoPorPeriodo.setBackground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_jButtonFinanciadoPorPeriodoMouseExited
 
     private void jButtonVendaMensalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVendaMensalMouseEntered
-        if (jButtonVendaMensal.isEnabled())
-            jButtonVendaMensal.setBackground(new Color(52,52,52));
+        if (jButtonVendaMensal.isEnabled()) {
+            jButtonVendaMensal.setBackground(new Color(52, 52, 52));
+        }
     }//GEN-LAST:event_jButtonVendaMensalMouseEntered
 
     private void jButtonVendaMensalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVendaMensalMouseExited
-        if (jButtonVendaMensal.isEnabled())
-            jButtonVendaMensal.setBackground(new Color(102,102,102));
+        if (jButtonVendaMensal.isEnabled()) {
+            jButtonVendaMensal.setBackground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_jButtonVendaMensalMouseExited
 
     private void jButtonComissaoPorCorretorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonComissaoPorCorretorMouseEntered
-        if (jButtonComissaoPorCorretor.isEnabled())
-            jButtonComissaoPorCorretor.setBackground(new Color(52,52,52));
+        if (jButtonComissaoPorCorretor.isEnabled()) {
+            jButtonComissaoPorCorretor.setBackground(new Color(52, 52, 52));
+        }
     }//GEN-LAST:event_jButtonComissaoPorCorretorMouseEntered
 
     private void jButtonComissaoPorCorretorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonComissaoPorCorretorMouseExited
-        if (jButtonComissaoPorCorretor.isEnabled())
-            jButtonComissaoPorCorretor.setBackground(new Color(102,102,102));
+        if (jButtonComissaoPorCorretor.isEnabled()) {
+            jButtonComissaoPorCorretor.setBackground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_jButtonComissaoPorCorretorMouseExited
 
     private void jButtonVendaAnualMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVendaAnualMouseEntered
-        if (jButtonVendaAnual.isEnabled())
-            jButtonVendaAnual.setBackground(new Color(52,52,52));
+        if (jButtonVendaAnual.isEnabled()) {
+            jButtonVendaAnual.setBackground(new Color(52, 52, 52));
+        }
     }//GEN-LAST:event_jButtonVendaAnualMouseEntered
 
     private void jButtonVendaAnualMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVendaAnualMouseExited
-        if (jButtonVendaAnual.isEnabled())
-            jButtonVendaAnual.setBackground(new Color(102,102,102));
+        if (jButtonVendaAnual.isEnabled()) {
+            jButtonVendaAnual.setBackground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_jButtonVendaAnualMouseExited
 
     private void jButtonDisponiveisParaVendaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDisponiveisParaVendaMouseEntered
-        if (jButtonDisponiveisParaVenda.isEnabled())
-            jButtonDisponiveisParaVenda.setBackground(new Color(52,52,52));
+        if (jButtonDisponiveisParaVenda.isEnabled()) {
+            jButtonDisponiveisParaVenda.setBackground(new Color(52, 52, 52));
+        }
     }//GEN-LAST:event_jButtonDisponiveisParaVendaMouseEntered
 
     private void jButtonDisponiveisParaVendaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDisponiveisParaVendaMouseExited
-        if (jButtonDisponiveisParaVenda.isEnabled())
-            jButtonDisponiveisParaVenda.setBackground(new Color(102,102,102));
+        if (jButtonDisponiveisParaVenda.isEnabled()) {
+            jButtonDisponiveisParaVenda.setBackground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_jButtonDisponiveisParaVendaMouseExited
 
     private void jButtonBaixadoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonBaixadoMouseEntered
-        if (jButtonBaixado.isEnabled())
-            jButtonBaixado.setBackground(new Color(52,52,52));
+        if (jButtonBaixado.isEnabled()) {
+            jButtonBaixado.setBackground(new Color(52, 52, 52));
+        }
     }//GEN-LAST:event_jButtonBaixadoMouseEntered
 
     private void jButtonBaixadoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonBaixadoMouseExited
-        if (jButtonBaixado.isEnabled())
-            jButtonBaixado.setBackground(new Color(102,102,102));
+        if (jButtonBaixado.isEnabled()) {
+            jButtonBaixado.setBackground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_jButtonBaixadoMouseExited
 
     private void jButtonCidadePeriodoETipoImovelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCidadePeriodoETipoImovelMouseEntered
-        if (jButtonCidadePeriodoETipoImovel.isEnabled())
-            jButtonCidadePeriodoETipoImovel.setBackground(new Color(52,52,52));
+        if (jButtonCidadePeriodoETipoImovel.isEnabled()) {
+            jButtonCidadePeriodoETipoImovel.setBackground(new Color(52, 52, 52));
+        }
     }//GEN-LAST:event_jButtonCidadePeriodoETipoImovelMouseEntered
 
     private void jButtonCidadePeriodoETipoImovelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCidadePeriodoETipoImovelMouseExited
-        if (jButtonCidadePeriodoETipoImovel.isEnabled())
-            jButtonCidadePeriodoETipoImovel.setBackground(new Color(102,102,102));
+        if (jButtonCidadePeriodoETipoImovel.isEnabled()) {
+            jButtonCidadePeriodoETipoImovel.setBackground(new Color(102, 102, 102));
+        }
     }//GEN-LAST:event_jButtonCidadePeriodoETipoImovelMouseExited
 
     public static void main(String args[]) {

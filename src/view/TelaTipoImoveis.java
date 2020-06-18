@@ -17,6 +17,7 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
     private TipoImovelController tic = null;
     private DefaultTableModel modelo = new DefaultTableModel();
     private TipoImovel tp = null;
+    private TelaRelatoriosCidadeTipoPagamentoTempo ttc = null;
     private boolean isSelected = false;
     private TelaImoveis telaImoveis = null;
     private final int index = 10;
@@ -31,6 +32,18 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
     }
 
     public TelaTipoImoveis(TelaImoveis telaImoveis) throws Exception {
+        CriarJTable();
+        initComponents();
+        iniciar();
+        popularJtable();
+        this.telaImoveis = telaImoveis;
+        jButtonUtilizar.setVisible(true);
+        OrdenaClickTabela.ordenarPorClick(jTableTabela, tic, modelo);
+        jComboAcao.setEnabled(Login.funcionario.getTipoFuncionario().getNivelAcesso().getNivelByIndex(index));
+    }
+    
+      public TelaTipoImoveis(TelaRelatoriosCidadeTipoPagamentoTempo ttc ) throws Exception {
+        this.ttc = ttc; 
         CriarJTable();
         initComponents();
         iniciar();
@@ -559,8 +572,15 @@ public class TelaTipoImoveis extends javax.swing.JFrame {
         try {
             if (isSelected) {
 
+                if(telaImoveis != null)
+                
                 telaImoveis.setarTipoImovel(tp);
                 this.dispose();
+                
+            }if(ttc != null){
+            
+            
+            ttc.setarTipoImovel(tp);
 
             } else {
                 throw new Exception("É necessário clicar numa tabela para utilizar este botão.");

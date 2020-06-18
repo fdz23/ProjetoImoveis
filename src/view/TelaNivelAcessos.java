@@ -150,7 +150,7 @@ public class TelaNivelAcessos extends javax.swing.JFrame {
         jSeparator20 = new javax.swing.JSeparator();
         jSeparator21 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela Nivel Acessos");
 
         jPanel1.setBackground(new java.awt.Color(205, 221, 228));

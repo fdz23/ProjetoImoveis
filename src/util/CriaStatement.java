@@ -478,4 +478,13 @@ public class CriaStatement {
         return con.prepareStatement(sql);
         
     }
+    
+       public PreparedStatement selectSqlPegarCidades() throws SQLException {
+        
+        String sql = "select end_cidade from enderecos group by end_cidade";
+                      
+        
+        return con.prepareStatement(sql);
+        
+    }
 }

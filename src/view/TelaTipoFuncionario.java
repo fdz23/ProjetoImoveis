@@ -150,6 +150,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jSeparator23 = new javax.swing.JSeparator();
         jSeparator24 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
         jButtonNivelAcesso = new javax.swing.JButton();
         jButtonUtilizar = new javax.swing.JButton();
         jButtonAtivos = new javax.swing.JButton();
@@ -338,6 +339,14 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         jSeparator24.setBackground(new java.awt.Color(102, 102, 102));
         jSeparator24.setForeground(new java.awt.Color(102, 102, 102));
         jPanel2.add(jSeparator24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 250, 10));
+
+        jButton1.setText("Selecionar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 530, 110, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 870));
 
@@ -748,6 +757,19 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonDesativarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         
+        try{
+            
+            new TelaNivelAcessos(this).setVisible(true);
+            
+        }catch(Exception ex){
+            
+            ex.printStackTrace();
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -787,6 +809,7 @@ public class TelaTipoFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField JtextFielDescricao;
     private javax.swing.JTextField JtextFielDescricaoNivelAcesso;
     private javax.swing.JTextField JtextFielDescricaoSalario;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAcao;
     private javax.swing.JButton jButtonAtivar;
     private javax.swing.JButton jButtonAtivos;
