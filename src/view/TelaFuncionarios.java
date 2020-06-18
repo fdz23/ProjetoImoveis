@@ -936,10 +936,15 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                     break;
 
                 case 2:
+                    
+                    int ativo = 1;
 
                     if (isSelected) {
                         if (jCheckBoxDemissao.isSelected()) {
                             Date data = new Date(System.currentTimeMillis());
+                            
+                            ativo = 0;
+                            
                             if (CriaDate.geraSqlDate(jFormattedTextFieldRescisao.getText()).compareTo(data) < 0) {
                                 throw new Exception("O campo de data de nascimento não pode ser no passado.");
                             }
@@ -957,7 +962,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                         usc.inserirItem(usu);
                     }
 
-                        fc.alterarItem(new Funcionario(fun.getId(), matricula, pe, tf, status, dataRescisao, 1));
+                        fc.alterarItem(new Funcionario(fun.getId(), matricula, pe, tf, status, dataRescisao, ativo));
                         popularJtable();
                         JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
 
