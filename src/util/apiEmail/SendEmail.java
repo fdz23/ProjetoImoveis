@@ -1,5 +1,6 @@
 package util.apiEmail;
 
+import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 
@@ -18,10 +19,10 @@ public class SendEmail {
         this.emailCliente = emailCliente;
         stringNome = "Senhor(a) " + nome + ",segue o token necessário para a validação:\n";
         
-        HtmlEmail email = new HtmlEmail();
+        email = new HtmlEmail();
         email.setHostName("smtp.gmail.com");
         email.setSmtpPort(465);
-        email.setAuthentication(meuEmail, minhaSenha);
+        email.setAuthenticator(new DefaultAuthenticator(meuEmail, minhaSenha));
         email.setSSLOnConnect(true);
 
         email.setFrom(meuEmail);

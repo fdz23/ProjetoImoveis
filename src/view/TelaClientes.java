@@ -69,6 +69,7 @@ public class TelaClientes extends javax.swing.JFrame {
         iniciar();
         popularJtable();
         OrdenaClickTabela.ordenarPorClick(jTableTabela, pec, modelo);
+        jButtonUsarContrato.setVisible(true);
     }
 
     public void popularJtable() throws ClassNotFoundException, Exception {
@@ -103,7 +104,6 @@ public class TelaClientes extends javax.swing.JFrame {
         jButtonUsarContrato.setVisible(false);
         jTextFieldEmail.setEnabled(false);
         jTextFieldEndereco.setEnabled(false);
-        jFormattedTextFieldDataNascimento.setEnabled(false);
         jTextFieldNome.setEnabled(false);
         jFormattedTextFieldTelefone.setEnabled(false);
         jButtonSelecionarEndereco.setEnabled(false);

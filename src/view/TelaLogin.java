@@ -45,14 +45,12 @@ public class TelaLogin extends javax.swing.JFrame {
         jTextFieldEmail.setBackground(new java.awt.Color(189, 209, 219));
         jTextFieldEmail.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jTextFieldEmail.setForeground(new java.awt.Color(102, 102, 102));
-        jTextFieldEmail.setText("E-mail");
         jTextFieldEmail.setBorder(null);
         getContentPane().add(jTextFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 260, 40));
 
         jPasswordFieldSenha.setBackground(new java.awt.Color(189, 209, 219));
         jPasswordFieldSenha.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jPasswordFieldSenha.setForeground(new java.awt.Color(102, 102, 102));
-        jPasswordFieldSenha.setText("Password");
         jPasswordFieldSenha.setBorder(null);
         getContentPane().add(jPasswordFieldSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 260, 40));
 

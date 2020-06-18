@@ -6,6 +6,7 @@ import controller.StatusController;
 import controller.TipoFuncionarioController;
 import controller.UsuarioController;
 import dao.FuncionarioDao;
+import dao.UsuarioDao;
 import java.awt.Color;
 import java.util.Date;
 import java.util.logging.Level;
@@ -854,7 +855,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                 jButtonStatus.setEnabled(true);
                 jButtonTipoFuncionario.setEnabled(true);
                 jButtonAcao.setEnabled(true);
-                jCheckBoxLogin.setEnabled(false);
+                jCheckBoxLogin.setEnabled(true);
 
                 break;
 
@@ -943,6 +944,18 @@ public class TelaFuncionarios extends javax.swing.JFrame {
                                 throw new Exception("O campo de data de nascimento não pode ser no passado.");
                             }
                         }
+                        
+                        if (jCheckBoxLogin.isSelected() && new UsuarioDao().getByIDFun(fun.getId()) == null) {
+
+                        String senha = GeraSenha.gerar();
+                        
+                        new SendEmail(email, nome).sendEmailSenha(senha);
+
+                        senha = GeradorPasswords.generateSecurePassword(senha, "Pacoca");
+
+                        usu = new Usuario(0, fc.getItemByEmail(fun.getEmail()), senha, 1, "");
+                        usc.inserirItem(usu);
+                    }
 
                         fc.alterarItem(new Funcionario(fun.getId(), matricula, pe, tf, status, dataRescisao, 1));
                         popularJtable();

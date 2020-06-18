@@ -26,7 +26,9 @@
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaMenu.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/util/Login.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/util/Validacao.java</file>
+            <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/EnderecoDao.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/TipoPagamentoController.java</file>
+            <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/StatusDao.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaFuncionarios.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/util/ConectaDb.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/ImovelController.java</file>
@@ -46,11 +48,13 @@
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/TipoFuncionarioController.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/PessoaController.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/Status.java</file>
+            <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/TipoPagamentoDao.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/view/TelaNivelAcessos.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/icones/icons8_mail_account_50px_1.png</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/ImovelItemController.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/Endereco.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/IDao.java</file>
+            <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/TipoImovelDao.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/controller/OrcamentoController.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/dao/ContratoDao.java</file>
             <file>file:/D:/Prog/SENAI/ProjetoImoveis/src/model/TipoFuncionario.java</file>
