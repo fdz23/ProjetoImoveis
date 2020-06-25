@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import util.Validacao;
 import controller.PessoaController;
 import controller.UsuarioController;
+import java.awt.Color;
 import model.Funcionario;
 import model.Pessoa;
 import model.Usuario;
@@ -42,77 +43,109 @@ public class TelaResetarSenha extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jButtonResetar = new javax.swing.JButton();
+        jSeparator21 = new javax.swing.JSeparator();
+        jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldToken = new javax.swing.JTextField();
-        jButtonResetar = new javax.swing.JButton();
         jButtonToken = new javax.swing.JButton();
+        jSeparator20 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela Resetar Senha");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Digite seu e-mail");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 18, -1, 20));
 
-        jLabel2.setText("Digite o token recebido");
+        jTextFieldEmail.setBackground(new java.awt.Color(189, 209, 219));
+        jTextFieldEmail.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTextFieldEmail.setForeground(new java.awt.Color(102, 102, 102));
+        jTextFieldEmail.setBorder(null);
+        jTextFieldEmail.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        getContentPane().add(jTextFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 52, 270, 25));
 
-        jTextFieldToken.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldTokenActionPerformed(evt);
+        jPanel1.setBackground(new java.awt.Color(189, 209, 219));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonResetar.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonResetar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonResetar.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonResetar.setText("Resetar senha");
+        jButtonResetar.setBorder(null);
+        jButtonResetar.setBorderPainted(false);
+        jButtonResetar.setFocusPainted(false);
+        jButtonResetar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonResetarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonResetarMouseExited(evt);
             }
         });
-
-        jButtonResetar.setText("Resetar senha");
         jButtonResetar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonResetarActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonResetar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 170, 35));
 
+        jSeparator21.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator21.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel1.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 270, 10));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 180));
+
+        jPanel2.setBackground(new java.awt.Color(205, 221, 228));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setText("Digite o token recebido");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, 20));
+
+        jTextFieldToken.setBackground(new java.awt.Color(205, 221, 228));
+        jTextFieldToken.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jTextFieldToken.setForeground(new java.awt.Color(102, 102, 102));
+        jTextFieldToken.setBorder(null);
+        jTextFieldToken.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jTextFieldToken.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTokenActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jTextFieldToken, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 270, 25));
+
+        jButtonToken.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonToken.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonToken.setForeground(new java.awt.Color(204, 204, 204));
         jButtonToken.setText("Prosseguir");
+        jButtonToken.setBorder(null);
+        jButtonToken.setBorderPainted(false);
+        jButtonToken.setFocusPainted(false);
+        jButtonToken.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonTokenMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonTokenMouseExited(evt);
+            }
+        });
         jButtonToken.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonTokenActionPerformed(evt);
             }
         });
+        jPanel2.add(jButtonToken, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 170, 35));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextFieldEmail)
-                            .addComponent(jTextFieldToken, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(jButtonResetar)))
-                .addContainerGap(16, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonToken)
-                .addGap(127, 127, 127))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonResetar)
-                .addGap(20, 20, 20)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jTextFieldToken, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonToken)
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
+        jSeparator20.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator20.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel2.add(jSeparator20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 270, 10));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 320, 200));
 
         pack();
         setLocationRelativeTo(null);
@@ -194,6 +227,26 @@ public class TelaResetarSenha extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonTokenActionPerformed
 
+    private void jButtonTokenMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTokenMouseEntered
+        if (jButtonToken.isEnabled())
+            jButtonToken.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonTokenMouseEntered
+
+    private void jButtonTokenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTokenMouseExited
+        if (jButtonToken.isEnabled())
+            jButtonToken.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonTokenMouseExited
+
+    private void jButtonResetarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonResetarMouseEntered
+        if (jButtonResetar.isEnabled())
+            jButtonResetar.setBackground(new Color(52,52,52));
+    }//GEN-LAST:event_jButtonResetarMouseEntered
+
+    private void jButtonResetarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonResetarMouseExited
+        if (jButtonResetar.isEnabled())
+            jButtonResetar.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_jButtonResetarMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -205,7 +258,7 @@ public class TelaResetarSenha extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -235,6 +288,10 @@ public class TelaResetarSenha extends javax.swing.JFrame {
     private javax.swing.JButton jButtonToken;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator20;
+    private javax.swing.JSeparator jSeparator21;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldToken;
     // End of variables declaration//GEN-END:variables

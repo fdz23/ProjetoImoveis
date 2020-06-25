@@ -15,7 +15,7 @@ import util.CriaStatement;
 
 /**
  *
- * @author fdz
+ * @author rapha
  */
 public class TipoPagamentoDao extends Dao<TipoPagamento> {
 

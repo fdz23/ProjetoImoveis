@@ -5,12 +5,16 @@
  */
 package view;
 
+import controller.UsuarioController;
+import java.awt.Color;
 import java.sql.Array;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Funcionario;
+import model.Usuario;
+import util.GeradorPasswords;
 import util.Login;
 
 /**
@@ -103,201 +107,393 @@ public class TelaMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jSeparator3 = new javax.swing.JSeparator();
-        jLabelFuncionarioAtual = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
+        jButtonNiveisDeAcesso = new javax.swing.JButton();
+        jButtonTiposDeFuncionarios = new javax.swing.JButton();
         jButtonFuncionarios = new javax.swing.JButton();
         jButtonEnderecos = new javax.swing.JButton();
         jButtonClientes = new javax.swing.JButton();
-        jButtonImoveis = new javax.swing.JButton();
-        jButtonNiveisDeAcesso = new javax.swing.JButton();
-        jButtonOrcamentos = new javax.swing.JButton();
-        jButtonStatus = new javax.swing.JButton();
-        jButtonTiposDeFuncionarios = new javax.swing.JButton();
-        jButtonTiposDeImovel = new javax.swing.JButton();
-        jButtonTiposDePagamento = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JSeparator();
-        jButtonLogOff = new javax.swing.JButton();
-        jButtonContratos = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jButtonRelatorios = new javax.swing.JButton();
+        jButtonImoveis = new javax.swing.JButton();
+        jButtonTiposDeImovel = new javax.swing.JButton();
+        jButtonStatus = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jButtonLogOff = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabelFuncionarioAtual = new javax.swing.JLabel();
+        jButtonTrocaDeSenha = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jButtonTiposDePagamento = new javax.swing.JButton();
+        jButtonOrcamentos = new javax.swing.JButton();
+        jButtonContratos = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Menu");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Bem-vindo ");
+        jPanel1.setBackground(new java.awt.Color(189, 209, 219));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButtonFuncionarios.setText("Funcionarios");
-        jButtonFuncionarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFuncionariosActionPerformed(evt);
-            }
-        });
-
-        jButtonEnderecos.setText("Enderecos");
-        jButtonEnderecos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEnderecosActionPerformed(evt);
-            }
-        });
-
-        jButtonClientes.setText("Clientes");
-        jButtonClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonClientesActionPerformed(evt);
-            }
-        });
-
-        jButtonImoveis.setText("Imoveis");
-        jButtonImoveis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonImoveisActionPerformed(evt);
-            }
-        });
-
+        jButtonNiveisDeAcesso.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonNiveisDeAcesso.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonNiveisDeAcesso.setForeground(new java.awt.Color(204, 204, 204));
         jButtonNiveisDeAcesso.setText("Niveis de acesso");
+        jButtonNiveisDeAcesso.setBorder(null);
+        jButtonNiveisDeAcesso.setBorderPainted(false);
+        jButtonNiveisDeAcesso.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonNiveisDeAcesso.setFocusPainted(false);
+        jButtonNiveisDeAcesso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonNiveisDeAcessoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonNiveisDeAcessoMouseExited(evt);
+            }
+        });
         jButtonNiveisDeAcesso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonNiveisDeAcessoActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonNiveisDeAcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 170, 50));
 
-        jButtonOrcamentos.setText("Orcamentos");
-        jButtonOrcamentos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonOrcamentosActionPerformed(evt);
-            }
-        });
-
-        jButtonStatus.setText("Status");
-        jButtonStatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonStatusActionPerformed(evt);
-            }
-        });
-
+        jButtonTiposDeFuncionarios.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonTiposDeFuncionarios.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonTiposDeFuncionarios.setForeground(new java.awt.Color(204, 204, 204));
         jButtonTiposDeFuncionarios.setText("Tipos de funcionario");
+        jButtonTiposDeFuncionarios.setBorder(null);
+        jButtonTiposDeFuncionarios.setBorderPainted(false);
+        jButtonTiposDeFuncionarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonTiposDeFuncionarios.setFocusPainted(false);
+        jButtonTiposDeFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonTiposDeFuncionariosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonTiposDeFuncionariosMouseExited(evt);
+            }
+        });
         jButtonTiposDeFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonTiposDeFuncionariosActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonTiposDeFuncionarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 170, 50));
 
-        jButtonTiposDeImovel.setText("Tipos de imovel");
-        jButtonTiposDeImovel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTiposDeImovelActionPerformed(evt);
+        jButtonFuncionarios.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonFuncionarios.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonFuncionarios.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonFuncionarios.setText("Funcionarios");
+        jButtonFuncionarios.setBorder(null);
+        jButtonFuncionarios.setBorderPainted(false);
+        jButtonFuncionarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonFuncionarios.setFocusPainted(false);
+        jButtonFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonFuncionariosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonFuncionariosMouseExited(evt);
             }
         });
-
-        jButtonTiposDePagamento.setText("Tipos de pagamento");
-        jButtonTiposDePagamento.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTiposDePagamentoActionPerformed(evt);
+                jButtonFuncionariosActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonFuncionarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 170, 50));
 
-        jButtonLogOff.setText("Log off");
-        jButtonLogOff.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLogOffActionPerformed(evt);
+        jButtonEnderecos.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonEnderecos.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonEnderecos.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonEnderecos.setText("Enderecos");
+        jButtonEnderecos.setBorder(null);
+        jButtonEnderecos.setBorderPainted(false);
+        jButtonEnderecos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonEnderecos.setFocusPainted(false);
+        jButtonEnderecos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonEnderecosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonEnderecosMouseExited(evt);
             }
         });
-
-        jButtonContratos.setText("Contratos");
-        jButtonContratos.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEnderecos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonContratosActionPerformed(evt);
+                jButtonEnderecosActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonEnderecos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 170, 50));
 
+        jButtonClientes.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonClientes.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonClientes.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonClientes.setText("Clientes");
+        jButtonClientes.setBorder(null);
+        jButtonClientes.setBorderPainted(false);
+        jButtonClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonClientes.setFocusPainted(false);
+        jButtonClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonClientesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonClientesMouseExited(evt);
+            }
+        });
+        jButtonClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClientesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 170, 50));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icons8_person_50px.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 50, 50));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 260, 420));
+
+        jPanel2.setBackground(new java.awt.Color(189, 209, 219));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonRelatorios.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonRelatorios.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonRelatorios.setForeground(new java.awt.Color(204, 204, 204));
         jButtonRelatorios.setText("Relatórios");
+        jButtonRelatorios.setBorder(null);
+        jButtonRelatorios.setBorderPainted(false);
+        jButtonRelatorios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonRelatorios.setFocusPainted(false);
+        jButtonRelatorios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonRelatoriosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonRelatoriosMouseExited(evt);
+            }
+        });
         jButtonRelatorios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRelatoriosActionPerformed(evt);
             }
         });
+        jPanel2.add(jButtonRelatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 170, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelFuncionarioAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(430, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonTiposDeFuncionarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonEnderecos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonFuncionarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonNiveisDeAcesso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonLogOff, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                            .addComponent(jButtonRelatorios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButtonTiposDePagamento, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                            .addComponent(jButtonOrcamentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonContratos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonImoveis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonTiposDeImovel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(24, 24, 24))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSeparator2)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonFuncionarios)
-                    .addComponent(jButtonLogOff))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonClientes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonEnderecos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonTiposDeFuncionarios)
-                    .addComponent(jButtonRelatorios))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonNiveisDeAcesso)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonImoveis)
-                    .addComponent(jButtonOrcamentos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonTiposDePagamento, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jButtonTiposDeImovel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonStatus)
-                    .addComponent(jButtonContratos))
-                .addGap(24, 24, 24)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelFuncionarioAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
-        );
+        jButtonImoveis.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonImoveis.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonImoveis.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonImoveis.setText("Imoveis");
+        jButtonImoveis.setBorder(null);
+        jButtonImoveis.setBorderPainted(false);
+        jButtonImoveis.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonImoveis.setFocusPainted(false);
+        jButtonImoveis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonImoveisMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonImoveisMouseExited(evt);
+            }
+        });
+        jButtonImoveis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImoveisActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonImoveis, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 170, 50));
+
+        jButtonTiposDeImovel.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonTiposDeImovel.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonTiposDeImovel.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonTiposDeImovel.setText("Tipos de imovel");
+        jButtonTiposDeImovel.setBorder(null);
+        jButtonTiposDeImovel.setBorderPainted(false);
+        jButtonTiposDeImovel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonTiposDeImovel.setFocusPainted(false);
+        jButtonTiposDeImovel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonTiposDeImovelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonTiposDeImovelMouseExited(evt);
+            }
+        });
+        jButtonTiposDeImovel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTiposDeImovelActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonTiposDeImovel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 170, 50));
+
+        jButtonStatus.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonStatus.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonStatus.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonStatus.setText("Status");
+        jButtonStatus.setBorder(null);
+        jButtonStatus.setBorderPainted(false);
+        jButtonStatus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonStatus.setFocusPainted(false);
+        jButtonStatus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonStatusMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonStatusMouseExited(evt);
+            }
+        });
+        jButtonStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonStatusActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 170, 50));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icons8_business_building_50px.png"))); // NOI18N
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 50, 50));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 270, 420));
+
+        jPanel3.setBackground(new java.awt.Color(102, 136, 153));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonLogOff.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonLogOff.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonLogOff.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonLogOff.setText("Log off");
+        jButtonLogOff.setBorder(null);
+        jButtonLogOff.setBorderPainted(false);
+        jButtonLogOff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonLogOff.setFocusPainted(false);
+        jButtonLogOff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonLogOffMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonLogOffMouseExited(evt);
+            }
+        });
+        jButtonLogOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLogOffActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButtonLogOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 40, 170, 50));
+
+        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setText("Bem-vindo ");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 26));
+
+        jLabelFuncionarioAtual.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jLabelFuncionarioAtual.setForeground(new java.awt.Color(51, 51, 51));
+        jPanel3.add(jLabelFuncionarioAtual, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 262, 26));
+
+        jButtonTrocaDeSenha.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonTrocaDeSenha.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonTrocaDeSenha.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonTrocaDeSenha.setText("Trocar Senha");
+        jButtonTrocaDeSenha.setBorder(null);
+        jButtonTrocaDeSenha.setBorderPainted(false);
+        jButtonTrocaDeSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonTrocaDeSenha.setFocusPainted(false);
+        jButtonTrocaDeSenha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonTrocaDeSenhaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonTrocaDeSenhaMouseExited(evt);
+            }
+        });
+        jButtonTrocaDeSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTrocaDeSenhaActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButtonTrocaDeSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, 170, 50));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 130));
+
+        jPanel4.setBackground(new java.awt.Color(205, 221, 228));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonTiposDePagamento.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonTiposDePagamento.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonTiposDePagamento.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonTiposDePagamento.setText("Tipos de pagamento");
+        jButtonTiposDePagamento.setBorder(null);
+        jButtonTiposDePagamento.setBorderPainted(false);
+        jButtonTiposDePagamento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonTiposDePagamento.setFocusPainted(false);
+        jButtonTiposDePagamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonTiposDePagamentoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonTiposDePagamentoMouseExited(evt);
+            }
+        });
+        jButtonTiposDePagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTiposDePagamentoActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButtonTiposDePagamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 170, 50));
+
+        jButtonOrcamentos.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonOrcamentos.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonOrcamentos.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonOrcamentos.setText("Orcamentos");
+        jButtonOrcamentos.setBorder(null);
+        jButtonOrcamentos.setBorderPainted(false);
+        jButtonOrcamentos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonOrcamentos.setFocusPainted(false);
+        jButtonOrcamentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonOrcamentosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonOrcamentosMouseExited(evt);
+            }
+        });
+        jButtonOrcamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrcamentosActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButtonOrcamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 170, 50));
+
+        jButtonContratos.setBackground(new java.awt.Color(102, 102, 102));
+        jButtonContratos.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButtonContratos.setForeground(new java.awt.Color(204, 204, 204));
+        jButtonContratos.setText("Contratos");
+        jButtonContratos.setBorder(null);
+        jButtonContratos.setBorderPainted(false);
+        jButtonContratos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonContratos.setFocusPainted(false);
+        jButtonContratos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonContratosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonContratosMouseExited(evt);
+            }
+        });
+        jButtonContratos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonContratosActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButtonContratos, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 170, 50));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icons8_sell_50px.png"))); // NOI18N
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 50, 50));
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 280, 420));
 
         pack();
         setLocationRelativeTo(null);
@@ -423,6 +619,143 @@ public class TelaMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonRelatoriosActionPerformed
 
+    private void jButtonFuncionariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFuncionariosMouseEntered
+        jButtonFuncionarios.setBackground(new Color(52, 52, 52));
+    }//GEN-LAST:event_jButtonFuncionariosMouseEntered
+
+    private void jButtonFuncionariosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFuncionariosMouseExited
+        jButtonFuncionarios.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_jButtonFuncionariosMouseExited
+
+    private void jButtonClientesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonClientesMouseEntered
+        jButtonClientes.setBackground(new Color(52, 52, 52));
+    }//GEN-LAST:event_jButtonClientesMouseEntered
+
+    private void jButtonClientesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonClientesMouseExited
+        jButtonClientes.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_jButtonClientesMouseExited
+
+    private void jButtonEnderecosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEnderecosMouseEntered
+        jButtonEnderecos.setBackground(new Color(52, 52, 52));
+    }//GEN-LAST:event_jButtonEnderecosMouseEntered
+
+    private void jButtonEnderecosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEnderecosMouseExited
+        jButtonEnderecos.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_jButtonEnderecosMouseExited
+
+    private void jButtonTiposDeFuncionariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTiposDeFuncionariosMouseEntered
+        jButtonTiposDeFuncionarios.setBackground(new Color(52, 52, 52));
+    }//GEN-LAST:event_jButtonTiposDeFuncionariosMouseEntered
+
+    private void jButtonTiposDeFuncionariosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTiposDeFuncionariosMouseExited
+        jButtonTiposDeFuncionarios.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_jButtonTiposDeFuncionariosMouseExited
+
+    private void jButtonNiveisDeAcessoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonNiveisDeAcessoMouseEntered
+        jButtonNiveisDeAcesso.setBackground(new Color(52, 52, 52));
+    }//GEN-LAST:event_jButtonNiveisDeAcessoMouseEntered
+
+    private void jButtonNiveisDeAcessoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonNiveisDeAcessoMouseExited
+        jButtonNiveisDeAcesso.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_jButtonNiveisDeAcessoMouseExited
+
+    private void jButtonOrcamentosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOrcamentosMouseEntered
+        jButtonOrcamentos.setBackground(new Color(52, 52, 52));
+    }//GEN-LAST:event_jButtonOrcamentosMouseEntered
+
+    private void jButtonOrcamentosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOrcamentosMouseExited
+        jButtonOrcamentos.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_jButtonOrcamentosMouseExited
+
+    private void jButtonTiposDePagamentoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTiposDePagamentoMouseEntered
+        jButtonTiposDePagamento.setBackground(new Color(52, 52, 52));
+    }//GEN-LAST:event_jButtonTiposDePagamentoMouseEntered
+
+    private void jButtonTiposDePagamentoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTiposDePagamentoMouseExited
+        jButtonTiposDePagamento.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_jButtonTiposDePagamentoMouseExited
+
+    private void jButtonContratosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonContratosMouseEntered
+        jButtonContratos.setBackground(new Color(52, 52, 52));
+    }//GEN-LAST:event_jButtonContratosMouseEntered
+
+    private void jButtonContratosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonContratosMouseExited
+        jButtonContratos.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_jButtonContratosMouseExited
+
+    private void jButtonLogOffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLogOffMouseEntered
+        jButtonLogOff.setBackground(new Color(52, 52, 52));
+    }//GEN-LAST:event_jButtonLogOffMouseEntered
+
+    private void jButtonLogOffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLogOffMouseExited
+        jButtonLogOff.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_jButtonLogOffMouseExited
+
+    private void jButtonRelatoriosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRelatoriosMouseEntered
+        jButtonRelatorios.setBackground(new Color(52, 52, 52));
+    }//GEN-LAST:event_jButtonRelatoriosMouseEntered
+
+    private void jButtonRelatoriosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRelatoriosMouseExited
+        jButtonRelatorios.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_jButtonRelatoriosMouseExited
+
+    private void jButtonImoveisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImoveisMouseEntered
+        jButtonImoveis.setBackground(new Color(52, 52, 52));
+    }//GEN-LAST:event_jButtonImoveisMouseEntered
+
+    private void jButtonImoveisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImoveisMouseExited
+        jButtonImoveis.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_jButtonImoveisMouseExited
+
+    private void jButtonTiposDeImovelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTiposDeImovelMouseEntered
+        jButtonTiposDeImovel.setBackground(new Color(52, 52, 52));
+    }//GEN-LAST:event_jButtonTiposDeImovelMouseEntered
+
+    private void jButtonTiposDeImovelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTiposDeImovelMouseExited
+        jButtonTiposDeImovel.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_jButtonTiposDeImovelMouseExited
+
+    private void jButtonStatusMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonStatusMouseEntered
+        jButtonStatus.setBackground(new Color(52, 52, 52));
+    }//GEN-LAST:event_jButtonStatusMouseEntered
+
+    private void jButtonStatusMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonStatusMouseExited
+        jButtonStatus.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_jButtonStatusMouseExited
+
+    private void jButtonTrocaDeSenhaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTrocaDeSenhaMouseEntered
+        jButtonTrocaDeSenha.setBackground(new Color(52, 52, 52));
+    }//GEN-LAST:event_jButtonTrocaDeSenhaMouseEntered
+
+    private void jButtonTrocaDeSenhaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTrocaDeSenhaMouseExited
+        jButtonTrocaDeSenha.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_jButtonTrocaDeSenhaMouseExited
+
+    private void jButtonTrocaDeSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTrocaDeSenhaActionPerformed
+
+        try {
+            UsuarioController usuCon = new UsuarioController();
+
+            Usuario user = usuCon.getItemComLoginPorEmail(Login.funcionario.getEmail());
+            String novaSenha = "";
+
+            while (novaSenha.equals("")) {
+                novaSenha = JOptionPane.showInputDialog("Digite a nova senha");
+                if (novaSenha.equals("")) {
+                    JOptionPane.showMessageDialog(this, "Por favor digite algo no campo de senha");
+                }
+            }
+
+            user.setSenha(GeradorPasswords.generateSecurePassword(novaSenha, "Pacoca"));
+            new UsuarioController().alterarItem(user);
+
+            JOptionPane.showMessageDialog(this, "Senha alterada com sucesso");
+
+        } catch (Exception ex) {
+            Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonTrocaDeSenhaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -472,10 +805,16 @@ public class TelaMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTiposDeFuncionarios;
     private javax.swing.JButton jButtonTiposDeImovel;
     private javax.swing.JButton jButtonTiposDePagamento;
+    private javax.swing.JButton jButtonTrocaDeSenha;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelFuncionarioAtual;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator3;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,7 @@ package controller;
 
 import dao.RelatoriosDao;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,6 +25,11 @@ public class RelatoriosController {
         dao = new RelatoriosDao();
         this.model = model;
         
+    }
+     public RelatoriosController( ) throws SQLException {
+        dao = new RelatoriosDao();
+        this.model = model;
+       
     }
     
     public DefaultTableModel populaImoveisPorFuncionario(int idFuncionario) throws Exception {
@@ -97,6 +103,15 @@ public class RelatoriosController {
         }
 
         return model;
+        
+    }
+    
+    public ArrayList<String>PopularListaCidades () throws Exception{
+        
+      ArrayList<String> cidades = dao.getCidadesCadastradas();
+        
+      return cidades;
+        
         
     }
 }

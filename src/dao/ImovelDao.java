@@ -15,7 +15,7 @@ import util.CriaStatement;
 
 /**
  *
- * @author fdz
+ * @author rapha
  */
 public class ImovelDao extends Dao<Imovel> {
 
@@ -92,7 +92,7 @@ public class ImovelDao extends Dao<Imovel> {
     @Override
     protected void verificaExistenteAlterar(Imovel item) throws Exception {
 
-        if (getByIdEndereco(item.getEndereco().getId()) != null && getByIdEndereco(item.getEndereco().getId()).getId() != getByID(item.getId()).getEndereco().getId()) {
+        if (getByIdEndereco(item.getEndereco().getId()) != null && getByIdEndereco(item.getEndereco().getId()).getId() != item.getId()) {
             throw new Exception("Endereço já cadastrado.");
         }
         if (getByDescricao(item.getDescricao()) != null && getByDescricao(item.getDescricao()).getId() != getByID(item.getId()).getId()) {

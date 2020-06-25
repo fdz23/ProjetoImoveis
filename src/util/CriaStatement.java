@@ -51,6 +51,18 @@ public class CriaStatement {
     //Para mais de uma coluna/valores utilize "," entre cada um deles(sem espaço)
     public PreparedStatement selectSql(String tabela, boolean especificacao, String coluna) throws Exception {
         
+            
+        String sql = "SELECT * FROM " + tabela;
+        
+        if(especificacao) {
+            sql += " WHERE " + coluna + " = ?";
+        }
+        
+        return con.prepareStatement(sql);
+    }
+    
+    public PreparedStatement selectSqlAtivado(String tabela, boolean especificacao, String coluna) throws Exception {
+        
         String colunaAtivado = "";
         if(tabela.equals("pessoas"))
             colunaAtivado = tabela.substring(0, 3) + "_ativado";
@@ -462,6 +474,15 @@ public class CriaStatement {
         
         String sql = "select i.imo_descricao,i.imo_tamanho,p.pes_nome,i.imo_preco,i.imo_valor_comissao,i.imo_data_inclusao from imoveis i\n" +
                      "join pessoas p ON p.pes_iden = i.imo_pes_iden";
+        
+        return con.prepareStatement(sql);
+        
+    }
+    
+       public PreparedStatement selectSqlPegarCidades() throws SQLException {
+        
+        String sql = "select end_cidade from enderecos group by end_cidade";
+                      
         
         return con.prepareStatement(sql);
         

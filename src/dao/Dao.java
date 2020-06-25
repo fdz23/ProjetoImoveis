@@ -22,7 +22,7 @@ import util.ConectaDb;
 
 /**
  *
- * @author fdz
+ * @author rapha
  */
 public abstract class Dao<T> implements IDao<T> {
 
@@ -213,6 +213,17 @@ public abstract class Dao<T> implements IDao<T> {
 
         //cria um sql para seleciona o item que possue esse id
         ps = criaStatement.selectSql(tabela, true, this.id);
+
+        ps.setInt(1, id);
+
+        return ps;
+
+    }
+
+    protected PreparedStatement statementGetItemDesativado(int id) throws Exception {
+
+        //cria um sql para seleciona o item que possue esse id
+        ps = criaStatement.selectSqlDesativado(tabela, true, this.id);
 
         ps.setInt(1, id);
 
